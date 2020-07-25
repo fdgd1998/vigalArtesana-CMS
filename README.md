@@ -18,3 +18,4 @@ Current features:
 
 Planned features:
 - Basic UI customization (colors, images).
+- Visitor counter (for administration purposes).

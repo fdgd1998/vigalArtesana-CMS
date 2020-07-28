@@ -28,6 +28,7 @@
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="<?=$URL?>/index.php" style="color: rgb(255, 255, 255);">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="<?=$URL?>/showcase.php" style="color: rgb(255, 255, 255);">Exposición</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="<?=$URL?>/contact.php" style="color: rgb(255, 255, 255);">Contacto</a></li>
                 <?php
                     if (isset($_SESSION['user'])) {
                         echo "

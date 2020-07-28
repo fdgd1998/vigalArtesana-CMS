@@ -7,6 +7,8 @@
                     <ul>
                         <li><a href="<?=$URL?>/index.php">Inicio</a></li>
                         <li><a href="<?=$URL?>/showcase.php">Exposición</a></li>
+                        <li><a href="<?=$URL?>/contact.php">Contacto</a></li>
+
                         <?php
                             if (isset($_SESSION['user'])) {
                                 echo '<li><a href="'.$URL.'/modules/logout.php">Cerrar sesión</a></li>';

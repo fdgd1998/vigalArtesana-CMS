@@ -3,7 +3,7 @@
 
     if ($_POST) {
 
-        $location = "../../../uploads/";
+        $location = "../../../uploads/categories/";
         
         $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
 
@@ -18,7 +18,7 @@
             $stmt = "select image from categories where id = ".$_POST["cat_id"];
             if ($res = $conn->query($stmt)) {
                 $rows = $res->fetch_assoc();
-                unlink($_SERVER["DOCUMENT_ROOT"]."/uploads/categories".$rows['image']);
+                unlink($_SERVER["DOCUMENT_ROOT"].$location.$rows['image']);
             } else {
                 echo "Ha ocurrido un error.";
             }

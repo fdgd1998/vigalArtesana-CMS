@@ -1,7 +1,7 @@
 <?php
     require_once $_SERVER['DOCUMENT_ROOT'].'/modules/connection.php';
     require_once $_SERVER['DOCUMENT_ROOT'].'/modules/get_http_protocol.php';
-    $contact_info = array();
+    $contact_info= array();
     $URL = getHttpProtocol().'://'.$_SERVER['SERVER_NAME'];
     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
 

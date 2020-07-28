@@ -1,9 +1,10 @@
-# vigalArtesanos-CMS
+# ViGal Artesanos CMS
 This is a small, custom CMS developed from scratch for my mother's carpentry and restoration company.
 
-The main purpose of this CMS is to show company information, as well as providing a showcase where the work done can be exposed. A basic control panel is also made to manage website's content.
+The main purpose of this CMS is to make something simple from scratch and easy to use, providing to the visitors company information and a product showcase where the work done can be exposed. A basic control panel is also made to manage website's content.
 
-Programming languages used: HTML, CSS, JS, PHP and MySQL.
+Programming languages: HTML, CSS, JS, PHP and MySQL.
+Frameworks: bootstrap, jQuery.
 
 Features:
 - Encryption of sensible data stored in the database.

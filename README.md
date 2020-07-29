@@ -3,8 +3,11 @@ This is a small, custom CMS developed from scratch for my mother's carpentry and
 
 The main purpose of this CMS is to make something simple from scratch and easy to use, providing to the visitors company information and a product showcase where the work done can be exposed. A basic control panel is also made to manage website's content.
 
-Programming languages: HTML, CSS, JS, PHP and MySQL.
-Frameworks: bootstrap, jQuery.
+- Programming languages: JS, PHP and SQL.
+- Markup languages: HTML.
+- Styles languages: CSS.
+- Frameworks: Bootstrap, jQuery.
+- Web development techniques: AJAX.
 
 Features:
 - Encryption of sensible data stored in the database.

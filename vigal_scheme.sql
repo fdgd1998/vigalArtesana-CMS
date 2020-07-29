@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-07-2020 a las 21:50:43
+-- Tiempo de generación: 30-07-2020 a las 00:43:55
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.4.7
 
@@ -34,15 +34,6 @@ CREATE TABLE `categories` (
   `image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `categories`
---
-
-INSERT INTO `categories` (`id`, `name`, `cat_enabled`, `image`) VALUES
-(19, 'Mobiliario', 'YES', '1595955122.jpeg'),
-(20, 'Decoración', 'YES', '1595955134.jpeg'),
-(21, 'Puertas viejas', 'YES', '1595964058.jpeg');
-
 -- --------------------------------------------------------
 
 --
@@ -53,16 +44,6 @@ CREATE TABLE `company_info` (
   `key_info` varchar(255) NOT NULL,
   `value_info` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `company_info`
---
-
-INSERT INTO `company_info` (`key_info`, `value_info`) VALUES
-('phone', '+34 602 03 68 30'),
-('address', 'Ctra. N-340, KM 268, Casa Las Yucas. 29749 Vélez-Málaga.'),
-('email', 'test@example.com'),
-('name', 'ViGal Artesanos');
 
 -- --------------------------------------------------------
 
@@ -93,7 +74,7 @@ CREATE TABLE `password_reset` (
 --
 
 CREATE TABLE `posts` (
-  `id` int(3) NOT NULL,
+  `id` int(9) NOT NULL,
   `author` varchar(255) NOT NULL,
   `category` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
@@ -101,7 +82,7 @@ CREATE TABLE `posts` (
   `content` text NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp(),
   `images` text DEFAULT NULL,
-  `published` char(3) DEFAULT 'NO'
+  `published` char(3) DEFAULT 'YES'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -122,13 +103,6 @@ CREATE TABLE `users` (
   `account_enabled` char(10) DEFAULT 'YES',
   `passwd_reset` char(10) DEFAULT 'NO'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `users`
---
-
-INSERT INTO `users` (`id`, `username`, `email`, `passwd`, `firstname`, `secondname`, `surname`, `account_type`, `account_enabled`, `passwd_reset`) VALUES
-(3, 'admin', 'afgalvezdiaz@gmail.com', 'SFB1eTNNZEczdUVlRVJJMUk4OWM5UT09Ojqj2VaTkgd1J/zLnHRjd7TR', 'Qlk5ekRHcFdqSzdUaC9tV09VRzQ5dz09Ojr02QIaX4gCuCz07wFGW4ki', NULL, 'bXM2bnh5alpDTGF0R0cxYmVzMzFhQT09OjptvXsWOBMacTp9B3CzmyXP', 'superuser', 'YES', 'NO');
 
 --
 -- Índices para tablas volcadas
@@ -176,13 +150,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

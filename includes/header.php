@@ -19,7 +19,7 @@
 ?>
 <nav class="navbar navbar-light navbar-expand-md navigation-clean" style="background-color: #5026D1;">
     <div class="container">
-        <a class="navbar-brand" href="#" style="font-family: 'Great Vibes'; font-weight: lighter; color: rgb(255, 255, 255);font-size: 32px;" name="company_name"><?=$contact_info[3]?></a>
+        <a class="navbar-brand" href="#" style="font-family: 'Great Vibes'; letter-spacing: 2px; font-weight: lighter; color: rgb(255, 255, 255);font-size: 38px;" name="company_name"><?=$contact_info[3]?></a>
         <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1" style="color: white;">
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon" style="background-image: url(&quot;<?=$URL?>/includes/img/iconfinder-icon.svg&quot;);"></span>

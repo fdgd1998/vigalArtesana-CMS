@@ -12,6 +12,15 @@
 <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
 <script src="admin/posts/js/ajax.js"></script>
 <script src="admin/posts/js/input_actions.js"></script>
+<style>
+  .disabled-form {
+      pointer-events: none;
+      opacity: 0.4;
+  }
+  .custom-checkbox {
+    margin-bottom: 10px;
+}
+</style>
 
 
 <!-- create cat modal -->
@@ -32,11 +41,19 @@
                 </div>
                 <div class="form-group">
                     <label for="new-cat-image">Imagen de fondo: </label>
-                    <input id="new-cat-image" name="new-cat-image" type="file" accept="image/*" width="100%">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon01"><icon class='icon-cloud-upload'></icon></span>
+                      </div>
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="new-cat-image" aria-describedby="inputGroupFileAddon01">
+                        <label id="new-cat-image-name" class="custom-file-label" for="new-cat-image" data-browse="Buscar...">Escoger fichero...</label>
+                      </div>
+                    </div>
                 </div>
                 <div class="form-group" hidden id="new-cat-image-preview-div">
-                    <label for="new-cat-image-preview">Vista previa: </label>
-                    <img id="new-cat-image-preview" src="#" alt="" width="100%">
+                    <label for="new-cat-image-preview" style="width: 100%;">Vista previa: </label>
+                    <center><img id="new-cat-image-preview" src="#" alt="" width="50%"></center>
                 </div>
             </form>
         </div>
@@ -53,7 +70,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel-delete">Editando categoría ...</h5>
+          <h5 class="modal-title" id="staticBackdropLabel-delete" >Editando categoría ...</h5>
           <button id="close-edit-cat" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -79,23 +96,47 @@
           </button>
         </div>
         <div id="modal-body" class="modal-body"> 
-            <div id='category-name' class="form-group"></div>
-            <div class="form-group" hidden id="update-cat-image-preview-div">
-                <label for="update-cat-image-preview">Imagen de fondo actual: </label>
-                <img id="update-cat-image-preview" src="#" alt="" width="100%">
-            </div>
-            <div>
-                <label>Nueva imagen de fondo: </label>
-                <input id="update-cat-image" type="file" accept="image/*">
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="change-edit-name-chkbx">
+          <label class="custom-control-label" for="change-edit-name-chkbx">Editar nombre.</label>
+        </div>
+        <div id="edit-change-name" class="input-group mb-3 disabled-form">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Nombre</span>
+          </div>
+          <input type="text" class="form-control" id="update-cat-name" aria-describedby="basic-addon1">
+        </div>
+        <div class="form-group" hidden id="update-cat-image-preview-div">
+            <label for="update-cat-image-preview" style="width: 100%;">Imagen de fondo actual: </label>
+            <center><img id="update-cat-image-preview" src="#" alt="" width="50%"></center>
+        </div>
+        <div>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="change-edit-image-chkbx">
+          <label class="custom-control-label" for="change-edit-image-chkbx">Establecer nueva imagen de fondo.</label>
+        </div>
+          <div id="edit-change-image" class="disabled-form">
+            <label>Nueva imagen de fondo: </label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><icon class='icon-cloud-upload'></icon></span>
+              </div>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="update-new-cat-image" aria-describedby="inputGroupFileAddon01">
+                <label id="update-new-cat-image-name" class="custom-file-label" for="update-new-cat-image" data-browse="Buscar...">Escoger fichero...</label>
+              </div>
             </div>
             <div style="margin-top: 15px;" class="form-group" hidden id="update-new-cat-image-preview-div">
-                <label for="update-new-cat-image-preview">Vista previa de nueva imagen: </label>
-                <img id="update-new-cat-image-preview" src="#" alt="" width="100%">
-            </div>
+              <label for="update-new-cat-image-preview" style="width: 100%;">Vista previa de nueva imagen: </label>
+              <center><img id="update-new-cat-image-preview" src="#" alt="" width="100%" style="width: 50%;"></center>
+          </div>
+          </div>           
+          </div>
+          
         </div>
         <div id="modal-footer1" class="modal-footer">
           <button id="cancel-cat-edit" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-          <button id="cat-edit" type="button" class="btn btn-success">Crear</button>
+          <button disabled id="cat-edit" type="button" class="btn btn-success">Editar</button>
         </div>
       </div>
     </div>

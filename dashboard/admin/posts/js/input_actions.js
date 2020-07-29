@@ -4,12 +4,9 @@ jQuery(function($) {
         // set the variables
         editing_cat_id = $(this).attr('id').substring(6);
         editing_catname = $(this).attr('name');
-        $('#staticBackdropLabel-edit').text('Editando categoría '+editing_catname);
-            $('#category-name').empty();
-            label = $('<label for="update-cat-name">Nombre: </label>');
-            input = $('<input class="form-control" name="update-cat-name" id="update-cat-name" value="'+editing_catname+'"></input>');
-            $('#category-name').append(label);
-            $('#category-name').append(input);
+        $('#staticBackdropLabel-edit').text('Editando categoría: "'+editing_catname+'"');
+            // $('#category-name').empty();
+            // $("#update-cat-name").val(editing_catname);
             var formData = new FormData();
             formData.append("cat_id", editing_cat_id);
             $.ajax({
@@ -35,7 +32,7 @@ jQuery(function($) {
     $(".cat-delete").on('click', function(e) {
         editing_cat_id = $(this).attr('id').substring(6);
         editing_catname = $(this).attr('name');
-        $('#staticBackdropLabel-delete').text('Eliminando categoría '+editing_catname);
+        $('#staticBackdropLabel-delete').text('Eliminando categoría: "'+editing_catname+'"');
         $('#delete-cat').modal().show();
     });
 
@@ -53,7 +50,10 @@ jQuery(function($) {
         $('#update-cat-name').val("");
         $('#update-cat-image').val("");
         $("#update-new-cat-image-preview-div").attr("hidden", "");
-
+        $("#update-new-cat-image-name").html("Escoger fichero...");
+        $("#change-edit-name-chkbx").prop("checked", false);
+        $("#change-edit-image-chkbx").prop("checked", false);
+        $("#cat-edit").attr("disabled");
     });
 
     $('#cancel-cat-create, #close-cat-create').on('click', function(e) {
@@ -63,6 +63,7 @@ jQuery(function($) {
         $('#new-cat-image').val("");
         $("#new-cat-image-preview-div").attr("hidden", "");
         $("#new-cat-image-preview").attr("src", "");
+        $("#new-cat-image-name").html("Escoger fichero...");
     });
 
     $('.cat-status-change-form').on('click', function(e) {
@@ -75,31 +76,37 @@ jQuery(function($) {
             action_title = 'Desabilitando';
             action_info = 'deshabilitar';
         };
-        $('#staticBackdropLabel-statuschange').text(action_title+' categoría '+editing_catname);
+        $('#staticBackdropLabel-statuschange').text(action_title+' categoría: "'+editing_catname+'"');
         $('#statuschange_modal_info_text').text('¿Estás seguro de que quieres '+action_info+' esta categoría?');
         $('#cat-status-change').modal().show();
     });
 
-    $("#update-cat-image").on("change", function(e) {
-        if ($("#udpate-cat-image").val() != "") {
-            // $('#cat-create').removeAttr('disabled');
+    $("#update-new-cat-image").on("change", function(e) {
+        if ($(this).val() != "") {
+            var fileName = $(this).val().substring(12);
+            console.log(fileName);
+            $('#update-new-cat-image-name').html(fileName);
             readURL(this, "#update-new-cat-image-preview");
-            $("#update-new-cat-image-preview-div").removeAttr("hidden");
-            enableCreateFormBtn();
+            $("#update-new-cat-image-preview-div").prop("hidden", false);  
         } else {
             $('#cat-edit').attr('disabled', 'disabled');
+            $("#update-new-cat-image-name").html("Escoger fichero...");
+            $("#update-new-cat-image-preview-div").prop("hidden", true);
         }
+        enableEditFormBtn();
     });
 
     $("#new-cat-image").on("change", function(e) {
-        if ($("#new-cat-image").val() != "") {
-            // $('#cat-create').removeAttr('disabled');
+        if ($(this).val() != "") {
+            var fileName = $(this).val().substring(12);
+            console.log(fileName.substring(12));
+            $('#new-cat-image-name').html(fileName);
             readURL(this, "#new-cat-image-preview");
-            $("#new-cat-image-preview-div").removeAttr("hidden");
-            enableCreateFormBtn();
+            $("#new-cat-image-preview-div").prop("hidden", true);
         } else {
             $('#cat-create').attr('disabled', 'disabled');
         }
+        enableCreateFormBtn();
     });
 
     function readURL(input, selector) {
@@ -116,5 +123,40 @@ jQuery(function($) {
           reader.readAsDataURL(input.files[0]); // convert to base64 string
         }
     }
+
+    $("#change-edit-name-chkbx").on("change", function(e){
+        if ($(this).is(":checked")) {
+            $("#edit-change-name").removeClass("disabled-form");
+            if ($("#update-cat-name").val() != "") {
+                $.ajax({
+                    url: 'admin/posts/check_category_name.php', // this is the target
+                    method: 'post', // method
+                    data: {cat_name: $("#update-cat-name").val()}, // pass the input value to server
+                    success: function(r) { // if the http response code is 200
+                        $("#update-cat-name").css('background-color', '#A7F0A9');
+                        console.log('category does not exist.');
+                        $('#cat-edit').prop("disabled", false);
+                    },
+                    error: function(r) { // if the http response code is other than 200
+                        $("#update-cat-name").css('background-color', '#FF9696');
+                        console.log('category exists.');
+                        $('#cat-edit').prop("disabled", true);
+                    }
+                })
+            }
+        } else {
+            $("#edit-change-name").addClass("disabled-form");
+        }
+        enableEditFormBtn();
+    });
+
+    $("#change-edit-image-chkbx").on("change", function(e){
+        if ($(this).is(":checked")) {
+            $("#edit-change-image").removeClass("disabled-form");
+        } else {
+            $("#edit-change-image").addClass("disabled-form");
+        }
+        enableEditFormBtn();
+    });
 
 });

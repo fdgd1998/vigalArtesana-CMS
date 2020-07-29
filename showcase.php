@@ -45,7 +45,7 @@
         }
 
         .animated:hover {
-            transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+            transform: scale(1.1); /* (150% zoom)*/
             z-index: 1;
         }
 
@@ -58,7 +58,9 @@
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 3;
-            font-size: 32px;
+            font-size: 38px;
+            letter-spacing: 2px;
+            line-height: 35px;
         }
 
         img {

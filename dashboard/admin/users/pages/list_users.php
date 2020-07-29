@@ -2,8 +2,9 @@
     require_once '../modules/connection.php';
     require_once '../modules/crypt.php';
 
-    if (!isset($_SESSION['user'])) {
-      header("Location: ../../../403.php");
+    if (!isset($_SESSION['loggedin'])) {
+      header("Location: ../../../../403.php");
+      exit();
     }
 
     if (isset($_GET['order'])) $order = $_GET['order'];
@@ -206,7 +207,7 @@
                       }                   
                     };
                   }
-                  
+                  $res->free();
               }          
               $conn->close();
           ?>

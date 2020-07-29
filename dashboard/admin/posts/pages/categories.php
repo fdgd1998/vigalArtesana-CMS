@@ -2,7 +2,8 @@
     require_once '../modules/connection.php';
 
     if (!isset($_SESSION['user'])) {
-      header("Location: ../../../403.php");
+      header("Location: ../../../../403.php");
+      exit();
     }
 
     if (isset($_GET['order'])) $order = $_GET['order'];
@@ -213,9 +214,8 @@
                         }
                         $res = $conn->query($sql);
                         if ($res->num_rows == 0) {
-                        echo '<p>No hay coincidencias.</p>';
-                        } 
-                        else {
+                          echo '<p>No hay coincidencias.</p>';
+                        } else {
                             while ($rows = $res->fetch_assoc()) {
                                 $status_arrow_icon = $rows['cat_enabled'] == 'YES' ? 'down':'up' ;
                                 $cat_status = $rows['cat_enabled'] == 'YES' ? 'Deshabilitar':'Habilitar' ;
@@ -239,6 +239,7 @@
                                 echo '</tr>';
                                 }                   
                             }
+                            $res->free();
                         }     
                     $conn->close();
                 ?>

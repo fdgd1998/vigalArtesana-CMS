@@ -1,5 +1,9 @@
 <?php
     session_start();
+    if (!isset($_SESSION['loggedin'])) {
+        header("Location: ../../../../403.php");
+        exit();
+    }
     require_once '../../../modules/connection.php';
     if ($_POST && $_SESSION['account_type'] != 'publisher') {
         $id = $_POST['id'];
@@ -17,8 +21,7 @@
             }
         }
     } else {
-        echo '<script type="text/javascript">
-                window.location = "'.getHttpProtocol().'://'.$_SERVER['SERVER_NAME'].'/403.php"
-            </script>';
+        header("Location: ../../../../403.php");
+        exit();
     }
 ?>

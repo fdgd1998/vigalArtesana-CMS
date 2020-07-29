@@ -1,5 +1,10 @@
 <?php
-    if ($_POST) {
+    session_start();
+    if (!isset($_SESSION['loggedin'])) {
+        header("Location: ../../../../403.php");
+        exit();
+    }
+    if ($_POST && $_SESSION["account_type"] != "puslisher") {
         require_once '../../../modules/connection.php';
         require_once '../../../modules/crypt.php';
 
@@ -29,6 +34,8 @@
                 http_response_code(412);
             }
         }
+    } else {
+        header("Location: ../../../../403.php");
+        exit();
     }
-    
 ?>

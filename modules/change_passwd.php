@@ -1,4 +1,8 @@
 <?php
+    if (!isset($_SESSION['user'])) {
+        header("Location: ../403.php");
+        exit();
+    }
     if ($_POST) {
         require_once 'connection.php';
         require_once 'crypt.php';

@@ -1,5 +1,11 @@
 <?php
     session_start();
+
+    if (!isset($_SESSION['loggedin'])) {
+        header("Location: ../../../../403.php");
+        exit();
+    }
+
     require_once '../../../modules/connection.php';
 
     if ($_POST) {
@@ -23,7 +29,6 @@
                     echo "No se ha podido crear la entrada.";
                 }
             } else {
-                $errors = "";
                 $fileNames = "";
                 $i = 0;
                 foreach ($_FILES as $file) {
@@ -42,7 +47,7 @@
                 if ($conn->query($stmt) === TRUE) {
                     echo "La entrada se ha creado correctamente.";
                 } else {
-                    echo $errors;
+                    echo "No se ha podido crear la entrada";
                 }
             }
         }

@@ -1,5 +1,8 @@
 <?php
-    /* Location */
+    if (!isset($_SESSION['loggedin'])) {
+        header("Location: ../../../../403.php");
+        exit();
+    }
     $location = "../../../uploads/categories/";
 
     if ($_FILES['file']['error'] > 0) {

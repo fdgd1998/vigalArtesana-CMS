@@ -4,7 +4,7 @@
     require_once $_SERVER['DOCUMENT_ROOT'].'/modules/get_http_protocol.php'; 
 
     if (!isset($_SESSION['user'])) {
-        header("Location: ../../../403.php");
+        header("Location: ../403.php");
         exit();
     }
 ?>

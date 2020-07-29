@@ -1,5 +1,11 @@
 <?php
+    session_start();
     require_once $_SERVER["DOCUMENT_ROOT"]."/modules/connection.php";
+    
+    if (!isset($_SESSION['loggedin'])) {
+        header("Location: ../../../../403.php");
+        exit();
+    }
 
     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
     $categories = array();

@@ -2,7 +2,10 @@
     session_start();
     require_once '../../../modules/connection.php';
     require_once '../../../modules/crypt.php';
-
+    if (!isset($_SESSION['loggedin'])) {
+        header("Location: ../../../../403.php");
+        exit();
+    }
     if ($_POST && isset($_SESSION['user'])) {
         $userid = $_POST['userid'];
         $email = "";
@@ -35,5 +38,9 @@
                 }
             }
         }
+    } else {
+        header("Location: ../../../../403.php");
+        exit();
     }
+    
 ?>

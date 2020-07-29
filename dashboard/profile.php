@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if (!isset($_SESSION['user'])) {
+        header("Location: ../403.php");
+        exit();
+    }
+?>
 <div class="container">
     <div class="row">
         <div class="col" style="margin-bottom: -15px;">

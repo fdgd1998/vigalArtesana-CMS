@@ -1,7 +1,11 @@
 <?php
+    session_start();
     require_once '../../../modules/connection.php';
-
-    if ($_POST) {
+    if (!isset($_SESSION['loggedin'])) {
+        header("Location: ../../../../403.php");
+        exit();
+    }
+    if ($_POST && $_SESSION["account_type"] != 'publisher') {
         $username = $_POST["user_name"];
         if (isset($_POST['user_type']) && isset($_POST['user_email'])) {
             $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
@@ -46,5 +50,9 @@
                 }
             }
         }
+    } else {
+        header("Location: ../../../../403.php");
+        exit();
     }
+    
 ?>

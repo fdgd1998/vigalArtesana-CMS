@@ -1,4 +1,9 @@
 <?php
+    session_start();
+    if (!isset($_SESSION['user'])) {
+        header("Location: ../403.php");
+        exit();
+    }
     require_once 'get_http_protocol.php';
     function SendPasswdEmail($token, $email) {
         $to = $email;

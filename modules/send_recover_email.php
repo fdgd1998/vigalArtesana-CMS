@@ -1,4 +1,10 @@
 <?php
+    session_start();
+    if (!isset($_SESSION['user'])) {
+        header("Location: ../403.php");
+        exit();
+    }
+
     require_once "connection.php"; //datos de conexión
     require_once "crypt.php"; //funciones criptograficas
     require_once 'generate_passwd_token.php';

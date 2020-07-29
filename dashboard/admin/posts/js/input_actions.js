@@ -159,4 +159,23 @@ jQuery(function($) {
         enableEditFormBtn();
     });
 
+    $('#result-order').on('change', function(e) {
+        value = $(this).children("option:selected").val();
+        console.log(value);
+        switch(value) {
+            case "asc":
+                window.location = "?page=categories&order=asc";
+                break;
+            case "desc":
+                window.location = "?page=categories&order=desc";
+                break;
+            case "enabled":
+                window.location = "?page=categories&order=enabled";
+                break;
+            case "disabled":
+                window.location = "?page=categories&order=disabled";
+                break;
+        }
+    });
+
 });

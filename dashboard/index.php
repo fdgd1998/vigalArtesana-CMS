@@ -86,7 +86,7 @@
                                         <a href="?page=create-user">Crear usuario</a>
                                     </li>
                                     <li>
-                                        <a href="?page=list-users">Listar usuarios</a>
+                                        <a href="?page=list-users&order=asc">Listar usuarios</a>
                                     </li>
                                 </ul>
                             </li>
@@ -116,10 +116,10 @@
                             <a href="?page=create-post">Crear post</a>
                         </li>
                         <li>
-                            <a href="?page=list-posts">Listar posts</a>
+                            <a href="?page=list-posts&order=asc">Listar posts</a>
                         </li>
                         <li>
-                            <a href="?page=categories">Categorías</a>
+                            <a href="?page=categories&order=asc">Categorías</a>
                         </li>
                     </ul>
                 </li>

@@ -163,7 +163,18 @@
     </div>
   </div>
 <div class="container">
-<button type="button" id="create-cat" class="btn btn-info" style="margin-bottom: 10px;">Crear categoría</button>
+<div class="input-group mb-6" style="width: 300px; margin-bottom: 20px;">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Ordenar</span>
+      </div>
+      <select id="result-order" class="form-control">
+        <option value="asc" <?=isset($order)?($order=='asc'?'selected':''):''?>>Ascendente</option>
+        <option value="desc" <?=isset($order)?($order=='desc'?'selected':''):''?>>Descendente</option>
+        <option value="enabled" <?=isset($order)?($order=='enabled'?'selected':''):''?>>Habilitado</option>
+        <option value="disabled" <?=isset($order)?($order=='disabled'?'selected':''):''?>>Deshabilitado</option>
+      </select>
+    </div>
+<button type="button" id="create-cat" class="btn btn-info" style="margin-bottom: 15px;"><i class="icon-plus" style="padding-right:5px;"></i>Crear categoría</button>
     <div class="table-responsive">
         <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
@@ -180,6 +191,26 @@
                         exit();
                     } else {
                         $sql = "select * from categories";
+                        if (isset($_GET['order'])) {
+                          switch($_GET['order']) {
+                            case 'asc':
+                              $sql .= " order by name asc";
+                              break;
+                            case 'desc':
+                              $sql .= " order by name desc";
+                              break;
+                            case 'enabled':
+                              $sql .= " where cat_enabled = 'YES' order by name asc";
+                              break;
+                            case 'disabled':
+                              $sql .= " where cat_enabled = 'NO' order by name asc";
+                              break;
+                            default:
+                              $sql .= " order by name asc";
+                          } 
+                        } else {
+                          $sql .= " order by name asc";
+                        }
                         $res = $conn->query($sql);
                         if ($res->num_rows == 0) {
                         echo '<p>No hay coincidencias.</p>';

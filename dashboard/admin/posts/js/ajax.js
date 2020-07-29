@@ -91,7 +91,7 @@ jQuery(function($) {
             success: function(response) { // if the http response code is 200
                 $('.modal-backdrop').remove();
                 alert(response);
-                window.location = location.origin+"/dashboard/?page=categories";
+                window.location = location.origin+"/dashboard/?page=categories&order=asc";
             },
             error: function(response) { // if the http response code is other than 200
                 alert(response);
@@ -125,7 +125,7 @@ jQuery(function($) {
             success: function(response) { // if the http response code is 200
                 // $('.modal-backdrop').remove();
                 alert(response);
-                window.location = location.origin+"/dashboard/?page=categories";
+                window.location = location.origin+"/dashboard/?page=categories&order=asc";
             },
             error: function(response) { // if the http response code is other than 200
                 alert(response);
@@ -149,7 +149,7 @@ jQuery(function($) {
             success: function(response) { // if the http response code is 200
                 $('.modal-backdrop').remove();
                 alert(response);
-                window.location = location.origin+"/dashboard/?page=categories";
+                window.location = location.origin+"/dashboard/?page=categories&order=asc";
             },
             error: function(response) { // if the http response code is other than 200
                 alert(response);
@@ -229,7 +229,7 @@ jQuery(function($) {
                 $('.modal-backdrop').remove();
                 editing_cat_name = '';
                 editing_cat_id = '';
-                window.location = location.origin+"/dashboard/?page=categories";
+                window.location = location.origin+"/dashboard/?page=categories&order=asc";
             },
             error: function(r) { // if the http response code is other than 200
                 alert("Ha ocurrido un error al actualizar el estado de la categoría.");

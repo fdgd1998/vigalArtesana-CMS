@@ -136,7 +136,11 @@
                       case 'disabled':
                         $sql .= " where account_enabled = 'NO'";
                         break;
+                      default:
+                        $sql .= " order by name asc";
                     } 
+                  } else {
+                    $sql .= " order by name asc";
                   }
 
                   $res = $conn->query($sql);

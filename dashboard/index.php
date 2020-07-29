@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="../includes/fonts/simple-line-icons.min.css">
     <link rel="stylesheet" href="../includes/fonts/ionicons.min.css">
     <link rel="stylesheet" href="../includes/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../includes/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="includes/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 

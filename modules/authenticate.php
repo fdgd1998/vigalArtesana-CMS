@@ -41,10 +41,10 @@
                             echo "<script>location.replace(location.origin+'/login.php')</script>";
                         } else {
                             $_SESSION['loggedin'] = true;
-                        $_SESSION['user'] = $user_form;
-                        $_SESSION['account_type'] = $account_type;
-                        header("Location: ../dashboard/?page=start");
-                        exit();
+                            $_SESSION['user'] = $user_form;
+                            $_SESSION['account_type'] = $account_type;
+                            header("Location: ../dashboard/?page=start");
+                            exit();
                         }
                     } else {
                         header("Location: ../login.php?wrong_pass=true");

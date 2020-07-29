@@ -14,6 +14,15 @@
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
 <script src="admin/users/js/list-users.js"></script>
+<style>
+  .disabled-form {
+      pointer-events: none;
+      opacity: 0.4;
+  }
+  .custom-checkbox {
+    margin-bottom: 10px;
+}
+</style>
 
   <!-- Delete user modal -->
   <div class="modal fade" id="delete-user" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -159,16 +168,17 @@
                         }
                         echo '<td>'.$account_type.'</td>';
                         echo '<td id="userid-'.$rows['id'].'_account_status">'.$account_status = $rows['account_enabled'] == 'YES' ? 'Habilitada':'Deshabilitada'.'</td>';
-                        echo '
+                        
+                        if (($rows['account_type'] != 'superuser' && $_SESSION['user'] != $rows['username']) || $_SESSION['user'] != $rows['username']) {
+                          $status_arrow_icon = $rows['account_enabled'] == 'YES' ? 'down':'up' ;
+                          $user_status = $rows['account_enabled'] == 'YES' ? 'Deshabilitar':'Habilitar' ;
+                          echo '
                             <td>
                                 <div>
                                     <button class="btn btn-success user-edit-form" title="Editar usuario" type="button" style="margin-right: 1px;" id="userid-'.$rows['id'].'" name="'.$rows['username'].'">
                                         <i class="fas fa-edit"></i>
                                     </button>
                             ';
-                        if ($rows['account_type'] != 'superuser' && $_SESSION['user'] != $rows['username']) {
-                          $status_arrow_icon = $rows['account_enabled'] == 'YES' ? 'down':'up' ;
-                          $user_status = $rows['account_enabled'] == 'YES' ? 'Deshabilitar':'Habilitar' ;
                           echo '
                             <button class="btn btn-danger user-delete" title="Borrar usuario" type="button" style="margin-right: 1px;" id="userid-'.$rows['id'].'" name="'.$rows['username'].'">
                                         <i class="fas fa-trash"></i>
@@ -181,7 +191,13 @@
                                     </button>
                                 </div>
                             </td>';
-                        }       
+                        } else {
+                          echo "
+                            <td>
+                              <button class='btn btn-secondary' id='user_profile-".$rows['id']."'>Configurar perfil</button>
+                            </td>
+                          ";
+                        }
                         echo '</tr>';
                       }                   
                     };
@@ -206,19 +222,31 @@
           </button>
         </div>
         <div id="modal-body" class="modal-body">
-          <div class="form-group">
-              <label for="email1-input-edit">Email: </label>
-              <input id="email1-input-edit" class="form-control" name="email" type="text">
-          </div>
-          <div class="form-group">
-              <label for="email2-input-edit">Confirma email: </label>
-              <input id="email2-input-edit" class="form-control" name="email" type="text">
-          </div>  
-            <div id='select-account' class="form-group"></div>          
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="change-user-email-chkbx">
+          <label class="custom-control-label" for="change-user-email-chkbx">Cambiar email.</label>
+        </div>
+            <div id="edit-email" class="disabled-form">
+              <div class="form-group">
+                  <label for="email1-input-edit">Email: </label>
+                  <input id="email1-input-edit" class="form-control" name="email" type="text">
+              </div>
+              <div class="form-group">
+                  <label for="email2-input-edit">Confirma email: </label>
+                  <input id="email2-input-edit" class="form-control" name="email" type="text">
+              </div> 
+            </div> 
+            
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="change-user-type-chkbx">
+              <label class="custom-control-label" for="change-user-type-chkbx">Cambiar tipo de cuenta.</label>
+            </div>
+            <div id='select-account' class="form-group disabled-form">
+            </div>          
         </div>
         <div id="modal-footer1" class="modal-footer">
           <button id="cancel-user-edit" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-          <button id="user-edit" disabled="true" type="button" class="btn btn-success">Crear</button>
+          <button id="user-edit" disabled="true" type="button" class="btn btn-success">Editar</button>
         </div>
       </div>
     </div>

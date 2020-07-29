@@ -111,9 +111,9 @@ jQuery(function($) {
         } else if ($("#change-edit-image-chkbx").is(":not(:checked)") && $("#change-edit-name-chkbx").is(":checked")) {
             formData.append("cat_name", $("#update-cat-name").val());
         }
-        for(var pair of formData.entries()) {
-            console.log(pair[0]+ ', '+ pair[1]); 
-         }
+        // for(var pair of formData.entries()) {
+        //     console.log(pair[0]+ ', '+ pair[1]); 
+        //  }
         $.ajax({
             url: location.origin+'/dashboard/admin/posts/edit_category.php', // this is the target
             type: 'post', // method

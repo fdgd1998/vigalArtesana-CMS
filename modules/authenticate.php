@@ -32,25 +32,25 @@
             // Si los datos coinciden, inicializo la sesión
             if ($stmt->num_rows == 1) {
                 if($row = $stmt->fetch()) {
-                    if ($account_enabled == "NO") {
-                        echo "<script>alert('Esta cuenta ha sido deshabilitada. Contacta con el administrador del sitio.')</script>";
-                        echo "<script>location.replace(location.origin+'/login.php')</script>";
-                    } else if ($passwd_reset == "YES") {
-                        echo "<script>alert('No se puede iniciar sesión porque tienes pendiente una recuperación de contraseña. Revisa tu bandeja de entrada para encontrar las intrucciones y restablecerla o contacta con el administrador del sitio.')</script>";
-                        echo "<script>location.replace(location.origin+'/login.php')</script>";
-                    } else {
-                        if (OpenSSLDecrypt($pass) == $pass_form) {
-                            $_SESSION['loggedin'] = true;
-                            $_SESSION['user'] = $user_form;
-                            $_SESSION['account_type'] = $account_type;
-                            header("Location: ../dashboard/?page=start");
-                            exit();
+                    if (OpenSSLDecrypt($pass) == $pass_form) {
+                        if ($account_enabled == "NO") {
+                            echo "<script>alert('Esta cuenta ha sido deshabilitada. Contacta con el administrador del sitio.')</script>";
+                            echo "<script>location.replace(location.origin+'/login.php')</script>";
+                        } else if ($passwd_reset == "YES") {
+                            echo "<script>alert('No se puede iniciar sesión porque tienes pendiente una recuperación de contraseña. Revisa tu bandeja de entrada para encontrar las intrucciones y restablecerla o contacta con el administrador del sitio.')</script>";
+                            echo "<script>location.replace(location.origin+'/login.php')</script>";
                         } else {
-                            header("Location: ../login.php?wrong_pass=true");
-                            exit(); 
+                            $_SESSION['loggedin'] = true;
+                        $_SESSION['user'] = $user_form;
+                        $_SESSION['account_type'] = $account_type;
+                        header("Location: ../dashboard/?page=start");
+                        exit();
                         }
-                    } 
-                }   
+                    } else {
+                        header("Location: ../login.php?wrong_pass=true");
+                        exit(); 
+                    }
+                } 
             } else {
                 header('Location: ../login.php?wrong_user=true');
                 exit();

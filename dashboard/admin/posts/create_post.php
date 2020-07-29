@@ -38,10 +38,7 @@
                     $fileNames .= $newfilename.",";
                     $i++;
                 }
-                $errors .= "Imagenes guardadas correctamente.\n";
                 $fileNames = substr($fileNames, 0, -1);
-                $errors .= "Cadena de imagenes editada correctamente.\n";
-                $errors.= $fileNames;
                 
                 $stmt = "insert into posts (author, category, title, content, images) values ('".$_SESSION["user"]."', '".$_POST["category"]."', '".$_POST["title"]."', '".$_POST["content"]."', '".$fileNames."')";
                 if ($conn->query($stmt) === TRUE) {

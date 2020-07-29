@@ -199,7 +199,7 @@
                         } else {
                           echo "
                             <td>
-                              <button class='btn btn-secondary' id='user_profile-".$rows['id']."'>Configurar perfil</button>
+                              <button class='btn btn-secondary' id='user-profile'>Configurar perfil</button>
                             </td>
                           ";
                         }

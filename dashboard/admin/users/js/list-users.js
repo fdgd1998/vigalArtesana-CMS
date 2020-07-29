@@ -279,4 +279,8 @@ jQuery(function($) {
         }
         enableEditFormBtn();
     });
+
+    $("#user-profile").on("click", function(e){
+        window.location.href = location.origin+"/dashboard/?page=profile";
+    });
 });

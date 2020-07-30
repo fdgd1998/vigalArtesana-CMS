@@ -6,7 +6,7 @@
         header("Location: ../../../../403.php");
         exit();
     }
-    if ($_POST && isset($_SESSION['user'])) {
+    if ($_POST) {
         $userid = $_POST['userid'];
         $email = "";
         $passwd_reset = "";
@@ -38,9 +38,6 @@
                 }
             }
         }
-    } else {
-        header("Location: ../../../../403.php");
-        exit();
     }
     
 ?>

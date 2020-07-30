@@ -29,11 +29,18 @@
                     echo "No se ha podido crear la entrada.";
                 }
             } else {
+                $userid = 0;
                 $fileNames = "";
                 $i = 0;
+                $sql = "select id from users where username = '".$_SESSION['user']."'";
+                if ($res = $conn->query($sql)) {
+                    $rows = $res->fetch_assoc();
+                    $userid = $rows['id'];
+                }
+                $res->free();
                 foreach ($_FILES as $file) {
                     $temp = explode(".", $file["name"]);
-                    $newfilename = round(microtime(true)+$i) . '.' . end($temp);
+                    $newfilename = round(microtime(true)+$i).$userid.'.'.end($temp);
                     move_uploaded_file($file['tmp_name'],$location.$newfilename);
                     $fileNames .= $newfilename.",";
                     $i++;

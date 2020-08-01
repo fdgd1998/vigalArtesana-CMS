@@ -1,13 +1,15 @@
 <?php
+    session_start(); // starting the session.
     require_once '../modules/connection.php';
 
+    // Redirecting to 403 page if user is not logged in and access is attemped.
     if (!isset($_SESSION['user'])) {
       header("Location: ../../../../403.php");
       exit();
     }
 
-    if (isset($_GET['order'])) $order = $_GET['order'];
-    $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
+    if (isset($_GET['order'])) $order = $_GET['order']; // getting order if GET variable is set.
+    $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
 ?>
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
@@ -24,7 +26,7 @@
 </style>
 
 
-<!-- create cat modal -->
+<!-- create category modal -->
 <div class="modal fade" id="new-cat" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -66,7 +68,7 @@
     </div>
   </div>
 
-<!-- Delete cat modal -->
+<!-- Delete category modal -->
 <div class="modal fade" id="delete-cat" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -86,7 +88,7 @@
       </div>
     </div>
   </div>
-  <!-- Editing cat modal -->
+  <!-- Editing category modal -->
   <div class="modal fade" id="edit-cat" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -191,6 +193,7 @@
                         print("No se ha podido conectar a la base de datos");
                         exit();
                     } else {
+                        // Fetching categories from databases and sorting them.
                         $sql = "select * from categories";
                         if (isset($_GET['order'])) {
                           switch($_GET['order']) {
@@ -217,6 +220,7 @@
                           echo '<p>No hay coincidencias.</p>';
                         } else {
                             while ($rows = $res->fetch_assoc()) {
+                                // Showing categories on the page.
                                 $status_arrow_icon = $rows['cat_enabled'] == 'YES' ? 'down':'up' ;
                                 $cat_status = $rows['cat_enabled'] == 'YES' ? 'Deshabilitar':'Habilitar' ;
                                 echo '<tr>';
@@ -239,9 +243,9 @@
                                 echo '</tr>';
                                 }                   
                             }
-                            $res->free();
+                            $res->free(); // Releasing resources from RAM.
                         }     
-                    $conn->close();
+                    $conn->close(); // Closing database connection.
                 ?>
             </tbody>
         </table>

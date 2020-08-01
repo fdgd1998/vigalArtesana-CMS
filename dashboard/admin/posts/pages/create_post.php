@@ -1,19 +1,21 @@
 <?php
-    session_start();
-    require_once $_SERVER["DOCUMENT_ROOT"]."/modules/connection.php";
+    session_start(); // Starting the session.
+    require_once $_SERVER["DOCUMENT_ROOT"]."/modules/connection.php"; // Database connection info.
     
+    // If a non-logged user access to the current script, is redirected to a 403 page.
     if (!isset($_SESSION['loggedin'])) {
         header("Location: ../../../../403.php");
         exit();
     }
 
-    $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
-    $categories = array();
+    $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
+    $categories = array(); // Array to save categories
 
     if ($conn->connect_error) {
-        echo "Error interno del servidor. No se ha posido establecer una conexión con la base de datos.";
+        echo "Error interno del servidor. No se ha podido establecer una conexión con la base de datos.";
         exit();
     } else {
+        // Fetching categories from database and storing then in the arrat for further use.
         $sql = "select id, name from categories order by name asc";
         if ($res = $conn->query($sql)) {
             while ($rows = $res->fetch_assoc()) {
@@ -24,33 +26,31 @@
 ?>
 <script src="/dashboard/admin/posts/js/create_post.js"></script>
 <div class="container">
-    <h1 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;">Crear entrada</h1>
-    <form style="margin-top: 30px;">
-        <div class="form-row" style="margin-bottom: 20px;">
-            <div class="col" style="margin-right: 10px;">
-                <div class="form-group">
-                    <label>Título:</label>
-                    </div>
-                        <input id="title" class="form-control" type="text" style="margin-top: -15px;">
-                    </div>
-    <div class="col">
-        <div class="form-group">
-            <label>Categoría:</label>
-        </div>
-            <select id="category" class="form-control" style="margin-top: -15px;">
-                <?php
-                    foreach($categories as $id => $name) {
-                        echo "<option value=".$id.">".$name."</option>";
-                    }
-                ?>
-            </select>
+    <div class="row">
+        <div class="col" style="margin-bottom: -15px;">
+            <h1 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;">Crear post</h1>
         </div>
     </div>
-    <div class="form-row" style="margin-bottom: 20px;">
-        <div class="col" style="margin-right: 10px;">
-            <div class="form-rows">
-                <label>Seleccionar ficheros (máximo 10).</label>
+    <form style="margin-bottom: 20px;padding-top: 17px;">
+        <div class="form-row">
+            <div class="col">
+                <label>Título: </label>
+                <input id="title" class="form-control" type="text" style="margin-bottom: 15px;" />
             </div>
+            <div class="col">
+                <label>Categoría: </label>
+                <select id="category" class="form-control">
+                    <?php
+                        // Showing existing categories in a dropdown menu.
+                        foreach($categories as $id => $name) {
+                            echo "<option value=".$id.">".$name."</option>";
+                        }
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="form-row" style="margin-top: 10px;">
+            <label>Seleccionar ficheros (máximo 10).</label>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
@@ -64,20 +64,16 @@
             </div>
             <div><ul id="file-list" style="list-style-type: none; margin: 0;"></ul></div>
         </div>
-    </div>
-    <div class="form-row">
-        <div class="col" style="margin-right: 10px;">
-            <div class="form-group">
+        <div class="form-row" style="margin-top: 20px;">
+            <div class="col">
                 <label>Contenido:</label>
-                </div>
-                    <textarea maxlength="450" id="post-content" class="form-control" style="height: 140px;"></textarea>
-                </div>
+                <textarea id="post-content" class="form-control" style="height: 500px"></textarea>
             </div>
-            <div class="form-row">
-                <div class="col text-right" style="margin-top: 30px;">
-                    <button id="post-cancel" class="btn btn-danger" type="button" style="margin-right: 10px;">Cancelar</button>
-                    <button id="post-create" class="btn btn-success" type="button" disabled>Crear</button>
-                <div class="btn-group" role="group"></div>
+        </div>
+        <div class="form-row text-right" style="margin-top: 20px;">
+            <div class="col">
+                <button id="post-cancel" class="btn btn-danger" type="button">Cancelar</button>
+                <button id="post-create" class="btn btn-success" type="button" disabled style="margin-left: 5px;">Crear</button>
             </div>
         </div>
     </form>

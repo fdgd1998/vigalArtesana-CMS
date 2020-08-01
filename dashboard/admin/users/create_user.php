@@ -10,6 +10,7 @@
         require_once '../../../modules/generate_passwd_token.php';
         require_once '../../../modules/passwd_email.php';
 
+        // getting and encrypting data
         $user = $_POST['username_s'];
         $name = OpenSSLEncrypt($_POST['name_s']);
         $surname= OpenSSLEncrypt($_POST['surname_s']);
@@ -22,6 +23,7 @@
             print("No se ha podido conectar a la base de datos");
             exit();
         } else {
+            // creating user
             $stmt = "insert into users (username, email, firstname, surname, account_type) values ('".$user."','".$email."','".$name."','".$surname."','".$account_type."')";
             print($stmt);
             if ($conn->query($stmt) === TRUE) {

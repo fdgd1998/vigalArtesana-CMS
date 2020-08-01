@@ -1,5 +1,6 @@
-
 jQuery(function($) {
+
+    // Showing edition form.
     $('.cat-edit-form').on('click', function(e) {
         // set the variables
         editing_cat_id = $(this).attr('id').substring(6);
@@ -14,7 +15,7 @@ jQuery(function($) {
                 type: 'post', // method
                 dataType: 'text',
                 cache: false,
-                data: formData, // pass the input value to serve
+                data: formData, // pass the input value to server
                 processData: false,  // tell jQuery not to process the data
                 contentType: false,   // tell jQuery not to set contentType
                 success: function(response) { // if the http response code is 200
@@ -29,6 +30,7 @@ jQuery(function($) {
         $('#edit-cat').modal().show();
     });
 
+    // Showing deletion form.
     $(".cat-delete").on('click', function(e) {
         editing_cat_id = $(this).attr('id').substring(6);
         editing_catname = $(this).attr('name');
@@ -36,14 +38,16 @@ jQuery(function($) {
         $('#delete-cat').modal().show();
     });
 
+    // Showing creating form
     $("#create-cat").on('click', function(e) {
         $('#new-cat').modal().show();
     });
 
-    $("#cancel-cat-create, #close-edit-cat").on("click", function(e) {
-        $("#new-cat-name").val("");
-    });
+    // $("#cancel-cat-create, #close-edit-cat").on("click", function(e) {
+    //     $("#new-cat-name").val("");
+    // });
 
+    // Cancelling or closing the edition of a category. Resetting form.
     $('#cancel-cat-edit, #close-cat-edit').on('click', function(e) {
         $('#update-cat-name').css("background-color", "#FFF");
         $('#update-cat-image').css("background-color", "#FFF");
@@ -56,6 +60,7 @@ jQuery(function($) {
         $("#cat-edit").attr("disabled");
     });
 
+    // Cancelling or closing the creation of a category. Resetting form.
     $('#cancel-cat-create, #close-cat-create').on('click', function(e) {
         $('#new-cat-name').css("background-color", "#FFF");
         $('#new-cat-image').css("background-color", "#FFF");
@@ -66,10 +71,13 @@ jQuery(function($) {
         $("#new-cat-image-name").html("Escoger fichero...");
     });
 
+    // Changing category status - enabled/disabled.
     $('.cat-status-change-form').on('click', function(e) {
-        // set the variables
+        // Getting category info.
         editing_cat_id = $(this).attr('id');
         editing_catname = $(this).attr('name');
+
+        // Setting action text.
         action_title = 'Habilitando';
         action_info = 'habilitar';
         if ($('#'+editing_cat_id+'_cat_status').text().trim() == 'Habilitada') {
@@ -78,9 +86,10 @@ jQuery(function($) {
         };
         $('#staticBackdropLabel-statuschange').text(action_title+' categoría: "'+editing_catname+'"');
         $('#statuschange_modal_info_text').text('¿Estás seguro de que quieres '+action_info+' esta categoría?');
-        $('#cat-status-change').modal().show();
+        $('#cat-status-change').modal().show(); //Showing modal on top of website content.
     });
 
+    // Getting new category image URL and setting a preview.
     $("#update-new-cat-image").on("change", function(e) {
         if ($(this).val() != "") {
             var fileName = $(this).val().substring(12);
@@ -96,6 +105,7 @@ jQuery(function($) {
         enableEditFormBtn();
     });
 
+    // Getting current category image URL and setting a preview.
     $("#new-cat-image").on("change", function(e) {
         if ($(this).val() != "") {
             var fileName = $(this).val().substring(12);
@@ -109,6 +119,7 @@ jQuery(function($) {
         enableCreateFormBtn();
     });
 
+    // Getting URL of the image stored in the server.
     function readURL(input, selector) {
         console.log(input);
         console.log(selector);
@@ -124,6 +135,7 @@ jQuery(function($) {
         }
     }
 
+    // Changing name of the category.
     $("#change-edit-name-chkbx").on("change", function(e){
         if ($(this).is(":checked")) {
             $("#edit-change-name").removeClass("disabled-form");
@@ -150,6 +162,7 @@ jQuery(function($) {
         enableEditFormBtn();
     });
 
+    // Enabled image change form if selected. Disabling if not.
     $("#change-edit-image-chkbx").on("change", function(e){
         if ($(this).is(":checked")) {
             $("#edit-change-image").removeClass("disabled-form");
@@ -159,6 +172,7 @@ jQuery(function($) {
         enableEditFormBtn();
     });
 
+    // Reload page with new sorting order.
     $('#result-order').on('change', function(e) {
         value = $(this).children("option:selected").val();
         console.log(value);

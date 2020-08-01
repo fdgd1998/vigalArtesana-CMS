@@ -2,10 +2,13 @@
     session_start();
     require_once '../../../modules/connection.php';
     require_once '../../../modules/crypt.php';
+    
+    // 403 redirection if session is not started
     if (!isset($_SESSION['loggedin'])) {
         header("Location: ../../../../403.php");
         exit();
     }
+
     if ($_POST) {
         $userid = $_POST['userid'];
         $email = "";
@@ -17,18 +20,18 @@
             print("No se ha podido conectar a la base de datos");
             exit();
         } else {
+            // checking if the user has a pending passsword reset.
             $stmt = "select email, passwd_reset from users where id='".$userid."'";
             print("stmt: ".$stmt."<br>");
             if ($res = $conn->query($stmt)) {
                 if ($row = $res->fetch_assoc()) {
                     $email = $row['email'];
                     $passwd_reset = $row['passwd_reset'];
-                    print($email."<br>");
-                    print($passwd_reset."<br>");
                 }
             }
-            $stmt = "delete from users where id='".$userid."'";
+            $stmt = "delete from users where id='".$userid."'"; //deleting user
             $conn->query($stmt);
+            // if user has pending password reset, data is removed too
             if ($passwd_reset == "YES") {
                 $stmt = "delete from password_reset where email='".$row['email']."'";
                 if ($conn->query($stmt)) {
@@ -39,5 +42,4 @@
             }
         }
     }
-    
 ?>

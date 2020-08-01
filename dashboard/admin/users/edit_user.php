@@ -1,13 +1,16 @@
 <?php
     session_start();
+
+    // 403 redirection is session is not set.
     require_once '../../../modules/connection.php';
     if (!isset($_SESSION['loggedin'])) {
         header("Location: ../../../../403.php");
         exit();
     }
+
     if ($_POST && $_SESSION["account_type"] != 'publisher') {
         $username = $_POST["user_name"];
-        if (isset($_POST['user_type']) && isset($_POST['user_email'])) {
+        if (isset($_POST['user_type']) && isset($_POST['user_email'])) { //editing type
             $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
             if ($conn->connect_error) {
                 echo "No se ha podido conectar a la base de datos";
@@ -22,7 +25,7 @@
                 }
             }
         }
-        if (!isset($_POST['user_type']) && isset($_POST['user_email'])) {
+        if (!isset($_POST['user_type']) && isset($_POST['user_email'])) { //editing email
             $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
             if ($conn->connect_error) {
                 echo "No se ha podido conectar a la base de datos";
@@ -36,7 +39,7 @@
                 }
             }
         }
-        if (isset($_POST['user_type']) && !isset($_POST['user_email'])) {
+        if (isset($_POST['user_type']) && !isset($_POST['user_email'])) { //editing type and email
             $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
             if ($conn->connect_error) {
                 echo "No se ha podido conectar a la base de datos";

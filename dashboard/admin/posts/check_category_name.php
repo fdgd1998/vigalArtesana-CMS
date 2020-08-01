@@ -2,11 +2,13 @@
     session_start();
     require_once '../../../modules/connection.php';
 
+    // Redirecting to 403 page is session does not exist.
     if (!isset($_SESSION['loggedin'])) {
         header("Location: ../../../../403.php");
         exit();
     }
 
+    // Publishers cannot modify categories.
     if(isset($_POST['cat_name']) && $_SESSION['account_type'] != 'publisher') {
         $cat_name = $_POST['cat_name'];
 
@@ -22,7 +24,7 @@
             $stmt->store_result();
             $stmt->bind_result($cat_name_db);
 
-            // Si hay resultado, el usuario existe
+            // If there is results, the category name exists and cannot be used.
             if ($stmt->num_rows == 1) {
                 http_response_code(412);
             } else {

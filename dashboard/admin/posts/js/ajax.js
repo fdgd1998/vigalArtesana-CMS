@@ -1,6 +1,7 @@
 editing_cat_id = 0;
 editing_catname = '';
 
+// Enable submit button of the create form.
 function enableCreateFormBtn() {
     var total_inputs = 0;
     if ($('#new-cat-name').val() != "") total_inputs++;
@@ -9,6 +10,7 @@ function enableCreateFormBtn() {
     else $('#cat-create').attr('disabled', 'disabled');
 };
 
+// Enable submit button of the edit form.
 function enableEditFormBtn() {
     if ($("#change-edit-image-chkbx").is(":not(:checked)") && $("#change-edit-name-chkbx").is(":not(:checked)")) {
         $('#cat-edit').prop("disabled", true);
@@ -35,45 +37,6 @@ function enableEditFormBtn() {
     }
 }
 
-
-// function enableEditFormBtn() {
-//     console.log("change-edit-image-chkbx: "+$("#change-edit-image-chkbx").is(":checked"));
-//     console.log("change-edit-name-chkbx: "+$("#change-edit-name-chkbx").is(":checked"));
-//     if ($("#change-edit-image-chkbx").is(":not(:checked)") && !$("#change-edit-name-chkbx").is(":not(:checked)")) {
-//         $('#cat-edit').prop("disabled", true);
-//     } else if ($("#change-edit-image-chkbx").is(":checked")) {
-//         if ($('#update-new-cat-image').val() != "Escoger fichero..."){
-//             console.log("cat image val: "+$('#update-new-cat-image').val());
-//             $('#cat-edit').prop("disabled", false);
-//         }
-//     } else if ($("#change-edit-name-chkbx").is(":checked")) {
-//         if ($('#update-cat-name').val() != "") {
-//             console.log("cat name val: "+$('#update-cat-image').val());
-//             $('#cat-edit').prop("disabled", false);
-//         }
-//     }
-        // var total_inputs = 0;
-        // if ($("#change-edit-image-chkbx").is(":checked") && $("#change-edit-name-chkbx").is(":not(:checked)")) {
-        //     if ($('#update-new-cat-image').val() != "Escoger fichero..."){
-        //         console.log("cat image val: "+$('#update-new-cat-image').val());
-        //         $('#cat-edit').prop("disabled", false);
-        //         total_inputs++;
-        //     }
-        // }
-        // if ($("#change-edit-name-chkbx").is(":checked") && $("#change-edit-image-chkbx").is(":not(:checked)")) {
-        //     if ($('#update-cat-name').val() != "") {
-        //         console.log("cat name val: "+$('#update-cat-image').val());
-        //         $('#cat-edit').prop("disabled", false);
-        //         total_inputs++;
-        //     }
-        // }
-        // if ($('#update-cat-name').val() != "" && $("#change-edit-name-chkbx").is(":checked")) total_inputs++;
-        // if (($('#update-cat-image').val() != "" || $('#update-cat-image').val() != "Escoger fichero...") && $("#change-edit-image-chkbx").is(":checked")) total_inputs++;
-        // console.log("total inputs: "+total_inputs);
-        // if (total_inputs == 2) $('#cat-edit').prop("disabled", false);
-        // else $('#cat-edit').prop("disabled", true);
-// };
-
 jQuery(function($) {
     $('#cat-create').on('click', function(e) {
         // perform an ajax call
@@ -89,7 +52,6 @@ jQuery(function($) {
             processData: false,  // tell jQuery not to process the data
             contentType: false,   // tell jQuery not to set contentType
             success: function(response) { // if the http response code is 200
-                // $('.modal-backdrop').remove();
                 alert(response);
                 window.location = location.origin+"/dashboard/?page=categories&order=asc";
             },

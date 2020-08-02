@@ -50,6 +50,11 @@ jQuery(function($){
         enableCreateBtn(); // Checking if submit button should be enabled.
     });
 
+    //Exiting post creation/edition
+    $("#post-cancel").on("click", function(e){
+        window.location = location.origin + "/dashboard/?page=list-posts&order=asc"
+    });
+
     // Creating the post.
     $("#post-create").on("click", function(e){
         // Getting data to sent and appending it to the form data.
@@ -69,9 +74,7 @@ jQuery(function($){
                 formData.append("image"+i, files[i]);
             }
         }
-        // for(var pair of formData.entries()) {
-        //     console.log(pair[0]+ ', '+ pair[1]); 
-        // }
+        
         // Sending AJAX request to the server.
         $.ajax({
             url: location.origin+'/dashboard/admin/posts/create_post.php', // this is the target
@@ -81,12 +84,11 @@ jQuery(function($){
             data: formData, // pass the input value to serve
             processData: false,  // tell jQuery not to process the data
             contentType: false,   // tell jQuery not to set contentType
-            success: function(response) { // if the http response code is 200
-                // $('.modal-backdrop').remove();
+            success: function(response) { // HTTP response code is 200
                 alert(response);
                 window.location = location.origin+"/dashboard/?page=list-posts&order=asc";
             },
-            error: function(response) { // if the http response code is other than 200
+            error: function(response) { // HTTP response code is != than 200
                 alert(response);
             }
         });

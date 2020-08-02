@@ -23,6 +23,35 @@
             }
         }
     }
+
+    // Varibles for storing data to edit, just in case if needed.
+    $edit = false;
+    $category = '';
+    $title = '';
+    $content = '';
+    $images = '';
+
+    // If the action to perform is to edit a post, current post data is retrieved form database and showed up in the page.
+    if (isset($_GET['action']) && $_GET['action'] == 'edit' && isset($_GET['id'])) {
+        $edit = true;
+        $sql = "select POSTS.id, CATEGORIES.name, POSTS.title, POSTS.content, POSTS.images from posts inner join categories on CATEGORIES.id = POSTS.category where POSTS.id = ".$_GET['id'];
+        
+        if ($res = $conn->query($sql)) {
+            if ($res->num_rows == 1) {
+                $row = $res->fetch_assoc();
+                $category = $row['name'];
+                $title = $row['title'];
+                $content = $row['content'];
+                $images = $row['images'];
+            }
+        }
+    }
+
+    echo "<script>console.log('title: $title')</script>";
+    echo "<script>console.log('category: $category')</script>";
+    echo "<script>console.log('content: $content')</script>";
+    echo "<script>console.log('images: $images')</script>";
+
 ?>
 <script src="/dashboard/admin/posts/js/create_post.js"></script>
 <div class="container">
@@ -35,15 +64,23 @@
         <div class="form-row">
             <div class="col">
                 <label>Título: </label>
+                <?php if ($edit): ?>
+                <input id="title" class="form-control" type="text" style="margin-bottom: 15px;" value="<?=$title?>" />
+                <?php else: ?>
                 <input id="title" class="form-control" type="text" style="margin-bottom: 15px;" />
+                <?php endif; ?>
             </div>
             <div class="col">
                 <label>Categoría: </label>
                 <select id="category" class="form-control">
                     <?php
                         // Showing existing categories in a dropdown menu.
-                        foreach($categories as $id => $name) {
-                            echo "<option value=".$id.">".$name."</option>";
+                        foreach ($categories as $id => $name) {
+                            if ($edit && $name == $category) {
+                                echo "<option value=".$id." selected>".$name."</option>";
+                            } else {
+                                echo "<option value=".$id.">".$name."</option>";
+                            }
                         }
                     ?>
                 </select>
@@ -67,7 +104,11 @@
         <div class="form-row" style="margin-top: 20px;">
             <div class="col">
                 <label>Contenido:</label>
+                <?php if($edit): ?>
+                <textarea id="post-content" class="form-control" style="height: 500px"><?=$content?></textarea>
+                <?php else: ?>
                 <textarea id="post-content" class="form-control" style="height: 500px"></textarea>
+                <?php endif; ?>
             </div>
         </div>
         <div class="form-row text-right" style="margin-top: 20px;">

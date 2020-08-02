@@ -35,31 +35,43 @@ jQuery(function($) {
         $('#post-status-change').modal().show(); // Showing the modal window on top of the page content.
     });
 
+    // Refreshing page applying new category order on selection change.
+    $("#category-order").on("change", function(e) {
+        var category = $("#category-order option:selected").val();
+        var destination = "?page=list-posts&order=asc";
+        destination += "&category="+category;
+        window.location = destination;
+    });
+
+    //Editing post button
+    $(".post-edit-form").on("click", function(e) {
+        window.location = location.origin+"/dashboard/?page=create-post&action=edit&id="+$(this).attr('id').substring(7).trim();
+    });
 
     // Refreshing page applying new sort order on selection change.
     $('#result-order').on('change', function(e) {
-        value = $(this).children("option:selected").val(); // Getting selected value.
-        // $destination = "?page=list-posts&order=";
-        switch(value) {
-            case "asc":
-                window.location = "?page=list-posts&order=asc";
-                break;
-            case "desc":
-                window.location = "?page=list-posts&order=desc";
-                break;
-            case "published":
-                window.location = "?page=list-posts&order=published";
-                break;
-            case "notpublished":
-                window.location = "?page=list-posts&order=notpublished";
-                break;
+        var value = $(this).children("option:selected").val(); // Getting selected value.
+        var destination = "?page=list-posts&order=";
+        $("#category-order").prop("hidden", true);
+        if (value != "bycategory") {
+            switch(value) {
+                case "asc":
+                    destination += "asc";
+                    break;
+                case "desc":
+                    destination += "desc";
+                    break;
+                case "published":
+                    destination += "published";
+                    break;
+                case "notpublished":
+                    destination += "notpublished";
+                    break;
+            }
+            window.location = destination;
+        } else {
+            $("#category-order").prop("hidden", false);
+            window.location = destination + "asc&category=" + $("#category-order option:selected").val();
         }
-
-        /* to be applied...
-        if (category_is_selected) {
-            $destination += &category=category_id;
-        }
-        window.location = $destination;
-        */
     });
 });

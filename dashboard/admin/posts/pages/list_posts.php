@@ -61,8 +61,8 @@
 </div>
 
 <div class="container">
-  <h1 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;">Posts</h1>
-  <div class="input-group mb-6" style="width: 300px; margin-bottom: 20px;">
+  <h1 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;">Posts</h1>
+  <div class="input-group" style="margin-bottom: 20px;">
     <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon1">Ordenar</span>
     </div>
@@ -71,35 +71,38 @@
       <option value="desc" <?=isset($order)?($order=='desc'?'selected':''):''?>>Descendente</option>
       <option value="published" <?=isset($order)?($order=='published'?'selected':''):''?>>Publicado</option>
       <option value="notpublished" <?=isset($order)?($order=='notpublished'?'selected':''):''?>>No publicado</option>
-      <option value="bycategory" <?=isset($order)?($order=='bycategory'?'selected':''):''?>>Por categoría</option>
+      <option value="bycategory" <?=isset($_GET['category'])?'selected':''?>>Por categoría</option>
     </select>
     <?php 
-      // If the GET variable 'category' is set, a dropdown is element is created.
+      //If the GET variable 'category' is set, a dropdown is element is created.
       if (isset($_GET['category'])): 
     ?>
-    <select id="category-order" class="form-control">
-      <?php
-        if ($conn->connect_error) {
-          echo "No se ha podido conectar a la base de datos.";
-        } else {
-          $sql = "select id, name from categories";
-          
-          $res = $conn->query($sql);
-          if ($res->num_rows > 0) {
-            while ($row = $res->fetch_assoc()) {
-              $selected = "false";
-              if ($_GET['category']==$row['id']) {
-                echo "<option value='".$row['id']."' selected>".$row['name']."</option>";
-              } else {
-                echo "<option value='".$row['id']."'>".$row['name']."</option>";
-              }   
-            }
-          }
-          $res->free();
-        }
-      ?>
-    </select>
+      <select id="category-order" class="form-control">
+      <?php else: ?>
+      <select hidden id="category-order" class="form-control">
+      
       <?php endif; ?>
+      <?php
+          if ($conn->connect_error) {
+            echo "No se ha podido conectar a la base de datos.";
+          } else {
+            $sql = "select id, name from categories";
+            
+            $res = $conn->query($sql);
+            if ($res->num_rows > 0) {
+              while ($row = $res->fetch_assoc()) {
+                $selected = "false";
+                if ($_GET['category']==$row['id']) {
+                  echo "<option value='".$row['id']."' selected>".$row['name']."</option>";
+                } else {
+                  echo "<option value='".$row['id']."'>".$row['name']."</option>";
+                }   
+              }
+            }
+            $res->free();
+          }
+        ?>
+      </select>
   </div>
   <div class="table-responsive">
     <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -154,7 +157,7 @@
                       echo '
                           <td>
                               <div>
-                                  <button class="btn btn-success post-edit-form" title="Editar post" type="button" style="margin-right: 1px;" id="postid-'.$rows['id'].' name="'.$rows['title'].'">
+                                  <button class="btn btn-success post-edit-form" title="Editar post" type="button" style="margin-right: 1px;" id="postid-'.$rows['id'].'" name="'.$rows['title'].'">
                                       <i class="fas fa-edit"></i>
                                   </button>
                           ';

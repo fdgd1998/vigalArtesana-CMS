@@ -1,8 +1,10 @@
+var editing_post_id = 0;
 jQuery(function($) {
 
     // Showing delete options on button click.
     $(".post-delete").on('click', function(e) {
-        $('#staticBackdropLabel-delete').text('Eliminando post: "'+ $(this).attr('name')+'"');
+        editing_post_id = $(this).attr('id').substring(7);
+        $('#staticBackdropLabel-delete').text('Eliminando post: "'+ $(this).attr('name') +'"');
         $('#delete-post').modal().show(); // Showing the modal window on top of the page content.
     });
 
@@ -11,7 +13,7 @@ jQuery(function($) {
         $.ajax({
             url: location.origin+'/dashboard/admin/posts/delete_post.php',
             method: 'post',
-            data: {post_id: $(this).attr('id').substring(7)}, // Data to send.
+            data: {post_id: editing_post_id}, // Data to send.
             success: function(response) { // HTTP response code 200
                 alert(response);
                 window.location = location.origin+"/dashboard/?page=list-posts&order=asc"; // Reloading page on success.
@@ -24,9 +26,10 @@ jQuery(function($) {
 
     $('.post-status-change-form').on('click', function(e) {
         // Setting action messages depending on post's current status.
+        editing_post_id = $(this).attr('id').substring(7);
         action_title = 'Habilitando';
         action_info = 'habilitar';
-        if ($('#postid-'+$(this).attr('id').substring(7)+'_status').text().trim() == 'Sí') {
+        if ($('#postid-'+editing_post_id+'_status').text().trim() == 'Sí') {
             action_title = 'Desabilitando';
             action_info = 'deshabilitar';
         };

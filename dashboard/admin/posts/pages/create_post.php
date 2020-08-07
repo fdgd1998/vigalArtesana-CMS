@@ -24,7 +24,7 @@
         }
     }
 
-    // Varibles for storing data to edit, just in case if needed.
+    // Variables for storing data to edit, just in case if needed.
     $edit = false;
     $category = '';
     $title = '';
@@ -42,7 +42,7 @@
                 $category = $row['name'];
                 $title = $row['title'];
                 $content = $row['content'];
-                $images = $row['images'];
+                $images = explode(",", $row['images']);
             }
         }
     }
@@ -53,11 +53,39 @@
     echo "<script>console.log('images: $images')</script>";
 
 ?>
+<style>
+    img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+    }
+    .image {
+        display: inline-block;
+    }
+
+    .current-image {
+        margin-right: -5px;
+        margin-left: 5px;
+        margin-top: 5px;
+        margin-bottom: 5px; 
+    }
+
+    .new-image {
+        margin: 8px;
+    }
+
+    input[type="checkbox"] {
+        position: relative;
+        left: -20px;
+        top: 3px;
+    }
+</style>
+
 <script src="/dashboard/admin/posts/js/create_post.js"></script>
 <div class="container">
     <div class="row">
         <div class="col" style="margin-bottom: -15px;">
-            <h1 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;">Crear post</h1>
+            <h1 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;"><?=$edit ? "Editar post":"Crear post"?></h1>
         </div>
     </div>
     <form style="margin-bottom: 20px;padding-top: 17px;">
@@ -87,7 +115,8 @@
             </div>
         </div>
         <div class="form-row" style="margin-top: 10px;">
-            <label>Seleccionar ficheros (máximo 10).</label>
+            <label>Seleccionar ficheros (máximo <?=$edit ? 10-count($images):10?>).</label>
+            <script>maxFilesToUpload = <?=$edit?10-count($images):10?></script>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
@@ -100,6 +129,23 @@
                 </div>
             </div>
             <div><ul id="file-list" style="list-style-type: none; margin: 0;"></ul></div>
+        </div>
+        <?php if($edit): ?>
+        <div class="form-row" style="margin-top: 10px;">
+        <label>Imágenes actuales (si quieres eliminar alguna imagen selecciónalas aquí abajo).</label>
+            <div style="width:100%;">
+                <?php foreach ($images as $item): ?>
+                <div class="image current-image">
+                    <input class="remove-image" type="checkbox" id="<?=$item?>">
+                    <img src="<?='/uploads/posts/'.$item?>" class="rounded float-left" alt="">
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <?php endif;?>
+        <div id="new-image-container" hidden class="form-row" style="margin-top: 10px;">
+        <label>Nuevas mágenes.</label>
+            <div id="images-preview" style="width:100%;"></div>
         </div>
         <div class="form-row" style="margin-top: 20px;">
             <div class="col">
@@ -114,7 +160,12 @@
         <div class="form-row text-right" style="margin-top: 20px;">
             <div class="col">
                 <button id="post-cancel" class="btn btn-danger" type="button">Cancelar</button>
-                <button id="post-create" class="btn btn-success" type="button" disabled style="margin-left: 5px;">Crear</button>
+                <?php if ($edit): ?>
+                    <?php echo  "<script>var post_id = ".$_GET['id']."</script>"?>
+                    <button id="post-create" class="btn btn-success" type="button" style="margin-left: 5px;">Editar</button>
+                <?php else: ?>
+                    <button id="post-create" class="btn btn-success" type="button" disabled style="margin-left: 5px;">Crear</button>
+                <?php endif; ?>
             </div>
         </div>
     </form>

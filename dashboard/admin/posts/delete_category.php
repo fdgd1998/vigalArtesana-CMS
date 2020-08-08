@@ -16,6 +16,12 @@
             echo "No se ha podido conectar a la base de datos.";
             exit();
         } else {
+            // checking if there are posts of the category to be deleted
+            $stmt = "select count(id) as id from posts where category = ".$_POST["cat_id"];
+            if ($conn->query($stmt)->fetch_assoc()['id'] > 0) {
+                echo "Existen posts pertenecientes a esta categoría. La categoría no se puede eliminar. Para borrarla, comprueba que no existen posts de dicha categoría e inténtalo de nuevo.";
+                exit();
+            }
             // getting filename and deleting it
             $stmt = "select image from categories where id = ".$_POST["cat_id"];
             if ($res = $conn->query($stmt)) {

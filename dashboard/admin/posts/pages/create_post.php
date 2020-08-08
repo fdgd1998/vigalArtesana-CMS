@@ -47,11 +47,6 @@
         }
     }
 
-    echo "<script>console.log('title: $title')</script>";
-    echo "<script>console.log('category: $category')</script>";
-    echo "<script>console.log('content: $content')</script>";
-    echo "<script>console.log('images: $images')</script>";
-
 ?>
 <style>
     img {
@@ -100,15 +95,19 @@
             </div>
             <div class="col">
                 <label>Categoría: </label>
-                <select id="category" class="form-control">
+                <select id="category" class="form-control" <?=count($categories) > 0 ? "":"disabled"?>>
                     <?php
-                        // Showing existing categories in a dropdown menu.
-                        foreach ($categories as $id => $name) {
-                            if ($edit && $name == $category) {
-                                echo "<option value=".$id." selected>".$name."</option>";
-                            } else {
-                                echo "<option value=".$id.">".$name."</option>";
+                        if (count($categories) > 0) {
+                            // Showing existing categories in a dropdown menu.
+                            foreach ($categories as $id => $name) {
+                                if ($edit && $name == $category) {
+                                    echo "<option value=".$id." selected>".$name."</option>";
+                                } else {
+                                    echo "<option value=".$id.">".$name."</option>";
+                                }
                             }
+                        } else {
+                            echo "<option selected>Sin resultados.</option>";
                         }
                     ?>
                 </select>

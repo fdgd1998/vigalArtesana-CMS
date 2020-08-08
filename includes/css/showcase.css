@@ -1,0 +1,48 @@
+.animated {
+    transition: transform .5s; /* Animation */;
+}
+
+.animated:hover {
+    transform: scale(1.1); /* (150% zoom)*/
+    z-index: 1;
+}
+
+.title {
+    font-family: 'Great Vibes';
+    color: white;
+    position: absolute;
+    text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    font-size: 38px;
+    letter-spacing: 2px;
+    line-height: 35px;
+}
+
+.category {
+    border-radius: 5%;
+    opacity: .9;
+}
+
+.wrap {
+    position:relative;
+    border-radius: 5%;
+}
+
+.wrap:before {
+    border-radius: 5%;
+    content:"";
+    position: absolute;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    background: rgba(0,0,0,0.5);
+    z-index:2;
+}
+
+.wrap:hover {
+    background: rgba(0,0,0,0.8)
+}

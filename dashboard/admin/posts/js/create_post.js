@@ -7,7 +7,7 @@ jQuery(function($){
         var total_inputs = 0;
         if ($("#title").val() != "") total_inputs++;
         if ($("#post-content").val() != "") total_inputs++;
-        if ($("#category-option option:selected").val() != "") total_inputs++;
+        if ($("#category option:selected").val() != "Sin resultados.") total_inputs++;
         if ($("#upload-files").prop("files").length > 0) total_inputs++;
         console.log(total_inputs);
         if (total_inputs == 4) $("#post-create").prop("disabled", false);
@@ -144,7 +144,9 @@ jQuery(function($){
                 }
             });
         } else {
-            formData.append("images_to_remove", filesToRemove.join());
+            if (filesToRemove.length != 0) {
+                formData.append("images_to_remove", filesToRemove.join());
+            }
             formData.append("post_id", post_id);
              // Sending AJAX request to the server.
              $.ajax({

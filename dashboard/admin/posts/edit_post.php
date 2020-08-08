@@ -31,7 +31,7 @@
                         $current_images = explode(",", $row['images']);
                     }
                     array_push($current_images, $newfilename);
-                    $stmt = "update posts set category='".$_POST['category']."', title='".$_POST["title"]."', content='".$_POST["content"]."', images='".implode(",",$current_images)."'";
+                    $stmt = "update posts set category='".$_POST['category']."', title='".$_POST["title"]."', content='".$_POST["content"]."', images='".implode(",",$current_images)."' where id = ".$_POST['post_id'];
                     if ($conn->query($stmt) == TRUE) {
                         echo "La entrada (1) se ha editado correctamente.";
                     } else {
@@ -51,7 +51,7 @@
                             }
                         }
                         array_push($current_images, $newfilename);
-                        $stmt = "update posts set category='".$_POST['category']."', title='".$_POST["title"]."', content='".$_POST["content"]."', images='".implode(",",$current_images)."'";
+                        $stmt = "update posts set category='".$_POST['category']."', title='".$_POST["title"]."', content='".$_POST["content"]."', images='".implode(",",$current_images)."' where id = ".$_POST['post_id'];
                         if ($conn->query($stmt) == TRUE) {
                             echo "La entrada (2) se ha editado correctamente.";
                         } else {
@@ -92,7 +92,7 @@
                     foreach($fileNames as $file) {
                         array_push($current_images, $file);
                     }
-                    $stmt = "update posts set category='".$_POST['category']."', title='".$_POST["title"]."', content='".$_POST["content"]."', images='".implode(",",$fileNames)."'";
+                    $stmt = "update posts set category='".$_POST['category']."', title='".$_POST["title"]."', content='".$_POST["content"]."', images='".implode(",",$fileNames)."' where id = ".$_POST['post_id'];
                     if ($conn->query($stmt) == TRUE) {
                         echo "La entrada (3) se ha editado correctamente.";
                     } else {
@@ -116,7 +116,7 @@
                         }
 
                         $res->free(); // Releasing results from RAM.
-                        $stmt = "update posts set category='".$_POST['category']."', title='".$_POST["title"]."', content='".$_POST["content"]."', images='".implode(",",$current_images)."'";
+                        $stmt = "update posts set category='".$_POST['category']."', title='".$_POST["title"]."', content='".$_POST["content"]."', images='".implode(",",$current_images)."' where id = ".$_POST['post_id'];
                         if ($conn->query($stmt) == TRUE) {
                             echo "La entrada (4) se ha editado correctamente.";
                         } else {
@@ -138,13 +138,20 @@
                         }
                     }
                     $res->free(); // Releasing results from RAM.
-                    $stmt = "update posts set category='".$_POST['category']."', title='".$_POST["title"]."', content='".$_POST["content"]."', images='".implode(",",$current_images)."'";
+                    $stmt = "update posts set category='".$_POST['category']."', title='".$_POST["title"]."', content='".$_POST["content"]."', images='".implode(",",$current_images)."' where id = ".$_POST['post_id'];
                     if ($conn->query($stmt) == TRUE) {
                         echo "La entrada se ha editado correctamente.";
                     } else {
                         echo "No se ha podido editar la entrada.";
                     }
                 } 
+            } else {
+                $stmt = "update posts set category='".$_POST['category']."', title='".$_POST["title"]."', content='".$_POST["content"]."' where id = ".$_POST['post_id'];
+                if ($conn->query($stmt) == TRUE) {
+                    echo "La entrada se ha editado correctamente.";
+                } else {
+                    echo "No se ha podido editar la entrada.";
+                    }
             }
         }
         $conn->close();

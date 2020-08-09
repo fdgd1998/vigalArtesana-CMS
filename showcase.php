@@ -3,8 +3,8 @@
     require_once $_SERVER['DOCUMENT_ROOT'].'/modules/connection.php';
 
     // Retrieve new limit value if changed
-    if(isset($_POST['records-limit'])){
-        $_SESSION['records-limit'] = $_POST['records-limit'];
+    if(isset($_GET['records-limit'])){
+        $_SESSION['records-limit'] = $_GET['records-limit'];
     }
 
     $categories = array();
@@ -111,10 +111,10 @@
                 </div>   
             <?php else: ?>
                 <div class="intro">
-                    <h2 class="text-center" style="margin-top: 50px; margin-bottom: 40px;"><?=$category_name?></h2>
+                    <h2 class="text-center" style="margin-top: 70px; margin-bottom: 40px; font-family: 'Great Vibes'; font-size: 50px;"><?=$category_name?></h2>
                 </div>
-                <form action="?page=<?=$page?>&category=<?=$_GET['category']?>" method="post">
-                    <div class="input-group mb-3" style="width: 150px">
+                <form action="?category=<?=$_GET['category']?>" method="get">
+                    <div class="input-group mb-3" style="width: 220px; padding-bottom: 20px;">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">Mostrar</span>
                         </div>
@@ -123,14 +123,15 @@
                             <option
                                 <?php if(isset($_SESSION['records-limit']) && $_SESSION['records-limit'] == $limit) echo 'selected'; ?>
                                 value="<?= $limit; ?>">
-                                <?= $limit; ?>
+                                <?= $limit; ?> resultados
                             </option>
                             <?php endforeach; ?>
                         </select>
+                        <input hidden name="category" value="<?=$_GET['category']?>">
                     </div>
                 </form>
             
-                <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" style="margin-bottom: 20px;">
+                <div class="row row-cols-2 row-cols-md-2 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" style="margin-bottom: 20px;">
                 <?php foreach ($results as $element): ?>
                 <div class="col mb-4">
                     <div class="card h-100">
@@ -161,22 +162,40 @@
 
         <!-- Pagination -->
         <?php if (isset($_GET['category'])): ?>
-        <nav aria-label="Page navigation example mt-5">
+        <nav aria-label="Page navigation example mt-5" style="margin-bottom: 50px;">
             <ul class="pagination justify-content-center">
                 <li class="page-item <?php if($page <= 1){ echo 'disabled'; } ?>">
-                    <a class="page-link"
-                        href="<?php if($page <= 1){ echo '#'; } else { echo "?page=" . $prev; } ?>&category=<?= $_GET['category'] ?>"><</a>
+                    <a class="page-link" href="<?php if($page <= 1){ echo '#'; } else { echo "?page=" . $prev; } ?>&category=<?= $_GET['category'] ?>"><</a>
                 </li>
-
-                <?php for($i = 1; $i <= $totalPages; $i++ ): ?>
-                <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
-                    <a class="page-link" href="showcase.php?page=<?= $i; ?>&category=<?= $_GET['category'] ?>"> <?= $i; ?> </a>
-                </li>
-                <?php endfor; ?>
-
+                <?php if ($totalPages > 10): ?>
+                    <?php
+                        $min = $page - 3 < 1 ? 1 : $page - 3;
+                        $max = $page + 3 > $totalPages ? $totalPages : $page + 3;    
+                    ?>
+                    <?php if($page >= 5): ?>
+                        <li class="page-item disabled">
+                            <a class="page-link">...</a>
+                        </li>
+                    <?php endif; ?>
+                    <?php for($i = $min; $i <= $max; $i++): ?>
+                    <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
+                        <a class="page-link" href="showcase.php?page=<?= $i; ?>&category=<?= $_GET['category'] ?>"> <?= $i; ?> </a>
+                    </li>
+                    <?php endfor; ?>
+                    <?php if($page < $totalPages - 3): ?>
+                        <li class="page-item disabled">
+                            <a class="page-link">...</a>
+                        </li>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <?php for($i = 1; $i <= $totalPages; $i++ ): ?>
+                    <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
+                        <a class="page-link" href="showcase.php?page=<?= $i; ?>&category=<?= $_GET['category'] ?>"> <?= $i; ?> </a>
+                    </li>
+                    <?php endfor; ?>
+                <?php endif; ?>
                 <li class="page-item <?php if($page >= $totalPages) { echo 'disabled'; } ?>">
-                    <a class="page-link"
-                        href="<?php if($page >= $totalPages){ echo '#'; } else {echo "?page=". $next; } ?>&category=<?= $_GET['category'] ?>">></a>
+                    <a class="page-link" href="<?php if($page >= $totalPages){ echo '#'; } else {echo "?page=". $next; } ?>&category=<?= $_GET['category'] ?>">></a>
                 </li>
             </ul>
         </nav>

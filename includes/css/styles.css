@@ -44,3 +44,19 @@
   background-color: transparent;
 }
 
+body {
+  background-color: #FCFCFC;
+}
+
+li[class~="active"]>a {
+  background-color: #F2DAFF !important;
+  border: 1px solid #623FCE !important;
+}
+
+li>a[class~="page-link"]:active {
+  outline-color: white !important;
+}
+
+.page-link {
+  color: #623FCE !important;
+}

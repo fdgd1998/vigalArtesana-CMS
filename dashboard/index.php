@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once $_SERVER['DOCUMENT_ROOT'].'/scripts/get_http_protocol.php'; 
+    require_once '../scripts/get_http_protocol.php'; 
 
     if (!isset($_SESSION['user'])) {
         header("Location: ../403.php");
@@ -63,75 +63,75 @@
     ?>
     <nav class="navbar navbar-light navbar-expand-lg navigation-clean" style="background-color: #82D470;">
         <div class="container">
-        <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1" style="color: white; border: 1px solid whiteM">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="navbar-toggler-icon" style="background-image: url('../includes/img/iconfinder-icon.svg');"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navcol-1">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <?php
-                if ($_SESSION['account_type'] == 'admin' || $_SESSION['account_type'] == 'superuser') {
-                    echo '
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-hover-animate="pulse" href="/dashboard?page=company" style="color: rgb(255, 255, 255);">Empresa</a>
+            <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1" style="color: white; border: 1px solid whiteM">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="navbar-toggler-icon" style="background-image: url('../includes/img/iconfinder-icon.svg');"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <?php
+                    if ($_SESSION['account_type'] == 'admin' || $_SESSION['account_type'] == 'superuser') {
+                        echo '
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-hover-animate="pulse" href="/dashboard?page=company" style="color: rgb(255, 255, 255);">Empresa</a>
+                            </li>
+                        ';
+                    }
+                    if ($_SESSION['account_type'] == 'superuser') {
+                        echo "
+                            <li class='nav-item dropdown'>
+                            <a data-toggle='dropdown' data-bs-hover-animate='pulse' aria-expanded='false' class='dropdown-toggle nav-link' href='#' style='color: white;'>
+                                Usuarios
+                            </a>
+                            <div role='menu' class='dropdown-menu dropdown-menu-right'>
+                                <a role='presentation' class='dropdown-item' href='/dashboard?page=create-user'>
+                                    <i class='fas fa-user-plus' style='margin-right: 5px;'></i>
+                                    Nuevo usuario
+                                </a>
+                                <a role='presentation' class='dropdown-item' href='/dashboard?page=list-users'>
+                                    <i class='fas fa-users' style='margin-right: 5px;'></i>
+                                    Listar usuarios
+                                </a>
+                            </div>
                         </li>
-                    ';
-                }
-                if ($_SESSION['account_type'] == 'superuser') {
-                    echo "
-                        <li class='nav-item dropdown'>
+                        ";
+                    }?>
+                
+                    <li class='nav-item dropdown'>
                         <a data-toggle='dropdown' data-bs-hover-animate='pulse' aria-expanded='false' class='dropdown-toggle nav-link' href='#' style='color: white;'>
-                            Usuarios
+                            Galería
                         </a>
                         <div role='menu' class='dropdown-menu dropdown-menu-right'>
-                            <a role='presentation' class='dropdown-item' href='/dashboard?page=create-user'>
-                                <i class='fas fa-user-plus' style='margin-right: 5px;'></i>
-                                Nuevo usuario
+                            <a role='presentation' class='dropdown-item' href='/dashboard?page=gallery-new'>
+                                <i class='fas fa-upload' style='margin-right: 5px;'></i>
+                                Subir imágenes
                             </a>
-                            <a role='presentation' class='dropdown-item' href='/dashboard?page=list-users'>
-                                <i class='fas fa-users' style='margin-right: 5px;'></i>
-                                Listar usuarios
+                            <a role='presentation' class='dropdown-item' href='/dashboard?page=manage-gallery'>
+                                <i class='fas fa-images' style='margin-right: 5px;'></i>
+                                Gestionar galería
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a role='presentation' class='dropdown-item' href='/dashboard?page=categories'>
+                                <i class='fas fa-ellipsis-h' style='margin-right: 5px;'></i>
+                                Categorías
                             </a>
                         </div>
                     </li>
-                    ";
-                }?>
-            
-                <li class='nav-item dropdown'>
-                    <a data-toggle='dropdown' data-bs-hover-animate='pulse' aria-expanded='false' class='dropdown-toggle nav-link' href='#' style='color: white;'>
-                        Galería
-                    </a>
-                    <div role='menu' class='dropdown-menu dropdown-menu-right'>
-                        <a role='presentation' class='dropdown-item' href='/dashboard?page=gallery-new'>
-                            <i class='fas fa-upload' style='margin-right: 5px;'></i>
-                            Subir imágenes
-                        </a>
-                        <a role='presentation' class='dropdown-item' href='/dashboard?page=manage-gallery'>
-                            <i class='fas fa-images' style='margin-right: 5px;'></i>
-                            Gestionar galería
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a role='presentation' class='dropdown-item' href='/dashboard?page=categories'>
-                            <i class='fas fa-ellipsis-h' style='margin-right: 5px;'></i>
-                            Categorías
-                        </a>
-                    </div>
-                </li>
-                <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="/dashboard?page=profile" style="color: rgb(255, 255, 255);">Mi perfil</a></li>
-                <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="../scripts/logout.php" style="color: rgb(255, 255, 255);">Cerrar sesión</a></li>
-                
-            </ul>
-            <div style="display: block;">
-                <a class="nav-link" data-bs-hover-animate="pulse" href="../" style="color: rgb(255, 255, 255);">Volver a inicio</a>
-            <div>
-        </div>
-    </nav>
-    <div class="wrapper">
-
+                    <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="/dashboard?page=profile" style="color: rgb(255, 255, 255);">Mi perfil</a></li>
+                    <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="../scripts/logout.php" style="color: rgb(255, 255, 255);">Cerrar sesión</a></li>
+                    
+                </ul>
+                <div style="display: block;">
+                    <a class="nav-link" data-bs-hover-animate="pulse" href="../" style="color: rgb(255, 255, 255);">Volver a inicio</a>
+                <div>
+            </div>
+        </nav>
+        <div class="wrapper">
         <!-- Page Content  -->
         <div id="content">
             <div>
                 <?php
+                    // reading GET variable and load corresponding page
                     switch($_GET['page']) {
                         case 'start':
                             include 'start.php';
@@ -143,13 +143,13 @@
                             include 'admin/users/pages/create_user.php';
                             break;
                         case 'gallery-new':
-                            include 'admin/posts/pages/gallery_new.php';
+                            include 'admin/gallery/pages/gallery_new.php';
                             break;
                         case 'manage-gallery':
-                            include 'admin/posts/pages/manage_gallery.php';
+                            include 'admin/gallery/pages/manage_gallery.php';
                             break;
                         case 'categories':
-                            include 'admin/posts/pages/categories.php';
+                            include 'admin/gallery/pages/categories.php';
                             break;
                         case 'profile':
                             include 'profile.php';

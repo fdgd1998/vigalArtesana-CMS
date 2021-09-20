@@ -22,8 +22,8 @@
 
 <body style="background-color: rgb(241,247,252);">
     <?php
-        require_once './modules/connection.php';
-        require_once './modules/get_http_protocol.php';
+        require_once './scripts/connection.php';
+        require_once './scripts/get_http_protocol.php';
         if(isset($_GET['token'])) {
             echo '<script>token = "'.$_GET['token'].'"</script>';
             $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
@@ -50,7 +50,7 @@
                                         <input id="pass2" class="form-control form-control-sm" type="password" name="password" placeholder="Confirma nueva contraseña">
                                     </div>
                                     <div class="form-group">
-                                        <button class="btn btn-primary btn-block" disabled id="submitbtn" role="button" href="./modules/change_password.php" style="background-color: rgb(0, 98, 204);">Restablecer</button>
+                                        <button class="btn btn-primary btn-block" disabled id="submitbtn" role="button" href="./scripts/change_password.php" style="background-color: rgb(0, 98, 204);">Restablecer</button>
                                     </div>
                                 </form>
                             </div>
@@ -99,7 +99,7 @@
             console.log($('#pass1').val());
             console.log(token);
             $.ajax({
-                url: './modules/change_passwd.php', // this is the target
+                url: './scripts/change_passwd.php', // this is the target
                 method: 'post', // method
                 data: {user: username, pass: $('#pass1').val(), token: token}, // pass the input value to server
                 success: function(r) { // if the http response code is 200 

@@ -1,7 +1,6 @@
 <?php
     session_start();
-    error_reporting(0);
-    require_once $_SERVER['DOCUMENT_ROOT'].'/modules/get_http_protocol.php'; 
+    require_once $_SERVER['DOCUMENT_ROOT'].'/scripts/get_http_protocol.php'; 
 
     if (!isset($_SESSION['user'])) {
         header("Location: ../403.php");
@@ -17,13 +16,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>Panel de control</title>
-    <link rel="stylesheet" href="../includes/fonts/simple-line-icons.min.css">
     <link rel="stylesheet" href="../includes/fonts/ionicons.min.css">
     <link rel="stylesheet" href="../includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../includes/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="includes/css/style.css">
+    <link rel="stylesheet" href="./includes/css/styles.css">
+    <link rel="stylesheet" href="../includes/css/styles.css">
+    <link rel="stylesheet" href="../includes/css/showcase.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 
     <!-- Font Awesome JS -->
@@ -62,102 +61,75 @@
         //     }
         // }
     ?>
-    <div class="wrapper">
-        <!-- Sidebar  -->
-        <nav id="sidebar">
-            <div id="dismiss">
-                <i class="fas fa-arrow-left"></i>
-            </div>
-
-            <div class="sidebar-header">
-                <h3>Menú</h3>
-            </div>
-
-            <ul class="list-unstyled components">
+    <nav class="navbar navbar-light navbar-expand-lg navigation-clean" style="background-color: #82D470;">
+        <div class="container">
+        <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1" style="color: white; border: 1px solid whiteM">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon" style="background-image: url('../includes/img/iconfinder-icon.svg');"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <?php
-                    if ($_SESSION['account_type'] == 'superuser') {
-                        echo '
-                            <li>
-                                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                                    <i class="fas fa-user"></i>
-                                    Usuarios
-                                </a>
-                                <ul class="collapse list-unstyled" id="homeSubmenu">
-                                    <li>
-                                        <a href="?page=create-user">Crear usuario</a>
-                                    </li>
-                                    <li>
-                                        <a href="?page=list-users&order=asc">Listar usuarios</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        ';
-                    }
-
-                    if ($_SESSION['account_type'] == 'admin' || $_SESSION['account_type'] == 'superuser') {
-                       echo '
-                            <li>
-                                    <a href="#">
-                                        <i class="fas fa-briefcase"></i>
-                                        Empresa
-                                    </a>
-                                </li>
-                       ';
-                    }
-                ?>
-                
-                <li>
-                    
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <i class="fas fa-copy"></i>
-                        Posts
+                if ($_SESSION['account_type'] == 'admin' || $_SESSION['account_type'] == 'superuser') {
+                    echo '
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-hover-animate="pulse" href="/dashboard?page=company" style="color: rgb(255, 255, 255);">Empresa</a>
+                        </li>
+                    ';
+                }
+                if ($_SESSION['account_type'] == 'superuser') {
+                    echo "
+                        <li class='nav-item dropdown'>
+                        <a data-toggle='dropdown' data-bs-hover-animate='pulse' aria-expanded='false' class='dropdown-toggle nav-link' href='#' style='color: white;'>
+                            Usuarios
+                        </a>
+                        <div role='menu' class='dropdown-menu dropdown-menu-right'>
+                            <a role='presentation' class='dropdown-item' href='/dashboard?page=create-user'>
+                                <i class='fas fa-user-plus' style='margin-right: 5px;'></i>
+                                Nuevo usuario
+                            </a>
+                            <a role='presentation' class='dropdown-item' href='/dashboard?page=list-users'>
+                                <i class='fas fa-users' style='margin-right: 5px;'></i>
+                                Listar usuarios
+                            </a>
+                        </div>
+                    </li>
+                    ";
+                }?>
+            
+                <li class='nav-item dropdown'>
+                    <a data-toggle='dropdown' data-bs-hover-animate='pulse' aria-expanded='false' class='dropdown-toggle nav-link' href='#' style='color: white;'>
+                        Galería
                     </a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a href="?page=create-post">Crear post</a>
-                        </li>
-                        <li>
-                            <a href="?page=list-posts&order=asc">Listar posts</a>
-                        </li>
-                        <li>
-                            <a href="?page=categories&order=asc">Categorías</a>
-                        </li>
-                    </ul>
+                    <div role='menu' class='dropdown-menu dropdown-menu-right'>
+                        <a role='presentation' class='dropdown-item' href='/dashboard?page=gallery-new'>
+                            <i class='fas fa-upload' style='margin-right: 5px;'></i>
+                            Subir imágenes
+                        </a>
+                        <a role='presentation' class='dropdown-item' href='/dashboard?page=manage-gallery'>
+                            <i class='fas fa-images' style='margin-right: 5px;'></i>
+                            Gestionar galería
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a role='presentation' class='dropdown-item' href='/dashboard?page=categories'>
+                            <i class='fas fa-ellipsis-h' style='margin-right: 5px;'></i>
+                            Categorías
+                        </a>
+                    </div>
                 </li>
+                <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="/dashboard?page=profile" style="color: rgb(255, 255, 255);">Mi perfil</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="../scripts/logout.php" style="color: rgb(255, 255, 255);">Cerrar sesión</a></li>
+                
             </ul>
-
-            <ul class="list-unstyled CTAs">
-                <li>
-                    <a href="?page=profile" class="download">Perfil</a>
-                </li>
-                <li>
-                    <a href="../modules/logout.php" class="article">Cerrar sesión</a>
-                </li>
-            </ul>
-        </nav>
+            <div style="display: block;">
+                <a class="nav-link" data-bs-hover-animate="pulse" href="../" style="color: rgb(255, 255, 255);">Volver a inicio</a>
+            <div>
+        </div>
+    </nav>
+    <div class="wrapper">
 
         <!-- Page Content  -->
         <div id="content">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light" style="z-index: 1;">
-                <div class="container-fluid">
-
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
-                        <i class="fas fa-align-left"></i>
-                        <span>Menú</span>
-                    </button>
-                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-align-justify"></i>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="javascript:window.location = location.origin">Volver a inicio</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
             <div>
                 <?php
                     switch($_GET['page']) {
@@ -170,11 +142,11 @@
                         case 'create-user':
                             include 'admin/users/pages/create_user.php';
                             break;
-                        case 'create-post':
-                            include 'admin/posts/pages/create_post.php';
+                        case 'gallery-new':
+                            include 'admin/posts/pages/gallery_new.php';
                             break;
-                        case 'list-posts':
-                            include 'admin/posts/pages/list_posts.php';
+                        case 'manage-gallery':
+                            include 'admin/posts/pages/manage_gallery.php';
                             break;
                         case 'categories':
                             include 'admin/posts/pages/categories.php';
@@ -190,26 +162,5 @@
         </div>
     </div>
     <div class="overlay"></div>
-    
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#sidebar").mCustomScrollbar({
-                theme: "minimal"
-            });
-
-            $('#dismiss, .overlay').on('click', function () {
-                $('#sidebar').removeClass('active');
-                $('.overlay').removeClass('active');
-            });
-
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').addClass('active');
-                $('.overlay').addClass('active');
-                $('.collapse.in').toggleClass('in');
-                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-            });
-        });
-    </script>
 </body>
 </html>

@@ -7,7 +7,7 @@
         exit();
     }
 
-    require_once '../../../modules/connection.php';
+    require_once '../../../scripts/connection.php';
 
     if ($_POST) {
         $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);

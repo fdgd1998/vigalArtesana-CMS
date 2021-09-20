@@ -2,7 +2,7 @@
     session_start();
 
     // 403 redirection is session is not set.
-    require_once '../../../modules/connection.php';
+    require_once '../../../scripts/connection.php';
     if (!isset($_SESSION['loggedin'])) {
         header("Location: ../../../../403.php");
         exit();

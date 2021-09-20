@@ -1,7 +1,7 @@
 <?php
     session_start();
-    require_once '../../../modules/connection.php';
-    require_once '../../../modules/crypt.php';
+    require_once '../../../scripts/connection.php';
+    require_once '../../../scripts/crypt.php';
     
     // 403 redirection if session is not started
     if (!isset($_SESSION['loggedin'])) {

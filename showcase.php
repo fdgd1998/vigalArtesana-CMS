@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once $_SERVER['DOCUMENT_ROOT'].'/modules/connection.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/scripts/connection.php';
 
     // Retrieve new limit value if changed
     if(isset($_GET['records-limit'])){
@@ -38,16 +38,16 @@
             }
             $res->free();
         } else {
-            $sql = "select POSTS.id, CATEGORIES.name, author, title, content, images from posts inner join categories on POSTS.category = CATEGORIES.id where cat_enabled='YES' and POSTS.category = ".$_GET['category']." limit $paginationStart, $limit";
+            $sql = "select gallery.id, filename from gallery inner join categories on gallery.category = categories.id where gallery.category = ".$_GET['category']." limit $paginationStart, $limit";
             if ($res = $conn->query($sql)) {
                 while ($rows = $res->fetch_assoc()) {
-                    array_push($results, array($rows['id'], $rows['author'], $rows['title'], $rows['content'], explode(",", $rows['images'])[0]));
+                    array_push($results, array($rows['id'], $rows['filename']));
                 }
                 $res->free();
             }
 
             // Getting all records from database
-            $sql = "select count(POSTS.id) as id from posts inner join categories on POSTS.category = CATEGORIES.id where cat_enabled='YES' and POSTS.category = ".$_GET['category']; 
+            $sql = "select count(gallery.id) as id from gallery inner join categories on gallery.category = categories.id where cat_enabled='YES' and gallery.category = ".$_GET['category']; 
             $allRecords = $conn->query($sql)->fetch_assoc()['id'];
             
             // Calculate total pages
@@ -84,7 +84,8 @@
     <link href='https://fonts.googleapis.com/css?family=Great Vibes' rel='stylesheet'>
     <script src="./includes/js/jquery.min.js"></script>
     <script src="./includes/bootstrap/js/bootstrap.min.js"></script>
-    <script src="./includes/js/bs-init.js"></script>
+    <script src="./includes/js/animate-carousel-height-change.js"></script>
+    <!-- <script src="./includes/js/bs-init.js"></script> -->
 </head>
 
 <body>
@@ -94,16 +95,16 @@
         <div class="container">
             <?php if (!isset($_GET['category'])): ?>
                 <div class="intro">
-                    <h2 class="text-center" style="margin-top: 50px; margin-bottom: 10px;">Exposición</h2>
+                    <h1 class="text-center" style="margin-top: 50px; margin-bottom: 20px;">Galería</h1>
                     <p class="text-center" style="margin-bottom: 50px;">Haz clic sobre las imágenes para ver los trabajos de cada categoría. </p>
                 </div>
                 <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" style="margin-bottom: 20px;">
                     <?php foreach ($categories as $element): ?>
                         <div class='animated category col-sm-6 col-md-4 col-lg-3 item' style='margin-bottom: 30px;'>
                             <a data-lightbox='photos' href='<?=$_SERVER['PHP_SELF']."?category=".$element[0]?>'>
-                                <div class='wrap'>
-                                    <label class='title text-center'><?=$element[1]?></label>
-                                    <img class='img-fluid category' src='/uploads/categories/<?=$element[2]?>'/>
+                                <div style="text-align: center;" class='wrap wrap-category'>
+                                    <label class='title'><?=$element[1]?></label>
+                                    <img class='img-fluid category post_img' src='/uploads/categories/<?=$element[2]?>'/>
                                 </div>
                             </a>
                         </div>
@@ -111,7 +112,8 @@
                 </div>   
             <?php else: ?>
                 <div class="intro">
-                    <h2 class="text-center" style="margin-top: 70px; margin-bottom: 40px; font-family: 'Great Vibes'; font-size: 50px;"><?=$category_name?></h2>
+                    <h1 class="text-center" style="margin-top: 50px; margin-bottom: 20px;"><?=$category_name?></h1>
+                    <p class="text-center">Pulsa sobre las imágenes para verlas a tamaño completo.</p>
                 </div>
                 <form action="?category=<?=$_GET['category']?>" method="get">
                     <div class="input-group mb-3" style="width: 220px; padding-bottom: 20px;">
@@ -119,7 +121,7 @@
                             <span class="input-group-text" id="basic-addon1">Mostrar</span>
                         </div>
                         <select name="records-limit" id="records-limit" class="custom-select">
-                            <?php foreach([4,8,16] as $limit) : ?>
+                            <?php foreach([8,16,24] as $limit) : ?>
                             <option
                                 <?php if(isset($_SESSION['records-limit']) && $_SESSION['records-limit'] == $limit) echo 'selected'; ?>
                                 value="<?= $limit; ?>">
@@ -130,33 +132,17 @@
                         <input hidden name="category" value="<?=$_GET['category']?>">
                     </div>
                 </form>
-            
-                <div class="row row-cols-2 row-cols-md-2 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" style="margin-bottom: 20px;">
-                <?php foreach ($results as $element): ?>
-                <div class="col mb-4">
-                    <div class="card h-100">
-                    <img class="card-img-top img-fluid" src="<?='/uploads/posts/'.$element[4]?>">
-                    <div class="card-body">
-                        <h5 class="card-title"><?=$element[2]?></h5>
-                        <p class="card-text"><?=substr($element[3],0,200)."..."?></p>
-                        <button style="margin-right: 3px;" class="btn btn-dark" type="button">Leer más</button>
-                        <?php 
-                            if (isset($_SESSION['user'])):
-                                if ($element[1] == $_SESSION['user']):
-                                ?>
-                                <div style="display: inline-block;">
-                                <button class="btn btn-success edit-post" type="button" id="edit-post-<?=$element[0]?>"><i class="far fa-edit"></i></button>
-                                <button class="btn btn-danger delete-post" type="button" style="margin-left: 1px;" id="delete-post-<?=$element[0]?>"><i class="far fa-trash-alt"></i></button>
+                <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" style="margin-bottom: 20px;">
+                    <?php foreach ($results as $element): ?>
+                        <div class='animated photos col-sm-6 col-md-4 col-lg-3 item' style='margin-bottom: 30px;'>
+                            <a data-lightbox='photos'>
+                                <div style="text-align: center;" class='wrap'>
+                                    <img id="image-<?=$element[0]?>" class='img-fluid photos post_img' src='./uploads/images/<?=$element[1]?>'/>
                                 </div>
-                                <?php 
-                                endif; 
-                            endif;
-                        ?>
-                    </div>
-                    </div>
-                </div>
-                <?php endforeach; ?>
-            </div>
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
+                </div>   
             <?php endif; ?>
         </div>
 
@@ -199,19 +185,72 @@
                 </li>
             </ul>
         </nav>
-        <?php endif; ?>
+    <?php endif; ?>
     <?php
         include './includes/footer.php';
     ?>
+    <div class="modal fade" id="modal-galeria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <!-- Editar desde aqui -->
+                    <div id="galeria" class="carousel slide carousel-fade" data-interval="false" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <?php $i = 0; foreach ($results as $element):?>
+                            <li id="indicator-<?=$element[0]?>" data-target="#galeria" data-slide-to="<?=$i?>" class="carousel-indicator <?php if($i==0) echo 'active'?>"></li>
+                            <?php $i++; ?>
+                            <?php endforeach; ?>
+                        </ol>
+                        <div class="carousel-inner">
+                            <?php $i = 0; foreach ($results as $element): ?>
+                            <div id="item-<?=$element[0]?>" class="carousel-item <?php if($i==0) echo 'active' ?>">
+                                <img src="./uploads/images/<?=$element[1]?>" class="d-block w-100">
+                            </div>
+                            <?php $i++; ?>
+                            <?php endforeach; ?>
+                        </div>
+                        <a class="carousel-control-prev" href="#galeria" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Anterior</span>
+                        </a>
+                        <a class="carousel-control-next" href="#galeria" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Siguiente</span>
+                        </a>
+                    </div>
+                    <!-- Hasta aqui -->
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         $(document).ready(function () {
+            $('.carousel').on('slide.bs.carousel', function(e) {
+                $(this).find('.carousel-inner').animate({
+                    height: $(e.relatedTarget).height()
+                }, 300);
+            });
             $('#records-limit').change(function () {
                 $('form').submit();
             })
-
-            $('.edit-post').click(function () {
-                var id = $(this).prop('id').substr(10);
-                window.location = "/dashboard?page=create-post&action=edit&id="+id;
+            
+            $('.post_img').click(function() {
+                var id = $(this).attr('id').substr(6);
+                console.log("id: "+id);
+                $('.carousel-indicator').each(function() {
+                    if ($(this).hasClass("active")) {
+                        $(this).removeClass("active");
+                    }
+                })
+                $('#indicator-'+id).addClass('active');
+                $('.carousel-item').each(function() {
+                    if ($(this).hasClass("active")) {
+                        $(this).removeClass("active");
+                    }
+                })
+                $('#item-'+id).addClass('active');
+                // $(".carousel-item > img").css("max-height", window.innerHeight*0.85);
+                $('#modal-galeria').modal('show');
             })
         });
     </script>

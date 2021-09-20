@@ -1,6 +1,6 @@
 <?php
     session_start(); // stating the session
-    require_once '../modules/connection.php'; //Database connection data
+    require_once '../scripts/connection.php'; //Database connection data
 
     // If a non-logged user access to the current script, is redirected to a 403 page.
     if (!isset($_SESSION['user'])) {
@@ -64,8 +64,8 @@
   <h1 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;">Posts</h1>
   <div class="input-group" style="margin-bottom: 20px;">
     <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon1">Ordenar</span>
-    </div>
+        <span class="input-group-text" id="basic-addon1">Ordenar</span>
+      </div>
     <select id="result-order" class="form-control">
       <option value="asc" <?=isset($order)?($order=='asc'?'selected':''):''?>>Ascendente</option>
       <option value="desc" <?=isset($order)?($order=='desc'?'selected':''):''?>>Descendente</option>
@@ -74,7 +74,7 @@
       <option value="bycategory" <?=isset($_GET['category'])?'selected':''?>>Por categoría</option>
     </select>
     <?php 
-      //If the GET variable 'category' is set, a dropdown is element is created.
+      //If the GET variable 'category' is set, a dropdown element is created.
       if (isset($_GET['category'])): 
     ?>
       <select id="category-order" class="form-control">
@@ -123,7 +123,7 @@
                 print("No se ha podido conectar a la base de datos");
                 exit();
             } else {
-              $sql = "select POSTS.id, POSTS.author, CATEGORIES.name, POSTS.title, POSTS.content, POSTS.images, POSTS.published from posts inner join categories on CATEGORIES.id = POSTS.category";
+              $sql = "select posts.id, posts.author, categories.name, posts.title, posts.content, posts.images, posts.published from posts inner join categories on categories.id = posts.category";
                 // Setting posts order depending on user's choice.
                 if (isset($_GET['order'])) {
                   switch($_GET['order']) {
@@ -138,6 +138,9 @@
                       break;
                     case 'notpublished':
                       $sql .= " where published = 'NO' order by title asc";
+                      break;
+                    case 'category':
+                      $sql .= " where categories.id = ".$_GET['category'];
                       break;
                   } 
                 }
@@ -187,7 +190,7 @@
   </div>
 </div>
 
-<!-- Bootstrap modal form for creating posts. -->
+<!-- Bootstrap modal form for creating posts. 
 <div class="modal fade" id="edit-user" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -214,4 +217,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

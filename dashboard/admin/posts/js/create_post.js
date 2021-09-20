@@ -102,7 +102,7 @@ jQuery(function($){
         imagesPreview(this, 'div.gallery');
     });
 
-    // Creating or editing the post the post.
+    // Creating or editing the post.
     $("#post-create").on("click", function(e){
         // Getting data to sent and appending it to the form data.
         var filesLength = 0;

@@ -1,6 +1,6 @@
 <?php
     session_start(); // starting the session.
-    require_once '../modules/connection.php';
+    require_once '../scripts/connection.php';
 
     // Redirecting to 403 page if user is not logged in and access is attemped.
     if (!isset($_SESSION['user'])) {
@@ -166,6 +166,13 @@
     </div>
   </div>
 <div class="container">
+<div class="row">
+        <div class="col">
+            <h1 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;">Categorías</h1>
+        </div>
+    </div>
+    <button type="button" id="create-cat" class="btn btn-outline-success" style="margin-bottom: 15px;"><i class="far fa-plus-square" style="padding-right:5px;"></i>Crear categoría</button>
+
 <div class="input-group mb-6" style="width: 300px; margin-bottom: 20px;">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">Ordenar</span>
@@ -177,7 +184,6 @@
         <option value="disabled" <?=isset($order)?($order=='disabled'?'selected':''):''?>>Deshabilitado</option>
       </select>
     </div>
-<button type="button" id="create-cat" class="btn btn-info" style="margin-bottom: 15px;"><i class="icon-plus" style="padding-right:5px;"></i>Crear categoría</button>
     <div class="table-responsive">
         <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>

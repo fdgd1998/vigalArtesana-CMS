@@ -7,8 +7,8 @@
         exit();
     }
 
-    require_once '../../../modules/connection.php';
-    require_once '../../../modules/get_http_protocol.php';
+    require_once '../../../scripts/connection.php';
+    require_once '../../../scripts/get_http_protocol.php';
 
     if(isset($_POST['cat_id']) && $_SESSION['account_type'] != 'publisher') {
         $cat_id = $_POST['cat_id'];

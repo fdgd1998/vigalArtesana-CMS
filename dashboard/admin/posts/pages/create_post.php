@@ -1,6 +1,6 @@
 <?php
     session_start(); // Starting the session.
-    require_once $_SERVER["DOCUMENT_ROOT"]."/modules/connection.php"; // Database connection info.
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/connection.php"; // Database connection info.
     
     // If a non-logged user access to the current script, is redirected to a 403 page.
     if (!isset($_SESSION['loggedin'])) {
@@ -15,7 +15,7 @@
         echo "Error interno del servidor. No se ha podido establecer una conexión con la base de datos.";
         exit();
     } else {
-        // Fetching categories from database and storing then in the arrat for further use.
+        // Fetching categories from database and storing then in the array for further use.
         $sql = "select id, name from categories order by name asc";
         if ($res = $conn->query($sql)) {
             while ($rows = $res->fetch_assoc()) {
@@ -34,7 +34,7 @@
     // If the action to perform is to edit a post, current post data is retrieved form database and showed up in the page.
     if (isset($_GET['action']) && $_GET['action'] == 'edit' && isset($_GET['id'])) {
         $edit = true;
-        $sql = "select POSTS.id, CATEGORIES.name, POSTS.title, POSTS.content, POSTS.images from posts inner join categories on CATEGORIES.id = POSTS.category where POSTS.id = ".$_GET['id'];
+        $sql = "select posts.id, categories.name, posts.title, posts.content, posts.images from posts inner join categories on categories.id = posts.category where posts.id = ".$_GET['id'];
         
         if ($res = $conn->query($sql)) {
             if ($res->num_rows == 1) {

@@ -7,7 +7,7 @@
         exit();
     }
 
-    require_once '../../../modules/connection.php';
+    require_once '../../../scripts/connection.php';
 
     if ($_POST) {
         $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
@@ -17,7 +17,7 @@
             exit();
         } else {
             $location = $_SERVER["DOCUMENT_ROOT"]."/uploads/posts/"; // location for post images.
-
+            echo print_r($_FILES);
             if ($_POST["file_count"] == 1) { // only one file is selected
                 $temp = explode(".", $_FILES["image"]["name"]);
                 $newfilename = round(microtime(true)) . '.' . end($temp);

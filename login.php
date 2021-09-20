@@ -25,11 +25,11 @@
 
 <body style="background-color: rgb(241,247,252);">
 <?php
-        require_once 'modules/get_http_protocol.php';
+        require_once 'scripts/get_http_protocol.php';
         if(!isset($_SESSION['user'])) {
             echo '
             <div class="login-clean" style="background-color: rgba(241,247,252,0);">
-            <form class="border rounded shadow-lg" method="post" style="margin-top: 20px;" action="./modules/authenticate.php">
+            <form class="border rounded shadow-lg" method="post" style="margin-top: 20px;" action="./scripts/authenticate.php">
                 <div style="margin-bottom: 20px;">
                     <a data-bs-hover-animate="pulse" class="bg-white" href="./index.php">
                         <i class="icon ion-android-arrow-back" style="margin-right: 10px;"></i>

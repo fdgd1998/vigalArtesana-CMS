@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Sitio web de Fran Gálvez.</title>
+    <title>ViGal - Recuperar contraseña</title>
     <meta name="description" content="Administración de Sistemas Informáticos en Red, I.E.S. Los Manantiales.">
     <link rel="stylesheet" href="includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="includes/fonts/fontawesome-all.min.css">
@@ -33,7 +33,7 @@
         $('#submitbtn').on('click', function(e) {
             // perform an ajax call
             $.ajax({
-                url: './modules/send_recover_email.php', // this is the target
+                url: './script/send_recover_email.php', // this is the target
                 method: 'post', // method
                 data: {email: $('#email').val()}, // pass the input value to server
                 success: function(r) { // if the http response code is 200 

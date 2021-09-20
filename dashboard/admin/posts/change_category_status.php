@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once '../../../modules/connection.php';
+    require_once '../../../scripts/connection.php';
 
     // Redirecting to 403 page is session does not exist.
     if (!isset($_SESSION['loggedin'])) {

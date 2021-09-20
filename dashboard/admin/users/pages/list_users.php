@@ -1,6 +1,6 @@
 <?php
-    require_once '../modules/connection.php';
-    require_once '../modules/crypt.php';
+    require_once '../scripts/connection.php';
+    require_once '../scripts/crypt.php';
 
     if (!isset($_SESSION['loggedin'])) {
       header("Location: ../../../../403.php");
@@ -140,8 +140,9 @@
                       default:
                         $sql .= " order by name asc";
                     } 
-                  } else {
-                    $sql .= " order by name asc";
+                  } 
+                  if (!isset($_GET)) {
+                      $sql .= " order by name asc";
                   }
 
                   $res = $conn->query($sql);

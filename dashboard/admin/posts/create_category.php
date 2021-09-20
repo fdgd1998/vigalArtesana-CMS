@@ -12,7 +12,7 @@
     if ($_FILES['file']['error'] > 0) { // An arror has ocurred getting the file from the client.
         echo "Ha ocurrido un error al subir el fichero";
     } else{
-        require_once "../../../modules/connection.php";
+        require_once "../../../scripts/connection.php";
         $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
 
         if ($conn->errno) {

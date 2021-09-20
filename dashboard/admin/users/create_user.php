@@ -5,10 +5,10 @@
         exit();
     }
     if ($_POST && $_SESSION['account_type'] != 'publisher') {
-        require_once '../../../modules/connection.php';
-        require_once '../../../modules/crypt.php';
-        require_once '../../../modules/generate_passwd_token.php';
-        require_once '../../../modules/passwd_email.php';
+        require_once '../../../scripts/connection.php';
+        require_once '../../../scripts/crypt.php';
+        require_once '../../../scripts/generate_passwd_token.php';
+        require_once '../../../scripts/passwd_email.php';
 
         // getting and encrypting data
         $user = $_POST['username_s'];

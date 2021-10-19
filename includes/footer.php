@@ -38,7 +38,7 @@
                     <ul style="margin-bottom: 0px;">
                         <li>© <?=date('Y')?></li>
                         <li>Sitio web desarrollado por Francisco Gálvez</li>
-                        <li>Código fuente: <a class="footer_link" href="https://www.github.com/fdgd1998/vigalArtesanos-CMS">github.com</a></li>
+                        <li>Código fuente: <a class="footer_link" target="blank" href="https://www.github.com/fdgd1998/vigalArtesanos-CMS">github.com</a></li>
                     </ul>
                 </div>
             </div>

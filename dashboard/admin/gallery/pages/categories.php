@@ -13,8 +13,8 @@
 ?>
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
-<script src="admin/posts/js/ajax.js"></script>
-<script src="admin/posts/js/input_actions.js"></script>
+<script src="admin/gallery/js/ajax.js"></script>
+<script src="admin/gallery/js/categories.js"></script>
 <style>
   .disabled-form {
       pointer-events: none;

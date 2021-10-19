@@ -92,10 +92,10 @@
     <?php
         include './includes/header.php';
     ?>
-        <div class="container">
+        <div class="container content">
             <?php if (!isset($_GET['category'])): ?>
                 <div class="intro">
-                    <h1 class="text-center" style="margin-top: 50px; margin-bottom: 20px;">Galería</h1>
+                    <h1 class="text-center" style="margin-bottom: 20px;">Galería</h1>
                     <p class="text-center" style="margin-bottom: 50px;">Haz clic sobre las imágenes para ver los trabajos de cada categoría. </p>
                 </div>
                 <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" style="margin-bottom: 20px;">
@@ -112,7 +112,7 @@
                 </div>   
             <?php else: ?>
                 <div class="intro">
-                    <h1 class="text-center" style="margin-top: 50px; margin-bottom: 20px;"><?=$category_name?></h1>
+                    <h1 class="text-center" style="margin-bottom: 20px;"><?=$category_name?></h1>
                     <p class="text-center">Pulsa sobre las imágenes para verlas a tamaño completo.</p>
                 </div>
                 <form action="?category=<?=$_GET['category']?>" method="get">

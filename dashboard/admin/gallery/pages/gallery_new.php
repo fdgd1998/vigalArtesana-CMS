@@ -88,7 +88,7 @@
         <div class="form-row text-right" style="margin-top: 20px;">
             <div class="col">
                 <button id="cancel" class="btn btn-danger" type="button">Cancelar</button>
-                <button id="upload" class="btn btn-success" type="button" style="margin-left: 5px;">Cargar</button>
+                <button id="upload" disabled class="btn btn-success" type="button" style="margin-left: 5px;">Cargar</button>
             </div>
         </div>
     </form>

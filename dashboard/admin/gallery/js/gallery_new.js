@@ -1,4 +1,8 @@
 jQuery(function($){
+
+    $("#cancel").on("click", function() {
+        window.location.href="?page=manage-gallery";
+    });
     // Variable definition
     var categories = {};
 
@@ -31,6 +35,7 @@ jQuery(function($){
             data: 'id=testdata',
             cache: false,
             success: function(result) {
+                $("#upload").removeAttr("disabled");
                 $.each(result, function(key, value) {
                     categories[key] = value;
                 });

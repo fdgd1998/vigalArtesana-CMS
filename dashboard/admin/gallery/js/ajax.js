@@ -44,7 +44,7 @@ jQuery(function($) {
         formData.append("cat_name", $("#new-cat-name").val());
         formData.append("file", $("#new-cat-image").prop("files")[0]);
         $.ajax({
-            url: location.origin+'/dashboard/admin/posts/create_category.php', // this is the target
+            url: location.origin+'/dashboard/admin/gallery/create_category.php', // this is the target
             type: 'post', // method
             dataType: 'text',
             cache: false,
@@ -77,7 +77,7 @@ jQuery(function($) {
         //     console.log(pair[0]+ ', '+ pair[1]); 
         //  }
         $.ajax({
-            url: location.origin+'/dashboard/admin/posts/edit_category.php', // this is the target
+            url: location.origin+'/dashboard/admin/gallery/edit_category.php', // this is the target
             type: 'post', // method
             dataType: 'text',
             cache: false,
@@ -101,7 +101,7 @@ jQuery(function($) {
         alert(editing_cat_id);
         formData.append("cat_id", editing_cat_id);
         $.ajax({
-            url: location.origin+'/dashboard/admin/posts/delete_category.php', // this is the target
+            url: location.origin+'/dashboard/admin/gallery/delete_category.php', // this is the target
             type: 'post', // method
             dataType: 'text',
             cache: false,
@@ -123,7 +123,7 @@ jQuery(function($) {
         if ($(this).val() != "") {
             // perform an ajax call
             $.ajax({
-                url: 'admin/posts/check_category_name.php', // this is the target
+                url: 'admin/gallery/check_category_name.php', // this is the target
                 method: 'post', // method
                 data: {cat_name: $(this).val()}, // pass the input value to server
                 success: function(r) { // if the http response code is 200
@@ -145,7 +145,7 @@ jQuery(function($) {
         if ($(this).val() != "") {
             // perform an ajax call
             $.ajax({
-                url: 'admin/posts/check_category_name.php', // this is the target
+                url: 'admin/gallery/check_category_name.php', // this is the target
                 method: 'post', // method
                 data: {cat_name: $(this).val()}, // pass the input value to server
                 success: function(r) { // if the http response code is 200
@@ -181,7 +181,7 @@ jQuery(function($) {
         console.log("category id: "+cat_id);
         console.log("category status: "+disable);
         $.ajax({
-            url: location.origin+'/dashboard/admin/posts/change_category_status.php', // this is the target
+            url: location.origin+'/dashboard/admin/gallery/change_category_status.php', // this is the target
             method: 'post', // method
             data: {id: cat_id, status: disable}, // pass the input value to server
             success: function(r) { // if the http response code is 200

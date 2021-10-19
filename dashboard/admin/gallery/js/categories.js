@@ -11,7 +11,7 @@ jQuery(function($) {
             var formData = new FormData();
             formData.append("cat_id", editing_cat_id);
             $.ajax({
-                url: location.origin+'/dashboard/admin/posts/retrieve_category_image.php', // this is the target
+                url: location.origin+'/dashboard/admin/gallery/retrieve_category_image.php', // this is the target
                 type: 'post', // method
                 dataType: 'text',
                 cache: false,
@@ -112,7 +112,7 @@ jQuery(function($) {
             console.log(fileName.substring(12));
             $('#new-cat-image-name').html(fileName);
             readURL(this, "#new-cat-image-preview");
-            $("#new-cat-image-preview-div").prop("hidden", true);
+            $("#new-cat-image-preview-div").prop("hidden", false);
         } else {
             $('#cat-create').attr('disabled', 'disabled');
         }
@@ -141,7 +141,7 @@ jQuery(function($) {
             $("#edit-change-name").removeClass("disabled-form");
             if ($("#update-cat-name").val() != "") {
                 $.ajax({
-                    url: 'admin/posts/check_category_name.php', // this is the target
+                    url: 'admin/gallery/check_category_name.php', // this is the target
                     method: 'post', // method
                     data: {cat_name: $("#update-cat-name").val()}, // pass the input value to server
                     success: function(r) { // if the http response code is 200

@@ -157,7 +157,7 @@
                         echo '<td>'.$rows['username'].'</td>';
                         echo '<td>'.OpenSSLDecrypt($rows['surname']).'</td>';
                         echo '<td>'.OpenSSLDecrypt($rows['firstname']).'</td>';
-                        echo '<td>'.$rows['email'].'</td>';
+                        echo '<td>'.OpenSSLDecrypt($rows['email']).'</td>';
                         if ($_SESSION['user'] == $rows['username']) $change_account_type = false;
   
                         $account_type = '';

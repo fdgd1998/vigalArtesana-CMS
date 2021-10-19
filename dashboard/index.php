@@ -31,8 +31,9 @@
 
     <script src="../includes/js/jquery.min.js"></script>
     <script src="../includes/js/bs-init.js"></script>
+    <script src="admin/company/company.js"></script>
 
-    <script src="../includes/js/popper.min.js"></script>
+     
     <script src="../includes/bootstrap/js/bootstrap.min.js"></script>
     <!-- <script src="includes/js/toast.js"></script> -->
 
@@ -133,9 +134,6 @@
                 <?php
                     // reading GET variable and load corresponding page
                     switch($_GET['page']) {
-                        case 'start':
-                            include 'start.php';
-                            break;
                         case 'list-users':
                             include 'admin/users/pages/list_users.php';
                             break;
@@ -154,8 +152,11 @@
                         case 'profile':
                             include 'profile.php';
                             break;
+                        case 'company':
+                            include 'admin/company/company.php';
+                            break;
                         default:
-                            include '404.php';
+                            include 'start.php';
                     }
                 ?>
             </div>

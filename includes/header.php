@@ -8,16 +8,47 @@
         print("No se ha podido conectar a la base de datos");
         exit();
     } else {
-        $sql = "select value_info from company_info limit 4";
+        $sql = "select value_info from company_info limit 5";
         $res = $conn->query($sql);
         while ($rows = $res->fetch_assoc()) {
             array_push($contact_info, $rows['value_info']);
         }
     }
+    $social_media = json_decode($contact_info[4], true);
+    
     $conn->close();
 ?>
+<script>
+    $(document).ready(function() {
+        $(window).on("scroll", function() {
+                if($(window).scrollTop()) {
+                    $('.header').addClass('nav-solid');
+                    $('.header').removeClass('nav-transparent');
+                }
+                else {
+                    $('.header').addClass('nav-transparent');
+                    $('.header').removeClass('nav-solid');
+                }
+        });
+        $('.header').on('shown.bs.collapse', function() {
+            $('.header').addClass('nav-solid');
+            $('.header').removeClass('nav-transparent');
+        });
 
-<nav class="navbar navbar-light navbar-expand-lg navigation-clean" style="background-color: #82D470;">
+        $('.header').on('hidden.bs.collapse', function() {
+            if($(window).scrollTop()) {
+                    $('.header').addClass('nav-solid');
+                    $('.header').removeClass('nav-transparent');
+                }
+                else {
+                    $('.header').addClass('nav-transparent');
+                    $('.header').removeClass('nav-solid');
+                } 
+        });
+    });
+</script>
+
+<nav class="header nav-transparent navbar navbar-light sticky-top navbar-expand-lg navigation-clean">
     <div class="container">
         <a class="navbar-brand" href="index.php" style="font-family: 'Great Vibes'; letter-spacing: 2px; padding-right: 15px;  font-weight: lighter; color: black ;font-size: 35px;" name="company_name"><?=$contact_info[2]?></a>
         <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1" style="color: white; border: 1px solid grey">
@@ -29,7 +60,6 @@
                 <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="index.php">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="showcase.php">Galería</a></li>
                 <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="contact.php">Sobre mí</a></li>
-                <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="contact.php">Ubicación</a></li>
                 <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="contact.php">Contacto</a></li>
 
                 <?php if (isset($_SESSION['user'])): ?>
@@ -49,6 +79,23 @@
                         </div>
                     </li>
                 <?php endif; ?>
+                <div class="social-div">
+                    <?php if (isset($social_media["whatsapp"])):?>
+                        <div class="social-link">
+                            <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" target="blank" href="https://wa.me/<?=$social_media["whatsapp"]?>"><i class="fab fa-whatsapp fa-w-16"></i></a></li>
+                        </div>
+                    <?php endif; ?>
+                    <?php if (isset($social_media["instagram"])):?>
+                        <div class="social-link">
+                            <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" target="blank" href="https://www.instagram.com/<?=$social_media["instagram"]?>"><i class="fab fa-instagram"></i></a></li>
+                        </div>
+                    <?php endif; ?>
+                    <?php if (isset($social_media["facebook"])):?>
+                        <div class="social-link">
+                            <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" target="blank" href="https://www.facebook.com/<?=$social_media["facebook"]?>"><i class="fab fa-facebook-square"></i></a></li>
+                        </div>
+                    <?php endif; ?>
+                </div>
             </ul>
         </div>
     </div>

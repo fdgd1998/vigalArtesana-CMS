@@ -74,7 +74,7 @@
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
-                        <icon class='icon-cloud-upload'></icon>
+                        <i class="fas fa-upload"></i>
                     </span>
                 </div>
                 <div class="custom-file">

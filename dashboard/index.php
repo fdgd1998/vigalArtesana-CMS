@@ -24,22 +24,6 @@
     <link rel="stylesheet" href="../includes/css/showcase.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
-
-    <!-- Font Awesome JS -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
-
-    <script src="../includes/js/jquery.min.js"></script>
-    <script src="../includes/js/bs-init.js"></script>
-    <script src="admin/company/company.js"></script>
-
-     
-    <script src="../includes/bootstrap/js/bootstrap.min.js"></script>
-    <!-- <script src="includes/js/toast.js"></script> -->
-
-
-    <!-- jQuery Custom Scroller CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 </head>
 
 <body>
@@ -74,7 +58,7 @@
                     if ($_SESSION['account_type'] == 'admin' || $_SESSION['account_type'] == 'superuser') {
                         echo '
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-hover-animate="pulse" href="/dashboard?page=company" style="color: rgb(255, 255, 255);">Empresa</a>
+                                <a class="nav-link" data-bs-hover-animate="pulse" href="/dashboard?page=site-settings" style="color: rgb(255, 255, 255);">Configuración del sitio</a>
                             </li>
                         ';
                     }
@@ -152,8 +136,8 @@
                         case 'profile':
                             include 'profile.php';
                             break;
-                        case 'company':
-                            include 'admin/company/company.php';
+                        case 'site-settings':
+                            include 'admin/site-settings/site_settings.php';
                             break;
                         default:
                             include 'start.php';
@@ -163,5 +147,18 @@
         </div>
     </div>
     <div class="overlay"></div>
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+    <script src="../includes/js/jquery.min.js"></script>
+    <script src="../includes/js/bs-init.js"></script>
+    <script src="../includes/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./admin/site-settings/site-settings.js"></script>
+    <!-- <script src="includes/js/toast.js"></script> -->
+
+
+    <!-- jQuery Custom Scroller CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 </body>
 </html>

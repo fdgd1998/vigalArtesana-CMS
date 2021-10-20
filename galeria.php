@@ -8,11 +8,13 @@
     }
 
     $categories = array();
+    $GLOBALS["site_settings"] = array();
 
     $category_name = "";
     $results = array();
 
     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
+    $conn->set_charset("utf8");
 
     // Variables for pagination
     $limit = isset($_SESSION['records-limit']) ? $_SESSION['records-limit'] : 4; // Dynamic limit
@@ -29,7 +31,13 @@
     if ($conn->connect_error) {
         print("No se ha podido conectar a la base de datos");
         exit();
-    } else {
+    } else {    
+        $sql = "select value_info from company_info";
+            $res = $conn->query($sql);
+            while ($rows = $res->fetch_assoc()) {
+                array_push($GLOBALS["site_settings"], $rows['value_info']);
+            }
+        $GLOBALS["site_settings"][4] = json_decode($GLOBALS["site_settings"][4], true);
         if(!isset($_GET['category'])) {
             $sql = "select * from categories where cat_enabled='YES'";
             $res = $conn->query($sql);
@@ -82,10 +90,6 @@
     <link rel="stylesheet" href="./includes/fonts/simple-line-icons.min.css">
     <link rel="stylesheet" href="./includes/css/showcase.css">
     <link href='https://fonts.googleapis.com/css?family=Great Vibes' rel='stylesheet'>
-    <script src="./includes/js/jquery.min.js"></script>
-    <script src="./includes/bootstrap/js/bootstrap.min.js"></script>
-    <script src="./includes/js/animate-carousel-height-change.js"></script>
-    <!-- <script src="./includes/js/bs-init.js"></script> -->
 </head>
 
 <body>
@@ -223,36 +227,10 @@
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function () {
-            $('.carousel').on('slide.bs.carousel', function(e) {
-                $(this).find('.carousel-inner').animate({
-                    height: $(e.relatedTarget).height()
-                }, 300);
-            });
-            $('#records-limit').change(function () {
-                $('form').submit();
-            })
-            
-            $('.post_img').click(function() {
-                var id = $(this).attr('id').substr(6);
-                console.log("id: "+id);
-                $('.carousel-indicator').each(function() {
-                    if ($(this).hasClass("active")) {
-                        $(this).removeClass("active");
-                    }
-                })
-                $('#indicator-'+id).addClass('active');
-                $('.carousel-item').each(function() {
-                    if ($(this).hasClass("active")) {
-                        $(this).removeClass("active");
-                    }
-                })
-                $('#item-'+id).addClass('active');
-                // $(".carousel-item > img").css("max-height", window.innerHeight*0.85);
-                $('#modal-galeria').modal('show');
-            })
-        });
-    </script>
+    <script src="./includes/js/jquery.min.js"></script>
+    <script src="./includes/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./includes/js/animate-carousel-height-change.js"></script>
+    <script src="./includes/js/gallery.js"></script>
+    <script src="./includes/js/header.js"></script>
 </body>
 </html>

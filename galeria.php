@@ -17,7 +17,7 @@
     $conn->set_charset("utf8");
 
     // Variables for pagination
-    $limit = isset($_SESSION['records-limit']) ? $_SESSION['records-limit'] : 4; // Dynamic limit
+    $limit = isset($_SESSION['records-limit']) ? $_SESSION['records-limit'] : 8; // Dynamic limit
     $page = (isset($_GET['page']) && is_numeric($_GET['page']) ) ? $_GET['page'] : 1; // Current pagination page number
     $paginationStart = ($page - 1) * $limit; // Offset
 
@@ -88,7 +88,7 @@
     <link rel="stylesheet" href="./includes/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="./includes/fonts/ionicons.min.css">
     <link rel="stylesheet" href="./includes/fonts/simple-line-icons.min.css">
-    <link rel="stylesheet" href="./includes/css/showcase.css">
+    <link rel="stylesheet" href="./includes/css/galeria.css">
     <link href='https://fonts.googleapis.com/css?family=Great Vibes' rel='stylesheet'>
 </head>
 
@@ -169,7 +169,7 @@
                     <?php endif; ?>
                     <?php for($i = $min; $i <= $max; $i++): ?>
                     <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
-                        <a class="page-link" href="showcase.php?page=<?= $i; ?>&category=<?= $_GET['category'] ?>"> <?= $i; ?> </a>
+                        <a class="page-link" href="galeria.php?page=<?= $i; ?>&category=<?= $_GET['category'] ?>"> <?= $i; ?> </a>
                     </li>
                     <?php endfor; ?>
                     <?php if($page < $totalPages - 3): ?>
@@ -180,7 +180,7 @@
                 <?php else: ?>
                     <?php for($i = 1; $i <= $totalPages; $i++ ): ?>
                     <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
-                        <a class="page-link" href="showcase.php?page=<?= $i; ?>&category=<?= $_GET['category'] ?>"> <?= $i; ?> </a>
+                        <a class="page-link" href="galeria.php?page=<?= $i; ?>&category=<?= $_GET['category'] ?>"> <?= $i; ?> </a>
                     </li>
                     <?php endfor; ?>
                 <?php endif; ?>

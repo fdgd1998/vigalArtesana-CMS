@@ -19,36 +19,17 @@
     <link rel="stylesheet" href="../includes/fonts/ionicons.min.css">
     <link rel="stylesheet" href="../includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../includes/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="./includes/css/styles.css">
+    <!-- <link rel="stylesheet" href="./includes/css/styles.css"> -->
     <link rel="stylesheet" href="../includes/css/styles.css">
     <link rel="stylesheet" href="../includes/css/showcase.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css"> -->
 </head>
 
 <body>
-    <!-- <div id="toast" style="z-index: 2; position: relative; height: 150px; text-align: center; margin-top 20px; background-color: transparent;"></div> -->
-    <?php
-        // if (isset($_GET['user-message'])) {
-        //     switch($_GET['user-message']) {
-        //         case 'create-success':
-        //             showToastMessage('success', 'El usuario se ha creado correctamente.');
-        //             break;
-        //         case 'password-pending':
-        //             showToastMessage('warning', 'Es necesario que el usuario establezca la contraseña en el primer inicio de sesión.');
-        //             break;
-        //         case 'email-pending':
-        //             showToastMessage('success', 'Se han enviado instrucciones a tu dirección de email.');
-        //             break;
-        //         case 'create-error':
-        //             showToastMessage('danger', 'Ha ocurrido un error al crear el usuario.');
-        //             break;
-        //     }
-        // }
-    ?>
-    <nav class="navbar navbar-light navbar-expand-lg navigation-clean" style="background-color: #82D470;">
+    <nav class="navbar navbar-light navbar-expand-lg navigation-clean" style="background-color: #D0D0D0;">
         <div class="container">
-            <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1" style="color: white; border: 1px solid whiteM">
+            <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="navbar-toggler-icon" style="background-image: url('../includes/img/iconfinder-icon.svg');"></span>
             </button>
@@ -57,15 +38,31 @@
                     <?php
                     if ($_SESSION['account_type'] == 'admin' || $_SESSION['account_type'] == 'superuser') {
                         echo '
-                            <li class="nav-item">
-                                <a class="nav-link" data-bs-hover-animate="pulse" href="/dashboard?page=site-settings" style="color: rgb(255, 255, 255);">Configuración del sitio</a>
-                            </li>
+                        <li class="nav-item dropdown">
+                            <a data-toggle="dropdown" data-bs-hover-animate="pulse" aria-expanded="false" class="dropdown-toggle nav-link" href="#">
+                                Configuración del sitio
+                            </a>
+                            <div role="menu" class="dropdown-menu dropdown-menu-right">
+                                <a role="presentation" class="dropdown-item" href="/dashboard?page=general-settings">
+                                    <i class="fas fa-cog" style="margin-right: 5px;"></i>
+                                    Configuración general
+                                </a>
+                                <a role="presentation" class="dropdown-item" href="/dashboard?page=contact-settings">
+                                    <i class="fas fa-address-book" style="margin-right: 5px;"></i>
+                                    Opciones de contacto y ubicación
+                                </a>
+                                <a role="presentation" class="dropdown-item" href="/dashboard?page=services-settings">
+                                    <i class="fas fa-wrench" style="margin-right: 5px;"></i>
+                                    Servicios
+                                </a>
+                            </div>
+                        </li>
                         ';
                     }
                     if ($_SESSION['account_type'] == 'superuser') {
                         echo "
                             <li class='nav-item dropdown'>
-                            <a data-toggle='dropdown' data-bs-hover-animate='pulse' aria-expanded='false' class='dropdown-toggle nav-link' href='#' style='color: white;'>
+                            <a data-toggle='dropdown' data-bs-hover-animate='pulse' aria-expanded='false' class='dropdown-toggle nav-link' href='#''>
                                 Usuarios
                             </a>
                             <div role='menu' class='dropdown-menu dropdown-menu-right'>
@@ -83,7 +80,7 @@
                     }?>
                 
                     <li class='nav-item dropdown'>
-                        <a data-toggle='dropdown' data-bs-hover-animate='pulse' aria-expanded='false' class='dropdown-toggle nav-link' href='#' style='color: white;'>
+                        <a data-toggle='dropdown' data-bs-hover-animate='pulse' aria-expanded='false' class='dropdown-toggle nav-link' href='#'>
                             Galería
                         </a>
                         <div role='menu' class='dropdown-menu dropdown-menu-right'>
@@ -102,12 +99,12 @@
                             </a>
                         </div>
                     </li>
-                    <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="/dashboard?page=profile" style="color: rgb(255, 255, 255);">Mi perfil</a></li>
-                    <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="../scripts/logout.php" style="color: rgb(255, 255, 255);">Cerrar sesión</a></li>
+                    <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="/dashboard?page=profile">Mi perfil</a></li>
+                    <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="../scripts/logout.php">Cerrar sesión</a></li>
                     
                 </ul>
                 <div style="display: block;">
-                    <a class="nav-link" data-bs-hover-animate="pulse" href="../" style="color: rgb(255, 255, 255);">Volver a inicio</a>
+                    <a class="nav-link" data-bs-hover-animate="pulse" href="../">Volver a inicio</a>
                 <div>
             </div>
         </nav>
@@ -136,8 +133,14 @@
                         case 'profile':
                             include 'profile.php';
                             break;
-                        case 'site-settings':
-                            include 'admin/site-settings/site_settings.php';
+                        case 'general-settings':
+                            include 'admin/site-settings/pages/general.php';
+                            break;
+                        case 'contact-settings':
+                            include 'admin/site-settings/pages/contact.php';
+                            break;
+                        case 'services-settings':
+                            include 'admin/site-settings/pages/services.php';
                             break;
                         default:
                             include 'start.php';
@@ -154,7 +157,10 @@
     <script src="../includes/js/jquery.min.js"></script>
     <script src="../includes/js/bs-init.js"></script>
     <script src="../includes/bootstrap/js/bootstrap.min.js"></script>
-    <script src="./admin/site-settings/site-settings.js"></script>
+    <script src="/dashboard/admin/gallery/js/gallery_new.js"></script>
+    <script src="./admin/site-settings/js/general.js"></script>
+    <script src="./admin/site-settings/js/contact.js"></script>
+    <script src="./admin/site-settings/js/services.js"></script>
     <!-- <script src="includes/js/toast.js"></script> -->
 
 

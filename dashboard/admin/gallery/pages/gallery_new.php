@@ -60,7 +60,7 @@
     }
 </style>
 
-<script src="/dashboard/admin/gallery/js/gallery_new.js"></script>
+
 <div class="container">
     <div class="row">
         <div class="col" style="margin-bottom: -15px;">

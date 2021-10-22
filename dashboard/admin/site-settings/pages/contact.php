@@ -32,7 +32,7 @@
     <form style="margin-bottom: 20px;">
         <div class="form-row">
             <div class="col">
-                <h1 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;"><i style="margin-right: 10px;" class="far fa-envelope"></i>Email y teléfono</h1>
+                <h2 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;"><i style="margin-right: 10px;" class="far fa-envelope"></i>Email y teléfono</h2>
                 <p>Actualiza el email y el teléfono de contacto.</p>
             </div>
         </div>
@@ -68,7 +68,7 @@
     <form style="margin-bottom: 20px;">
         <div class="form-row">
             <div class="col">
-                <h1 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;"><i style="margin-right: 10px;" class="far fa-comment-alt"></i>Redes sociales</h1>
+                <h2 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;"><i style="margin-right: 10px;" class="far fa-comment-alt"></i>Redes sociales</h2>
                 <p>Si configuras redes sociales, los enlaces aparecerán en la cabecera del sitio web.</p>
             </div>
         </div>
@@ -121,7 +121,7 @@
     <form style="margin-bottom: 20px;">
         <div class="form-row">
             <div class="col">
-                <h1 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;"><i style="margin-right: 10px;" class="far fa-map"></i>Google Maps</h1>
+                <h2 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;"><i style="margin-right: 10px;" class="far fa-map"></i>Google Maps</h2>
                 <p>En la página de contacto se muestra un mapa con la ubicación que especifiques. Copia aquí abajo el enlace proporcionado por Google Maps del elemento <strong>iframe</strong>.</p>
             </div>
         </div>
@@ -139,7 +139,7 @@
     <form style="margin-bottom: 20px;">
         <div class="form-row">
             <div class="col">
-                <h1 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;"><i style="margin-right: 10px;" class="far fa-calendar-alt"></i>Horario</h1>
+                <h2 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;"><i style="margin-right: 10px;" class="far fa-calendar-alt"></i>Horario</h2>
                 <p>Establece un horario por cada día de la semana. Formato recomendado: <strong>hh:mm - hh:mm | hh:mm - hh:mm</strong>.</p>
             </div>
         </div>

@@ -16,26 +16,22 @@
             echo "No se ha podido conectar a la base de datos.";
             exit();
         } else {
-            $location = $_SERVER["DOCUMENT_ROOT"]."/uploads//"; // location for post images.
-            $i = 0;
-            $errors = 0;
-            echo print_r($_FILES);
-            foreach ($_FILES as $file) { // Setting new filename for each file to upload
-                $temp = explode(".", $file["name"]); // Getting current filename.
-                $newfilename = 'index.'.end($temp); // Setting new filename.
-                move_uploaded_file($file['tmp_name'],$location.$newfilename); // Moving file to the server.
-                $stmt = "update company_info set value_info='".$newfilename."' where key_info='index-image'";
-                if ($conn->query($stmt) === FALSE) {
-                    $errors++;
+            try {
+                $location = $_SERVER["DOCUMENT_ROOT"]."/uploads//"; // location for post images.
+                $i = 0;
+                echo print_r($_FILES);
+                foreach ($_FILES as $file) { // Setting new filename for each file to upload
+                    $temp = explode(".", $file["name"]); // Getting current filename.
+                    $newfilename = 'index.'.end($temp); // Setting new filename.
+                    move_uploaded_file($file['tmp_name'],$location.$newfilename); // Moving file to the server.
+                    $stmt = "update company_info set value_info='".$newfilename."' where key_info='index-image'";
+                    $conn->query($stmt);
+                    $i++;
                 }
-                $i++;
-            }
-            if ($errors == 0) {
-                echo "La entrada se ha creado correctamente.";
-            } else {
-                echo "No se ha podido crear la entrada";
+                $conn->close();
+            } catch (Exception $e) {
+                echo $e;
             }
         }
-        $conn->close();
     }
 ?>

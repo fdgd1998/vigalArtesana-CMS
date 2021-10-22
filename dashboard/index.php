@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../includes/fonts/fontawesome-all.min.css">
     <!-- <link rel="stylesheet" href="./includes/css/styles.css"> -->
     <link rel="stylesheet" href="../includes/css/styles.css">
-    <link rel="stylesheet" href="../includes/css/showcase.css">
+    <link rel="stylesheet" href="../includes/css/galeria.css">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css"> -->
 </head>
@@ -62,7 +62,7 @@
                     if ($_SESSION['account_type'] == 'superuser') {
                         echo "
                             <li class='nav-item dropdown'>
-                            <a data-toggle='dropdown' data-bs-hover-animate='pulse' aria-expanded='false' class='dropdown-toggle nav-link' href='#''>
+                            <a data-toggle='dropdown' data-bs-hover-animate='pulse' aria-expanded='false' class='dropdown-toggle nav-link' href='#'>
                                 Usuarios
                             </a>
                             <div role='menu' class='dropdown-menu dropdown-menu-right'>
@@ -158,9 +158,14 @@
     <script src="../includes/js/bs-init.js"></script>
     <script src="../includes/bootstrap/js/bootstrap.min.js"></script>
     <script src="/dashboard/admin/gallery/js/gallery_new.js"></script>
+    <script src="./admin/gallery/js/gallery-manage.js"></script>
     <script src="./admin/site-settings/js/general.js"></script>
     <script src="./admin/site-settings/js/contact.js"></script>
     <script src="./admin/site-settings/js/services.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <script src="admin/gallery/js/ajax.js"></script>
+    <script src="admin/gallery/js/categories.js"></script>
     <!-- <script src="includes/js/toast.js"></script> -->
 
 

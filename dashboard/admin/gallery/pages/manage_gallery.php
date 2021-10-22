@@ -15,7 +15,7 @@
     }
 
     // Variables for pagination
-    $limit = isset($_SESSION['records-limit']) ? $_SESSION['records-limit'] : 4; // Dynamic limit
+    $limit = isset($_SESSION['records-limit']) ? $_SESSION['records-limit'] : 8; // Dynamic limit
     $page = (isset($_GET['n']) && is_numeric($_GET['n']) ) ? $_GET['n'] : 1; // Current pagination page number
     $paginationStart = ($page - 1) * $limit; // Offset
 
@@ -63,9 +63,6 @@
       $baseURL.="?page=manage-gallery&display=all&n=";
     }
 ?>
-<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
-<script src="admin/posts/js/gallery-manage.js"></script>
 
 <!-- Bootstrap modal for deleting posts -->
 <div class="modal fade" id="delete-post" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -196,14 +193,15 @@
     </ul>
 </nav>
 </div>
+<script src="../includes/js/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
-        $('#records-limit').change(function () {
-          window.location.href = "<?=$baseURL?>&records-limit="+$("#records-limit").val();
-        })
+            $('#records-limit').change(function () {
+        window.location.href = "<?=$baseURL?>1&records-limit="+$("#records-limit").val();
+      })
 
-        $('#upload-images').click(function() {
-          window.location.href = "?page=gallery-new";
-        })
+      $('#upload-images').click(function() {
+      window.location.href = "?page=gallery-new";
+      })
     });
 </script>

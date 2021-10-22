@@ -11,10 +11,7 @@
     if (isset($_GET['order'])) $order = $_GET['order']; // getting order if GET variable is set.
     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
 ?>
-<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
-<script src="admin/gallery/js/ajax.js"></script>
-<script src="admin/gallery/js/categories.js"></script>
+
 <style>
   .disabled-form {
       pointer-events: none;
@@ -46,7 +43,7 @@
                     <label for="new-cat-image">Imagen de fondo: </label>
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupFileAddon01"><icon class='icon-cloud-upload'></icon></span>
+                        <span class="input-group-text" id="inputGroupFileAddon01"><icon class='fas fa-upload'></icon></span>
                       </div>
                       <div class="custom-file">
                         <input type="file" class="custom-file-input" id="new-cat-image" aria-describedby="inputGroupFileAddon01">
@@ -79,7 +76,7 @@
           </button>
         </div>
         <div id="modal-body" class="modal-body">
-          <p>¿Estás seguro de que deseas eliminar esta categoría? Si hay elementos pertenecientes a esta categoría, tendrás que cambiarla manualmente después.</p>
+          <p>¿Estás seguro de que deseas eliminar esta categoría? No podrás borrarla si hay imágenes que pertenecen a ella.</p>
         </div>
         <div id="modal-footer1" class="modal-footer">
           <button id="cancel-cat-delete" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>

@@ -1,9 +1,9 @@
 $(document).ready(function () {
-    $('.carousel').on('slide.bs.carousel', function(e) {
-        $(this).find('.carousel-inner').animate({
-            height: $(e.relatedTarget).height()
-        }, 300);
-    });
+    // $('.carousel').on('slide.bs.carousel', function(e) {
+    //     $(this).find('.carousel-inner').animate({
+    //         height: $(e.relatedTarget).height()
+    //     }, 300);
+    // });
     $('#records-limit').change(function () {
         $('form').submit();
     })

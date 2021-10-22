@@ -78,20 +78,20 @@
     <div class="container content">
         <div class="row">
             <div class="col-lg-7 text-left">
-                <h2>Ubicación</h2>
+                <h3>Ubicación</h3>
                 <div class="map-responsive">
                     <iframe class="w-100" src="<?=$GLOBALS["site_settings"][7]?>" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
             <div class="col-lg-5 text-left">
-                <h2>Datos de contacto</h2>
+                <h3>Datos de contacto</h3>
                 <ul style="list-style-type: none; padding-left: 0;">
                     <li><i style="color: #767676; margin-right: 10px;" class="fas fa-map-marker"></i><?=$GLOBALS["site_settings"][1]?></li>
                     <li><i style="color: #767676; margin-right: 10px;" class="fas fa-phone"></i><a href="tel:<?=str_replace(' ','',$GLOBALS["site_settings"][0])?>"><?=$GLOBALS["site_settings"][0]?></a></li>
                     <li><i style="color: #767676; margin-right: 10px;" class="fas fa-envelope"></i><a href="mailto:<?=$GLOBALS["site_settings"][3]?>"><?=$GLOBALS["site_settings"][3]?></a></li>
                 </ul>
                 <hr>
-                <h2>Horario</h2>
+                <h3>Horario</h3>
                 <ul style="list-style-type: none; padding-left: 0;">
                     <?php $i = 0; foreach ($GLOBALS["site_settings"][8] as $dia=>$horario): ?>
                         <li><?=$dia.": ".$horario?></li>

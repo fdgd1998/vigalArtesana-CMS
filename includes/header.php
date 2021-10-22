@@ -1,16 +1,16 @@
 <nav class="header nav-transparent navbar navbar-light sticky-top navbar-expand-lg navigation-clean">
     <div class="container">
-        <a class="navbar-brand" href="index.php" style="font-family: 'Great Vibes'; letter-spacing: 2px; padding-right: 15px;  font-weight: lighter; color: black ;font-size: 35px;" name="company_name"><?=$GLOBALS["site_settings"][2]?></a>
+        <a class="navbar-brand" href="index.php" style="font-family: 'Great Vibes'; letter-spacing: 2px; padding-right: 15px;  font-weight: lighter; color: black ;font-size: 30px;" name="company_name"><?=$GLOBALS["site_settings"][2]?></a>
         <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1" style="color: white; border: 1px solid grey">
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon" style="background-image: url('/includes/img/icons8-menu.svg');"></span>
         </button>
         <div class="collapse navbar-collapse" id="navcol-1" style="margin-left: 5%;">
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="index.php">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="galeria.php">Galería</a></li>
-                <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="sobremi.php">Sobre mí</a></li>
-                <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="contacto.php">Contacto</a></li>
+                <li class="nav-item"><a class="nav-link nav-link-ltr" data-bs-hover-animate="pulse" href="index.php">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link nav-link-ltr" data-bs-hover-animate="pulse" href="galeria.php">Galería</a></li>
+                <li class="nav-item"><a class="nav-link nav-link-ltr" data-bs-hover-animate="pulse" href="sobremi.php">Sobre mí</a></li>
+                <li class="nav-item"><a class="nav-link nav-link-ltr" data-bs-hover-animate="pulse" href="contacto.php">Contacto</a></li>
 
                 <?php if (isset($_SESSION['user'])): ?>
                     <li class='nav-item dropdown'>

@@ -10,22 +10,20 @@
     require_once '../../../scripts/connection.php';
 
     if ($_POST) {
-        $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
+        try {
+            $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
 
-        if ($conn->connect_error) {
-            echo "No se ha podido conectar a la base de datos.";
-            exit();
-        } else {
-            $errors = 0;
-            $stmt = "update company_info set value_info='".$_POST["map_link"]."' where key_info='google-map-link'";
-            if ($conn->query($stmt) === FALSE) $errors++;
-            
-            if ($errors == 0) {
-                echo "La entrada se ha creado correctamente.";
+            if ($conn->connect_error) {
+                echo "No se ha podido conectar a la base de datos.";
+                exit();
             } else {
-                echo "No se ha podido crear la entrada";
+                $errors = 0;
+                $stmt = "update company_info set value_info='".$_POST["map_link"]."' where key_info='google-map-link'";
+                $conn->query($stmt);
             }
+            $conn->close();
+        } catch (Exception $e) {
+           echo $e;
         }
-        $conn->close();
     }
 ?>

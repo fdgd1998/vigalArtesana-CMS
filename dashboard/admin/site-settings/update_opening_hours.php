@@ -10,22 +10,19 @@
     require_once '../../../scripts/connection.php';
 
     if ($_POST) {
-        $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
-
-        if ($conn->connect_error) {
-            echo "No se ha podido conectar a la base de datos.";
-            exit();
-        } else {
-            $errors = 0;
-            $stmt = "update company_info set value_info='".$_POST["hours"]."' where key_info='opening-hours'";
-            if ($conn->query($stmt) === FALSE) $errors++;
-            
-            if ($errors == 0) {
-                echo "La entrada se ha creado correctamente.";
+        try {
+            $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
+            if ($conn->connect_error) {
+                echo "No se ha podido conectar a la base de datos.";
+                exit();
             } else {
-                echo "No se ha podido crear la entrada";
+                $stmt = "update company_info set value_info='".$_POST["hours"]."' where key_info='opening-hours'";
+                $conn->query($stmt);
             }
+            $conn->close();
+        } catch (Exception $e) {
+            echo $e;
         }
-        $conn->close();
+        
     }
 ?>

@@ -5,7 +5,6 @@
         exit();
     }
 ?>
-<script src="admin/users/js/create-user.js"></script>
 <div class="container">
     <h1 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;">Crear usuario</h1>
     <form style="margin-top: 30px;">

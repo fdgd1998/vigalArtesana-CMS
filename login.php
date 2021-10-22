@@ -52,7 +52,8 @@
                         <div class="form-group"><input type="text" class="form-control form-control-sm" name="user" placeholder="Usuario" /></div>
                         <div class="form-group"><input class="form-control form-control-sm" type="password" name="password" placeholder="Contraseña"></div>
                         <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="background-color: rgb(0, 98, 204);">Iniciar sesión</button></div>
-                        <a class="forgot" href="./recover.php">¿Has olvidado tu contraseña?</a></form>
+                        <p class="forgot">Si has olvidado tu contraseña, contacta con el administrador del sitio para restablecerla.</p>
+                        </form>
                 </div>
                 ';
         } else {

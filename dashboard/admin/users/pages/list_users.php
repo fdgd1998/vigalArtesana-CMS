@@ -12,9 +12,6 @@
     $change_account_type = true;
     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
 ?>
-<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
-<script src="admin/users/js/list-users.js"></script>
 <style>
   .disabled-form {
       pointer-events: none;
@@ -186,13 +183,13 @@
                                     </button>
                             ';
                           echo '
-                            <button class="btn btn-danger user-delete" title="Borrar usuario" type="button" style="margin-right: 1px;" id="userid-'.$rows['id'].'" name="'.$rows['username'].'">
+                            <button class="btn btn-danger user-delete" title="Borrar usuario" type="button" style="margin-right: 1px;" id="delete-'.$rows['id'].'" name="'.$rows['username'].'">
                                         <i class="fas fa-trash"></i>
                                     </button>
-                                    <button class="btn btn-dark user-status-change-form" title="'.$user_status.' usuario" type="button" id="userid-'.$rows['id'].'" name="'.$rows['username'].'">
-                                        <i id="userid-'.$rows['id'].'-change-status-btn" class="fas fa-arrow-circle-'.$status_arrow_icon.'"></i>
+                                    <button class="btn btn-dark user-status-change-form" title="'.$user_status.' usuario" type="button" id="update-'.$rows['id'].'" name="'.$rows['username'].'">
+                                        <i id="update-'.$rows['id'].'-change-status-btn" class="fas fa-arrow-circle-'.$status_arrow_icon.'"></i>
                                     </button>
-                                    <button id="useremail-'.$rows['email'].'" class="btn btn-warning password-recover-form" title="Recuperar contraseña" type="button" id="userid-'.$rows['id'].'" name="'.$rows['username'].'">
+                                    <button id="useremail-'.$rows['id'].'" class="btn btn-warning password-recover-form" title="Recuperar contraseña" type="button" id="userid-'.$rows['id'].'" name="'.$rows['username'].'">
                                         <i class="fas fa-undo"></i>
                                     </button>
                                 </div>
@@ -232,8 +229,9 @@
           <input type="checkbox" class="custom-control-input" id="change-user-email-chkbx">
           <label class="custom-control-label" for="change-user-email-chkbx">Cambiar email.</label>
         </div>
-            <div id="edit-email" class="disabled-form">
+            <div id="edit-email" class="form-group disabled-form">
               <div class="form-group">
+                  <p>Si hay alguna recuperación de contraseña pendiente, al cambiar el email se enviará una nueva solicitud. La solicitud con el email anterior dejará de ser válida.</p>
                   <label for="email1-input-edit">Email: </label>
                   <input id="email1-input-edit" class="form-control" name="email" type="text">
               </div>

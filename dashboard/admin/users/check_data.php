@@ -1,7 +1,7 @@
 <?php
     session_start();
-    require_once '../../../modules/connection.php';
-    require_once '../../../modules/crypt.php';
+    require_once '../../../scripts/connection.php';
+    require_once '../../../scripts/crypt.php';
 
     // redirection to 403 is session is not started
     if (!isset($_SESSION['loggedin'])) {
@@ -20,14 +20,14 @@
         } else {
 
             // preparing statement
+            echo $user;
             $stmt = $conn->prepare("select username from users where username = ?");
             $stmt->bind_param("s", $user);
             $stmt->execute();
             $stmt->store_result();
-            $stmt->bind_result($user_db);
 
             // if user exists, it can be used the same name
-            if ($stmt->num_rows == 1) {
+            if ($stmt->num_rows) {
                 http_response_code(412);
             } else {
                 http_response_code(200);

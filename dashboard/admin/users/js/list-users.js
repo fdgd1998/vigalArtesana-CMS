@@ -1,6 +1,6 @@
 var user_correct = false;
 var email_correct = false;
-var editint_user_id = '';
+var editing_user_id = '';
 var editing_username = '';
 
 jQuery(function($) {
@@ -67,9 +67,8 @@ jQuery(function($) {
 
 
     $('#user-edit').on('click', function(e) {
-        var user = $('#staticBackdropLabel-edit').text().substring(19, 25);
         var formData = new FormData();
-        formData.append("user_name", user);
+        formData.append("user_id", editing_user_id);
         if ($("#change-user-email-chkbx").is(":checked") && $("#change-user-type-chkbx").is(":checked")) {
             formData.append("user_email", $('#email1-input-edit').val());
             formData.append("user_type", $('#account-edit option:selected').val());
@@ -104,7 +103,8 @@ jQuery(function($) {
 
     $('.user-edit-form').on('click', function(e) {
         // set the variables
-        editing_user_id = $(this).attr('id');
+        editing_user_id = $(this).attr('id').substring(7);
+        console.log("editing user: "+$(this).attr('id'));
         editing_username = $(this).attr('name');
         $('#staticBackdropLabel-edit').text('Editando usuario: "'+editing_username+'"');
         if (account_name != editing_username) {
@@ -152,6 +152,8 @@ jQuery(function($) {
         $('#email2-input-edit').css("background-color", "#FFF");
         $('#email1-input-edit').val("");
         $('#email2-input-edit').val("");
+        $('#select-account').addClass("disabled-form");
+        $('#edit-email').addClass("disabled-form");
     });
 
     $('.user-status-change-form').on('click', function(e) {
@@ -181,15 +183,16 @@ jQuery(function($) {
     $("#submit-password-recover").on('click', function(e) {
 
         $.ajax({
-            url: location.origin+'/modules/send_recover_email.php', // this is the target
+            url: location.origin+'/scripts/send_recover_email.php', // this is the target
             method: 'post', // method
-            data: {email: editing_user_id}, // pass the input value to server
+            data: {id: editing_user_id, message: "¡Hola! El administrador de ViGal Artesana te ha enviado una solicitud para restablecer tu contraseña. Para seguir usando tu cuenta, debes restablecerla haciendo clic en el siguiente enlace: "}, // pass the input value to server
             success: function(r) { // if the http response code is 200
                 //alert("El estado del usuario se ha actualizado correctamente.");
                 $('#user-password').modal().hide();
                 $('.modal-backdrop').remove();
+                console.log("user id: "+editing_user_id);
                 editing_user_id = '';
-                window.location = location.origin+"/dashboard/?page=list-users&order=asc";
+                // window.location = location.origin+"/dashboard/?page=list-users&order=asc";
             },
             error: function(r) { // if the http response code is other than 200
                 alert("Ha ocurrido un error al actualizar el estado del usuario.");

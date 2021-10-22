@@ -5,12 +5,14 @@ jQuery(function($) {
 
     $('#username').on('keyup', function(e) {
         if ($(this).val() != "") {
+            console.log($('#username').val());
             // perform an ajax call
             $.ajax({
                 url: 'admin/users/check_data.php', // this is the target
                 method: 'post', // method
                 data: {username: $('#username').val()}, // pass the input value to server
                 success: function(r) { // if the http response code is 200
+                    console.log("username: "+r);
                     $('#username').css('background-color', '#A7F0A9').html(r);
                     console.log('user does not exist.');
                     user_correct = true;

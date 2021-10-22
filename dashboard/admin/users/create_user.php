@@ -14,7 +14,7 @@
         $user = $_POST['username_s'];
         $name = OpenSSLEncrypt($_POST['name_s']);
         $surname= OpenSSLEncrypt($_POST['surname_s']);
-        $email = $_POST['email_s'];
+        $email = OpenSSLEncrypt($_POST['email_s']);
         $account_type = $_POST['account_s'];
 
         $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
@@ -28,7 +28,9 @@
             print($stmt);
             if ($conn->query($stmt) === TRUE) {
                 $token = generateToken();
-                $isSent = sendPasswdEmail($token, $email);
+                $message = "¡Hola! Para poder usar tu cuenta en ViGal Artesanos, primero debes activarla. Haz clic en el siguiente enlace: ";
+                $isSent = sendPasswdEmail($token, $_POST['email_s'], $message);
+                echo $isSent;
                 if ($isSent) {
                     $stmt = array(
                         'insert into password_reset values ("'.$email.'","'.$token.'")',

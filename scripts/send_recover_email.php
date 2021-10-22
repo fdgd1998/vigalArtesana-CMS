@@ -12,8 +12,8 @@
 
     if ($_POST) {
         $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
-        $stmt = $conn->prepare("select email, passwd_reset from users where email = ?");
-        $stmt->bind_param("s", $_POST['email']);
+        $stmt = $conn->prepare("select email, passwd_reset from users where id = ?");
+        $stmt->bind_param("s", $_POST['id']);
         $stmt->execute();
         $stmt->store_result();
         $stmt->bind_result($email, $passwd_reset);
@@ -21,7 +21,7 @@
         if ($stmt->num_rows == 1) {
             if($row = $stmt->fetch()) {
                 $token = generateToken();
-                $isSent = sendPasswdEmail($token, $email);
+                $isSent = sendPasswdEmail($token, OpenSSLDecrypt($email), $_POST["message"]);
                 if ($isSent) {
                     $stmt = array(
                         'insert into password_reset values ("'.$email.'","'.$token.'")',

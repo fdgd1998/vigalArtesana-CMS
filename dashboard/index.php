@@ -166,6 +166,8 @@
     <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
     <script src="admin/gallery/js/ajax.js"></script>
     <script src="admin/gallery/js/categories.js"></script>
+    <script src="admin/users/js/create-user.js"></script>
+    <script src="admin/users/js/list-users.js"></script>
     <!-- <script src="includes/js/toast.js"></script> -->
 
 

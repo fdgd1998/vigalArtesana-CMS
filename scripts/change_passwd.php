@@ -1,13 +1,8 @@
 <?php
-    if (!isset($_SESSION['user'])) {
-        header("Location: ../403.php");
-        exit();
-    }
     if ($_POST) {
         require_once 'connection.php';
         require_once 'crypt.php';
 
-        $user = $_POST['user'];
         $token = $_POST['token'];
         $pass = OpenSSLEncrypt($_POST['pass']);
 
@@ -17,9 +12,11 @@
             print("No se ha podido conectar a la base de datos");
             exit();
         } else {
+            $stmt = "select id from users where email = (select email from password_reset where token = '".$token."')";
+            $user_id = $conn->query($stmt);
             $stmt = "delete from password_reset where token = '".$token."'";
             if ($conn->query($stmt) === TRUE) {
-                $stmt = "update users set passwd = '".$pass."', account_enabled='YES', passwd_reset='NO' where username = '".$user."'";
+                $stmt = "update users set passwd = '".$pass."', account_enabled='YES', passwd_reset='NO' where id = '".$user_id->fetch_assoc()["id"]."'";
                 if ($conn->query($stmt) === TRUE) {
                     http_response_code(200);
                 }

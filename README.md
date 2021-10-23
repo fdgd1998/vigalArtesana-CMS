@@ -12,12 +12,14 @@ The main purpose of this CMS is to be simple, lightweight and without any unnece
 Features:
 - Fully featured site control panel.
 - Encryption of sensible data stored in the database.
-- User management (creation, deletion, edition, profiles, privileges).
-- Account password recovery by unique token sent via email.
 - Gallery system organized by categories.
 - Customizable company info.(*)
 - In-site contact form.(*)
 - Search Engine Optimization.(*)
 - Under construction / maintenance website template.(*)
+
+Broken features (might be fixed in the future):
+- User management (creation, deletion, edition, profiles, privileges).
+- Account password recovery by unique token sent via email.
 
 NOTE: Features marked with (*) are in the works.

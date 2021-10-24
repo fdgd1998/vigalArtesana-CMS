@@ -25,8 +25,8 @@
 ?>
 <div class="container">
     <div class="row">
-        <div class="col" style="margin-bottom: -15px;">
-            <h1 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;">Opciones de contacto y ubicación</h1>
+        <div class="col">
+            <h2 class="text-left">Opciones de contacto y ubicación</h2>
         </div>
     </div>
     <form style="margin-bottom: 20px;">

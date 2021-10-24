@@ -28,10 +28,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViGal - Contacto</title>
+    <title>Contacto - ViGal Artesana</title>
     <link rel="stylesheet" href="./includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="./includes/fonts/ionicons.min.css">
-    <link rel="stylesheet" href="./includes/css/Footer-Dark.css">
+    <link rel="stylesheet" href="./includes/css/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="./includes/css/Navigation-Clean.css">
     <link rel="stylesheet" href="./includes/css/styles.css">
@@ -41,7 +41,7 @@
     <link rel="stylesheet" href="./includes/css/showcase.css">
     <link rel="stylesheet" href="./includes/css/carousel.css">
     <link href='https://fonts.googleapis.com/css?family=Great Vibes' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
+    <link href="http://fonts.cdnfonts.com/css/gotham" rel="stylesheet">
     <style>
         .map-responsive{
 
@@ -76,29 +76,38 @@
         include './includes/header.php';
     ?>
     <div class="container content">
+        <h1 class="title">Contacto</h1>
+        <p class="title-description">Si quieres pedir más información, preguntar precios, pedir un presupuesto o preguntar cualquier otra cosa, no dudes en contactar con nosotros. ¡Estaremos encantados de atenderte! También puedes usar el formulario de contacto al final de esta página.</p>
         <div class="row">
-            <div class="col-lg-7 text-left">
-                <h3>Ubicación</h3>
-                <div class="map-responsive">
-                    <iframe class="w-100" src="<?=$GLOBALS["site_settings"][7]?>" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                </div>
+            <div class="col-lg-7">
+                <p class="address"><?=$GLOBALS["site_settings"][1]?></p>
+                <a class="contact-data" href="tel:<?=str_replace(' ','',$GLOBALS["site_settings"][0])?>"><?=$GLOBALS["site_settings"][0]?></a>
+                <a class="contact-data" href="mailto:<?=$GLOBALS["site_settings"][3]?>"><?=$GLOBALS["site_settings"][3]?></a>
+                <?php if (isset($GLOBALS["site_settings"][4]["whatsapp"])):?>
+                    <a class="contact-data whatsapp" data-bs-hover-animate="pulse" target="blank" href="https://wa.me/<?=$GLOBALS["site_settings"][4]["whatsapp"]?>"><i class="fab fa-whatsapp fa-w-16"></i>WhatsApp</a>
+                <?php endif; ?>
+                <?php if (isset($GLOBALS["site_settings"][4]["instagram"])):?>
+                    <a class="contact-data instagram" data-bs-hover-animate="pulse" target="blank" href="https://www.instagram.com/<?=$GLOBALS["site_settings"][4]["instagram"]?>"><i class="fab fa-instagram"></i>@<?=$GLOBALS["site_settings"][4]["instagram"]?></a>
+                <?php endif; ?>
+                <?php if (isset($GLOBALS["site_settings"][4]["facebook"])):?>
+                    <a class="contact-data facebook" data-bs-hover-animate="pulse" target="blank" href="https://www.facebook.com/<?=$GLOBALS["site_settings"][4]["facebook"]?>"><i class="fab fa-facebook-square"></i>@<?=$GLOBALS["site_settings"][4]["facebook"]?></a>
+                <?php endif; ?>
             </div>
-            <div class="col-lg-5 text-left">
-                <h3>Datos de contacto</h3>
-                <ul>
-                    <li><i style="color: #767676;" class="fas fa-map-marker"></i><?=$GLOBALS["site_settings"][1]?></li>
-                    <li><i style="color: #767676;" class="fas fa-phone"></i><a href="tel:<?=str_replace(' ','',$GLOBALS["site_settings"][0])?>"><?=$GLOBALS["site_settings"][0]?></a></li>
-                    <li><i style="color: #767676;" class="fas fa-envelope"></i><a href="mailto:<?=$GLOBALS["site_settings"][3]?>"><?=$GLOBALS["site_settings"][3]?></a></li>
-                </ul>
-                <hr>
-                <h3>Horario</h3>
-                <ul style="list-style-type: none; padding-left: 0;">
+            <div class="col-lg-5">
+                <h2 class="title">Horarios</h2>
+                <ul class="timetable">
                     <?php $i = 0; foreach ($GLOBALS["site_settings"][8] as $dia=>$horario): ?>
                         <li><?=$dia.": ".$horario?></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
         </div>
+        <div>
+                <h2 class="title">Ubicación</h2>
+                <div class="map-responsive">
+                    <iframe class="w-100" src="<?=$GLOBALS["site_settings"][7]?>" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
     </div>
 
     <?php
@@ -107,17 +116,7 @@
     <!-- SB Forms JS -->
     <scipt src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     <script src="./includes/js/jquery.min.js"></script>
-    <script src="./includes/js/carousel.js"></script>
     <script src="./includes/js/header.js"></script>
     <script src="./includes/bootstrap/js/bootstrap.min.js"></script>
-    <script src="./includes/js/animate-carousel-height-change.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
-    <script>
-        const phoneInputField = document.querySelector("#phone");
-        const phoneInput = window.intlTelInput(phoneInputField, {
-            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-            initialCountry: "es",
-        });
-    </script>
 </body>
 </html>

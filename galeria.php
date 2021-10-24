@@ -78,14 +78,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViGal - Exposición</title>
+    <title>Galería - ViGal Artesana</title>
     <link rel="stylesheet" href="./includes/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./includes/css/Footer-Dark.css">
+    <link rel="stylesheet" href="./includes/css/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="./includes/css/Navigation-Clean.css">
     <link rel="stylesheet" href="./includes/css/styles.css">
     <link rel="stylesheet" href="./includes/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="./includes/css/galeria.css">
+    <link href="http://fonts.cdnfonts.com/css/gotham" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Great Vibes' rel='stylesheet'>
 </head>
 
@@ -95,16 +96,14 @@
     ?>
         <div class="container content">
             <?php if (!isset($_GET['category'])): ?>
-                <div class="intro">
-                    <h1 class="text-center" style="margin-bottom: 20px;">Galería</h1>
-                    <p class="text-center" style="margin-bottom: 50px;">Haz clic sobre las imágenes para ver los trabajos de cada categoría. </p>
-                </div>
+                <h1 class="title">Galería</h1>
+                <p class="title-description">Selecciona una categoría pinchando sobre una imagen.</p>
                 <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" style="margin-bottom: 20px;">
                     <?php foreach ($categories as $element): ?>
                         <div class='animated category col-sm-6 col-md-4 col-lg-3 item' style='margin-bottom: 30px;'>
                             <a data-lightbox='photos' href='<?=$_SERVER['PHP_SELF']."?category=".$element[0]?>'>
                                 <div style="text-align: center;" class='wrap wrap-category'>
-                                    <label class='title'><?=$element[1]?></label>
+                                    <label class='category-title'><?=$element[1]?></label>
                                     <img class='img-fluid category post_img' src='/uploads/categories/<?=$element[2]?>'/>
                                 </div>
                             </a>
@@ -113,11 +112,11 @@
                 </div>   
             <?php else: ?>
                 <div class="intro">
-                    <h1 class="text-center" style="margin-bottom: 20px;"><?=$category_name?></h1>
-                    <p class="text-center">Pulsa sobre las imágenes para verlas a tamaño completo.</p>
+                    <h1 class="title"><a href="galeria.php"><i class="fas fa-arrow-left" style="margin-right: 20px;"></i></a><?=$category_name?></h1>
+                    <p class="title-description">Pulsa sobre las imágenes para verlas a tamaño completo. Para volver a ver las categorías, pincha sobre la flecha a la izquierda del nombre de la categoría.</p>
                 </div>
                 <form action="?category=<?=$_GET['category']?>" method="get">
-                    <div class="input-group mb-3" style="width: 220px; padding-bottom: 20px;">
+                    <div class="input-group mb-3" style="width: 240px; padding-bottom: 20px;">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">Mostrar</span>
                         </div>
@@ -133,7 +132,7 @@
                         <input hidden name="category" value="<?=$_GET['category']?>">
                     </div>
                 </form>
-                <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" style="margin-bottom: 20px;">
+                <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4">
                     <?php foreach ($results as $element): ?>
                         <div class='animated photos col-sm-6 col-md-4 col-lg-3 item' style='margin-bottom: 30px;'>
                             <a data-lightbox='photos'>

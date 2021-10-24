@@ -9,7 +9,7 @@
             <ul class="navbar-nav nav ml-auto mt-2 mt-lg-0">
                 <li class="nav-item"><a class="nav-link underline-animated" href="index.php">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link underline-animated" href="galeria.php">Galería</a></li>
-                <li class="nav-item"><a class="nav-link underline-animated" href="sobremi.php">Sobre mí</a></li>
+                <li class="nav-item"><a class="nav-link underline-animated" href="sobremi.php">Sobre nosotros</a></li>
                 <li class="nav-item"><a class="nav-link underline-animated" href="contacto.php">Contacto</a></li>
 
                 <li class="nav-item">

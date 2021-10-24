@@ -24,8 +24,8 @@
 ?>
 <div class="container">
     <div class="row">
-        <div class="col" style="margin-bottom: -15px;">
-            <h1 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;">Configuración general</h1>
+        <div class="col">
+            <h2 class="text-left"></i>Configuración general</h2>
         </div>
     </div>
     <form style="margin-bottom: 20px;">
@@ -64,6 +64,27 @@
             <div class="col">
                 <h1 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;">Descripción de la imagen de portada</h1>
                 <p>Establece una descripción que se mostrará sobre la imagen de la portada configurada en la opción de arriba.</p>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                    </div>
+                    <textarea id="index-image-description" class="form-control"><?= ($site_settings[6] != ""? $site_settings[6]:"")?></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="form-row text-right">
+            <div class="col"><button id="submit-index-image-description" class="btn btn-success" type="button">Guardar</button></div>
+        </div>
+    </form>
+    <form style="margin-bottom: 20px;">
+        <div class="form-row">
+            <div class="col">
+                <h1 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;">Texto resumen página de inicio</h1>
+                <p>Describe brevemente tu negocio.</p>
             </div>
         </div>
         <div class="form-row">

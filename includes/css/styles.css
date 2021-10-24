@@ -203,6 +203,13 @@ li > i {
     margin-top: 0px !important;
   }
 
+  h3.title {
+    color: var(--button-main-color);
+    font-size: 25px !important;
+    text-align: left !important;
+    margin-top: 20px !important;
+  }
+
   .address {
     color: var(--footer-main-color);
     font-size: 23px !important;
@@ -250,6 +257,13 @@ li > i {
     margin-top: 30px;
   }
 
+  h3.title {
+    color: var(--button-main-color);
+    font-size: 20px !important;
+    text-align: left !important;
+    margin-top: 20px !important;
+  }
+
   .address {
     color: var(--footer-main-color);
     font-size: 20px;
@@ -293,6 +307,13 @@ li > i {
     text-align: center;
     margin-bottom: 20px;
     margin-top: 30px;
+  }
+
+  h3.title {
+    color: var(--button-main-color);
+    font-size: 20px !important;
+    text-align: left !important;
+    margin-top: 20px !important;
   }
 
   .address {
@@ -340,6 +361,13 @@ li > i {
     text-align: center !important;
     margin-bottom: 20px !important;
     margin-top: 40px !important;
+  }
+
+  h3.title {
+    color: var(--button-main-color);
+    font-size: 20px !important;
+    text-align: left !important;
+    margin-top: 20px !important;
   }
 
   .address {

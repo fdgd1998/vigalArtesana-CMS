@@ -26,9 +26,9 @@
             </div>
             <div class="col-12 col-sm-12 col-md-4 web-author">
                 <ul>
-                    <li>© <?=date('Y')?></li>
+                    <li>Todos los derechos reservados © <?=date('Y')?></li>
                     <li>Sitio web desarrollado por Francisco Gálvez</li>
-                    <li>Código fuente: <a class="footer_link" target="blank" href="https://www.github.com/fdgd1998/vigalArtesanos-CMS">github.com</a></li>
+                    <li><a class="footer_link" target="blank" href="https://www.linkedin.com/in/fdgd">linkedin.com/in/fdgd</a></li>
                 </ul>
             </div>
         </div>

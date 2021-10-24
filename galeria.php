@@ -102,7 +102,7 @@
                     <?php foreach ($categories as $element): ?>
                         <div class='animated category col-sm-6 col-md-4 col-lg-3 item' style='margin-bottom: 30px;'>
                             <a data-lightbox='photos' href='<?=$_SERVER['PHP_SELF']."?category=".$element[0]?>'>
-                                <div style="text-align: center;" class='wrap wrap-category'>
+                                <div class='wrap wrap-category'>
                                     <label class='category-title'><?=$element[1]?></label>
                                     <img class='img-fluid category post_img' src='/uploads/categories/<?=$element[2]?>'/>
                                 </div>

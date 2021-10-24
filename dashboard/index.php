@@ -19,19 +19,16 @@
     <link rel="stylesheet" href="../includes/fonts/ionicons.min.css">
     <link rel="stylesheet" href="../includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../includes/fonts/fontawesome-all.min.css">
-    <!-- <link rel="stylesheet" href="./includes/css/styles.css"> -->
-    <link rel="stylesheet" href="../includes/css/styles.css">
     <link rel="stylesheet" href="../includes/css/galeria.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css"> -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-light navbar-expand-lg navigation-clean" style="background-color: #D0D0D0;">
+    <nav class="navbar navbar-light navbar-expand-lg navigation-clean" style="background-color: #F1F1F1;">
         <div class="container">
             <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
                 <span class="sr-only">Toggle navigation</span>
-                <span class="navbar-toggler-icon" style="background-image: url('../includes/img/iconfinder-icon.svg');"></span>
+                <span class="navbar-toggler-icon" style="background-image: url('../includes/img/icons8-menu.svg');"></span>
             </button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -39,7 +36,7 @@
                     if ($_SESSION['account_type'] == 'admin' || $_SESSION['account_type'] == 'superuser') {
                         echo '
                         <li class="nav-item dropdown">
-                            <a data-toggle="dropdown" data-bs-hover-animate="pulse" aria-expanded="false" class="dropdown-toggle nav-link" href="#">
+                            <a data-toggle="dropdown" aria-expanded="false" class="dropdown-toggle nav-link" href="#">
                                 Configuración del sitio
                             </a>
                             <div role="menu" class="dropdown-menu dropdown-menu-right">
@@ -59,28 +56,10 @@
                         </li>
                         ';
                     }
-                    if ($_SESSION['account_type'] == 'superuser') {
-                        echo "
-                            <li class='nav-item dropdown'>
-                            <a data-toggle='dropdown' data-bs-hover-animate='pulse' aria-expanded='false' class='dropdown-toggle nav-link' href='#'>
-                                Usuarios
-                            </a>
-                            <div role='menu' class='dropdown-menu dropdown-menu-right'>
-                                <a role='presentation' class='dropdown-item' href='/dashboard?page=create-user'>
-                                    <i class='fas fa-user-plus' style='margin-right: 5px;'></i>
-                                    Nuevo usuario
-                                </a>
-                                <a role='presentation' class='dropdown-item' href='/dashboard?page=list-users'>
-                                    <i class='fas fa-users' style='margin-right: 5px;'></i>
-                                    Listar usuarios
-                                </a>
-                            </div>
-                        </li>
-                        ";
-                    }?>
+                ?>
                 
                     <li class='nav-item dropdown'>
-                        <a data-toggle='dropdown' data-bs-hover-animate='pulse' aria-expanded='false' class='dropdown-toggle nav-link' href='#'>
+                        <a data-toggle='dropdown' aria-expanded='false' class='dropdown-toggle nav-link' href='#'>
                             Galería
                         </a>
                         <div role='menu' class='dropdown-menu dropdown-menu-right'>
@@ -92,19 +71,13 @@
                                 <i class='fas fa-images' style='margin-right: 5px;'></i>
                                 Gestionar galería
                             </a>
-                            <div class="dropdown-divider"></div>
-                            <a role='presentation' class='dropdown-item' href='/dashboard?page=categories'>
-                                <i class='fas fa-ellipsis-h' style='margin-right: 5px;'></i>
-                                Categorías
-                            </a>
-                        </div>
                     </li>
-                    <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="/dashboard?page=profile">Mi perfil</a></li>
-                    <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="../scripts/logout.php">Cerrar sesión</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/dashboard?page=categories">Categorías</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../scripts/logout.php">Cerrar sesión</a></li>
                     
                 </ul>
                 <div style="display: block;">
-                    <a class="nav-link" data-bs-hover-animate="pulse" href="../">Volver a inicio</a>
+                    <a class="nav-link" href="../">Volver a inicio</a>
                 <div>
             </div>
         </nav>
@@ -166,8 +139,6 @@
     <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
     <script src="admin/gallery/js/ajax.js"></script>
     <script src="admin/gallery/js/categories.js"></script>
-    <script src="admin/users/js/create-user.js"></script>
-    <script src="admin/users/js/list-users.js"></script>
     <!-- <script src="includes/js/toast.js"></script> -->
 
 

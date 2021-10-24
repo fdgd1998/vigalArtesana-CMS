@@ -85,10 +85,10 @@
             </div>
             <div class="col-lg-5 text-left">
                 <h3>Datos de contacto</h3>
-                <ul style="list-style-type: none; padding-left: 0;">
-                    <li><i style="color: #767676; margin-right: 10px;" class="fas fa-map-marker"></i><?=$GLOBALS["site_settings"][1]?></li>
-                    <li><i style="color: #767676; margin-right: 10px;" class="fas fa-phone"></i><a href="tel:<?=str_replace(' ','',$GLOBALS["site_settings"][0])?>"><?=$GLOBALS["site_settings"][0]?></a></li>
-                    <li><i style="color: #767676; margin-right: 10px;" class="fas fa-envelope"></i><a href="mailto:<?=$GLOBALS["site_settings"][3]?>"><?=$GLOBALS["site_settings"][3]?></a></li>
+                <ul>
+                    <li><i style="color: #767676;" class="fas fa-map-marker"></i><?=$GLOBALS["site_settings"][1]?></li>
+                    <li><i style="color: #767676;" class="fas fa-phone"></i><a href="tel:<?=str_replace(' ','',$GLOBALS["site_settings"][0])?>"><?=$GLOBALS["site_settings"][0]?></a></li>
+                    <li><i style="color: #767676;" class="fas fa-envelope"></i><a href="mailto:<?=$GLOBALS["site_settings"][3]?>"><?=$GLOBALS["site_settings"][3]?></a></li>
                 </ul>
                 <hr>
                 <h3>Horario</h3>

@@ -4,11 +4,14 @@
             <div class="row">
                 <div class="col-sm-4 col-md-4 item">
                     <ul>
-                        <li><a href="privacidad.php">Política de privacidad</a></li>
-                        <li><a href="legal.php">Aviso legal</a></li>
+                        <li><a href="privacidad.php"><i class="fas fa-user-secret" style="margin-right: 5px;"></i>Política de privacidad</a></li>
+                        <li><a href="legal.php"><i class="fas fa-balance-scale" style="margin-right: 5px;"></i>Aviso legal</a></li>
                         <?php
                             if (!isset($_SESSION['user'])) {
-                                echo '<button style="margin-top: 10px;" onclick="window.location.href = &apos;login.php&apos;" type="button" class="btn btn-outline-light">Iniciar sesión</button>';
+                                echo '<li><a href="login.php"><i class="fas fa-sign-in-alt" style="margin-right: 5px;"></i>Iniciar sesión</a></li>';
+                            } else {
+                                echo '<li><a href="dashboard?page=start"><i class="fas fa-cog" style="margin-right: 5px;"></i>Configuración</a></li>';
+                                echo '<li><a href="scripts/logout.php"><i class="fas fa-sign-out-alt" style="margin-right: 5px;"></i>Cerrar sesión</a></li>';
                             }
                         ?>
                     </ul>

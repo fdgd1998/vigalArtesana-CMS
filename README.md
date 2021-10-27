@@ -13,6 +13,7 @@ Features:
 - Fully featured site control panel.
 - Encryption of sensible data stored in the database.
 - Gallery system organized by categories.
+- Blog system.(*)
 - Customizable company info.(*)
 - In-site contact form.(*)
 - Search Engine Optimization.(*)

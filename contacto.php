@@ -28,7 +28,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacto - ViGal Artesana</title>
+    <title>Contacta con nosotros - ViGal Artesana</title>
     <link rel="stylesheet" href="./includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="./includes/css/footer.css">
     <link rel="stylesheet" href="./includes/css/Navigation-Clean.css">

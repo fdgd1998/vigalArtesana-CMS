@@ -2,7 +2,7 @@
 <footer>
     <div class="container">
         <div class="row">
-            <div class="col-12 col-sm-5 col-md-4 footer-links">
+            <div class="col-12 col-sm-5 col-md-3 footer-links">
                 <ul>
                     <li><a href="privacidad.php"><i class="fas fa-user-secret" style="margin-right: 5px;"></i>Política de privacidad</a></li>
                     <li><a href="legal.php"><i class="fas fa-balance-scale" style="margin-right: 5px;"></i>Aviso legal</a></li>
@@ -16,7 +16,7 @@
                     ?>
                 </ul>
             </div>
-            <div class="col-12 col-sm-7 col-md-4">
+            <div class="col-12 col-sm-7 col-md-6">
                 <h3>Contacto</h3>
                 <ul>
                     <li style="color: rgb(240,249,255);"><i class="fas fa-mobile-alt" style="padding-right: 5px;"></i><label id="telephone"><?=$GLOBALS["site_settings"][0]?></label></li>
@@ -24,7 +24,7 @@
                     <li style="color: rgb(240,249,255);"><i class="fas fa-location-arrow" style="padding-right: 5px;"></i><label id="address"><?=$GLOBALS["site_settings"][1]?></label></li>
                 </ul>
             </div>
-            <div class="col-12 col-sm-12 col-md-4 web-author">
+            <div class="col-12 col-sm-12 col-md-3 web-author">
                 <ul>
                     <li>Todos los derechos reservados © <?=date('Y')?></li>
                     <li>Sitio web desarrollado por Francisco Gálvez</li>

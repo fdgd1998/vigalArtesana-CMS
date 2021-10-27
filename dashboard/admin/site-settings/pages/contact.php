@@ -23,17 +23,13 @@
     $site_settings[8] = json_decode($site_settings[8], true);
     $conn->close();
 ?>
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <h2 class="text-left">Opciones de contacto y ubicación</h2>
-        </div>
-    </div>
+<div class="container settings-container">
+    <h2 class="title">Opciones de contacto y ubicación</h2>
     <form style="margin-bottom: 20px;">
         <div class="form-row">
             <div class="col">
-                <h2 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;"><i style="margin-right: 10px;" class="far fa-envelope"></i>Email y teléfono</h2>
-                <p>Actualiza el email y el teléfono de contacto.</p>
+                <h3 class="title"><i class="far fa-envelope"></i>Email y teléfono</h3>
+                <p class="title-description">Actualiza el email y el teléfono de contacto.</p>
             </div>
         </div>
         <div class="form-row">
@@ -61,15 +57,15 @@
             </div>
         </div>
         <div class="form-row text-right">
-            <div class="col"><button id="submit_contact_data" class="btn btn-success" type="button">Guardar</button></div>
+            <div class="col"><button id="submit_contact_data" class="btn my-button" type="button">Guardar</button></div>
         </div>
     </form>
     <hr>
     <form style="margin-bottom: 20px;">
         <div class="form-row">
             <div class="col">
-                <h2 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;"><i style="margin-right: 10px;" class="far fa-comment-alt"></i>Redes sociales</h2>
-                <p>Si configuras redes sociales, los enlaces aparecerán en la cabecera del sitio web.</p>
+                <h3 class="title"><i class="far fa-comment-alt"></i>Redes sociales</h3>
+                <p class="title-description">Si configuras redes sociales, los enlaces aparecerán en la cabecera del sitio web.</p>
             </div>
         </div>
         <div class="form-row">
@@ -113,7 +109,7 @@
         </div>
         <div class="form-row text-right">
             <div class="col">
-                <button id="submit_social" class="btn btn-success" type="button">Guardar</button>
+                <button id="submit_social" class="btn my-button" type="button">Guardar</button>
             </div>
         </div>
     </form>
@@ -121,8 +117,8 @@
     <form style="margin-bottom: 20px;">
         <div class="form-row">
             <div class="col">
-                <h2 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;"><i style="margin-right: 10px;" class="far fa-map"></i>Google Maps</h2>
-                <p>En la página de contacto se muestra un mapa con la ubicación que especifiques. Copia aquí abajo el enlace proporcionado por Google Maps del elemento <strong>iframe</strong>.</p>
+                <h3 class="title"><i class="far fa-map"></i>Google Maps</h3>
+                <p class="title-description">En la página de contacto se muestra un mapa con la ubicación que especifiques. Copia aquí abajo el enlace proporcionado por Google Maps del elemento <strong>iframe</strong>.</p>
             </div>
         </div>
         <div class="form-row" style="margin-bottom: 15px;">
@@ -132,15 +128,15 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="col text-right"><button id="submit_map_link" class="btn btn-success" type="button">Guardar</button></div>
+            <div class="col text-right"><button id="submit_map_link" class="btn my-button" type="button">Guardar</button></div>
         </div>
     </form>
     <hr>
     <form style="margin-bottom: 20px;">
         <div class="form-row">
             <div class="col">
-                <h2 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;"><i style="margin-right: 10px;" class="far fa-calendar-alt"></i>Horario</h2>
-                <p>Establece un horario por cada día de la semana. Formato recomendado: <strong>hh:mm - hh:mm | hh:mm - hh:mm</strong>.</p>
+                <h3 class="title"><i class="far fa-calendar-alt"></i>Horario</h3>
+                <p class="title-description">Establece un horario por cada día de la semana. Formato recomendado: <strong>hh:mm - hh:mm | hh:mm - hh:mm</strong>.</p>
             </div>
         </div>
         <div class="form-row" style="margin-bottom: 15px;">
@@ -212,7 +208,7 @@
         </div>
         <div class="form-row">
             <div class="col text-right">
-                <button id="submit_opening_hours" class="btn btn-success" type="button">Guardar</button>
+                <button id="submit_opening_hours" class="btn my-button" type="button">Guardar</button>
             </div>
         </div>
     </form>

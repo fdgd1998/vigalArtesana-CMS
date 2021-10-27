@@ -4,8 +4,9 @@
   --footer-main-color: #330033;
   --body-background-color:  #f0f0f0;
   --navbar-text-color: black ;
-  --button-main-color:  #ff6666;
-  --button-hover-bg-color:  #ffb3b3;
+  --title-color:  #ff6666;
+  --button-main-color: #ff9933;
+  --button-hover-bg-color:  #ffb366;
   --buton-hover-text-color: white;
   --button-text-color: white;
 }
@@ -16,15 +17,15 @@
   border: 1px solid var(--button-main-color) !important;
 }
 
-.my-button:hover {
+.my-button:not([disabled]):hover {
   background-color: var(--button-hover-bg-color) !important;
   border: 1px solid var(--button-hover-bg-color) !important;
 }
 
-.my-button:active, .my-button:focus {
+.my-button:not([disabled]):active:focus {
   background-color: var(--button-hover-bg-color) !important;
   outline: none !important;
-  box-shadow: none;
+  box-shadow: none !important;
 }
 
 .navbar-brand {
@@ -35,13 +36,21 @@
   font-size: 30px;
 }
 
-.navbar {
-  color: var(--navbar-text-color) !important;
+h1.maintenance-title {
+  font-family: 'Great Vibes';
+  letter-spacing: 2px; 
+  padding-right: 15px;  
+  font-weight: lighter !important; 
+  font-size: 50px;
+  text-align: center;
 }
 
-.content {
-  margin-top:60px;
-  margin-bottom:60px;
+.maintenance {
+  margin-top: 10%;
+}
+
+.navbar {
+  color: var(--navbar-text-color) !important;
 }
 
 .services {
@@ -51,6 +60,7 @@
 
 body {
   background-color: var(--body-background-color);
+  font-size: 1.03em;
   height: 100vh;
   min-height: 100vh;
   display:flex; 
@@ -150,13 +160,8 @@ a.instagram:hover {
     transition: background-color 200ms linear !important;
 }
 
-.post_img {
-  height:200px !important;
-  object-fit: cover !important;
-}
-
 li[class~="active"]>a {
-  background-color: var(--button-main-color) !important;
+  background-color: var(--title-color) !important;
   border: 1px solid var(--button-hover-bg-color) !important;
 }
 
@@ -188,7 +193,7 @@ li > i {
 
 @media (min-width: 991px){
   h1.title {
-    color: var(--button-main-color);
+    color: var(--title-color);
     font-size: 50px !important;
     text-align: left !important;
     margin-bottom: 30px !important;
@@ -196,7 +201,7 @@ li > i {
   }
   
   h2.title {
-    color: var(--button-main-color);
+    color: var(--title-color);
     font-size: 35px !important;
     text-align: left !important;
     margin-bottom: 20px !important;
@@ -204,7 +209,7 @@ li > i {
   }
 
   h3.title {
-    color: var(--button-main-color);
+    color: var(--title-color);
     font-size: 25px !important;
     text-align: left !important;
     margin-top: 20px !important;
@@ -222,7 +227,6 @@ li > i {
     font-size: 17px;
     margin-bottom: 5px !important;
     display: block;
-    text-align: left !important;
   }
   
   .contact-data:hover {
@@ -238,11 +242,16 @@ li > i {
   .timetable {
     text-align: left !important;
   }
+
+  .content {
+    margin-top:90px;
+    margin-bottom:90px;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 991px){
   h1.title {
-    color: var(--button-main-color);
+    color: var(--title-color);
     font-size: 40px !important;
     text-align: left;
     margin-bottom: 20px !important;
@@ -250,7 +259,7 @@ li > i {
   }
   
   h2.title {
-    color: var(--button-main-color);
+    color: var(--title-color);
     font-size: 30px !important;
     text-align: left;
     margin-bottom: 20px;
@@ -258,7 +267,7 @@ li > i {
   }
 
   h3.title {
-    color: var(--button-main-color);
+    color: var(--title-color);
     font-size: 20px !important;
     text-align: left !important;
     margin-top: 20px !important;
@@ -290,11 +299,16 @@ li > i {
   .timetable {
     text-align: left !important;
   }
+
+  .content {
+    margin-top:90px;
+    margin-bottom:90px;
+  }
 }
 
 @media (min-width: 576px) and (max-width: 768px){
   h1.title {
-    color: var(--button-main-color);
+    color: var(--title-color);
     font-size: 40px !important;
     text-align: center;
     margin-bottom: 30px !important;
@@ -302,15 +316,15 @@ li > i {
   }
   
   h2.title {
-    color: var(--button-main-color);
-    font-size: 40px !important;
+    color: var(--title-color);
+    font-size: 30px !important;
     text-align: center;
     margin-bottom: 20px;
     margin-top: 30px;
   }
 
   h3.title {
-    color: var(--button-main-color);
+    color: var(--title-color);
     font-size: 20px !important;
     text-align: left !important;
     margin-top: 20px !important;
@@ -338,17 +352,29 @@ li > i {
 
   .title-description {
     text-align: center;
-    margin-bottom: 30px;
   }
 
   .timetable {
     text-align: center;
   }
+
+  .button-group {
+    text-align: center !important;
+  }
+
+  .button-group > button {
+    margin-bottom: 5px !important;
+  }
+
+  .content {
+    margin-top:50px;
+    margin-bottom:50px;
+  }
 }
 
 @media (max-width: 576px){
   h1.title {
-    color: var(--button-main-color);
+    color: var(--title-color);
     font-size: 30px !important;
     text-align: center;
     margin-bottom: 20px !important;
@@ -356,7 +382,7 @@ li > i {
   }
   
   h2.title {
-    color: var(--button-main-color) !important;
+    color: var(--title-color) !important;
     font-size: 30px !important;
     text-align: center !important;
     margin-bottom: 20px !important;
@@ -364,7 +390,7 @@ li > i {
   }
 
   h3.title {
-    color: var(--button-main-color);
+    color: var(--title-color);
     font-size: 20px !important;
     text-align: left !important;
     margin-top: 20px !important;
@@ -399,6 +425,19 @@ li > i {
   .timetable {
     text-align: center;
   }
+
+  .button-group {
+    text-align: center !important;
+  }
+
+  .button-group > button {
+    margin-bottom: 5px !important;
+  }
+
+  .content {
+    margin-top:60px;
+    margin-bottom:60px;
+  }
 }
 
 a.contact-data > i{
@@ -414,4 +453,24 @@ a.contact-data > i{
       -ms-flex-direction: column;
           flex-direction: column;
   min-height: 100%;
+}
+
+h3.title > i {
+  margin-right: 10px;
+}
+
+.settings-container {
+  margin-top: 30px;
+}
+
+a > i, button > i {
+  margin-right: 5px !important;
+}
+
+.i-no-margin {
+  margin-right: 0 !important;
+}
+
+footer {
+  margin-top: 100px;
 }

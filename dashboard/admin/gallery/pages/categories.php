@@ -59,7 +59,7 @@
         </div>
         <div id="modal-footer1" class="modal-footer">
           <button id="cancel-cat-create" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-          <button id="cat-create" type="button" disabled class="btn btn-success">Crear</button>
+          <button id="cat-create" type="button" disabled class="btn my-button">Crear</button>
         </div>
       </div>
     </div>
@@ -80,7 +80,7 @@
         </div>
         <div id="modal-footer1" class="modal-footer">
           <button id="cancel-cat-delete" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-          <button id="cat-delete" type="button" class="btn btn-success">Eliminar</button>
+          <button id="cat-delete" type="button" class="btn my-button">Eliminar</button>
         </div>
       </div>
     </div>
@@ -119,7 +119,7 @@
             <label>Nueva imagen de fondo: </label>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
-                <span class="input-group-text"><icon class='icon-cloud-upload'></icon></span>
+                <span class="input-group-text"><i class='fas fa-upload'></i>/span>
               </div>
               <div class="custom-file">
                 <input type="file" class="custom-file-input" id="update-new-cat-image" aria-describedby="inputGroupFileAddon01">
@@ -136,7 +136,7 @@
         </div>
         <div id="modal-footer1" class="modal-footer">
           <button id="cancel-cat-edit" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-          <button disabled id="cat-edit" type="button" class="btn btn-success">Editar</button>
+          <button disabled id="cat-edit" type="button" class="btn my-button">Editar</button>
         </div>
       </div>
     </div>
@@ -157,18 +157,14 @@
         </div>
         <div id="modal-footer1" class="modal-footer">
           <button id="cancel-cat-statuschange" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-          <button id="cat-statuschange" type="button" class="btn btn-success">Aceptar</button>
+          <button id="cat-statuschange" type="button" class="btn my-button">Aceptar</button>
         </div>
       </div>
     </div>
   </div>
-<div class="container">
-<div class="row">
-        <div class="col">
-            <h1 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;">Categorías</h1>
-        </div>
-    </div>
-    <button type="button" id="create-cat" class="btn btn-outline-success" style="margin-bottom: 15px;"><i class="far fa-plus-square" style="padding-right:5px;"></i>Crear categoría</button>
+<div class="container settings-container">
+    <h2 class="title">Categorías</h2>
+    <button type="button" id="create-cat" class="btn my-button" style="margin-bottom: 15px;"><i class="far fa-plus-square" style="padding-right:5px;"></i>Crear categoría</button>
 
 <div class="input-group mb-6" style="width: 300px; margin-bottom: 20px;">
       <div class="input-group-prepend">

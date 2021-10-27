@@ -85,9 +85,9 @@
   </div>
 </div>
 
-<div class="container">
-  <h1 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;">Galería</h1>
-  <button type="button" id="upload-images" class="btn btn-outline-success" style="margin-bottom: 15px;"><i class="fas fa-upload" style="padding-right:5px;"></i>Subir imágenes...</button>
+<div class="container settings-container">
+  <h2 class="title">Galería</h1>
+  <button type="button" id="upload-images" class="btn my-button" style="margin-bottom: 15px;"><i class="fas fa-upload"></i>Subir imágenes...</button>
   <div class="input-group" style="margin-bottom: 20px;">
     <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">Ordenar</span>
@@ -143,13 +143,11 @@
         </select>
       </div>
   </form>
-  <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" style="margin-bottom: 20px;">
+  <div class="container gallery-manage row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" style="margin-bottom: 20px;">
     <?php foreach ($results as $element): ?>
-        <div class='animated photos col-sm-6 col-md-4 col-lg-3 item' style='margin-bottom: 30px;'>
-            <a data-lightbox='photos'>
-                <div class='wrap'>
-                    <img class='img-fluid photos post_img' src='../uploads/images/<?=$element[1]?>'/>
-                </div>
+        <div class='col-sm-6 col-md-4 col-lg-3' style='margin-bottom: 30px;'>
+            <a class='gallery-item animated'>
+              <img id="<?=$element[1]?>" class='photos img-fluid' src='../uploads/images/<?=$element[1]?>'/>
             </a>
         </div>
     <?php endforeach; ?>

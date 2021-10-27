@@ -7,7 +7,7 @@
         exit();
     }
 
-    require_once '../../../modules/connection.php';
+    require_once '../../../scripts/connection.php';
 
     if ($_POST) {
         try {

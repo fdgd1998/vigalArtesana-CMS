@@ -86,6 +86,7 @@
     <link rel="stylesheet" href="./includes/css/styles.css">
     <link rel="stylesheet" href="./includes/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="./includes/css/galeria.css">
+    <link rel="stylesheet" href="./includes/css/simple-lightbox.css?v2.8.0">
     <link href="http://fonts.cdnfonts.com/css/gotham" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Great Vibes' rel='stylesheet'>
 </head>
@@ -101,10 +102,10 @@
                 <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" style="margin-bottom: 20px;">
                     <?php foreach ($categories as $element): ?>
                         <div class='animated category col-sm-6 col-md-4 col-lg-3 item' style='margin-bottom: 30px;'>
-                            <a data-lightbox='photos' href='<?=$_SERVER['PHP_SELF']."?category=".$element[0]?>'>
-                                <div class='wrap wrap-category'>
+                            <a href='<?=$_SERVER['PHP_SELF']."?category=".$element[0]?>'>
+                                <div class='wrap-category'>
                                     <label class='category-title'><?=$element[1]?></label>
-                                    <img class='img-fluid category post_img' src='/uploads/categories/<?=$element[2]?>'/>
+                                    <img class='img-fluid category photos' src='/uploads/categories/<?=$element[2]?>'/>
                                 </div>
                             </a>
                         </div>
@@ -112,8 +113,8 @@
                 </div>   
             <?php else: ?>
                 <div class="intro">
-                    <h1 class="title"><a href="galeria.php"><i class="fas fa-arrow-left" style="margin-right: 20px;"></i></a><?=$category_name?></h1>
-                    <p class="title-description">Pulsa sobre las imágenes para verlas a tamaño completo. Para volver a ver las categorías, pincha sobre la flecha a la izquierda del nombre de la categoría.</p>
+                    <h1 class="title"><a href="galeria.php"><i class="fas fa-arrow-left" style="margin-right: 20px !important;"></i></a><?=$category_name?></h1>
+                    <p class="title-description">Pincha sobre las imágenes para verlas a tamaño completo. Para volver a la página anterior, pincha sobre la flecha a la izquierda del nombre de la categoría.</p>
                 </div>
                 <form action="?category=<?=$_GET['category']?>" method="get">
                     <div class="input-group mb-3" style="width: 240px; padding-bottom: 20px;">
@@ -132,17 +133,16 @@
                         <input hidden name="category" value="<?=$_GET['category']?>">
                     </div>
                 </form>
-                <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4">
-                    <?php foreach ($results as $element): ?>
-                        <div class='animated photos col-sm-6 col-md-4 col-lg-3 item' style='margin-bottom: 30px;'>
-                            <a data-lightbox='photos'>
-                                <div style="text-align: center;" class='wrap'>
-                                    <img id="image-<?=$element[0]?>" class='img-fluid photos post_img' src='./uploads/images/<?=$element[1]?>'/>
-                                </div>
-                            </a>
-                        </div>
-                    <?php endforeach; ?>
-                </div>   
+                <div class="galeria">
+                    <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4"> 
+                        <?php foreach ($results as $element): ?>    
+                        <a class="animated wrap" href="./uploads/images/<?=$element[1]?>">
+                            <img id="image-<?=$element[0]?>" class='img-fluid photos' src="./uploads/images/<?=$element[1]?>" alt=""/>
+                        </a>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>   
             <?php endif; ?>
         </div>
 
@@ -189,44 +189,18 @@
     <?php
         include './includes/footer.php';
     ?>
-    <div  class="modal fade" id="modal-galeria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg modal-xl">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <!-- Editar desde aqui -->
-                    <div id="galeria" class="carousel slide carousel-fade" data-interval="false" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <?php $i = 0; foreach ($results as $element):?>
-                            <li id="indicator-<?=$element[0]?>" data-target="#galeria" data-slide-to="<?=$i?>" class="carousel-indicator <?php if($i==0) echo 'active'?>"></li>
-                            <?php $i++; ?>
-                            <?php endforeach; ?>
-                        </ol>
-                        <div class="carousel-inner">
-                            <?php $i = 0; foreach ($results as $element): ?>
-                            <div id="item-<?=$element[0]?>" class="carousel-item <?php if($i==0) echo 'active' ?>">
-                                <img src="./uploads/images/<?=$element[1]?>" class="d-block w-100">
-                            </div>
-                            <?php $i++; ?>
-                            <?php endforeach; ?>
-                        </div>
-                        <a class="carousel-control-prev" href="#galeria" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Anterior</span>
-                        </a>
-                        <a class="carousel-control-next" href="#galeria" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Siguiente</span>
-                        </a>
-                    </div>
-                    <!-- Hasta aqui -->
-                </div>
-            </div>
-        </div>
-    </div>
     <script src="./includes/js/jquery.min.js"></script>
     <script src="./includes/bootstrap/js/bootstrap.min.js"></script>
     <script src="./includes/js/animate-carousel-height-change.js"></script>
+    <script src="./includes/js/simple-lightbox.js?v2.8.0"></script>
     <script src="./includes/js/galeria.js"></script>
     <script src="./includes/js/header.js"></script>
+    <?php if (isset($_GET['category'])): ?>
+        <script>
+            (function() {
+            var $gallery = new SimpleLightbox('.galeria a', {});
+        })();
+        </script>
+    <?php endif; ?>
 </body>
 </html>

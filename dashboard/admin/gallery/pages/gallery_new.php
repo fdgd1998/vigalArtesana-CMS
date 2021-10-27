@@ -61,12 +61,8 @@
 </style>
 
 
-<div class="container">
-    <div class="row">
-        <div class="col" style="margin-bottom: -15px;">
-            <h1 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;">Subir imágenes</h1>
-        </div>
-    </div>
+<div class="container settings-container">
+    <h2 class="title">Subir imágenes</h2>
     <form style="margin-bottom: 20px;padding-top: 17px;" enctype="multipart/form-data">
         <div class="form-row" style="margin-top: 10px;">
             <label>Seleccionar ficheros (máximo <?=$edit ? 10-count($images):10?>).</label>
@@ -88,7 +84,7 @@
         <div class="form-row text-right" style="margin-top: 20px;">
             <div class="col">
                 <button id="cancel" class="btn btn-danger" type="button">Cancelar</button>
-                <button id="upload" disabled class="btn btn-success" type="button" style="margin-left: 5px;">Cargar</button>
+                <button id="upload" disabled class="btn my-button" type="button" style="margin-left: 5px;">Cargar</button>
             </div>
         </div>
     </form>

@@ -1,10 +1,13 @@
-function bsCarouselAnimHeight()
-{
-    $('.carousel').carousel({
-        interval: 5000
-    }).on('slide.bs.carousel', function (e)
-    {
-        var nextH = $(e.relatedTarget).height();
-        $(this).find('.active.item').parent().animate({ height: nextH }, 500);
-    });
-}
+// $(document).ready(function() {
+//     $(window).on("resize", function() {
+//         $('.carousel').find('.active').parent().animate({ 
+//             height: $(e.relatedTarget).height() }, 500);
+//     })
+//     $('.carousel').carousel({
+//         interval: 1000
+//     }).on('slide.bs.carousel', function (e)
+//     {
+//         $(this).find('.active').parent().animate({ 
+//             height: $(e.relatedTarget).height() }, 500);
+//     });
+// });

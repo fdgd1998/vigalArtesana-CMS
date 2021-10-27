@@ -52,27 +52,31 @@
         <div class="container content">
             <div class="title-description">
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                <button onclick="window.location.href = 'sobremi.php'" type="button" class="btn my-button">Lee más sobre nosotros</button>
-                <button onclick="window.location.href = 'galeria.php'" type="button" class="btn my-button">Ver galería</button>
+            </div>
+            <h2 class="title">Te recomendamos</h2>
+            <div class="button-group">
+                <button onclick="window.location.href = 'sobremi.php'" type="button" class="btn my-button">Leer más sobre nosotros</button>
+                <button onclick="window.location.href = 'galeria.php'" type="button" class="btn my-button">Ver la galería</button>
+                <button onclick="window.location.href = 'galeria.php'" type="button" class="btn my-button">Visitar nuestro blog</button>
             </div>
         </div>
-        <div class="container">
+        <div class="container content">
             <div class="row">
                 <div class="col-6">
-                    <h2 class="mb-3 text-left title">Servicios</h2>
+                    <h1 class="mb-3 text-left title">Servicios</h1>
                 </div>
                 <div class="col-6 text-right">
                     <a class="btn my-button mb-3 mr-1" href="#carousel-example" role="button" data-slide="prev">
-                        <i class="fa fa-arrow-left"></i>
+                        <i class="fa fa-arrow-left i-no-margin"></i>
                     </a>
-                    <a class="btn my-button mb-3 " href="#carousel-example" role="button" data-slide="next">
-                        <i class="fa fa-arrow-right"></i>
+                    <a class="btn my-button mb-3 mr-1" href="#carousel-example" role="button" data-slide="next">
+                        <i class="fa fa-arrow-right i-no-margin"></i>
                     </a>
                 </div>
                 <div class="col-12">
                     <div id="carousel-example" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner row w-100 mx-auto" role="listbox">
-                            <div class="carousel-item col-12 col-sm-6 col-md-6 col-lg-4 active">
+                            <div class="carousel-item col-12 col-sm-6 col-lg-4 active">
                                 <div class="card h-100">
                                     <img class="img-fluid img-services" alt="100%x280" src="https://images.unsplash.com/photo-1532777946373-b6783242f211?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=8ac55cf3a68785643998730839663129">
                                     <div class="card-body">

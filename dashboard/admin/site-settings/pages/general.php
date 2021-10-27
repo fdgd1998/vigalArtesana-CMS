@@ -22,17 +22,13 @@
     $site_settings[4] = json_decode($site_settings[4], true);
     $conn->close();
 ?>
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <h2 class="text-left"></i>Configuración general</h2>
-        </div>
-    </div>
+<div class="container settings-container">
+    <h2 class="title"></i>Configuración general</h2>
     <form style="margin-bottom: 20px;">
         <div class="form-row">
             <div class="col">
-                <h1 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;">Imagen de portada</h1>
-                <p>Establece una imagen de portada que se verá en la página principal.</p>
+                <h3 class="title"><i class="far fa-image"></i>Imagen de portada</h3>
+                <p class="title-description">Establece una imagen de portada que se verá en la página principal.</p>
             </div>
         </div>
         <div class="form-row">
@@ -56,14 +52,14 @@
         </div>
         </div>
         <div class="form-row text-right">
-            <div class="col"><button id="submit-index-image" disabled class="btn btn-success" type="button">Guardar</button></div>
+            <div class="col"><button id="submit-index-image" disabled class="btn my-button" type="button">Guardar</button></div>
         </div>
     </form>
     <form style="margin-bottom: 20px;">
         <div class="form-row">
             <div class="col">
-                <h1 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;">Descripción de la imagen de portada</h1>
-                <p>Establece una descripción que se mostrará sobre la imagen de la portada configurada en la opción de arriba.</p>
+                <h3 class="title">Descripción de la imagen de portada</h3>
+                <p class="title-description">Establece una descripción que se mostrará sobre la imagen de la portada configurada en la opción de arriba.</p>
             </div>
         </div>
         <div class="form-row">
@@ -77,14 +73,14 @@
             </div>
         </div>
         <div class="form-row text-right">
-            <div class="col"><button id="submit-index-image-description" class="btn btn-success" type="button">Guardar</button></div>
+            <div class="col"><button id="submit-index-image-description" class="btn my-button" type="button">Guardar</button></div>
         </div>
     </form>
     <form style="margin-bottom: 20px;">
         <div class="form-row">
             <div class="col">
-                <h1 class="text-left text-dark" style="margin-top: 20px;font-size: 24px;margin-bottom: 20px;color: black;">Texto resumen página de inicio</h1>
-                <p>Describe brevemente tu negocio.</p>
+                <h3 class="title">Texto resumen página de inicio</h3>
+                <p class="title-description">Describe brevemente tu negocio.</p>
             </div>
         </div>
         <div class="form-row">
@@ -98,7 +94,7 @@
             </div>
         </div>
         <div class="form-row text-right">
-            <div class="col"><button id="submit-index-image-description" class="btn btn-success" type="button">Guardar</button></div>
+            <div class="col"><button id="submit-index-image-description" class="btn my-button" type="button">Guardar</button></div>
         </div>
     </form>
 </div>

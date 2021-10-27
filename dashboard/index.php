@@ -15,16 +15,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Panel de control</title>
-    <link rel="stylesheet" href="../includes/fonts/ionicons.min.css">
+    <title>Panel de control - ViGal Artesana</title>
     <link rel="stylesheet" href="../includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../includes/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="../includes/css/galeria.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../includes/css/styles.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-light navbar-expand-lg navigation-clean" style="background-color: #F1F1F1;">
+    <nav class="nav-solid navbar navbar-expand-lg navigation-clean">
         <div class="container">
             <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
                 <span class="sr-only">Toggle navigation</span>
@@ -36,21 +36,26 @@
                     if ($_SESSION['account_type'] == 'admin' || $_SESSION['account_type'] == 'superuser') {
                         echo '
                         <li class="nav-item dropdown">
-                            <a data-toggle="dropdown" aria-expanded="false" class="dropdown-toggle nav-link" href="#">
+                            <a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">
                                 Configuración del sitio
                             </a>
-                            <div role="menu" class="dropdown-menu dropdown-menu-right">
+                            <div role="menu" class="dropdown-menu">
                                 <a role="presentation" class="dropdown-item" href="/dashboard?page=general-settings">
-                                    <i class="fas fa-cog" style="margin-right: 5px;"></i>
+                                    <i class="fas fa-cog"></i>
                                     Configuración general
                                 </a>
                                 <a role="presentation" class="dropdown-item" href="/dashboard?page=contact-settings">
-                                    <i class="fas fa-address-book" style="margin-right: 5px;"></i>
+                                    <i class="fas fa-address-book"></i>
                                     Opciones de contacto y ubicación
                                 </a>
                                 <a role="presentation" class="dropdown-item" href="/dashboard?page=services-settings">
-                                    <i class="fas fa-wrench" style="margin-right: 5px;"></i>
+                                    <i class="fas fa-wrench"></i>
                                     Servicios
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a role="presentation" class="dropdown-item" href="/dashboard?page=services-settings">
+                                    <i class="fas fa-code"></i>
+                                    Opciones avanzadas
                                 </a>
                             </div>
                         </li>
@@ -59,22 +64,26 @@
                 ?>
                 
                     <li class='nav-item dropdown'>
-                        <a data-toggle='dropdown' aria-expanded='false' class='dropdown-toggle nav-link' href='#'>
+                        <a data-toggle='dropdown' class='dropdown-toggle nav-link' href='#'>
                             Galería
                         </a>
-                        <div role='menu' class='dropdown-menu dropdown-menu-right'>
+                        <div role='menu' class='dropdown-menu'>
                             <a role='presentation' class='dropdown-item' href='/dashboard?page=gallery-new'>
-                                <i class='fas fa-upload' style='margin-right: 5px;'></i>
+                                <i class='fas fa-upload'></i>
                                 Subir imágenes
                             </a>
                             <a role='presentation' class='dropdown-item' href='/dashboard?page=manage-gallery'>
-                                <i class='fas fa-images' style='margin-right: 5px;'></i>
+                                <i class='fas fa-images'></i>
                                 Gestionar galería
                             </a>
+                            <div class="dropdown-divider"></div>
+                            <a role='presentation' class="dropdown-item" href="/dashboard?page=categories">
+                                <i class="fas fa-ellipsis-h"></i>
+                                Categorías
+                            </a>
+                        </div>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="/dashboard?page=categories">Categorías</a></li>
                     <li class="nav-item"><a class="nav-link" href="../scripts/logout.php">Cerrar sesión</a></li>
-                    
                 </ul>
                 <div style="display: block;">
                     <a class="nav-link" href="../">Volver a inicio</a>
@@ -128,7 +137,6 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 
     <script src="../includes/js/jquery.min.js"></script>
-    <script src="../includes/js/bs-init.js"></script>
     <script src="../includes/bootstrap/js/bootstrap.min.js"></script>
     <script src="/dashboard/admin/gallery/js/gallery_new.js"></script>
     <script src="./admin/gallery/js/gallery-manage.js"></script>
@@ -139,7 +147,7 @@
     <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
     <script src="admin/gallery/js/ajax.js"></script>
     <script src="admin/gallery/js/categories.js"></script>
-    <!-- <script src="includes/js/toast.js"></script> -->
+    <script src="../includes/js/popper.min.js"></script>
 
 
     <!-- jQuery Custom Scroller CDN -->

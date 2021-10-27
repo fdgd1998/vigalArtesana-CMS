@@ -8,7 +8,7 @@
         exit();
     }
 
-    if ($_POST) {
+    if (isset($_POST["filenames"])) {
         try {
             $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
 
@@ -17,14 +17,16 @@
                 exit();
             } else {
                 // getting filename and deleting it
-                $filenames = $_POST["filenames"];
+                $filenames = json_decode($_POST["filenames"], true);
+                echo var_dump($filenames);
                 $images = "";
                 for($i = 0; $i < count($filenames) - 1; $i++) {
                     $images .= "'".$filenames[$i]."',";
                 }
                 $images .= "'".$filenames[count($filenames) - 1]."'";
                 $stmt = "delete from gallery where filename in(".$images.")";
-                if ($conn->query($stmt) === TRUE) {
+                echo $stmt;
+                if ($conn->query($stmt) == TRUE) {
                     foreach($filenames as $id=>$image) {
                         unlink($_SERVER["DOCUMENT_ROOT"]."/uploads/images/".$image); // deleting the file
                     }

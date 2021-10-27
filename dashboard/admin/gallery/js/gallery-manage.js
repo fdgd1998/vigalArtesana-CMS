@@ -38,7 +38,7 @@ jQuery(function($) {
             
             filenames[i] = this.id;
         });
-        console.log(filenames);
+        console.log(JSON.stringify(filenames));
         $.ajax({
             url: location.origin+'/dashboard/admin/gallery/delete_images.php',
             method: 'post',

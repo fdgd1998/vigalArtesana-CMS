@@ -23,7 +23,7 @@
     $conn->close();
 ?>
 <div class="container settings-container">
-    <h2 class="title"></i>Configuración general</h2>
+    <h1 class="title"></i>Página de inicio</h1>
     <form style="margin-bottom: 20px;">
         <div class="form-row">
             <div class="col">

@@ -24,7 +24,7 @@
     $conn->close();
 ?>
 <div class="container settings-container">
-    <h2 class="title">Opciones de contacto y ubicación</h2>
+    <h1 class="title">Contacto y ubicación</h1>
     <form style="margin-bottom: 20px;">
         <div class="form-row">
             <div class="col">

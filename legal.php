@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="./includes/css/Navigation-Clean.css">
     <link rel="stylesheet" href="./includes/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="./includes/css/styles.css">
-    <link href="http://fonts.cdnfonts.com/css/gotham" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand" />    
     <link href='https://fonts.googleapis.com/css?family=Great Vibes' rel='stylesheet'>
 </head>
 

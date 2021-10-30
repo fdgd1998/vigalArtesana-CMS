@@ -16,7 +16,7 @@ jQuery(function($) {
                 dataType: 'text',
                 cache: false,
                 data: formData, // pass the input value to server
-                processData: false,  // tell jQuery not to process the data
+                processData: false,  // tell not to process the data
                 contentType: false,   // tell jQuery not to set contentType
                 success: function(response) { // if the http response code is 200
                     // alert(response);
@@ -95,7 +95,7 @@ jQuery(function($) {
             var fileName = $(this).val().substring(12);
             console.log(fileName);
             $('#update-new-cat-image-name').html(fileName);
-            readURL(this, "#update-new-cat-image-preview");
+            readURL(this, $("#update-new-cat-image-preview")[0]);
             $("#update-new-cat-image-preview-div").prop("hidden", false);  
         } else {
             $('#cat-edit').attr('disabled', 'disabled');
@@ -107,33 +107,20 @@ jQuery(function($) {
 
     // Getting current category image URL and setting a preview.
     $("#new-cat-image").on("change", function(e) {
-        if ($(this).val() != "") {
+        if ($(this).prop("files")[0]) {
             var fileName = $(this).val().substring(12);
             console.log(fileName.substring(12));
             $('#new-cat-image-name').html(fileName);
+            $('#new-cat-image-preview-div').removeAttr("hidden");
             readURL(this, "#new-cat-image-preview");
             $("#new-cat-image-preview-div").prop("hidden", false);
         } else {
-            $('#cat-create').attr('disabled', 'disabled');
+            // $('#cat-create').attr('disabled', 'disabled');
+            $('#new-cat-image-preview-div').attr("hidden","true");
+            $('#new-cat-image-name').html("Seleccionar imagen...");
         }
         enableCreateFormBtn();
     });
-
-    // Getting URL of the image stored in the server.
-    function readURL(input, selector) {
-        console.log(input);
-        console.log(selector);
-        console.log(input.files[0]);
-        if (input.files && input.files[0]) {
-          var reader = new FileReader();
-          
-          reader.onload = function(e) {
-            $(selector).attr('src', e.target.result);
-          }
-          
-          reader.readAsDataURL(input.files[0]); // convert to base64 string
-        }
-    }
 
     // Changing name of the category.
     $("#change-edit-name-chkbx").on("change", function(e){
@@ -154,7 +141,7 @@ jQuery(function($) {
                         console.log('category exists.');
                         $('#cat-edit').prop("disabled", true);
                     }
-                })
+                });
             }
         } else {
             $("#edit-change-name").addClass("disabled-form");

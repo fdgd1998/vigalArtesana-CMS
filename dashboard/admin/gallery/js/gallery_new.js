@@ -22,8 +22,6 @@ jQuery(function($){
     // Checking content for post creation.
     $("#upload-files").on("change", function(e){
 
-        //Disable upload button if input file is empty, or enabling if files are selected.
-        $("#upload").prop("disabled", $(this).prop("files").length === 0?true:false);
         var files = $("#upload-files").prop("files");
 
         // AJAX call to get categories stored in database
@@ -35,7 +33,6 @@ jQuery(function($){
             data: 'id=testdata',
             cache: false,
             success: function(result) {
-                $("#upload").removeAttr("disabled");
                 $.each(result, function(key, value) {
                     categories[key] = value;
                 });
@@ -46,20 +43,22 @@ jQuery(function($){
         $("#images-preview").empty();
 
         if (files.length > 0) { // Checking if there's selected files
-            if (files.length <= maxFilesToUpload) { // Checking if there's less than 10 files selected.
+            if (files.length <= 10) { // Checking if there's less than 10 files selected.
                 imagesPreview(this); // Load images preview
                 $("#upload-files-name").html(files.length+" fichero(s) seleccionado(s)."); // Updating input text.
+                $("#uploadbtn").removeAttr("disabled","disabled");
             } else {
                 // If more than 10 files are selected, a warning is shown and form is resetted.
                 alert("El número máximo de ficheros permitidos es "+maxFilesToUpload+". Revisa tu selección e inténtalo de nuevo.");
                 $("#upload-files").val("");
                 $("#upload-files-name").html("Subir fichero(s)...");
-                $("#file-list").empty();
+                $("#uploadbtn").attr("disabled","disabled");
             }
         } else {
             // If no files are selected, reset form.
             $("#file-list").empty();
             $("#upload-files-name").html("Subir fichero(s)...");
+            $("#uploadbtn").attr("disabled","disabled");
         }
     });
 
@@ -92,7 +91,7 @@ jQuery(function($){
     };
 
     // Starting database data insertion and file upload
-    $("#upload").on("click", function(e){
+    $("#uploadbtn").on("click", function(e){
         // Getting data to sent and appending it to the form data.
         var image_categories = [];
         var formData = new FormData();

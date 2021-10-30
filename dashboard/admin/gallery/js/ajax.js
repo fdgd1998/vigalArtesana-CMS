@@ -4,8 +4,9 @@ editing_catname = '';
 // Enable submit button of the create form.
 function enableCreateFormBtn() {
     var total_inputs = 0;
-    if ($('#new-cat-name').val() != "") total_inputs++;
+    if ($('#new-cat-name').val() != "" && $("#new-cat-name").css('background-color') != 'rgb(255, 150, 150)') total_inputs++;
     if ($('#new-cat-image').val() != "") total_inputs++;
+    console.log($("#new-cat-name").css('background-color'));
     if (total_inputs == 2) $('#cat-create').removeAttr('disabled');
     else $('#cat-create').attr('disabled', 'disabled');
 };
@@ -16,10 +17,10 @@ function enableEditFormBtn() {
         $('#cat-edit').prop("disabled", true);
     }
     if ($("#change-edit-image-chkbx").is(":checked")) {
-        if ($("#update-new-cat-image-name").text() != "Escoger fichero...") {
+        if ($("#update-new-cat-image").prop("files")[0]) {
             $('#cat-edit').prop("disabled", false);
             if ($("#change-edit-name-chkbx").is(":checked")) {
-                if ($("#update-cat-name").css('background-color') == 'rgb(255, 150, 150)' || $("#update-cat-name").css('background-color') == 'rgb(255, 255, 255)') {
+                if ($("#update-cat-name").css('background-color') == 'rgb(255, 150, 150)' || $.trim($("#update-cat-name").val()) == "") {
                     $('#cat-edit').prop("disabled", true);
                 }
             }
@@ -28,7 +29,7 @@ function enableEditFormBtn() {
         }
     } else if ($("#change-edit-image-chkbx").is(":not(:checked)")) {
         if ($("#change-edit-name-chkbx").is(":checked")) {
-            if ($("#update-cat-name").css('background-color') == 'rgb(255, 150, 150)' || $("#update-cat-name").css('background-color') == 'rgb(255, 255, 255)') {
+            if ($("#update-cat-name").css('background-color') == 'rgb(255, 150, 150)' || $.trim($("#update-cat-name").val()) == "") {
                 $('#cat-edit').prop("disabled", true);
             } else {
                 $('#cat-edit').prop("disabled", false);
@@ -120,55 +121,56 @@ jQuery(function($) {
     });
 
     $('#new-cat-name').on('keyup', function(e) {
-        if ($(this).val() != "") {
+        if ($.trim($(this).val()) != "") {
             // perform an ajax call
             $.ajax({
                 url: 'admin/gallery/check_category_name.php', // this is the target
                 method: 'post', // method
-                data: {cat_name: $(this).val()}, // pass the input value to server
+                data: {cat_name: $.trim($(this).val())}, // pass the input value to server
                 success: function(r) { // if the http response code is 200
                     $("#new-cat-name").css('background-color', '#A7F0A9');
-                    console.log('category does not exist.');
+                    enableCreateFormBtn();
+                    // console.log('category does not exist.');
                 },
                 error: function(r) { // if the http response code is other than 200
                     $("#new-cat-name").css('background-color', '#FF9696');
+                    enableCreateFormBtn();
                     console.log('category exists.');
-                    $('#cat-create').attr('disabled', 'disabled');
+                    // $('#cat-create').attr('disabled', 'disabled');
                 }
             });
         }
-        enableCreateFormBtn();
+        
     });
 
     
     $('#update-cat-name').on('keyup', function(e) {
-        if ($(this).val() != "") {
+        if ($.trim($(this).val()) != "") {
             // perform an ajax call
             $.ajax({
                 url: 'admin/gallery/check_category_name.php', // this is the target
                 method: 'post', // method
-                data: {cat_name: $(this).val()}, // pass the input value to server
+                data: {cat_name: $.trim($(this).val())}, // pass the input value to server
                 success: function(r) { // if the http response code is 200
                     $("#update-cat-name").css('background-color', '#A7F0A9');
+                    enableEditFormBtn();
                     console.log('category does not exist.');
                     if ($("#change-edit-image-chkbx").is(":checked")) {
-                        if ($("#update-new-cat-image-name").text() == "Escoger fichero...") {
-                            $('#cat-edit').prop("disabled", true);
+                        if ($("#update-new-cat-image-name").text() == "Seleccionar imagen...") {
+                            // $('#cat-edit').prop("disabled", true);
                         }
-                    } else {
-                        $('#cat-edit').prop("disabled", false);
                     }
                 },
                 error: function(r) { // if the http response code is other than 200
                     $("#update-cat-name").css('background-color', '#FF9696');
                     console.log('category exists.');
-                    $('#cat-edit').prop("disabled", true);
+                    enableEditFormBtn();
+                    // $('#cat-edit').prop("disabled", true);
                 }
             })
         } else {
             $("#update-cat-name").css('background-color', '#FFF');
         }
-        enableEditFormBtn();
     });
 
     $("#cat-statuschange").on('click', function(e) {

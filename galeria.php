@@ -87,8 +87,9 @@
     <link rel="stylesheet" href="./includes/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="./includes/css/galeria.css">
     <link rel="stylesheet" href="./includes/css/simple-lightbox.css?v2.8.0">
-    <link href="http://fonts.cdnfonts.com/css/gotham" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand" />    
     <link href='https://fonts.googleapis.com/css?family=Great Vibes' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 
 <body>
@@ -97,9 +98,9 @@
     ?>
         <div class="container content">
             <?php if (!isset($_GET['category'])): ?>
-                <h1 class="title">Galería</h1>
-                <p class="title-description">Selecciona una categoría pinchando sobre una imagen.</p>
-                <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" style="margin-bottom: 20px;">
+                <h1 class="title wow animate__animated animate__fadeInUp">Galería</h1>
+                <p class="title-description wow animate__animated animate__fadeInUp">Selecciona una categoría pinchando sobre una imagen.</p>
+                <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 wow animate__animated animate__fadeIn" style="margin-bottom: 20px;">
                     <?php foreach ($categories as $element): ?>
                         <div class='animated category col-sm-6 col-md-4 col-lg-3 item' style='margin-bottom: 30px;'>
                             <a href='<?=$_SERVER['PHP_SELF']."?category=".$element[0]?>'>
@@ -113,10 +114,10 @@
                 </div>   
             <?php else: ?>
                 <div class="intro">
-                    <h1 class="title"><a href="galeria.php"><i class="fas fa-arrow-left" style="margin-right: 20px !important;"></i></a><?=$category_name?></h1>
-                    <p class="title-description">Pincha sobre las imágenes para verlas a tamaño completo. Para volver a la página anterior, pincha sobre la flecha a la izquierda del nombre de la categoría.</p>
+                    <h1 class="title wow animate__animated animate__fadeInUp"><a href="galeria.php"><i class="fas fa-arrow-left" style="margin-right: 20px !important;"></i></a><?=$category_name?></h1>
+                    <p class="title-description wow animate__animated animate__fadeInUp">Pincha sobre las imágenes para verlas a tamaño completo. Para volver a la página anterior, pincha sobre la flecha a la izquierda del nombre de la categoría.</p>
                 </div>
-                <form action="?category=<?=$_GET['category']?>" method="get">
+                <form action="?category=<?=$_GET['category']?>" method="get" class="wow animate__animated animate__fadeInUp">
                     <div class="input-group mb-3" style="width: 240px; padding-bottom: 20px;">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">Mostrar</span>
@@ -133,7 +134,7 @@
                         <input hidden name="category" value="<?=$_GET['category']?>">
                     </div>
                 </form>
-                <div class="galeria">
+                <div class="galeria wow animate__animated animate__fadeInUp">
                     <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4"> 
                         <?php foreach ($results as $element): ?>    
                         <a class="animated wrap" href="./uploads/images/<?=$element[1]?>">
@@ -195,6 +196,7 @@
     <script src="./includes/js/simple-lightbox.js?v2.8.0"></script>
     <script src="./includes/js/galeria.js"></script>
     <script src="./includes/js/header.js"></script>
+    <script src="./includes/js/wow-init.js"></script>
     <?php if (isset($_GET['category'])): ?>
         <script>
             (function() {

@@ -62,11 +62,10 @@
 
 
 <div class="container settings-container">
-    <h2 class="title">Subir imágenes</h2>
+    <h1 class="title">Subir imágenes</h1>
     <form style="margin-bottom: 20px;padding-top: 17px;" enctype="multipart/form-data">
         <div class="form-row" style="margin-top: 10px;">
-            <label>Seleccionar ficheros (máximo <?=$edit ? 10-count($images):10?>).</label>
-            <script>maxFilesToUpload = <?=$edit?10-count($images):10?></script>
+            <label>Seleccionar ficheros (máximo 10).</label>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
@@ -74,7 +73,7 @@
                     </span>
                 </div>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="upload-files" accept="image/*" multiple aria-describedby="inputGroupFileAddon01">
+                    <input type="file" class="custom-file-input" id="upload-files" accept=".jpg,.png" multiple aria-describedby="inputGroupFileAddon01">
                     <label id="upload-files-name" class="custom-file-label" for="upload-files" data-browse="Buscar...">Seleccionar fichero(s)...</label>
                 </div>
             </div>
@@ -84,7 +83,7 @@
         <div class="form-row text-right" style="margin-top: 20px;">
             <div class="col">
                 <button id="cancel" class="btn btn-danger" type="button">Cancelar</button>
-                <button id="upload" disabled class="btn my-button" type="button" style="margin-left: 5px;">Cargar</button>
+                <button id="uploadbtn" disabled class="btn my-button" type="button" style="margin-left: 5px;">Cargar</button>
             </div>
         </div>
     </form>

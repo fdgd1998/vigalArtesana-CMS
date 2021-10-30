@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="./includes/css/Login-Form-Clean.css">
     <link rel="stylesheet" href="./includes/css/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand" />    
+
 </head>
 
 <body style="background-color: rgb(241,247,252);">

@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="../includes/css/galeria.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="../includes/css/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand" />    
+
 </head>
 
 <body>
@@ -40,17 +42,24 @@
                                 Configuración del sitio
                             </a>
                             <div role="menu" class="dropdown-menu">
+                            <h6 class="dropdown-header">Opciones generales</h6>
                                 <a role="presentation" class="dropdown-item" href="/dashboard?page=general-settings">
                                     <i class="fas fa-cog"></i>
-                                    Configuración general
+                                    Página de inicio
                                 </a>
                                 <a role="presentation" class="dropdown-item" href="/dashboard?page=contact-settings">
                                     <i class="fas fa-address-book"></i>
-                                    Opciones de contacto y ubicación
+                                    Contacto y ubicación
                                 </a>
-                                <a role="presentation" class="dropdown-item" href="/dashboard?page=services-settings">
+                                <div class="dropdown-divider"></div>
+                                <h6 class="dropdown-header">Servicios</h6>
+                                <a role="presentation" class="dropdown-item" href="/dashboard?page=manage-services">
                                     <i class="fas fa-wrench"></i>
-                                    Servicios
+                                    Gestionar servicios
+                                </a>
+                                <a role="presentation" class="dropdown-item" href="/dashboard?page=new-service">
+                                    <i class="fas fa-plus-circle"></i>
+                                    Nuevo servicio
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a role="presentation" class="dropdown-item" href="/dashboard?page=services-settings">
@@ -83,10 +92,10 @@
                             </a>
                         </div>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="../scripts/logout.php">Cerrar sesión</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../">Volver a inicio</a></li>
                 </ul>
                 <div style="display: block;">
-                    <a class="nav-link" href="../">Volver a inicio</a>
+                    <a class="nav-link" href="../scripts/logout.php">Cerrar sesión</a>
                 <div>
             </div>
         </nav>
@@ -97,23 +106,14 @@
                 <?php
                     // reading GET variable and load corresponding page
                     switch($_GET['page']) {
-                        case 'list-users':
-                            include 'admin/users/pages/list_users.php';
-                            break;
-                        case 'create-user':
-                            include 'admin/users/pages/create_user.php';
+                        case 'manage-gallery':
+                            include 'admin/gallery/pages/manage_gallery.php';
                             break;
                         case 'gallery-new':
                             include 'admin/gallery/pages/gallery_new.php';
                             break;
-                        case 'manage-gallery':
-                            include 'admin/gallery/pages/manage_gallery.php';
-                            break;
                         case 'categories':
                             include 'admin/gallery/pages/categories.php';
-                            break;
-                        case 'profile':
-                            include 'profile.php';
                             break;
                         case 'general-settings':
                             include 'admin/site-settings/pages/general.php';
@@ -121,8 +121,11 @@
                         case 'contact-settings':
                             include 'admin/site-settings/pages/contact.php';
                             break;
-                        case 'services-settings':
+                        case 'manage-services':
                             include 'admin/site-settings/pages/services.php';
+                            break;
+                        case 'new-service':
+                            include 'admin/site-settings/pages/new_service.php';
                             break;
                         default:
                             include 'start.php';
@@ -138,6 +141,8 @@
 
     <script src="../includes/js/jquery.min.js"></script>
     <script src="../includes/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../includes/js/popper.min.js"></script>
+    <script src="./admin/gallery/js/load-images.js"></script>
     <script src="/dashboard/admin/gallery/js/gallery_new.js"></script>
     <script src="./admin/gallery/js/gallery-manage.js"></script>
     <script src="./admin/site-settings/js/general.js"></script>
@@ -145,12 +150,7 @@
     <script src="./admin/site-settings/js/services.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
-    <script src="admin/gallery/js/ajax.js"></script>
-    <script src="admin/gallery/js/categories.js"></script>
-    <script src="../includes/js/popper.min.js"></script>
-
-
-    <!-- jQuery Custom Scroller CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./admin/gallery/js/ajax.js"></script>
+    <script src="./admin/gallery/js/categories.js"></script>
 </body>
 </html>

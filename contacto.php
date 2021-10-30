@@ -35,7 +35,9 @@
     <link rel="stylesheet" href="./includes/css/styles.css">
     <link rel="stylesheet" href="./includes/fonts/fontawesome-all.min.css">
     <link href='https://fonts.googleapis.com/css?family=Great Vibes' rel='stylesheet'>
-    <link href="http://fonts.cdnfonts.com/css/gotham" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
     <style>
         .map-responsive{
 
@@ -70,9 +72,9 @@
         include './includes/header.php';
     ?>
     <div class="container content">
-        <h1 class="title">Contacto</h1>
-        <p class="title-description">Si quieres pedir más información, preguntar precios, pedir un presupuesto o preguntar cualquier otra cosa, no dudes en contactar con nosotros. ¡Estaremos encantados de atenderte! También puedes usar el formulario de contacto al final de esta página.</p>
-        <div class="row">
+        <h1 class="title wow animate__animated animate__fadeInUp">Contacto</h1>
+        <p class="title-description wow animate__animated animate__fadeInUp">Si quieres pedir más información, preguntar precios, pedir un presupuesto o preguntar cualquier otra cosa, no dudes en contactar con nosotros. ¡Estaremos encantados de atenderte! También puedes usar el formulario de contacto al final de esta página.</p>
+        <div class="row wow animate__animated animate__fadeInUp">
             <div class="col-lg-7">
                 <p class="address"><?=$GLOBALS["site_settings"][1]?></p>
                 <a class="contact-data" href="tel:<?=str_replace(' ','',$GLOBALS["site_settings"][0])?>"><?=$GLOBALS["site_settings"][0]?></a>
@@ -91,14 +93,14 @@
                 <h2 class="title">Horarios</h2>
                 <ul class="timetable">
                     <?php $i = 0; foreach ($GLOBALS["site_settings"][8] as $dia=>$horario): ?>
-                        <li><?=$dia.": ".$horario?></li>
+                        <li><?=$dia.": <strong>".$horario."</strong>"?></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
         </div>
         <div>
-                <h2 class="title">Ubicación</h2>
-                <div class="map-responsive">
+                <h2 class="title wow animate__animated animate__fadeInUp">Ubicación</h2>
+                <div class="map-responsive wow animate__animated animate__fadeInUp">
                     <iframe class="w-100" src="<?=$GLOBALS["site_settings"][7]?>" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
@@ -112,5 +114,6 @@
     <script src="./includes/js/jquery.min.js"></script>
     <script src="./includes/js/header.js"></script>
     <script src="./includes/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./includes/js/wow-init.js"></script>
 </body>
 </html>

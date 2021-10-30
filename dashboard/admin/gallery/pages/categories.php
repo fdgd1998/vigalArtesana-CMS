@@ -119,11 +119,11 @@
             <label>Nueva imagen de fondo: </label>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
-                <span class="input-group-text"><i class='fas fa-upload'></i>/span>
+                <span class="input-group-text"><i class='fas fa-upload'></i></span>
               </div>
               <div class="custom-file">
                 <input type="file" class="custom-file-input" id="update-new-cat-image" aria-describedby="inputGroupFileAddon01">
-                <label id="update-new-cat-image-name" class="custom-file-label" for="update-new-cat-image" data-browse="Buscar...">Escoger fichero...</label>
+                <label id="update-new-cat-image-name" class="custom-file-label" for="update-new-cat-image" data-browse="Buscar...">Seleccionar fichero...</label>
               </div>
             </div>
             <div style="margin-top: 15px;" class="form-group" hidden id="update-new-cat-image-preview-div">
@@ -163,7 +163,7 @@
     </div>
   </div>
 <div class="container settings-container">
-    <h2 class="title">Categorías</h2>
+    <h1 class="title">Categorías</h1>
     <button type="button" id="create-cat" class="btn my-button" style="margin-bottom: 15px;"><i class="far fa-plus-square" style="padding-right:5px;"></i>Crear categoría</button>
 
 <div class="input-group mb-6" style="width: 300px; margin-bottom: 20px;">

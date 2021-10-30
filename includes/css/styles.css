@@ -5,13 +5,50 @@
   --footer-link-hover-color: #EF8DFF;
   --body-background-color:  #f0f0f0;
   --navbar-text-color: black ;
-  --title-color:  #ff6666;
+  --title-color: #ff6666;
   --button-main-color: #ffcc99;
   --button-hover-bg-color:  #ffd9b3;
   --button-hover-text-color: rgb(37, 37, 37);
   --button-text-color: black;
+  --navigation-button-text-color: white;
+  --button-2-main-color: #ff9999;
+  --button-2-hover-bg-color: #ffcccc;
+  --button-3-main-color: #6fdc87;
+  --button-3-hover-bg-color: #98e6a9;
   --div-bg-color-1: #e6e6e6;
   --div-bg-color-2: #f2f2f2;
+  --custom-checkbox-bg-selected: #ffcc99;
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before{
+  background-color:var(--custom-checkbox-bg-selected);
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::after{
+  background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='grey' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E");
+  border: 1px solid grey !important;
+  border-radius: .25rem !important;
+}
+
+.custom-checkbox .custom-control-input:active:focus~.custom-control-label::after{
+  background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='grey' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E");
+  border: 1px solid #DEE2E6 !important;
+}
+
+.custom-checkbox .custom-control-input:focus~.custom-control-label::before{
+  border: 1px solid darkgrey !important;
+}
+
+.custom-control-input:focus ~ .custom-control-label::before {
+  box-shadow:none !important;
+}
+
+.custom-checkbox .custom-control-indicator {
+  border-radius: .25rem !important;
+}
+
+.custom-control-input:active ~ .custom-control-label::before {
+  background-color: #fff !important;
 }
 
 .my-button {
@@ -34,6 +71,54 @@
 
 .my-button:not([disabled]):active:hover {
   background-color: var(--button-hover-bg-color) !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.my-button-2 {
+  color: var(--button-text-color);
+  background-color: var(--button-2-main-color) !important;
+  border: 1px solid var(--button-2-main-color) !important;
+}
+
+.my-button-2:not([disabled]):hover {
+  background-color: var(--button-2-hover-bg-color) !important;
+  border: 1px solid var(--button-2-hover-bg-color) !important;
+  color: var(--button-hover-text-color) !important;
+}
+
+.my-button-2:not([disabled]):active:focus {
+  background-color: var(--button-2-hover-bg-color) !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.my-button-2:not([disabled]):active:hover {
+  background-color: var(--button-2-hover-bg-color) !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.my-button-3 {
+  color: var(--button-text-color);
+  background-color: var(--button-3-main-color) !important;
+  border: 1px solid var(--button-3-main-color) !important;
+}
+
+.my-button-3:not([disabled]):hover {
+  background-color: var(--button-3-hover-bg-color) !important;
+  border: 1px solid var(--button-3-hover-bg-color) !important;
+  color: var(--button-hover-text-color) !important;
+}
+
+.my-button-3:not([disabled]):active:focus {
+  background-color: var(--button-3-hover-bg-color) !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.my-button-3:not([disabled]):active:hover {
+  background-color: var(--button-3-hover-bg-color) !important;
   outline: none !important;
   box-shadow: none !important;
 }
@@ -153,7 +238,7 @@ a.instagram:hover {
 .nav-link {
   display: inline-block !important;
   position: relative !important;
-  color: black;
+  color: var(--navbar-text-color);
   padding-bottom: 3px !important;
 }
 
@@ -188,8 +273,12 @@ li[class~="active"]>a {
   border: 1px solid var(--button-hover-bg-color) !important;
 }
 
-li>a[class~="page-link"]:active {
+a[class="page-link"]:active {
   outline-color: white !important;
+}
+
+li[class="page-item active"] {
+  color: var(--navigation-button-text-color) !important;
 }
 
 footer{
@@ -262,7 +351,7 @@ li > i {
     margin-top: 30px;
   }
 
-  .button-group > button {
+  .button-group {
     margin-bottom: 30px !important;
   }
 
@@ -290,6 +379,19 @@ li > i {
     background-color: var(--div-bg-color-2);
     padding-bottom: 60px;
     padding-top: 60px;
+  }
+
+  .carousel-buttons {
+    text-align: right;
+    margin-bottom: 20px;
+  }
+
+  .card-title {
+    font-size: 30px !important;
+  }
+
+  .card-text {
+    font-size: 20px !important;
   }
 }
 
@@ -340,7 +442,7 @@ li > i {
     margin-top: 30px;
   }
 
-  .button-group > button {
+  .button-group {
     margin-bottom: 30px !important;
   }
 
@@ -368,6 +470,11 @@ li > i {
     background-color: var(--div-bg-color-2);
     padding-bottom: 60px;
     padding-top: 60px;
+  }
+
+  .carousel-buttons {
+    text-align: right;
+    margin-bottom: 20px;
   }
 }
 
@@ -424,12 +531,7 @@ li > i {
     text-align: left;
   }
 
-  /* .button-group {
-    text-align: center !important;
-    margin-bottom: 40px;
-  } */
-
-  .button-group > button {
+  .button-group {
     margin-bottom: 30px !important;
   }
 
@@ -453,6 +555,10 @@ li > i {
     background-color: var(--div-bg-color-2);
     padding-bottom: 60px;
     padding-top: 60px;
+  }
+
+  .carousel-buttons {
+    text-align: center;
   }
 }
 
@@ -514,7 +620,7 @@ li > i {
     text-align: center !important;
   }
 
-  .button-group > button {
+  .button-group {
     margin-bottom: 20px !important;
   }
 
@@ -539,6 +645,10 @@ li > i {
     padding-bottom: 60px;
     padding-top: 60px;
   }
+
+  .carousel-buttons {
+    text-align: center;
+  }
 }
 
 a.contact-data > i{
@@ -551,31 +661,30 @@ h3.title > i {
 
 .settings-container {
   margin-top: 30px;
+  margin-bottom: 70px;
 }
 
-a > i, button > i {
-  margin-right: 5px !important;
+.my-button > i, .my-button-2 > i {
+  margin-right: 5px;
 }
 
 .i-no-margin {
-  margin-right: 0 !important;
+  margin: 0 !important;
 }
 
 footer {
   margin-bottom: 0;
 }
 
-/* .gradient > img {
-  height: 400px;
-  object-fit: cover;
+.my-alert {
+  background-color: var(--button-2-hover-bg-color);
+  border-color: var(--button-2-main-color);
 }
 
-.gradient::before {
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, black 100%);
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  content: "";
-} */
+.button-group > button {
+  margin-bottom: 5px;
+}
+
+.card img {
+  border-radius: 10px !important;
+}

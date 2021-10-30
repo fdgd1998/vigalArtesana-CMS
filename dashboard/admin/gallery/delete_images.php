@@ -31,7 +31,7 @@
                         unlink($_SERVER["DOCUMENT_ROOT"]."/uploads/images/".$image); // deleting the file
                     }
                 }
-                $conn->close;
+                $conn->close();
             }
         } catch (Exception $e) {
             echo $e;

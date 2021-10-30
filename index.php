@@ -20,7 +20,7 @@
         $sql = "select * from services";
         $res = $conn->query($sql);
         while ($rows = $res->fetch_assoc()) {
-            array_push($GLOBALS["services"], array($rows["id"],$rows["title"],$rows["descripion"],$rows["image"]));
+            array_push($GLOBALS["services"], array($rows["id"],$rows["title"],$rows["description"],$rows["image"]));
         }
 
         $res->free();
@@ -70,13 +70,11 @@
                 </div>
             </div>
         </div>
-        <div class="div-color-2">
+        <div id="services-section" class="div-color-2">
             <div class="container">
+            <h1 class="title wow animate__animated animate__fadeInRight">Nuestros servicios</h1>
                 <div class="row">
-                    <div class="col-8">
-                        <h1 class="title wow animate__animated animate__fadeInRight">Nuestros servicios</h1>
-                    </div>
-                    <div class="col-4 text-right  wow animate__animated animate__fadeInRight">
+                    <div class="col-12 carousel-buttons wow animate__animated animate__fadeInRight">
                         <a class="btn my-button mr-1" href="#services" role="button" data-slide="prev">
                             <i class="fa fa-arrow-left i-no-margin"></i>
                         </a>
@@ -88,25 +86,24 @@
                         <div id="services" class="carousel slide  wow animate__animated animate__fadeInRight" data-ride="carousel">
                             <!-- The slideshow -->
                             <div class="carousel-inner">
+                                <?php $i = 0; ?>
                                 <?php foreach ($GLOBALS["services"] as $service): ?>
-                                <div class="carousel-item active">
+                                <div class="carousel-item <?=$i == 0? "active":""?>">
                                     <div class="card mb-3">
                                         <div class="row no-gutters">
                                             <div class="col-md-6">
                                                 <img src="./uploads/services/<?=$service[3]?>" class="card-img" alt="...">
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="card-body align-middle">
-                                                    <h5 class="card-title font-weight-bold"><?=$service[1]?></h5>
+                                            <div class="col-md-6 d-flex">
+                                                <div class="card-body align-self-center">
+                                                    <h4 class="card-title font-weight-bold"><?=$service[1]?></h4>
                                                     <p class="card-text"><?=$service[2]?></p>
-                                                    <?php if ($_SESSION['account_type'] == 'admin' || $_SESSION['account_type'] == 'superuser') :?>
-                                                        <button type="button" id="new-service" onclick="window.location.href='./dashboard?page=edit-service&id=<?=$service[0]?>'" class="btn my-button"><i class="far fa-edit"></i>Editar</button>
-                                                    <?php endif; ?>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <?php $i++; ?>
                                 <?php endforeach; ?>
                             </div>
                         </div>

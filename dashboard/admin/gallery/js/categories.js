@@ -85,7 +85,13 @@ jQuery(function($) {
             action_info = 'deshabilitar';
         };
         $('#staticBackdropLabel-statuschange').text(action_title+' categoría: "'+editing_catname+'"');
-        $('#statuschange_modal_info_text').text('¿Estás seguro de que quieres '+action_info+' esta categoría?');
+        var text = '¿Estás seguro de que quieres '+action_info+' esta categoría?';
+        if (action_info == "deshabilitar") {
+            text = text + " Si la deshabilitas, no se borrará, pero dejará de estar visible en la galería hasta que la habilites de nuevo.";
+        } else {
+            text = text + " Si la habilitas, volverá a estar visible de nuevo en la galería.";
+        }
+        $('#statuschange_modal_info_text').text(text);
         $('#cat-status-change').modal().show(); //Showing modal on top of website content.
     });
 
@@ -95,7 +101,7 @@ jQuery(function($) {
             var fileName = $(this).val().substring(12);
             console.log(fileName);
             $('#update-new-cat-image-name').html(fileName);
-            readURL(this, $("#update-new-cat-image-preview")[0]);
+            readURL(this, $("#update-new-cat-image-preview"));
             $("#update-new-cat-image-preview-div").prop("hidden", false);  
         } else {
             $('#cat-edit').attr('disabled', 'disabled');
@@ -112,7 +118,7 @@ jQuery(function($) {
             console.log(fileName.substring(12));
             $('#new-cat-image-name').html(fileName);
             $('#new-cat-image-preview-div').removeAttr("hidden");
-            readURL(this, "#new-cat-image-preview");
+            readURL(this, $("#new-cat-image-preview"));
             $("#new-cat-image-preview-div").prop("hidden", false);
         } else {
             // $('#cat-create').attr('disabled', 'disabled');

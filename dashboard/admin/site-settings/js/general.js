@@ -11,12 +11,14 @@ $(document).ready(function() {
     $("#upload-index-image").on("change", function(e){
         var files = $("#upload-index-image").prop("files");
         if (files.length > 0) { // Checking if there's selected files
-            // indexImagePreview(this); // Load images preview
-            $("#upload-index-name").html(files.length+" fichero seleccionado."); // Updating input text.
+            readURL(this, $("#index-image-preview"));
+            $("#index-image-preview").parent().removeAttr("hidden");
+            $("#upload-index-name").html(files[0].name); // Updating input text.
             $("#submit-index-image").removeAttr("disabled");
         } else {
             // If no files are selected, reset form.
-            $("#upload-index-name").html("Seleccionar fichero...");
+            $("#index-image-preview").parent().attr("hidden",true);
+            $("#upload-index-name").html("Seleccionar imagen...");
             $("#submit-index-image").attr("disabled","disabled");
         }
     });

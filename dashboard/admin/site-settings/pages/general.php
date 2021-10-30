@@ -1,4 +1,5 @@
 <?php
+    error_reporting(0);
     session_start();
     if (!isset($_SESSION['user'])) {
         header("Location: ../403.php");
@@ -40,19 +41,19 @@
                         </span>
                     </div>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="upload-index-image" accept="image/*" aria-describedby="inputGroupFileAddon01">
-                        <label id="upload-index-name" class="custom-file-label" for="upload-files" data-browse="Buscar...">Seleccionar fichero...</label>
+                        <input type="file" class="custom-file-input" id="upload-index-image" accept=".png,.jpeg,.jpg" aria-describedby="inputGroupFileAddon01">
+                        <label id="upload-index-name" class="custom-file-label" for="upload-files" data-browse="Buscar...">Seleccionar imagen...</label>
                     </div>
                 </div>
             </div>
         </div>
         <div class="form-row">
-            <div class="col">
-            <div id="index-image-preview" class="text-center"></div>
-        </div>
+            <div class="col text-center mb-3" hidden>
+                <img id="index-image-preview" class="text-center w-50"/>
+            </div>
         </div>
         <div class="form-row text-right">
-            <div class="col"><button id="submit-index-image" disabled class="btn my-button" type="button">Guardar</button></div>
+            <div class="col"><button id="submit-index-image" disabled class="btn my-button" type="button"><i class="far fa-save"></i>Guardar</button></div>
         </div>
     </form>
     <form style="margin-bottom: 20px;">
@@ -73,7 +74,7 @@
             </div>
         </div>
         <div class="form-row text-right">
-            <div class="col"><button id="submit-index-image-description" class="btn my-button" type="button">Guardar</button></div>
+            <div class="col"><button id="submit-index-image-description" class="btn my-button" type="button"><i class="far fa-save"></i>Guardar</button></div>
         </div>
     </form>
     <form style="margin-bottom: 20px;">
@@ -94,7 +95,7 @@
             </div>
         </div>
         <div class="form-row text-right">
-            <div class="col"><button id="submit-index-image-description" class="btn my-button" type="button">Guardar</button></div>
+            <div class="col"><button id="submit-index-image-description" class="btn my-button" type="button"><i class="far fa-save"></i>Guardar</button></div>
         </div>
     </form>
 </div>

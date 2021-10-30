@@ -1,4 +1,5 @@
 <?php
+    error_reporting(0);
     session_start(); // starting the session.
     require_once '../scripts/connection.php';
 
@@ -47,7 +48,7 @@
                       </div>
                       <div class="custom-file">
                         <input type="file" class="custom-file-input" id="new-cat-image" aria-describedby="inputGroupFileAddon01">
-                        <label id="new-cat-image-name" class="custom-file-label" for="new-cat-image" data-browse="Buscar...">Escoger fichero...</label>
+                        <label id="new-cat-image-name" class="custom-file-label" for="new-cat-image" data-browse="Buscar...">Seleccionar imagen...</label>
                       </div>
                     </div>
                 </div>
@@ -58,7 +59,7 @@
             </form>
         </div>
         <div id="modal-footer1" class="modal-footer">
-          <button id="cancel-cat-create" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+          <button id="cancel-cat-create" type="button" class="btn my-button-2" data-dismiss="modal">Cancelar</button>
           <button id="cat-create" type="button" disabled class="btn my-button">Crear</button>
         </div>
       </div>
@@ -76,15 +77,16 @@
           </button>
         </div>
         <div id="modal-body" class="modal-body">
-          <p>¿Estás seguro de que deseas eliminar esta categoría? No podrás borrarla si hay imágenes que pertenecen a ella.</p>
+          <p>¿Estás seguro de que deseas borrar esta categoría? No podrás borrarla si hay imágenes que pertenecen a ella.</p>
         </div>
         <div id="modal-footer1" class="modal-footer">
-          <button id="cancel-cat-delete" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-          <button id="cat-delete" type="button" class="btn my-button">Eliminar</button>
+          <button id="cancel-cat-delete" type="button" class="btn my-button" data-dismiss="modal">Cancelar</button>
+          <button id="cat-delete" type="button" class="btn my-button-2"><i class="far fa-trash-alt"></i>Borrar</button>
         </div>
       </div>
     </div>
   </div>
+
   <!-- Editing category modal -->
   <div class="modal fade" id="edit-cat" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -123,7 +125,7 @@
               </div>
               <div class="custom-file">
                 <input type="file" class="custom-file-input" id="update-new-cat-image" aria-describedby="inputGroupFileAddon01">
-                <label id="update-new-cat-image-name" class="custom-file-label" for="update-new-cat-image" data-browse="Buscar...">Seleccionar fichero...</label>
+                <label id="update-new-cat-image-name" class="custom-file-label" for="update-new-cat-image" data-browse="Buscar...">Seleccionar imagen...</label>
               </div>
             </div>
             <div style="margin-top: 15px;" class="form-group" hidden id="update-new-cat-image-preview-div">
@@ -135,8 +137,8 @@
           
         </div>
         <div id="modal-footer1" class="modal-footer">
-          <button id="cancel-cat-edit" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-          <button disabled id="cat-edit" type="button" class="btn my-button">Editar</button>
+          <button id="cancel-cat-edit" type="button" class="btn my-button-2" data-dismiss="modal">Cancelar</button>
+          <button disabled id="cat-edit" type="button" class="btn my-button-3"><i class="far fa-edit"></i>Editar</button>
         </div>
       </div>
     </div>
@@ -156,7 +158,7 @@
           <p id="statuschange_modal_info_text"></p>
         </div>
         <div id="modal-footer1" class="modal-footer">
-          <button id="cancel-cat-statuschange" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+          <button id="cancel-cat-statuschange" type="button" class="btn my-button-2" data-dismiss="modal">Cancelar</button>
           <button id="cat-statuschange" type="button" class="btn my-button">Aceptar</button>
         </div>
       </div>
@@ -228,11 +230,11 @@
                                 echo '
                                     <td>
                                         <div>
-                                            <button class="btn btn-success cat-edit-form" title="Editar categoría" type="button" style="margin-right: 1px;" id="catid-'.$rows['id'].'" name="'.$rows['name'].'">
-                                                <i class="fas fa-edit"></i>
+                                            <button class="btn my-button-3 cat-edit-form" title="Editar categoría" type="button" id="catid-'.$rows['id'].'" name="'.$rows['name'].'">
+                                                <i class="far fa-edit"></i>
                                             </button>
-                                            <button class="btn btn-danger cat-delete" title="Borrar categoría" type="button" style="margin-right: 1px;" id="catid-'.$rows['id'].'" name="'.$rows['name'].'">
-                                                <i class="fas fa-trash"></i>
+                                            <button class="btn my-button-2 cat-delete" title="Borrar categoría" type="button" id="catid-'.$rows['id'].'" name="'.$rows['name'].'">
+                                                <i class="far fa-trash-alt"></i>
                                             </button>
                                             <button class="btn btn-dark cat-status-change-form" title="'.$cat_status.' categoría" type="button" id="catid-'.$rows['id'].'" name="'.$rows['name'].'">
                                                 <i id="catid-'.$rows['id'].'-change-status-btn" class="fas fa-arrow-circle-'.$status_arrow_icon.'"></i>

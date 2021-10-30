@@ -1,4 +1,5 @@
 <?php
+    error_reporting(0);
     session_start(); // Starting the session.
     require_once "../scripts/connection.php"; // Database connection info.
     
@@ -82,7 +83,7 @@
         </div>
         <div class="form-row text-right" style="margin-top: 20px;">
             <div class="col">
-                <button id="cancel" class="btn btn-danger" type="button">Cancelar</button>
+                <button id="cancel" class="btn my-button-2" type="button">Cancelar</button>
                 <button id="uploadbtn" disabled class="btn my-button" type="button" style="margin-left: 5px;">Cargar</button>
             </div>
         </div>

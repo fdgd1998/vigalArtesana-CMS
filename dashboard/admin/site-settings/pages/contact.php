@@ -1,4 +1,5 @@
 <?php
+    error_reporting(0);
     session_start();
     if (!isset($_SESSION['user'])) {
         header("Location: ../403.php");
@@ -57,7 +58,7 @@
             </div>
         </div>
         <div class="form-row text-right">
-            <div class="col"><button id="submit_contact_data" class="btn my-button" type="button">Guardar</button></div>
+            <div class="col"><button id="submit_contact_data" class="btn my-button" type="button"><i class="far fa-save"></i>Guardar</button></div>
         </div>
     </form>
     <hr>
@@ -109,7 +110,7 @@
         </div>
         <div class="form-row text-right">
             <div class="col">
-                <button id="submit_social" class="btn my-button" type="button">Guardar</button>
+                <button id="submit_social" class="btn my-button" type="button"><i class="far fa-save"></i>Guardar</button>
             </div>
         </div>
     </form>
@@ -128,7 +129,7 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="col text-right"><button id="submit_map_link" class="btn my-button" type="button">Guardar</button></div>
+            <div class="col text-right"><button id="submit_map_link" class="btn my-button" type="button"><i class="far fa-save"></i>Guardar</button></div>
         </div>
     </form>
     <hr>
@@ -208,7 +209,7 @@
         </div>
         <div class="form-row">
             <div class="col text-right">
-                <button id="submit_opening_hours" class="btn my-button" type="button">Guardar</button>
+                <button id="submit_opening_hours" class="btn my-button" type="button"><i class="far fa-save"></i>Guardar</button>
             </div>
         </div>
     </form>

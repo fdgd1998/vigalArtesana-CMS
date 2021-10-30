@@ -1,4 +1,5 @@
 <?php
+    error_reporting(0);
     session_start(); // stating the session
     require_once '../scripts/connection.php'; //Database connection data
 
@@ -64,29 +65,8 @@
     }
 ?>
 
-<!-- Bootstrap modal for deleting posts -->
-<div class="modal fade" id="delete-post" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel-delete">Eliminando post ...</h5>
-        <button id="close-edit-post" type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div id="modal-body" class="modal-body">
-        <p>¿Estás seguro de que deseas eliminar este post?</p>
-      </div>
-      <div id="modal-footer1" class="modal-footer">
-        <button id="cancel-post-delete" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-        <button id="post-delete" type="button" class="btn btn-success">Eliminar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="container settings-container">
-  <h2 class="title">Galería</h1>
+  <h1 class="title">Galería</h1>
   <button type="button" id="upload-images" class="btn my-button" style="margin-bottom: 15px;"><i class="fas fa-upload"></i>Subir imágenes...</button>
   <div class="input-group" style="margin-bottom: 20px;">
     <div class="input-group-prepend">

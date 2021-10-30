@@ -2,11 +2,6 @@
     session_start();
     require_once $_SERVER['DOCUMENT_ROOT'].'/scripts/connection.php';
 
-    // Retrieve new limit value if changed
-    if(isset($_GET['records-limit'])){
-        $_SESSION['records-limit'] = $_GET['records-limit'];
-    }
-
     $categories = array();
     $GLOBALS["site_settings"] = array();
 
@@ -17,7 +12,7 @@
     $conn->set_charset("utf8");
 
     // Variables for pagination
-    $limit = isset($_SESSION['records-limit']) ? $_SESSION['records-limit'] : 8; // Dynamic limit
+    $limit = 16; // Dynamic limit
     $page = (isset($_GET['page']) && is_numeric($_GET['page']) ) ? $_GET['page'] : 1; // Current pagination page number
     $paginationStart = ($page - 1) * $limit; // Offset
 
@@ -117,23 +112,6 @@
                     <h1 class="title wow animate__animated animate__fadeInUp"><a href="galeria.php"><i class="fas fa-arrow-left" style="margin-right: 20px !important;"></i></a><?=$category_name?></h1>
                     <p class="title-description wow animate__animated animate__fadeInUp">Pincha sobre las imágenes para verlas a tamaño completo. Para volver a la página anterior, pincha sobre la flecha a la izquierda del nombre de la categoría.</p>
                 </div>
-                <form action="?category=<?=$_GET['category']?>" method="get" class="wow animate__animated animate__fadeInUp">
-                    <div class="input-group mb-3" style="width: 240px; padding-bottom: 20px;">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">Mostrar</span>
-                        </div>
-                        <select name="records-limit" id="records-limit" class="custom-select">
-                            <?php foreach([8,16,24] as $limit) : ?>
-                            <option
-                                <?php if(isset($_SESSION['records-limit']) && $_SESSION['records-limit'] == $limit) echo 'selected'; ?>
-                                value="<?= $limit; ?>">
-                                <?= $limit; ?> resultados
-                            </option>
-                            <?php endforeach; ?>
-                        </select>
-                        <input hidden name="category" value="<?=$_GET['category']?>">
-                    </div>
-                </form>
                 <div class="galeria wow animate__animated animate__fadeInUp">
                     <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4"> 
                         <?php foreach ($results as $element): ?>    

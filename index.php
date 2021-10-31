@@ -58,9 +58,8 @@
                     <p><?=$GLOBALS["site_settings"][10]?></p>
                 </div>
                 <div class="button-group wow animate__animated animate__fadeInUp">
-                    <button onclick="window.location.href = 'sobremi.php'" type="button" class="btn my-button">Sobre nosotros</button>
+                    <button onclick="window.location.href = 'sobre_nosotros.php'" type="button" class="btn my-button">Sobre nosotros</button>
                     <button onclick="window.location.href = 'galeria.php'" type="button" class="btn my-button">Galería</button>
-                    <button onclick="window.location.href = 'galeria.php'" type="button" class="btn my-button">Blog</button>
                 </div>
             </div>
         </div>

@@ -92,7 +92,7 @@
                         <a href='<?=$_SERVER['PHP_SELF']."?category=".$element[0]?>'>
                             <div class='wrap-category'>
                                 <label class='category-title'><?=$element[1]?></label>
-                                <img class='img-fluid category photos' src='/uploads/categories/<?=$element[2]?>'/>
+                                <img class='img-fluid category photos' src='/uploads/categories/<?=$element[2]?>' alt="<?=$element[1]?>"/>
                             </div>
                         </a>
                     </div>
@@ -107,7 +107,7 @@
                 <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4"> 
                     <?php foreach ($results as $element): ?>    
                     <a class="animated wrap" href="./uploads/images/<?=$element[1]?>">
-                        <img id="image-<?=$element[0]?>" class='img-fluid photos' src="./uploads/images/<?=$element[1]?>" alt=""/>
+                        <img id="image-<?=$element[0]?>" class='img-fluid photos' src="./uploads/images/<?=$element[1]?>" alt="<?=$category_name?>"/>
                     </a>
                     <?php endforeach; ?>
                 </div>

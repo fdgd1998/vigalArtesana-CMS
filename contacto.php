@@ -54,7 +54,7 @@
     ?>
     <div class="container content">
         <h1 class="title wow animate__animated animate__fadeInUp">Contacto</h1>
-        <p class="title-description wow animate__animated animate__fadeInUp">Si quieres pedir más información, preguntar precios, pedir un presupuesto o preguntar cualquier otra cosa, no dudes en contactar con nosotros. ¡Estaremos encantados de atenderte! También puedes usar el formulario de contacto al final de esta página.</p>
+        <p class="title-description wow animate__animated animate__fadeInUp">Si quieres pedir más información, preguntar precios, pedir un presupuesto o preguntar cualquier otra cosa, no dudes en contactar con nosotros. ¡Estaremos encantados de atenderte!</p>
         <div class="row wow animate__animated animate__fadeInUp">
             <div class="col-lg-7">
                 <p class="address"><?=$GLOBALS["site_settings"][1]?></p>

@@ -84,7 +84,7 @@
           <?php $i = 0; ?>
           <?php foreach ($services as $service): ?>
           <div class="carousel-item <?=$i == 0? "active":""?>">
-            <div class="card">
+            <div class="card mb-3">
               <div class="row no-gutters">
                 <div class="col-md-6">
                   <img src="../uploads/services/<?=$service[3]?>" class="card-img" alt="...">
@@ -93,7 +93,7 @@
                   <div class="card-body align-self-center">
                     <h5 class="card-title font-weight-bold"><?=$service[1]?></h5>
                     <p class="card-text"><?=$service[2]?></p>
-                    <div class="button-group">
+                    <div class="button-group carousel-buttons">
                       <button type="button" id="edit-<?=$service[0]?>" class="btn my-button-3 edit-service"><i class="far fa-edit"></i>Editar</button>
                       <button type="button" id="delete-<?=$service[0]?>" class="btn my-button-2 delete-service"><i class="far fa-trash-alt"></i>Borrar</button>
                     </div>

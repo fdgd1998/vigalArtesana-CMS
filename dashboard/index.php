@@ -106,27 +106,30 @@
             <div>
                 <?php
                     // reading GET variable and load corresponding page
-                    switch($_GET['page']) {
-                        case 'manage-gallery':
+                    switch(true) {
+                        case $_GET['page'] == 'manage-gallery':
                             include 'admin/gallery/pages/manage_gallery.php';
                             break;
-                        case 'gallery-new':
+                        case $_GET['page'] == 'gallery-new':
                             include 'admin/gallery/pages/gallery_new.php';
                             break;
-                        case 'categories':
+                        case $_GET['page'] == 'categories':
                             include 'admin/gallery/pages/categories.php';
                             break;
-                        case 'general-settings':
+                        case $_GET['page'] == 'general-settings':
                             include 'admin/site-settings/pages/general.php';
                             break;
-                        case 'contact-settings':
+                        case $_GET['page'] == 'contact-settings':
                             include 'admin/site-settings/pages/contact.php';
                             break;
-                        case 'manage-services':
+                        case $_GET['page'] == 'manage-services':
                             include 'admin/site-settings/pages/services.php';
                             break;
-                        case 'new-service':
+                        case $_GET['page'] == 'new-service':
                             include 'admin/site-settings/pages/new_service.php';
+                            break;
+                        case preg_match('^edit-service&id=(\d{1,2})$^', isset($_GET["id"])?$_GET["page"]."&id=".$_GET["id"]:$_GET["page"]):
+                            include 'admin/site-settings/pages/edit_service.php';
                             break;
                         default:
                             include 'start.php';

@@ -1,15 +1,9 @@
 <?php
     session_start();
+    require_once '../../../scripts/check_session.php';
+    require_once '../../../../connection.php';
 
-    // Redirecting to 403 page is session does not exist.
-    if (!isset($_SESSION['loggedin'])) {
-        header("Location: ../../../../403.php");
-        exit();
-    }
-
-    require_once '../../../scripts/connection.php';
-
-    if ($_POST) {
+    if (isset($_POST)) {
         try {
             $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
 
@@ -19,7 +13,11 @@
             } else {
                 $errors = 0;
                 $stmt = "update company_info set value_info='".$_POST["map_link"]."' where key_info='google-map-link'";
-                $conn->query($stmt);
+                if ($conn->query($stmt) === TRUE) {
+                    echo "El enlace se ha modificado correctamente.";
+                } else {
+                    echo "Ha ocurrido un error al actualizar el enlace.";
+                }
             }
             $conn->close();
         } catch (Exception $e) {

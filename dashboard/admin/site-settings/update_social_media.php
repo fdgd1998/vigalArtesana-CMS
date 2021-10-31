@@ -1,15 +1,9 @@
 <?php
     session_start();
+    require_once '../../../scripts/check_session.php';
+    require_once '../../../../connection.php';
 
-    // Redirecting to 403 page is session does not exist.
-    if (!isset($_SESSION['loggedin'])) {
-        header("Location: ../../../../403.php");
-        exit();
-    }
-
-    require_once '../../../scripts/connection.php';
-
-    if ($_POST) {
+    if (isset($_POST)) {
         try {
             $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
 
@@ -18,7 +12,12 @@
                 exit();
             } else {
                 $stmt = "update company_info set value_info='".$_POST["social"]."' where key_info='social_media'";
-                $conn->query($stmt):
+                if ($conn->query($stmt) === TRUE) {
+                    echo "Las redes sociales se han actualizado correctamente";
+                } else {
+                    echo "Ha ocurrido un error mientras se modificaban las redes sociales.";
+                }
+            }
             $conn->close();
         } catch (Exception $e) {
             echo $e;

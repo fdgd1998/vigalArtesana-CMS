@@ -77,4 +77,23 @@ $(document).ready(function() {
             }
         });
     });
+
+    $("#submit-index-brief-description").on("click", function(e){
+
+        // Sending AJAX request to the server.
+        $.ajax({
+            url: './admin/site-settings/update_index_brief_description.php', // this is the target
+            type: 'post', // method
+            dataType: 'text', // what is expected to be returned
+            cache: false,
+            data: {description: $("#index-brief-description").val()}, // pass the input valuse to serve
+            success: function(response) { // HTTP response code is 200
+                alert(response);
+                window.location.replace("?page=general-settings"); // redirect
+            },
+            error: function(response) { // HTTP response code is != than 200
+                alert(response);
+            }
+        });
+    });
 })

@@ -1,11 +1,10 @@
 <?php
     session_start();
-    if (!isset($_SESSION['user'])) {
-        header("Location: ../403.php");
-        exit();
-    }
+    require_once "check_session.php";
+
     session_unset();
     session_destroy();
+    
     header("Location: ../index.php");
     exit();
 ?>

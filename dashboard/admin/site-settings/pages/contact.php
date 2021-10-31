@@ -1,28 +1,31 @@
 <?php
     error_reporting(0);
     session_start();
-    if (!isset($_SESSION['user'])) {
-        header("Location: ../403.php");
-        exit();
-    }
-    require_once "../scripts/connection.php";
-    $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
+
+    require_once '../scripts/check_session.php';
 
     $site_settings = array();
-    if ($conn->connect_error) {
-        echo "No se ha podido conectar a la base de datos.";
-        exit();
-    } else {
-        $stmt = "select * from company_info";
-        if ($res = $conn->query($stmt)) {
-            while ($rows = $res->fetch_assoc()) {
-                array_push($site_settings, $rows["value_info"]);
+
+    try {
+        $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
+        
+        if ($conn->connect_error) {
+            echo "No se ha podido conectar a la base de datos.";
+            exit();
+        } else {
+            $stmt = "select * from company_info";
+            if ($res = $conn->query($stmt)) {
+                while ($rows = $res->fetch_assoc()) {
+                    array_push($site_settings, $rows["value_info"]);
+                }
             }
         }
+        $site_settings[4] = json_decode($site_settings[4], true);
+        $site_settings[8] = json_decode($site_settings[8], true);
+        $conn->close();
+    } catch (Exception $e) {
+        echo $e;
     }
-    $site_settings[4] = json_decode($site_settings[4], true);
-    $site_settings[8] = json_decode($site_settings[8], true);
-    $conn->close();
 ?>
 <div class="container settings-container">
     <h1 class="title">Contacto y ubicación</h1>
@@ -66,7 +69,7 @@
         <div class="form-row">
             <div class="col">
                 <h3 class="title"><i class="far fa-comment-alt"></i>Redes sociales</h3>
-                <p class="title-description">Si configuras redes sociales, los enlaces aparecerán en la cabecera del sitio web.</p>
+                <p class="title-description">Si configuras redes sociales, los enlaces aparecerán en la barra de navegación y en la página de contacto.</p>
             </div>
         </div>
         <div class="form-row">

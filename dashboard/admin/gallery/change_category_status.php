@@ -1,13 +1,7 @@
 <?php
     session_start();
-    require_once '../../../scripts/connection.php';
-
-    // Redirecting to 403 page is session does not exist.
-    if (!isset($_SESSION['loggedin'])) {
-        header("Location: ../../../../403.php");
-        exit();
-    }
-
+    require_once '../../../scripts/check_session.php';
+    require_once '../../../../connection.php';
     // Publishers cannot modify categories.
     if ($_POST && $_SESSION['account_type'] != 'publisher') {
         try {
@@ -19,7 +13,10 @@
                 exit();
             } else {
                 $stmt = "update categories set cat_enabled='".$status."' where id=".$id; //Updating category.
-                $conn->query($stmt);
+                if ($conn->query($stmt) === TRUE) {
+                    echo "El estado de la categoría se ha cambiado correctamente";
+                }
+                $conn->close();
             }
         } catch (Exception $e) {
             echo $e;

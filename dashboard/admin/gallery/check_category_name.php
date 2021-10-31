@@ -1,12 +1,7 @@
 <?php
     session_start();
-    require_once '../../../scripts/connection.php';
-
-    // Redirecting to 403 page is session does not exist.
-    if (!isset($_SESSION['loggedin'])) {
-        header("Location: ../../../../403.php");
-        exit();
-    }
+    require_once '../../../scripts/check_session.php';
+    require_once '../../../../connection.php';
 
     // Publishers cannot modify categories.
     if(isset($_POST['cat_name']) && $_SESSION['account_type'] != 'publisher') {

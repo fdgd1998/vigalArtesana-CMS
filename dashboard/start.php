@@ -1,9 +1,5 @@
 <?php
-    session_start();
-    if (!isset($_SESSION['user'])) {
-        header("Location: ../403.php");
-        exit();
-    }
+    require_once '../scripts/check_session.php';
 ?>
 <div class="container">
     <h1 class="text-center" style="margin-top: 10%;">¡Hola <?=$_SESSION['user']?>!</h1>

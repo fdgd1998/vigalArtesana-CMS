@@ -1,31 +1,30 @@
 <?php
     session_start();
+    require_once '../../../scripts/check_session.php';
+    require_once '../../../../connection.php';
 
-    // Redirecting to 403 page is session does not exist.
-    if (!isset($_SESSION['loggedin'])) {
-        header("Location: ../../../../403.php");
-        exit();
-    }
+    $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
 
-    require_once '../../../scripts/connection.php';
-
-    if ($_POST) {
+    if (isset($_POST)) {
         try {
-            $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
-
             if ($conn->connect_error) {
                 echo "No se ha podido conectar a la base de datos.";
                 exit();
             } else {
-                $errors = 0;
-                $stmt = "update company_info set value_info='".$_POST["phone"]."' where key_info='phone'";
-                $conn->query($stmt);
+                $conn->begin_transaction();
 
-                $stmt = "update company_info set value_info='".$_POST["email"]."' where key_info='email'";
-                $conn->query($stmt);
+                $conn->query("update company_info set value_info='".$_POST["phone"]."' where key_info='phone'");
+                $conn->query("update company_info set value_info='".$_POST["email"]."' where key_info='email'");
+
+                if ($conn->commit()) {
+                    echo "Los datos de contacto se han modificado correctamente.";
+                } else {
+                    echo "Ha ocurrido un error al modificar los datos de contacto.";
+                }
             }
             $conn->close();
         } catch (Exception $e) {
+            $conn->rollback();
             echo $e;
         }
     }

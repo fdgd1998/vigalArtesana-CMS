@@ -1,30 +1,25 @@
 <?php
     // error_reporting(0);
     session_start(); // starting the session.
-    require_once '../scripts/connection.php';
 
-    // Redirecting to 403 page if user is not logged in and access is attemped.
-    if (!isset($_SESSION['user'])) {
-      header("Location: ../../../../403.php");
-      exit();
-    }
-
-    $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
+    require_once '../scripts/check_session.php'; 
 
     $services = array();
+    
     try {
-      if ($conn->connect_error) {
-        print("No se ha podido conectar a la base de datos");
-        exit();
-      } else {
-        $stmt = "select * from services where id = ".$_GET["id"];
-        if ($res = $conn->query($stmt)) {
-            if ($rows = $res->fetch_assoc())
-                $services = array($rows["id"],$rows["title"],$rows["description"],$rows["image"]);
+        $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
+        if ($conn->connect_error) {
+            print("No se ha podido conectar a la base de datos");
+            exit();
+        } else {
+            $stmt = "select * from services where id = ".$_GET["id"];
+            if ($res = $conn->query($stmt)) {
+                if ($rows = $res->fetch_assoc())
+                    $services = array($rows["id"],$rows["title"],$rows["description"],$rows["image"]);
+            }
         }
-      }
     } catch (Exception $e) {
-      echo $e;
+        echo $e;
     }
     echo "<script>var servId = ".$_GET["id"]."</script>";
 ?>

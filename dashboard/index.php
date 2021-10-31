@@ -1,12 +1,25 @@
 <?php
-    error_reporting(0);
+    // error_reporting(0);
     session_start();
-    require_once '../scripts/get_http_protocol.php'; 
+    require_once '../../connection.php';
+    require_once '../scripts/check_session.php';
 
-    if (!isset($_SESSION['user'])) {
-        header("Location: ../403.php");
+    $maintenance = "";
+    $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
+    $conn->set_charset("utf8");
+
+    if ($conn->connect_error) {
+        print("No se ha podido conectar a la base de datos");
         exit();
+    } else {
+        $sql = "select value_info from company_info where key_info = 'maintenance'";
+        
+        if ($res = $conn->query($sql)) {
+            $maintenance = $res->fetch_assoc()["value_info"];
+        }
     }
+    
+    $conn->close();
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,13 +33,18 @@
     <link rel="stylesheet" href="../includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../includes/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="../includes/css/galeria.css">
-    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="../includes/css/styles.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand" />    
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand" />
+    <link rel="stylesheet" href="../includes/summernote/summernote-bs4.min.css" />
 </head>
 
 <body>
+    <?php if ($maintenance == "true"): ?>
+    <div id="maintenance-warning" class="container-fluid">
+        <p> <i class="fas fa-exclamation-triangle"></i>El modo de mantenimiento está activado. Puedes ver el sitio web porque has iniciado sesión, pero no estará disponible en internet hasta que lo desactives.</p>
+        <p>Puedes desactivarlo <u><a href="./dashboard?page=advanced">aquí</a></u>.</p>
+    </div>
+    <?php endif; ?>
     <nav class="nav-solid navbar navbar-expand-lg navigation-clean">
         <div class="container">
             <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
@@ -45,12 +63,16 @@
                             <div role="menu" class="dropdown-menu">
                             <h6 class="dropdown-header">Opciones generales</h6>
                                 <a role="presentation" class="dropdown-item" href="/dashboard?page=general-settings">
-                                    <i class="fas fa-cog"></i>
+                                    <i class="fas fa-home"></i>
                                     Página de inicio
                                 </a>
                                 <a role="presentation" class="dropdown-item" href="/dashboard?page=contact-settings">
                                     <i class="fas fa-address-book"></i>
                                     Contacto y ubicación
+                                </a>
+                                <a role="presentation" class="dropdown-item" href="/dashboard?page=about-us">
+                                    <i class="fas fa-address-card"></i>
+                                    Sobre nosotros
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <h6 class="dropdown-header">Servicios</h6>
@@ -63,7 +85,7 @@
                                     Nuevo servicio
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a role="presentation" class="dropdown-item" href="/dashboard?page=services-settings">
+                                <a role="presentation" class="dropdown-item" href="/dashboard?page=advanced">
                                     <i class="fas fa-code"></i>
                                     Opciones avanzadas
                                 </a>
@@ -128,6 +150,12 @@
                         case $_GET['page'] == 'new-service':
                             include 'admin/site-settings/pages/new_service.php';
                             break;
+                        case $_GET['page'] == 'about-us':
+                            include 'admin/site-settings/pages/about_us.php';
+                            break;
+                        case $_GET['page'] == 'advanced':
+                            include 'admin/site-settings/pages/advanced.php';
+                            break;
                         case preg_match('^edit-service&id=(\d{1,2})$^', isset($_GET["id"])?$_GET["page"]."&id=".$_GET["id"]:$_GET["page"]):
                             include 'admin/site-settings/pages/edit_service.php';
                             break;
@@ -142,19 +170,82 @@
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
-
     <script src="../includes/js/jquery.min.js"></script>
     <script src="../includes/bootstrap/js/bootstrap.min.js"></script>
     <script src="../includes/js/popper.min.js"></script>
     <script src="./admin/gallery/js/load-images.js"></script>
-    <script src="/dashboard/admin/gallery/js/gallery_new.js"></script>
-    <script src="./admin/gallery/js/gallery-manage.js"></script>
-    <script src="./admin/site-settings/js/general.js"></script>
-    <script src="./admin/site-settings/js/contact.js"></script>
-    <script src="./admin/site-settings/js/services.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+
+    <?php if (isset($_GET["page"]) && ($_GET["page"] == "manage-gallery" || $_GET["page"] == "gallery-new" || $_GET["page"] == "categories")): ?>
+    <script src="./admin/gallery/js/gallery_new.js"></script>
+    <script src="./admin/gallery/js/gallery-manage.js"></script>
     <script src="./admin/gallery/js/ajax.js"></script>
     <script src="./admin/gallery/js/categories.js"></script>
+    <?php endif; ?>
+
+    <?php if (isset($_GET["page"]) && $_GET["page"] == "general-settings"): ?>
+    <script src="./admin/site-settings/js/general.js"></script>
+    <?php endif; ?>
+
+    <?php if (isset($_GET["page"]) && $_GET["page"] == "contact-settings"): ?>
+    <script src="./admin/site-settings/js/contact.js"></script>
+    <?php endif; ?>
+
+    <?php if (isset($_GET["page"]) && $_GET["page"] == "advanced"): ?>
+    <script src="./admin/site-settings/js/advanced.js"></script>
+    <?php endif; ?>
+
+    <?php if (isset($_GET["page"]) && ($_GET["page"] == "manage-services") || $_GET["page"] == "new-service" || preg_match('^edit-service&id=(\d{1,2})$^', isset($_GET["id"])?$_GET["page"]."&id=".$_GET["id"]:$_GET["page"])): ?>
+    <script src="./admin/site-settings/js/services.js"></script>
+    <?php endif; ?>
+    
+    <?php if(isset($_GET["page"]) && $_GET["page"] == "about-us"): ?>
+    <script src="../includes/summernote/summernote-bs4.min.js"></script>
+    <script src="../includes/summernote/lang/summernote-es-ES.js"></script>
+    <script src="./admin/site-settings/js/about-us.js"></script>
+    <script>
+        $("#summernote").summernote({
+            lang: 'es-ES',
+            height: 500,
+            disableDragAndDrop: true,
+            styleTags: [
+                {
+                    title: 'párrafo',
+                    tag: 'p',
+                    value: 'p'
+                },
+                {
+                    title: 'H2 título',
+                    tag: 'h2',
+                    className: 'title',
+                    value: 'h2'
+                },
+                {
+                    title: 'H3 título',
+                    tag: 'h3',
+                    className: 'title',
+                    value: 'h3'
+                }
+            ],
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear', 'style']],
+                ['font', ['superscript', 'subscript']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['picture', ['picture']],
+                ['table', ['table']],
+                ['hr', ['hr']],
+                ['misc', ['undo', 'redo', 'codeview']]
+            ],
+            callbacks: {
+                onInit: function() {
+                    $(this).summernote('code', '<?=$about_text?>');
+                }
+            }
+        });
+    </script>
+    <?php endif; ?>
 </body>
 </html>

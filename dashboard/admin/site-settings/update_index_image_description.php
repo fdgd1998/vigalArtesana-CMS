@@ -1,15 +1,9 @@
 <?php
     session_start();
+    require_once '../../../scripts/check_session.php';
+    require_once '../../../../connection.php';
 
-    // Redirecting to 403 page is session does not exist.
-    if (!isset($_SESSION['loggedin'])) {
-        header("Location: ../../../../403.php");
-        exit();
-    }
-
-    require_once '../../../scripts/connection.php';
-
-    if ($_POST) {
+    if (isset($_POST)) {
         try {
             $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
 
@@ -18,8 +12,13 @@
                 exit();
             } else {
                 $stmt = "update company_info set value_info='".$_POST["index-image-description"]."' where key_info='index-image-description'";
-                $conn->query($stmt);
+                if ($conn->query($stmt) === TRUE) {
+                    echo "La descripción se ha modificado correctamente.";
+                } else {
+                    echo "Ha ocurrido un error al editar la descripción.";
+                }
                 $conn->close();
+            }
         } catch (Exception $e) {
             echo $e;
         }

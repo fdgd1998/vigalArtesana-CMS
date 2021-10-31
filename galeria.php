@@ -1,9 +1,8 @@
 <?php
-    session_start();
-    require_once $_SERVER['DOCUMENT_ROOT'].'/scripts/connection.php';
+    require_once "./scripts/get_company_info.php";
+    require_once "./scripts/check_maintenance.php";
 
     $categories = array();
-    $GLOBALS["site_settings"] = array();
 
     $category_name = "";
     $results = array();
@@ -26,13 +25,7 @@
     if ($conn->connect_error) {
         print("No se ha podido conectar a la base de datos");
         exit();
-    } else {    
-        $sql = "select value_info from company_info";
-            $res = $conn->query($sql);
-            while ($rows = $res->fetch_assoc()) {
-                array_push($GLOBALS["site_settings"], $rows['value_info']);
-            }
-        $GLOBALS["site_settings"][4] = json_decode($GLOBALS["site_settings"][4], true);
+    } else {
         if(!isset($_GET['category'])) {
             $sql = "select * from categories where cat_enabled='YES'";
             $res = $conn->query($sql);
@@ -88,86 +81,82 @@
 </head>
 
 <body>
-    <?php
-        include './includes/header.php';
-    ?>
-        <div class="container content">
-            <?php if (!isset($_GET['category'])): ?>
-                <h1 class="title wow animate__animated animate__fadeInUp">Galería</h1>
-                <p class="title-description wow animate__animated animate__fadeInUp">Selecciona una categoría pinchando sobre una imagen.</p>
-                <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 wow animate__animated animate__fadeIn" style="margin-bottom: 20px;">
-                    <?php foreach ($categories as $element): ?>
-                        <div class='animated category col-sm-6 col-md-4 col-lg-3 item' style='margin-bottom: 30px;'>
-                            <a href='<?=$_SERVER['PHP_SELF']."?category=".$element[0]?>'>
-                                <div class='wrap-category'>
-                                    <label class='category-title'><?=$element[1]?></label>
-                                    <img class='img-fluid category photos' src='/uploads/categories/<?=$element[2]?>'/>
-                                </div>
-                            </a>
-                        </div>
-                    <?php endforeach; ?>
-                </div>   
-            <?php else: ?>
-                <div class="intro">
-                    <h1 class="title wow animate__animated animate__fadeInUp"><a href="galeria.php"><i class="fas fa-arrow-left" style="margin-right: 20px !important;"></i></a><?=$category_name?></h1>
-                    <p class="title-description wow animate__animated animate__fadeInUp">Pincha sobre las imágenes para verlas a tamaño completo. Para volver a la página anterior, pincha sobre la flecha a la izquierda del nombre de la categoría.</p>
-                </div>
-                <div class="galeria wow animate__animated animate__fadeInUp">
-                    <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4"> 
-                        <?php foreach ($results as $element): ?>    
-                        <a class="animated wrap" href="./uploads/images/<?=$element[1]?>">
-                            <img id="image-<?=$element[0]?>" class='img-fluid photos' src="./uploads/images/<?=$element[1]?>" alt=""/>
+    <?php include './includes/header.php';?>
+    <div class="container content">
+        <?php if (!isset($_GET['category'])): ?>
+            <h1 class="title wow animate__animated animate__fadeInUp">Galería</h1>
+            <p class="title-description wow animate__animated animate__fadeInUp">Selecciona una categoría pinchando sobre una imagen.</p>
+            <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 wow animate__animated animate__fadeIn" style="margin-bottom: 20px;">
+                <?php foreach ($categories as $element): ?>
+                    <div class='animated category col-sm-6 col-md-4 col-lg-3 item' style='margin-bottom: 30px;'>
+                        <a href='<?=$_SERVER['PHP_SELF']."?category=".$element[0]?>'>
+                            <div class='wrap-category'>
+                                <label class='category-title'><?=$element[1]?></label>
+                                <img class='img-fluid category photos' src='/uploads/categories/<?=$element[2]?>'/>
+                            </div>
                         </a>
-                        <?php endforeach; ?>
                     </div>
-                </div>
+                <?php endforeach; ?>
             </div>   
-            <?php endif; ?>
-        </div>
+        <?php else: ?>
+            <div class="intro">
+                <h1 class="title wow animate__animated animate__fadeInUp"><a href="galeria.php"><i class="fas fa-arrow-left" style="margin-right: 20px !important;"></i></a><?=$category_name?></h1>
+                <p class="title-description wow animate__animated animate__fadeInUp">Pincha sobre las imágenes para verlas a tamaño completo. Para volver a la página anterior, pincha sobre la flecha a la izquierda del nombre de la categoría.</p>
+            </div>
+            <div class="galeria wow animate__animated animate__fadeInUp">
+                <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4"> 
+                    <?php foreach ($results as $element): ?>    
+                    <a class="animated wrap" href="./uploads/images/<?=$element[1]?>">
+                        <img id="image-<?=$element[0]?>" class='img-fluid photos' src="./uploads/images/<?=$element[1]?>" alt=""/>
+                    </a>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>   
+        <?php endif; ?>
+    </div>
 
-        <!-- Pagination -->
-        <?php if (isset($_GET['category'])): ?>
-        <nav aria-label="Page navigation example mt-5" style="margin-bottom: 50px;">
-            <ul class="pagination justify-content-center">
-                <li class="page-item <?php if($page <= 1){ echo 'disabled'; } ?>">
-                    <a class="page-link" href="<?php if($page <= 1){ echo '#'; } else { echo "?page=" . $prev; } ?>&category=<?= $_GET['category'] ?>"><</a>
-                </li>
-                <?php if ($totalPages > 10): ?>
-                    <?php
-                        $min = $page - 3 < 1 ? 1 : $page - 3;
-                        $max = $page + 3 > $totalPages ? $totalPages : $page + 3;    
-                    ?>
-                    <?php if($page >= 5): ?>
-                        <li class="page-item disabled">
-                            <a class="page-link">...</a>
-                        </li>
-                    <?php endif; ?>
-                    <?php for($i = $min; $i <= $max; $i++): ?>
-                    <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
-                        <a class="page-link" href="galeria.php?page=<?= $i; ?>&category=<?= $_GET['category'] ?>"> <?= $i; ?> </a>
+    <!-- Pagination -->
+    <?php if (isset($_GET['category'])): ?>
+    <nav aria-label="Page navigation example mt-5" style="margin-bottom: 50px;">
+        <ul class="pagination justify-content-center">
+            <li class="page-item <?php if($page <= 1){ echo 'disabled'; } ?>">
+                <a class="page-link" href="<?php if($page <= 1){ echo '#'; } else { echo "?page=" . $prev; } ?>&category=<?= $_GET['category'] ?>"><</a>
+            </li>
+            <?php if ($totalPages > 10): ?>
+                <?php
+                    $min = $page - 3 < 1 ? 1 : $page - 3;
+                    $max = $page + 3 > $totalPages ? $totalPages : $page + 3;    
+                ?>
+                <?php if($page >= 5): ?>
+                    <li class="page-item disabled">
+                        <a class="page-link">...</a>
                     </li>
-                    <?php endfor; ?>
-                    <?php if($page < $totalPages - 3): ?>
-                        <li class="page-item disabled">
-                            <a class="page-link">...</a>
-                        </li>
-                    <?php endif; ?>
-                <?php else: ?>
-                    <?php for($i = 1; $i <= $totalPages; $i++ ): ?>
-                    <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
-                        <a class="page-link" href="galeria.php?page=<?= $i; ?>&category=<?= $_GET['category'] ?>"> <?= $i; ?> </a>
-                    </li>
-                    <?php endfor; ?>
                 <?php endif; ?>
-                <li class="page-item <?php if($page >= $totalPages) { echo 'disabled'; } ?>">
-                    <a class="page-link" href="<?php if($page >= $totalPages){ echo '#'; } else {echo "?page=". $next; } ?>&category=<?= $_GET['category'] ?>">></a>
+                <?php for($i = $min; $i <= $max; $i++): ?>
+                <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
+                    <a class="page-link" href="galeria.php?page=<?= $i; ?>&category=<?= $_GET['category'] ?>"> <?= $i; ?> </a>
                 </li>
-            </ul>
-        </nav>
+                <?php endfor; ?>
+                <?php if($page < $totalPages - 3): ?>
+                    <li class="page-item disabled">
+                        <a class="page-link">...</a>
+                    </li>
+                <?php endif; ?>
+            <?php else: ?>
+                <?php for($i = 1; $i <= $totalPages; $i++ ): ?>
+                <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
+                    <a class="page-link" href="galeria.php?page=<?= $i; ?>&category=<?= $_GET['category'] ?>"> <?= $i; ?> </a>
+                </li>
+                <?php endfor; ?>
+            <?php endif; ?>
+            <li class="page-item <?php if($page >= $totalPages) { echo 'disabled'; } ?>">
+                <a class="page-link" href="<?php if($page >= $totalPages){ echo '#'; } else {echo "?page=". $next; } ?>&category=<?= $_GET['category'] ?>">></a>
+            </li>
+        </ul>
+    </nav>
     <?php endif; ?>
-    <?php
-        include './includes/footer.php';
-    ?>
+    <?php include './includes/footer.php'; ?>
     <script src="./includes/js/jquery.min.js"></script>
     <script src="./includes/bootstrap/js/bootstrap.min.js"></script>
     <script src="./includes/js/animate-carousel-height-change.js"></script>

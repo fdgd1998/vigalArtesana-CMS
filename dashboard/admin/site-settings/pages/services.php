@@ -1,13 +1,7 @@
 <?php
     error_reporting(0);
     session_start(); // starting the session.
-    require_once '../scripts/connection.php';
-
-    // Redirecting to 403 page if user is not logged in and access is attemped.
-    if (!isset($_SESSION['user'])) {
-      header("Location: ../../../../403.php");
-      exit();
-    }
+    require_once '../scripts/check_session.php';
 
     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
 
@@ -57,9 +51,13 @@
   <h1 class="title">Servicios</h1>
   <p class="title-description">Añade en esta sección los servicios que ofreces a tus clientes. Puedes añadir hasta un máximo de 10.</p>
   <div class="alert my-alert">
-    <?php if ($total_services < 10): ?>
+    <?php if ($total_services == 0): ?>
+      Aún no has creado ningún servicio. Puedes crear un total de 10.
+    <?php endif; ?>
+    <?php if ($total_services < 10 && $total_services > 0): ?>
       Has creado <strong><?=$total_services?></strong> servicio<?=$total_services>1?"s":""?>. Puedes crear <strong><?=10-$total_services?></strong> más.
-    <?php else: ?>
+    <?php endif; ?>
+    <?php if ($total_services == 10): ?>
       No puedes crear más servicios. Para crear uno nuevo, tienes que borrar uno existente.
     <?php endif; ?>
   </div>

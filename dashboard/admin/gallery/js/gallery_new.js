@@ -33,6 +33,7 @@ jQuery(function($){
             data: 'id=testdata',
             cache: false,
             success: function(result) {
+                alert(result);
                 $.each(result, function(key, value) {
                     categories[key] = value;
                 });

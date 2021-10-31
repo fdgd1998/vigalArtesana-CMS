@@ -1,13 +1,7 @@
 <?php
     error_reporting(0);
     session_start(); // starting the session.
-    require_once '../scripts/connection.php';
-
-    // Redirecting to 403 page if user is not logged in and access is attemped.
-    if (!isset($_SESSION['user'])) {
-      header("Location: ../../../../403.php");
-      exit();
-    }
+    require_once "../scripts/check_session.php";
 
     if (isset($_GET['order'])) $order = $_GET['order']; // getting order if GET variable is set.
     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.

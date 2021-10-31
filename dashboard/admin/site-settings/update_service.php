@@ -1,13 +1,7 @@
 <?php
     session_start();
-
-    // Redirecting to 403 page is session does not exist.
-    if (!isset($_SESSION['loggedin'])) {
-        header("Location: ../../../../403.php");
-        exit();
-    }
-
-    require_once '../../../scripts/connection.php';
+    require_once '../../../scripts/check_session.php';
+    require_once '../../../../connection.php';
 
     if (isset($_POST)) {
         try {

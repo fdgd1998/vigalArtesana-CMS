@@ -5,8 +5,8 @@
         $user_form = trim($_POST['user']);
         $pass_form = trim($_POST['password']);
 
-        include "./connection.php"; //datos de conexión
-        include "./crypt.php"; //funciones criptograficas
+        require_once "../../connection.php"; //datos de conexión
+        require_once "./crypt.php"; //funciones criptograficas
 
         $mysqli = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
 

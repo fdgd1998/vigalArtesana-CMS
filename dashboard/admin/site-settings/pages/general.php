@@ -1,27 +1,29 @@
 <?php
     error_reporting(0);
     session_start();
-    if (!isset($_SESSION['user'])) {
-        header("Location: ../403.php");
-        exit();
-    }
-    require_once "../scripts/connection.php";
-    $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
+
+    require_once '../scripts/check_session.php';
 
     $site_settings = array();
-    if ($conn->connect_error) {
-        echo "No se ha podido conectar a la base de datos.";
-        exit();
-    } else {
-        $stmt = "select * from company_info";
-        if ($res = $conn->query($stmt)) {
-            while ($rows = $res->fetch_assoc()) {
-                array_push($site_settings, $rows["value_info"]);
+
+    try {
+        $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
+        if ($conn->connect_error) {
+            echo "No se ha podido conectar a la base de datos.";
+            exit();
+        } else {
+            $stmt = "select * from company_info";
+            if ($res = $conn->query($stmt)) {
+                while ($rows = $res->fetch_assoc()) {
+                    array_push($site_settings, $rows["value_info"]);
+                }
             }
         }
+        $site_settings[4] = json_decode($site_settings[4], true);
+        $conn->close();
+    } catch (Exception $e) {
+
     }
-    $site_settings[4] = json_decode($site_settings[4], true);
-    $conn->close();
 ?>
 <div class="container settings-container">
     <h1 class="title"></i>Página de inicio</h1>
@@ -56,11 +58,12 @@
             <div class="col"><button id="submit-index-image" disabled class="btn my-button" type="button"><i class="far fa-save"></i>Guardar</button></div>
         </div>
     </form>
+    <hr>
     <form style="margin-bottom: 20px;">
         <div class="form-row">
             <div class="col">
                 <h3 class="title">Descripción de la imagen de portada</h3>
-                <p class="title-description">Establece una descripción que se mostrará sobre la imagen de la portada configurada en la opción de arriba.</p>
+                <p class="title-description">Establece una descripción que se mostrará sobre la imagen de la página principal configurada en la opción de arriba.</p>
             </div>
         </div>
         <div class="form-row">
@@ -77,11 +80,12 @@
             <div class="col"><button id="submit-index-image-description" class="btn my-button" type="button"><i class="far fa-save"></i>Guardar</button></div>
         </div>
     </form>
+    <hr>
     <form style="margin-bottom: 20px;">
         <div class="form-row">
             <div class="col">
                 <h3 class="title">Texto resumen página de inicio</h3>
-                <p class="title-description">Describe brevemente tu negocio.</p>
+                <p class="title-description">Describe brevemente tu negocio. Esta descripción aparecerá debajo de la imagen de la página principal.</p>
             </div>
         </div>
         <div class="form-row">
@@ -90,12 +94,12 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Descripción</span>
                     </div>
-                    <textarea id="index-image-description" class="form-control"><?= ($site_settings[6] != ""? $site_settings[6]:"")?></textarea>
+                    <textarea id="index-brief-description" rows="5" class="form-control"><?= ($site_settings[10] != ""? $site_settings[10]:"")?></textarea>
                 </div>
             </div>
         </div>
         <div class="form-row text-right">
-            <div class="col"><button id="submit-index-image-description" class="btn my-button" type="button"><i class="far fa-save"></i>Guardar</button></div>
+            <div class="col"><button id="submit-index-brief-description" class="btn my-button" type="button"><i class="far fa-save"></i>Guardar</button></div>
         </div>
     </form>
 </div>

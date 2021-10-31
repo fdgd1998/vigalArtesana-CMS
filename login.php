@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if (isset($_SESSION['user'])) {
+    if (isset($_SESSION["loggedin"])) {
         header("Location: index.php");
         exit();
     }
@@ -24,20 +24,16 @@
 </head>
 
 <body style="background-color: rgb(241,247,252);">
-<?php
-        require_once 'scripts/get_http_protocol.php';
-        if(!isset($_SESSION['user'])) {
-            echo '
-            <div class="login-clean" style="background-color: rgba(241,247,252,0);">
-            <form class="border rounded shadow-lg" method="post" style="margin-top: 20px;" action="./scripts/authenticate.php">
-                <div style="margin-bottom: 20px;">
-                    <a href="./index.php">
-                        <i class="fas fa-arrow-left" style="margin-right: 10px;"></i>
-                        Volver a Inicio
-                    </a>
-                </div>
-            ';
-            $message = '';
+    <div class="login-clean" style="background-color: rgba(241,247,252,0);">
+        <form class="border rounded shadow-lg" method="post" style="margin-top: 20px;" action="./scripts/authenticate.php">
+            <div style="margin-bottom: 20px;">
+                <a href="./index.php">
+                    <i class="fas fa-arrow-left" style="margin-right: 10px;"></i>
+                    Volver a Inicio
+                </a>
+            </div>
+            <?php
+                $message = '';
                 if ($_GET) {
                     if (isset($_GET['wrong_pass'])) {
                         $message = "Contraseña incorrecta.";
@@ -48,20 +44,14 @@
                         include './snippets/error_message.php';
                     }
                 }
-                echo '
-                        <div class="form-group"><input type="text" class="form-control form-control-sm" name="user" placeholder="Usuario" /></div>
-                        <div class="form-group"><input class="form-control form-control-sm" type="password" name="password" placeholder="Contraseña"></div>
-                        <div class="form-group"><button class="btn my-button btn-block" type="submit" style="background-color: rgb(0, 98, 204);">Iniciar sesión</button></div>
-                        <p class="forgot">Si has olvidado tu contraseña, contacta con el administrador del sitio para restablecerla.</p>
-                        </form>
-                </div>
-                ';
-        } else {
-            echo '<script type="text/javascript">
-                window.location = "'.getHttpProtocol().'://'.$_SERVER['SERVER_NAME'].'/403.php"
-            </script>';
-        }
-    ?>            
+            ?>
+                
+            <div class="form-group"><input type="text" class="form-control form-control-sm" name="user" placeholder="Usuario" /></div>
+            <div class="form-group"><input class="form-control form-control-sm" type="password" name="password" placeholder="Contraseña"></div>
+            <div class="form-group"><button class="btn my-button btn-block" type="submit" style="background-color: rgb(0, 98, 204);">Iniciar sesión</button></div>
+            <p class="forgot">Si has olvidado tu contraseña, contacta con el administrador del sitio para restablecerla.</p>
+        </form>
+    </div>        
     <script src="includes/js/jquery.min.js"></script>
     <script src="includes/bootstrap/js/bootstrap.min.js"></script>
     <script src="includes/js/bs-init.js"></script>

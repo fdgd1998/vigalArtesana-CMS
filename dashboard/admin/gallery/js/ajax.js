@@ -99,7 +99,6 @@ jQuery(function($) {
     $('#cat-delete').on('click', function(e) {
         // perform an ajax call
         var formData = new FormData();
-        alert(editing_cat_id);
         formData.append("cat_id", editing_cat_id);
         $.ajax({
             url: location.origin+'/dashboard/admin/gallery/delete_category.php', // this is the target
@@ -187,7 +186,7 @@ jQuery(function($) {
             method: 'post', // method
             data: {id: cat_id, status: disable}, // pass the input value to server
             success: function(r) { // if the http response code is 200
-                //alert("El estado del usuario se ha actualizado correctamente.");
+                alert(r)
                 $('#catid-'+cat_id+'-change-status-btn').clas
                 $('#cat-status-change').modal().hide();
                 $('.modal-backdrop').remove();
@@ -196,7 +195,7 @@ jQuery(function($) {
                 window.location = location.origin+"/dashboard/?page=categories&order=asc";
             },
             error: function(r) { // if the http response code is other than 200
-                alert("Ha ocurrido un error al actualizar el estado de la categoría.");
+                alert(r);
             }
         });        
     });

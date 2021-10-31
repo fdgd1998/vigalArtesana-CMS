@@ -1,28 +1,26 @@
 <?php
     error_reporting(0);
     session_start(); // Starting the session.
-    require_once "../scripts/connection.php"; // Database connection info.
-    
-    // If a non-logged user access to the current script, is redirected to a 403 page.
-    if (!isset($_SESSION['loggedin'])) {
-        header("Location: ../../../../403.php");
-        exit();
-    }
+    require_once "../scripts/check_session.php";
 
     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
     $categories = array(); // Array to save categories
 
-    if ($conn->connect_error) {
-        echo "Error interno del servidor. No se ha podido establecer una conexión con la base de datos.";
-        exit();
-    } else {
-        // Fetching categories from database and storing then in the array for further use.
-        $sql = "select id, name from categories order by name asc";
-        if ($res = $conn->query($sql)) {
-            while ($rows = $res->fetch_assoc()) {
-                $categories[$rows["id"]] = $rows["name"];
+    try {
+        if ($conn->connect_error) {
+            echo "No se ha podido establecer una conexión con la base de datos.";
+            exit();
+        } else {
+            // Fetching categories from database and storing then in the array for further use.
+            $sql = "select id, name from categories order by name asc";
+            if ($res = $conn->query($sql)) {
+                while ($rows = $res->fetch_assoc()) {
+                    $categories[$rows["id"]] = $rows["name"];
+                }
             }
         }
+    } catch (Exception $e) {
+        echo $e;
     }
 
     // Variables for storing data to edit, just in case if needed.

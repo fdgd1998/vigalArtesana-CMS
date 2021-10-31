@@ -1,15 +1,8 @@
 <?php
     session_start();
-
-    // Redirecting to 403 page is session does not exist.
-    if (!isset($_SESSION['loggedin'])) {
-        header("Location: ../../../../403.php");
-        exit();
-    }
-
-    require_once '../../../scripts/connection.php';
-
-    if ($_POST) {
+    require_once '../../../scripts/check_session.php';
+    require_once '../../../../connection.php';
+    if (isset($_POST)) {
         try {
             $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
 
@@ -30,16 +23,18 @@
                 if ($res = $conn->query($sql)) {
                     $rows = $res->fetch_assoc();
                     $userid = $rows['id'];
-                }
-                echo print_r($_FILES);
-                $res->free(); // Releasing results from RAM.
-                foreach ($_FILES as $file) { // Setting new filename for each file to upload
-                    $temp = explode(".", $file["name"]); // Getting current filename.
-                    $newfilename = round(microtime(true)+$i).$userid.'.'.end($temp); // Setting new filename.
-                    move_uploaded_file($file['tmp_name'],$location.$newfilename); // Moving file to the server.
-                    $stmt = "insert into gallery (filename,category) values ('".$newfilename."',".$categories[$i].")";
-                    $conn->query($stmt);
-                    $i++;
+                    foreach ($_FILES as $file) { // Setting new filename for each file to upload
+                        $temp = explode(".", $file["name"]); // Getting current filename.
+                        $newfilename = round(microtime(true)+$i).$userid.'.'.end($temp); // Setting new filename.
+                        move_uploaded_file($file['tmp_name'],$location.$newfilename); // Moving file to the server.
+                        $stmt = "insert into gallery (filename,category) values ('".$newfilename."',".$categories[$i].")";
+                        $conn->query($stmt);
+                        $i++;
+                    }
+                    echo "Las imágenes se han subido correctamente.";
+                    $res->free();
+                } else {
+                    echo "Ha ocurrido un error subiendo las imágenes.";
                 }
             }
             $conn->close();

@@ -29,7 +29,9 @@ jQuery(function($) {
             if ($(document).find("#delete-images").length == 0) {
                 $(".gallery-manage").before("\
                     <div class='container text-right'>\
-                        <button type='button' id='delete-images' style='margin-bottom: 20px; margin-right: 35px;' class='btn my-button-2 float-right'><i class='far fa-trash-alt'></i>Borrar</button>\
+                        <div class='button-group'>\
+                            <button type='button' id='delete-images' class='btn my-button-2 float-right'><i class='far fa-trash-alt'></i>Borrar</button>\
+                        </div>\
                     </div>");
             }
         } else {

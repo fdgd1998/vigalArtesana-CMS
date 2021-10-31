@@ -1,5 +1,5 @@
 <?php
-    include 'cryptographic_key.php';
+    require_once '../../cryptographic_key.php';
 
     function OpenSSLEncrypt($data) {
         // Remove the base64 encoding from our key

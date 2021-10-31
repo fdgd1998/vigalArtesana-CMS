@@ -19,7 +19,7 @@ jQuery(function($) {
                 processData: false,  // tell not to process the data
                 contentType: false,   // tell jQuery not to set contentType
                 success: function(response) { // if the http response code is 200
-                    // alert(response);
+                    alert(response);
                     $("#update-cat-image-preview").attr("src", response);
                     $("#update-cat-image-preview-div").removeAttr("hidden");
                 },

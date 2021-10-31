@@ -38,11 +38,11 @@ $(document).ready(function() {
             type: 'POST', // method
             data: {social: JSON.stringify(social)},
             success: function(response) { // HTTP response code is 200
-                alert("200:"+response);
+                alert(response);
                 window.location.href = "?page=contact-settings";
             },
             error: function(response) { // HTTP response code is != than 200
-                alert("error: "+response);
+                alert(response);
             }
         });
     });
@@ -73,11 +73,11 @@ $(document).ready(function() {
             type: 'POST', // method
             data: {hours: JSON.stringify(hours)},
             success: function(response) { // HTTP response code is 200
-                alert("200:"+response);
+                alert(response);
                 window.location.href = "?page=contact-settings";
             },
             error: function(response) { // HTTP response code is != than 200
-                alert("error: "+response);
+                alert(response);
             }
         });
     });
@@ -91,11 +91,11 @@ $(document).ready(function() {
                 email: $("#email").val()
             },
             success: function(response) { // HTTP response code is 200
-                alert("200:"+response);
+                alert(response);
                 window.location.href = "?page=contact-settings";
             },
             error: function(response) { // HTTP response code is != than 200
-                alert("error: "+response);
+                alert(response);
             }
         });
     });
@@ -108,11 +108,11 @@ $(document).ready(function() {
                 map_link: $("#map-link").val()
             },
             success: function(response) { // HTTP response code is 200
-                alert("200:"+response);
+                alert(response);
                 window.location.href = "?page=contact-settings";
             },
             error: function(response) { // HTTP response code is != than 200
-                alert("error: "+response);
+                alert(response);
             }
         });
     });

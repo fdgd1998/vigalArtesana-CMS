@@ -1,26 +1,7 @@
 <?php
-    header("Content-Type: text/html;charset=utf-8");
-    session_start();
-    require_once $_SERVER['DOCUMENT_ROOT'].'/scripts/connection.php';
-    $GLOBALS["site_settings"] = array();
-    $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
-    $conn->set_charset("utf8");
-
-    if ($conn->connect_error) {
-        print("No se ha podido conectar a la base de datos");
-        exit();
-    } else {
-        $sql = "select value_info from company_info";
-        $res = $conn->query($sql);
-        while ($rows = $res->fetch_assoc()) {
-            array_push($GLOBALS["site_settings"], $rows['value_info']);
-        }
-    }
-    $GLOBALS["site_settings"][4] = json_decode($GLOBALS["site_settings"][4], true);
-    $GLOBALS["site_settings"][8] = json_decode($GLOBALS["site_settings"][8], true);
+    require_once "./scripts/get_company_info.php";
+    require_once "./scripts/check_maintenance.php";
     $semana = array("Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo");
-    
-    $conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -110,7 +91,7 @@
         include './includes/footer.php';
     ?>
     <!-- SB Forms JS -->
-    <scipt src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     <script src="./includes/js/jquery.min.js"></script>
     <script src="./includes/js/header.js"></script>
     <script src="./includes/bootstrap/js/bootstrap.min.js"></script>

@@ -1,33 +1,27 @@
 <?php
-    header("Content-Type: text/html;charset=utf-8");
-    session_start();
-    require_once $_SERVER['DOCUMENT_ROOT'].'/scripts/connection.php';
-    $GLOBALS["site_settings"] = array();
-    $GLOBALS["services"] = array();
-    $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
-    $conn->set_charset("utf8");
+    require_once "./scripts/get_company_info.php";
+    require_once "./scripts/check_maintenance.php";
 
-    if ($conn->connect_error) {
-        print("No se ha podido conectar a la base de datos");
-        exit();
-    } else {
-        $sql = "select value_info from company_info";
-        $res = $conn->query($sql);
-        while ($rows = $res->fetch_assoc()) {
-            array_push($GLOBALS["site_settings"], $rows['value_info']);
+    $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
+    $services = array(); // Array to save categories
+
+    try {
+        if ($conn->connect_error) {
+            echo "No se ha podido establecer una conexión con la base de datos.";
+            exit();
+        } else {
+            // Fetching categories from database and storing then in the array for further use.
+            $sql = "select * from services";
+            if ($res = $conn->query($sql)) {
+                while ($rows = $res->fetch_assoc()) {
+                    array_push($services, array($rows["id"], $rows["title"], $rows["description"], $rows["image"]));
+                }
+                $res->free();
+            }
         }
-
-        $sql = "select * from services";
-        $res = $conn->query($sql);
-        while ($rows = $res->fetch_assoc()) {
-            array_push($GLOBALS["services"], array($rows["id"],$rows["title"],$rows["description"],$rows["image"]));
-        }
-
-        $res->free();
+    } catch (Exception $e) {
+        echo $e;
     }
-    $GLOBALS["site_settings"][4] = json_decode($GLOBALS["site_settings"][4], true);
-    
-    $conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +55,7 @@
         <div class="div-color-1">
             <div class="container">
                 <div class="title-description wow animate__animated animate__fadeInUp">
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                    <p><?=$GLOBALS["site_settings"][10]?></p>
                 </div>
                 <div class="button-group wow animate__animated animate__fadeInUp">
                     <button onclick="window.location.href = 'sobremi.php'" type="button" class="btn my-button">Sobre nosotros</button>

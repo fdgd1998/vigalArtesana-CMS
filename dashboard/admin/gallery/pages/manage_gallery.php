@@ -1,13 +1,8 @@
 <?php
     error_reporting(0);
     session_start(); // stating the session
-    require_once '../scripts/connection.php'; //Database connection data
+    require_once "../scripts/check_session.php";
 
-    // If a non-logged user access to the current script, is redirected to a 403 page.
-    if (!isset($_SESSION['user'])) {
-      header("Location: ../../../../403.php");
-      exit();
-    }
     $results = array();
 
     // Retrieve new limit value if changed
@@ -67,7 +62,10 @@
 
 <div class="container settings-container">
   <h1 class="title">Galería</h1>
-  <button type="button" id="upload-images" class="btn my-button" style="margin-bottom: 15px;"><i class="fas fa-upload"></i>Subir imágenes...</button>
+  <p class="title-descirption">Gestiona la galería. Para borrar imágenes, pincha sobre ellas para seleccionarlas.</p>
+  <div class="button-group">
+    <button type="button" id="upload-images" class="btn my-button"><i class="fas fa-upload"></i>Subir imágenes...</button>
+  </div>
   <div class="input-group" style="margin-bottom: 20px;">
     <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">Ordenar</span>
@@ -125,11 +123,11 @@
   </form>
   <div class="container gallery-manage row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" style="margin-bottom: 20px;">
     <?php foreach ($results as $element): ?>
-        <div class='col-sm-6 col-md-4 col-lg-3' style='margin-bottom: 30px;'>
-            <a class='gallery-item animated'>
-              <img id="<?=$element[1]?>" class='photos img-fluid' src='../uploads/images/<?=$element[1]?>'/>
-            </a>
-        </div>
+      <div class="wrap animated">
+        <a class='gallery-item '>
+          <img id="<?=$element[1]?>" class='photos img-fluid' src='../uploads/images/<?=$element[1]?>'/>
+        </a>
+      </div>
     <?php endforeach; ?>
 </div>
 <!-- Pagination -->

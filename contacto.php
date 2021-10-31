@@ -12,6 +12,7 @@
     <title>Contacta con nosotros - ViGal Artesana</title>
     <meta name="description" content="Ponte en contacto con ViGal Artesana.">
     <meta name="robots" content="index, follow">
+    <link rel="icon" href="./includes/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="./includes/css/footer.css">
     <link rel="stylesheet" href="./includes/css/Navigation-Clean.css">

@@ -9,6 +9,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacta con nosotros - ViGal Artesana</title>
+    <meta name="description" content="Aprende más sobre nosotros y lo que hacemos.">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" href="./includes/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="./includes/css/footer.css">
     <link rel="stylesheet" href="./includes/css/Navigation-Clean.css">

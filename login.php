@@ -13,6 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Iniciar sesión en ViGal Artesana</title>
     <meta name="description" content="Iniciar sesión en ViGal Artesana">
+    <link rel="icon" href="./includes/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="./includes/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="./includes/css/Bootstrap-Callout.css">

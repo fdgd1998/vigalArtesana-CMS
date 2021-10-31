@@ -10,6 +10,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacta con nosotros - ViGal Artesana</title>
+    <meta name="description" content="Ponte en contacto con ViGal Artesana.">
+    <meta name="robots" content="index, follow">
     <link rel="stylesheet" href="./includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="./includes/css/footer.css">
     <link rel="stylesheet" href="./includes/css/Navigation-Clean.css">
@@ -46,6 +48,15 @@
 
             }
     </style>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FZJ25SLN42"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-FZJ25SLN42');
+    </script>
 </head>
 
 <body>

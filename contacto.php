@@ -24,30 +24,20 @@
 
     <style>
         .map-responsive{
-
             overflow:hidden;
-
             padding-bottom:56.25%;
-
             position:relative;
-
             height:0;
+            margin-bottom: 40px;
+        }
 
-            }
-
-            .map-responsive iframe{
-
+        .map-responsive iframe{
             left:0;
-
             top:0;
-
             height:100%;
-
             width:100%;
-
             position:absolute;
-
-            }
+        }
     </style>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FZJ25SLN42"></script>
@@ -67,6 +57,7 @@
     <div class="container content">
         <h1 class="title wow animate__animated animate__fadeInUp">Contacto</h1>
         <p class="title-description wow animate__animated animate__fadeInUp">Si quieres pedir más información, preguntar precios, pedir un presupuesto o preguntar cualquier otra cosa, no dudes en contactar con nosotros. ¡Estaremos encantados de atenderte!</p>
+        <p class="title-description wow animate__animated animate__fadeInUp">También puedes usar el formulario de contacto al final de esta página.</p>
         <div class="row wow animate__animated animate__fadeInUp">
             <div class="col-lg-7">
                 <p class="address"><?=$GLOBALS["site_settings"][1]?></p>
@@ -92,21 +83,60 @@
             </div>
         </div>
         <div>
-                <h2 class="title wow animate__animated animate__fadeInUp">Ubicación</h2>
-                <div class="map-responsive wow animate__animated animate__fadeInUp">
-                    <iframe class="w-100" src="<?=$GLOBALS["site_settings"][7]?>" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <h2 class="title wow animate__animated animate__fadeInUp">Ubicación</h2>
+            <div class="map-responsive wow animate__animated animate__fadeInUp">
+                <iframe class="w-100" src="<?=$GLOBALS["site_settings"][7]?>" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-2 col-lg-3"></div>
+            <div class="col-12 col-sm-8 col-lg-6">
+                <h2 class="title">Formulario de contacto</h2>
+                <div class="mb-3">
+                    <label>Nombre:</label>
+                    <input type="text" class="form-control" id="nombre">
+                    <div class="invalid-feedback">
+                        Introduce un nombre.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label>Email:</label>
+                    <input type="email" class="form-control" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                    <div class="invalid-feedback">
+                        Introduce un email válido.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label>Motivo de contacto:</label>
+                    <select class="custom-select" id="motivo">
+                        <option value="duda" selected>Consultar duda</option>
+                        <option value="precio">Pedir precio</option>
+                        <option value="presupuesto">Pedir presupuesto</option>
+                        <option value="otro">Otra consulta</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label>Mensaje:</label>
+                    <textarea rows="5" id="mensaje" class="form-control"></textarea>
+                    <div class="invalid-feedback">
+                        El mensaje no puede estar vacío.
+                    </div>
+                </div>
+                <div class="button-group text-right">
+                    <button disabled class="btn my-button" id="submit-message">Enviar</button>
                 </div>
             </div>
+            <div class="col-12 col-sm-2 col-lg-3"></div>
+        </div>
     </div>
 
     <?php
         include './includes/footer.php';
     ?>
-    <!-- SB Forms JS -->
-    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     <script src="./includes/js/jquery.min.js"></script>
-    <script src="./includes/js/header.js"></script>
+    <script src="./includes/js/contacto.js"></script>
     <script src="./includes/bootstrap/js/bootstrap.min.js"></script>
-    <script src="./includes/js/wow-init.js"></script>
+
+    <!-- <script src="./includes/js/wow-init.js"></script> -->
 </body>
 </html>

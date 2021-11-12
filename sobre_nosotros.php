@@ -1,6 +1,5 @@
 <?php
     require_once "./scripts/get_company_info.php";
-    require_once "./scripts/check_maintenance.php";
 ?>
 
 <!DOCTYPE html>
@@ -24,9 +23,10 @@
 
 <body>
     <?php
+        require_once "./scripts/check_maintenance.php";
         include './includes/header.php';
     ?>
-    <div class="container content wow animate__animated animate__fadeInUp">
+    <div class="container content">
         <h1 class="title">Sobre nosotros</h1>
         <?=$GLOBALS["site_settings"][9]?>
     </div>
@@ -35,10 +35,7 @@
         include './includes/footer.php';
     ?>
     <!-- SB Forms JS -->
-    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     <script src="./includes/js/jquery.min.js"></script>
-    <script src="./includes/js/header.js"></script>
     <script src="./includes/bootstrap/js/bootstrap.min.js"></script>
-    <script src="./includes/js/wow-init.js"></script>
 </body>
 </html>

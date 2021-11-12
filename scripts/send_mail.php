@@ -1,23 +1,34 @@
 <?php
-    session_start();
-
-    if (isset($_POST)) {
-        $from = $_POST["from"];
-        $to = $_POST["to"];
-        $subject = $_POST["subject"];
-        $message = $_POST["message"];
-        $headers = "MIME-Version: 1.0\r\n";
-        $headers .= "Content-type: text/html; charset=UTF-8\r\n";
-        $headers .= "From: ".$from;
-
-        if (mail($to, $subject, $message, $headers)) {
-            echo "El mensaje se ha enviado correctamente.";
-        } else {
-            echo "Ha ocurrido un error enviando el mensaje.";
+    require "PHPMailer/PHPMailer.php";
+    require "PHPMailer/SMTP.php";
+    require "PHPMailer/Exception.php";
+    
+    function SendEmail($from, $name, $to, $subject, $body) {
+        try {
+            include "../../email_settings.php";
+            $mail = new PHPMailer\PHPMailer\PHPMailer();
+            $mail->isSMTP();
+            $mail->Host = $host;
+            $mail->Port = $port;
+            $mail->SMTPDebug = $debugLevel;
+            $mail->SMTPSecure = "ssl";
+            $mail->SMTPAuth = true;
+            $mail->Username = $username;
+            $mail->Password = $password;
+            $mail->SetFrom($username, "");
+            $mail->AddReplyTo($username, "");
+            $mail->addAddress($to,"");
+            $mail->Subject = $subject;
+            $mail->Body = $body;
+            $mail->IsHTML(true);
+            
+            if ($mail->Send()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (phpmailerException $e) {
+            echo $e;
         }
-        
-    } else {
-        header("Location: ../403.php");
-        exit();
     }
 ?>

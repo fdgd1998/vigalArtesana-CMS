@@ -1,5 +1,6 @@
 $(document).ready(function() {
     $("#save-about-us").on("click", function() {
+        ShowSpinnerOverlay("Guardando...");
         $.ajax({
             url: location.origin+'/dashboard/admin/site-settings/update_about_us.php', // this is the target
             type: 'post', // method
@@ -10,6 +11,7 @@ $(document).ready(function() {
             },
             error: function(response) { // if the http response code is other than 200
                 alert(response);
+                $(document).find("#spinner-div").remove();
             }
         });
     });

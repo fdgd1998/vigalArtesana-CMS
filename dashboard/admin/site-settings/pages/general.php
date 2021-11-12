@@ -31,7 +31,7 @@
         <div class="form-row">
             <div class="col">
                 <h3 class="title"><i class="far fa-image"></i>Imagen de portada</h3>
-                <p class="title-description">Establece una imagen de portada que se verá en la página principal.</p>
+                <p class="title-description">Establece una imagen de portada que se verá en la página principal (máximo 2 MB).</p>
             </div>
         </div>
         <div class="form-row">

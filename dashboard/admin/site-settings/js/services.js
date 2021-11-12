@@ -9,6 +9,7 @@ $(document).ready(function() {
         else $("#new-service-btn").attr("disabled","disabled");
     }
     $("#new-service-btn").on("click", function(){
+        ShowSpinnerOverlay("Creando servicio...");
         var formData = new FormData();
         formData.append("title", $("#title-new").val());
         formData.append("description", $("#description-new").val());
@@ -26,21 +27,25 @@ $(document).ready(function() {
             },
             error: function(response) { // if the http response code is other than 200
                 alert(response);
+                HideSpinner();
             }
         });
     });
 
     $("#image-input-new").on("change", function(){
-        EnableSaveCategoryBtn ();
         if ($(this).prop("files")[0]) {
-            $("#image-preview-div-new").removeAttr("hidden");
-            readURL(this, $("#image-preview-new"));
-            $("#image-input-label-new").html($(this).prop("files")[0].name);            
+            if (!CheckImageSize($(this).prop("files")[0], 2097152)) {
+                $("#image-preview-div-new").removeAttr("hidden");
+                readURL(this, $("#image-preview-new"));
+                $("#image-input-label-new").html($(this).prop("files")[0].name);        
+            } else {
+                $(this).val('');
+            }
         } else {
             $("#image-preview-div-new").attr("hidden", true);
             $("#image-input-label-new").html("Selecccionar imagen...");
         }
-        
+        EnableSaveCategoryBtn ();
     });
 
     $("#title-new, #description-new").on("keyup", function() {
@@ -52,6 +57,7 @@ $(document).ready(function() {
     });
 
     $("#delete-service-btn").on("click", function(){
+        ShowSpinnerOverlay("Borrando servicio...");
         console.log("id: "+id);
         $.ajax({
             url: location.origin+'/dashboard/admin/site-settings/delete_service.php', // this is the target
@@ -65,6 +71,7 @@ $(document).ready(function() {
             },
             error: function(response) { // if the http response code is other than 200
                 alert(response);
+                HideSpinner();
             }
         });
     });
@@ -101,7 +108,7 @@ $(document).ready(function() {
 
     function IsImageValid() {
         console.log("image valid: "+$("#image-input-edit").prop("files")[0]);
-        if ($("#image-input-edit").prop("files")[0]) 
+        if ($("#image-input-edit").prop("files")[0] && !CheckImageSize($("#image-input-edit").prop("files")[0], 2097152)) 
         {
             return true;
         } else {
@@ -195,9 +202,13 @@ $(document).ready(function() {
 
     $("#image-input-edit").on("change", function(){
         if ($(this).prop("files")[0]) {
-            $("#image-input-edit-label").html($(this).prop("files")[0].name);
-            readURL(this, $("#service-edit-image-preview"));
-            EnableEditServiceBtn(true);
+            if (!CheckImageSize($(this).prop("files")[0], 2097152)) {
+                $("#image-input-edit-label").html($(this).prop("files")[0].name);
+                readURL(this, $("#service-edit-image-preview"));
+                EnableEditServiceBtn(true);
+            } else {
+                $(this).val('');   
+            }
         } else {
             $("#image-input-edit-label").html("Escoger imagen...");
             $("#service-edit-image-preview").attr("src","../includes/img/placeholder-image.jpg");
@@ -210,6 +221,7 @@ $(document).ready(function() {
     });
 
     $("#submit-service-edit").on("click", function(){
+        ShowSpinnerOverlay("Editando servicio...");
         var formData = new FormData();
         formData.append("id", servId);
         if ($("#edit-title").is(":checked")) {
@@ -238,6 +250,7 @@ $(document).ready(function() {
             },
             error: function(response) { // if the http response code is other than 200
                 alert(response);
+                HideSpinner();
             }
         });
     });

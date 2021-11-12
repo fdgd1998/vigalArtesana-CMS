@@ -32,13 +32,13 @@
     <title>Panel de control - ViGal Artesana</title>
     <link rel="stylesheet" href="../includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../includes/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="../includes/css/galeria.css">
+    <link rel="stylesheet" href="../includes/css/gallery.css">
     <link rel="stylesheet" href="../includes/css/styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand" />
     <link rel="stylesheet" href="../includes/summernote/summernote-bs4.min.css" />
 </head>
 
-<body>
+<body class="d-flex">
     <?php if ($maintenance == "true"): ?>
     <div id="maintenance-warning" class="container-fluid">
         <p> <i class="fas fa-exclamation-triangle"></i>El modo de mantenimiento está activado. Puedes ver el sitio web porque has iniciado sesión, pero no estará disponible en internet hasta que lo desactives.</p>
@@ -166,44 +166,46 @@
             </div>
         </div>
     </div>
-    <div class="overlay"></div>
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
     <script src="../includes/js/jquery.min.js"></script>
     <script src="../includes/bootstrap/js/bootstrap.min.js"></script>
     <script src="../includes/js/popper.min.js"></script>
-    <script src="./admin/gallery/js/load-images.js"></script>
+    <script src="admin/gallery/js/load-images.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <script src="js/show_spinner.js"></script>
+    <script src="js/hide_spinner.js"></script>
+    <script src="js/check_image_size.js"></script>
 
     <?php if (isset($_GET["page"]) && ($_GET["page"] == "manage-gallery" || $_GET["page"] == "gallery-new" || $_GET["page"] == "categories")): ?>
-    <script src="./admin/gallery/js/gallery_new.js"></script>
-    <script src="./admin/gallery/js/gallery-manage.js"></script>
-    <script src="./admin/gallery/js/ajax.js"></script>
-    <script src="./admin/gallery/js/categories.js"></script>
+    <script src="admin/gallery/js/gallery_new.js"></script>
+    <script src="admin/gallery/js/gallery-manage.js"></script>
+    <script src="admin/gallery/js/ajax.js"></script>
+    <script src="admin/gallery/js/categories.js"></script>
     <?php endif; ?>
 
     <?php if (isset($_GET["page"]) && $_GET["page"] == "general-settings"): ?>
-    <script src="./admin/site-settings/js/general.js"></script>
+    <script src="admin/site-settings/js/general.js"></script>
     <?php endif; ?>
 
     <?php if (isset($_GET["page"]) && $_GET["page"] == "contact-settings"): ?>
-    <script src="./admin/site-settings/js/contact.js"></script>
+    <script src="admin/site-settings/js/contact.js"></script>
     <?php endif; ?>
 
     <?php if (isset($_GET["page"]) && $_GET["page"] == "advanced"): ?>
-    <script src="./admin/site-settings/js/advanced.js"></script>
+    <script src="admin/site-settings/js/advanced.js"></script>
     <?php endif; ?>
 
     <?php if (isset($_GET["page"]) && ($_GET["page"] == "manage-services") || $_GET["page"] == "new-service" || preg_match('^edit-service&id=(\d{1,2})$^', isset($_GET["id"])?$_GET["page"]."&id=".$_GET["id"]:$_GET["page"])): ?>
-    <script src="./admin/site-settings/js/services.js"></script>
+    <script src="admin/site-settings/js/services.js"></script>
     <?php endif; ?>
     
     <?php if(isset($_GET["page"]) && $_GET["page"] == "about-us"): ?>
     <script src="../includes/summernote/summernote-bs4.min.js"></script>
     <script src="../includes/summernote/lang/summernote-es-ES.js"></script>
-    <script src="./admin/site-settings/js/about-us.js"></script>
+    <script src="admin/site-settings/js/about-us.js"></script>
     <script>
         $("#summernote").summernote({
             lang: 'es-ES',

@@ -15,13 +15,13 @@
     */
     header("Content-Type: text/html;charset=utf-8");
     session_start();
-    require_once '../connection.php';
+    require_once dirname(__DIR__, 2).'/connection.php';
     $GLOBALS["site_settings"] = array();
     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
     $conn->set_charset("utf8");
 
     if ($conn->connect_error) {
-        header("Location: ./error.php");
+        header("Location: /500");
         die();
     } else {
         $sql = "select value_info from company_info";

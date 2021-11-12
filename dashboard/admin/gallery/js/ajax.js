@@ -9,7 +9,7 @@ function enableCreateFormBtn() {
     console.log($("#new-cat-name").css('background-color'));
     if (total_inputs == 2) $('#cat-create').removeAttr('disabled');
     else $('#cat-create').attr('disabled', 'disabled');
-};
+}
 
 // Enable submit button of the edit form.
 function enableEditFormBtn() {
@@ -40,6 +40,7 @@ function enableEditFormBtn() {
 
 jQuery(function($) {
     $('#cat-create').on('click', function(e) {
+        ShowSpinnerOverlay("Creando categoría...");
         // perform an ajax call
         var formData = new FormData();
         formData.append("cat_name", $("#new-cat-name").val());
@@ -58,11 +59,13 @@ jQuery(function($) {
             },
             error: function(response) { // if the http response code is other than 200
                 alert(response);
+                HideSpinner();
             }
         });
     });
 
     $('#cat-edit').on('click', function(e) {
+        ShowSpinnerOverlay("Editando categoría...");
         // perform an ajax call
         var formData = new FormData();
         formData.append("cat_id", editing_cat_id);
@@ -92,11 +95,13 @@ jQuery(function($) {
             },
             error: function(response) { // if the http response code is other than 200
                 alert(response);
+                HideSpinner();
             }
         });
     });
 
     $('#cat-delete').on('click', function(e) {
+        ShowSpinnerOverlay("Borrando categoría...");
         // perform an ajax call
         var formData = new FormData();
         formData.append("cat_id", editing_cat_id);
@@ -115,6 +120,7 @@ jQuery(function($) {
             },
             error: function(response) { // if the http response code is other than 200
                 alert(response);
+                HideSpinner();
             }
         });
     });
@@ -173,6 +179,7 @@ jQuery(function($) {
     });
 
     $("#cat-statuschange").on('click', function(e) {
+        ShowSpinnerOverlay("Actualizando categoría...");
         disable = 'YES';
         if ($('#'+editing_cat_id+'_cat_status').text().trim() == 'Habilitada') {
             console.log("la categoria sera deshabilitada");
@@ -196,6 +203,7 @@ jQuery(function($) {
             },
             error: function(r) { // if the http response code is other than 200
                 alert(r);
+                HideSpinner();
             }
         });        
     });

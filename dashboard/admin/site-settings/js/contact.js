@@ -28,6 +28,7 @@ $(document).ready(function() {
     });
 
     $("#submit_social").on("click", function() {
+        ShowSpinnerOverlay("Editando...");
         var social = {};
         if ($("#instagram_chkbx").is(':checked')) social["instagram"] = $("#instagram_url").val();
         if ($("#facebook_chkbx").is(':checked')) social["facebook"] = $("#facebook_url").val();
@@ -43,6 +44,7 @@ $(document).ready(function() {
             },
             error: function(response) { // HTTP response code is != than 200
                 alert(response);
+                HideSpinner();
             }
         });
     });
@@ -58,6 +60,7 @@ $(document).ready(function() {
     });
 
     $("#submit_opening_hours").on("click", function() {
+        ShowSpinnerOverlay("Actualizando horario...");
         console.log("getting opening hours...");
         var hours = {};
         $(".week").each(function(i, obj) {
@@ -78,11 +81,13 @@ $(document).ready(function() {
             },
             error: function(response) { // HTTP response code is != than 200
                 alert(response);
+                HideSpinner();
             }
         });
     });
 
     $("#submit_contact_data").on("click", function() {
+        ShowSpinnerOverlay("Editando datos de contacto...");
         $.ajax({
             url: location.origin+"/dashboard/admin/site-settings/update_contact_phone_email.php", // this is the target
             type: 'POST', // method
@@ -96,11 +101,13 @@ $(document).ready(function() {
             },
             error: function(response) { // HTTP response code is != than 200
                 alert(response);
+                HideSpinner();
             }
         });
     });
 
     $("#submit_map_link").on("click", function() {
+        ShowSpinnerOverlay("Actualizando ubicación...");
         $.ajax({
             url: location.origin+"/dashboard/admin/site-settings/update_map_link.php", // this is the target
             type: 'POST', // method
@@ -113,6 +120,7 @@ $(document).ready(function() {
             },
             error: function(response) { // HTTP response code is != than 200
                 alert(response);
+                HideSpinner();
             }
         });
     });

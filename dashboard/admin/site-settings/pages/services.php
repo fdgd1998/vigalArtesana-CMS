@@ -49,7 +49,7 @@
 </div>
 <div class="container settings-container">
   <h1 class="title">Servicios</h1>
-  <p class="title-description">Añade en esta sección los servicios que ofreces a tus clientes. Puedes añadir hasta un máximo de 10.</p>
+  <p class="title-description">Añade en esta sección los servicios que ofreces a tus clientes. Puedes añadir hasta un máximo de 10 servicios.</p>
   <div class="alert my-alert">
     <?php if ($total_services == 0): ?>
       Aún no has creado ningún servicio. Puedes crear un total de 10.
@@ -61,9 +61,11 @@
       No puedes crear más servicios. Para crear uno nuevo, tienes que borrar uno existente.
     <?php endif; ?>
   </div>
+
   <div class="button-group">
     <button <?=$total_services == 10?"disabled":""?> type="button" onclick="window.location.href='?page=new-service'" class="btn my-button" style="margin-bottom: 15px;"><i class="far fa-plus-square"></i>Nuevo servicio</button>
   </div>
+  <?php if ($total_services != 0): ?>
   <div class="row">
     <div class="col-12 carousel-buttons">
         <a class="btn my-button mr-1" href="#services" role="button" data-slide="prev">
@@ -106,4 +108,5 @@
       </div>
     </div>
   </div>
+  <?php endif; ?>
 </div>

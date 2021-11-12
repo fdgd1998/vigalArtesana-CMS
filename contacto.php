@@ -1,7 +1,5 @@
 <?php
     require_once "./scripts/get_company_info.php";
-    require_once "./scripts/check_maintenance.php";
-    $semana = array("Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo");
 ?>
 
 <!DOCTYPE html>
@@ -19,8 +17,8 @@
     <link rel="stylesheet" href="./includes/css/styles.css">
     <link rel="stylesheet" href="./includes/fonts/fontawesome-all.min.css">
     <link href='https://fonts.googleapis.com/css?family=Great Vibes' rel='stylesheet'>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
     <style>
         .map-responsive{
@@ -52,13 +50,14 @@
 
 <body>
     <?php
+        require_once "./scripts/check_maintenance.php";
         include './includes/header.php';
     ?>
     <div class="container content">
-        <h1 class="title wow animate__animated animate__fadeInUp">Contacto</h1>
-        <p class="title-description wow animate__animated animate__fadeInUp">Si quieres pedir más información, preguntar precios, pedir un presupuesto o preguntar cualquier otra cosa, no dudes en contactar con nosotros. ¡Estaremos encantados de atenderte!</p>
-        <p class="title-description wow animate__animated animate__fadeInUp">También puedes usar el formulario de contacto al final de esta página.</p>
-        <div class="row wow animate__animated animate__fadeInUp">
+        <h1 class="title">Contacto</h1>
+        <p class="title-description">Si quieres pedir más información, preguntar precios, pedir un presupuesto o preguntar cualquier otra cosa, no dudes en contactar con nosotros. ¡Estaremos encantados de atenderte!</p>
+        <p class="title-description">También puedes usar el formulario de contacto al final de esta página.</p>
+        <div class="row">
             <div class="col-lg-7">
                 <p class="address"><?=$GLOBALS["site_settings"][1]?></p>
                 <a class="contact-data" href="tel:<?=str_replace(' ','',$GLOBALS["site_settings"][0])?>"><?=$GLOBALS["site_settings"][0]?></a>
@@ -82,10 +81,12 @@
                 </ul>
             </div>
         </div>
-        <div>
-            <h2 class="title wow animate__animated animate__fadeInUp">Ubicación</h2>
-            <div class="map-responsive wow animate__animated animate__fadeInUp">
-                <iframe class="w-100" src="<?=$GLOBALS["site_settings"][7]?>" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <div class="row">
+            <div class="col">
+                <h2 class="title">Ubicación</h2>
+                <div class="map-responsive">
+                    <iframe class="w-100" src="<?=$GLOBALS["site_settings"][7]?>" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -122,6 +123,7 @@
                         El mensaje no puede estar vacío.
                     </div>
                 </div>
+                <div class="g-recaptcha brochure__form__captcha" data-callback="recaptchaCallback" data-expired-callback="recaptchaExpired" data-sitekey="6LfjwBQdAAAAAHJFdsQtEaHdFscXMmWjrKlcv2h-"></div>
                 <div class="button-group text-right">
                     <button disabled class="btn my-button" id="submit-message">Enviar</button>
                 </div>
@@ -134,9 +136,10 @@
         include './includes/footer.php';
     ?>
     <script src="./includes/js/jquery.min.js"></script>
-    <script src="./includes/js/contacto.js"></script>
     <script src="./includes/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- <script src="./includes/js/wow-init.js"></script> -->
+    <script src="./includes/js/contact.js"></script>
+    <script src="./dashboard/js/hide_spinner.js"></script>
+    <script src="./dashboard/js/show_spinner.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
 </body>
 </html>

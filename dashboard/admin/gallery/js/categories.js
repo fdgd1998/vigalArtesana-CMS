@@ -97,12 +97,16 @@ jQuery(function($) {
 
     // Getting new category image URL and setting a preview.
     $("#update-new-cat-image").on("change", function(e) {
-        if ($(this).val() != "") {
-            var fileName = $(this).val().substring(12);
-            console.log(fileName);
-            $('#update-new-cat-image-name').html(fileName);
-            readURL(this, $("#update-new-cat-image-preview"));
-            $("#update-new-cat-image-preview-div").prop("hidden", false);  
+        if ($(this).prop("files")[0]) {
+            if (!CheckImageSize($(this).prop("files")[0], 2097152)) {
+                var fileName = $(this).val().substring(12);
+                console.log(fileName);
+                $('#update-new-cat-image-name').html(fileName);
+                readURL(this, $("#update-new-cat-image-preview"));
+                $("#update-new-cat-image-preview-div").prop("hidden", false);  
+            } else {
+                $(this).val('');   
+            }
         } else {
             $('#cat-edit').attr('disabled', 'disabled');
             $("#update-new-cat-image-name").html("Escoger fichero...");
@@ -114,12 +118,16 @@ jQuery(function($) {
     // Getting current category image URL and setting a preview.
     $("#new-cat-image").on("change", function(e) {
         if ($(this).prop("files")[0]) {
-            var fileName = $(this).val().substring(12);
-            console.log(fileName.substring(12));
-            $('#new-cat-image-name').html(fileName);
-            $('#new-cat-image-preview-div').removeAttr("hidden");
-            readURL(this, $("#new-cat-image-preview"));
-            $("#new-cat-image-preview-div").prop("hidden", false);
+            if (!CheckImageSize($(this).prop("files")[0], 2097152)) {
+                var fileName = $(this).val().substring(12);
+                console.log(fileName.substring(12));
+                $('#new-cat-image-name').html(fileName);
+                $('#new-cat-image-preview-div').removeAttr("hidden");
+                readURL(this, $("#new-cat-image-preview"));
+                $("#new-cat-image-preview-div").prop("hidden", false);
+            } else {
+                $(this).val('');   
+            }
         } else {
             // $('#cat-create').attr('disabled', 'disabled');
             $('#new-cat-image-preview-div').attr("hidden","true");

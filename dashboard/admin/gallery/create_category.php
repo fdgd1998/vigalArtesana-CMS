@@ -2,6 +2,7 @@
     session_start();
     require_once '../../../scripts/check_session.php';
     require_once '../../../../connection.php';
+    require_once 'scripts/get_friendly_url.php';
     
     $location = "../../../uploads/categories/"; // location for uploaded images.
 
@@ -30,7 +31,7 @@
                 $newfilename = round(microtime(true)).$userid.'.'.end($temp); // Setting new filename
 
                 // Saving the name and the image filename into database.
-                $sql = "insert into categories (name, image) values ('".$_POST['cat_name']."','".$newfilename."')";
+                $sql = "insert into categories (friendly_url, name, image) values ('".GetFriendlyUrl($_POST["cat_name"])."','".$_POST['cat_name']."','".$newfilename."')";
                 if ($conn->query($sql) === TRUE) {
                     move_uploaded_file($_FILES['file']['tmp_name'],$location.$newfilename); // Moving file to the server
                     echo "La categoría se ha creado correctamente.";

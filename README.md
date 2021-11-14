@@ -16,10 +16,10 @@ Features:
 - Encryption of sensible data stored in the database.
 - Gallery system organized by categories.
 - Blog system.(*)
-- Customizable company info.(*)
-- In-site contact form.(*)
-- Search Engine Optimization.(*)
-- Under construction / maintenance website template.(*)
+- Customizable company info.
+- In-site contact form.
+- Search Engine Optimization.
+- Under construction / maintenance website template.
 
 Broken features (might be fixed in the future):
 - User management (creation, deletion, edition, profiles, privileges).

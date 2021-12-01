@@ -1,5 +1,11 @@
 User-agent: *
 
+Allow: /$
+Allow: /galeria$
+Allow: /galeria/
+Allow: /contacto$
+Allow: /sobre-nosotros$
+
 Disallow: /dashboard/
 Disallow: /includes/
 Disallow: /scripts/

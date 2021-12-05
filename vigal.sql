@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 05-12-2021 a las 00:08:07
+-- Tiempo de generación: 05-12-2021 a las 01:17:55
 -- Versión del servidor: 10.5.12-MariaDB-cll-lve
 -- Versión de PHP: 7.2.34
 
@@ -49,6 +49,24 @@ CREATE TABLE `company_info` (
   `value_info` longtext CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `company_info`
+--
+
+INSERT INTO `company_info` (`key_info`, `value_info`) VALUES
+('phone', '+34 600 00 00 00'),
+('location', 'Calle, 0, 00000 Población, Ciudad'),
+('name', 'ViGal Artesana'),
+('email', 'test@example.es'),
+('social_media', '{\"instagram\":\"example\",\"facebook\":\"example\",\"whatsapp\":\"+34600000000\"}'),
+('index-image', 'index.jpg'),
+('index-image-description', 'Descripción de portada.'),
+('google-map-link', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1130.5455780830325!2d-4.1215623848120835!3d36.73058733416122!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x5e8cd95cc99abae6!2sVigal%20Artesana!5e0!3m2!1ses!2ses!4v1634843687218!5m2!1ses!2se'),
+('opening-hours', '{\"Lunes\":\"9:00 - 13:30 | 16:30 - 18:30\",\"Martes\":\"9:00 - 16:30\",\"Miércoles\":\"9:00 - 13:30 | 16:30 - 18:30\",\"Jueves\":\"9:00 - 16:30\",\"Viernes\":\"9:00 - 13:30 | 16:30 - 18:30\",\"Sábado\":\"con cita previa\",\"Domingo\":\"cerrado\"}'),
+('about-us', '<p><b>Esta</b> es la sección sobre nosotros</p>'),
+('index-brief-description', 'Una breve descripción en la página principal'),
+('maintenance', 'false');
+
 -- --------------------------------------------------------
 
 --
@@ -91,6 +109,13 @@ CREATE TABLE `users` (
   `account_enabled` char(10) CHARACTER SET utf8mb4 DEFAULT 'YES',
   `passwd_reset` char(10) CHARACTER SET utf8mb4 DEFAULT 'NO'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `email`, `passwd`, `firstname`, `surname`, `account_type`, `account_enabled`, `passwd_reset`) VALUES
+(1, 'admin', 'UnRxS0RBSWxJSTcyVnJwa094YVhobDVTdi9RRFlJMmRRckxZcWIzd3E0WT06OqMGfsQTERx8ilZlJcrlTSo=', 'OEEyY3RJZEJpUkxMOVh5QjRWWVFDQT09Ojrjdut8/EOQSEAdY1BgRU7a', '', '', 'superuser', 'YES', 'NO');
 
 --
 -- Índices para tablas volcadas
@@ -147,7 +172,7 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Restricciones para tablas volcadas

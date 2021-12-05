@@ -35,13 +35,13 @@
                 <?php endif; ?>
             </div>
             <div style="margin-top: 30px; margin-bottom: 30px;">
-                <p>También puedes ponerme en contacto con nosotros</p>
+                <p>También puedes ponerte en contacto con nosotros</p>
                 <a class="contact-data" href="tel:<?=str_replace(' ','',$GLOBALS["site_settings"][0])?>"><?=$GLOBALS["site_settings"][0]?></a>
                 <a class="contact-data" href="mailto:<?=$GLOBALS["site_settings"][3]?>"><?=$GLOBALS["site_settings"][3]?></a>
             </div>
         </div>
         <hr>
-        <p style="margin-top: 30px;">Si eres el propietario del sitio web, puedes iniciar sesión haciendo clic <u><a href="login.php">aquí.</a></u></p>
+        <p style="margin-top: 30px;">Si eres el propietario del sitio web, puedes iniciar sesión haciendo clic <u><a href="login">aquí.</a></u></p>
     </div>
 </body>
 </html>

@@ -35,7 +35,7 @@
                     <input class="form-control" id="new-cat-name" type="text">
                 </div>
                 <div class="form-group">
-                    <label for="new-cat-image">Imagen de fondo: </label>
+                    <label for="new-cat-image">Imagen (máximo 2 MB): </label>
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroupFileAddon01"><icon class='fas fa-upload'></icon></span>
@@ -103,16 +103,16 @@
           <input type="text" class="form-control" id="update-cat-name" aria-describedby="basic-addon1">
         </div>
         <div class="form-group" hidden id="update-cat-image-preview-div">
-            <label for="update-cat-image-preview" style="width: 100%;">Imagen de fondo actual: </label>
+            <label for="update-cat-image-preview" style="width: 100%;">Imagen actual: </label>
             <center><img id="update-cat-image-preview" src="#" alt="" width="50%"></center>
         </div>
         <div>
         <div class="custom-control custom-checkbox">
           <input type="checkbox" class="custom-control-input" id="change-edit-image-chkbx">
-          <label class="custom-control-label" for="change-edit-image-chkbx">Establecer nueva imagen de fondo.</label>
+          <label class="custom-control-label" for="change-edit-image-chkbx">Establecer nueva imagen.</label>
         </div>
           <div id="edit-change-image" class="disabled-form">
-            <label>Nueva imagen de fondo: </label>
+            <label>Nueva imagen : </label>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class='fas fa-upload'></i></span>

@@ -1,7 +1,6 @@
 <?php
     session_start();
     require_once "./scripts/get_company_info.php";
-    require_once "./scripts/check_maintenance.php";
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +22,7 @@
 <body>
     <div id="main">
         <?php
+            require_once "./scripts/check_maintenance.php";
             include './includes/header.php';
         ?>
         <div class="container content">

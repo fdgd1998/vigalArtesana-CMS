@@ -103,7 +103,7 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'G-FZJ25SLN42');
+        gtag('config', 'G-PR2VVLQM5B');
     </script>
 </head>
 

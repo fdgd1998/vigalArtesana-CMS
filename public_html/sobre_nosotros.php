@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacta con nosotros - ViGal Artesana</title>
+    <title>Sobre nosotros - ViGal Artesana</title>
     <meta name="description" content="Aprende más sobre nosotros y lo que hacemos.">
     <meta name="robots" content="index, follow">
     <link rel="icon" href="./includes/img/favicon.ico" type="image/x-icon">
@@ -19,6 +19,15 @@
     <link href='https://fonts.googleapis.com/css?family=Great Vibes' rel='stylesheet'>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FZJ25SLN42"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-PR2VVLQM5B');
+    </script>
 </head>
 
 <body>

@@ -123,7 +123,7 @@
   </form>
   <div class="container gallery-manage row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" style="margin-bottom: 20px;">
     <?php foreach ($results as $element): ?>
-      <div class="wrap animated">
+      <div class="wrap animated-item">
         <a class='gallery-item '>
           <img id="<?=$element[1]?>" class='photos img-fluid' src='../uploads/images/<?=$element[1]?>'/>
         </a>

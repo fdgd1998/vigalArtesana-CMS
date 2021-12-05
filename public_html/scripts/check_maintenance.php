@@ -4,5 +4,5 @@
     <p>Puedes desactivarlo <u><a href="./dashboard?page=advanced">aquí</a></u>.</p>
 </div>
 <?php elseif ($GLOBALS["site_settings"][11] == "true" && !isset($_SESSION["loggedin"])): ?>
-<?php header("Location: ./mantenimiento.php"); die();?>
+<?php header("Location: /mantenimiento"); die();?>
 <?php endif; ?>

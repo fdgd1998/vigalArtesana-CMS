@@ -94,8 +94,9 @@
     .photos {
         border-radius: 5%;
         height:180px !important;
+        width: 100% !important;
         object-fit: cover !important;
-        width: 100%;
+        
     }
     
     .wrap {
@@ -109,8 +110,9 @@
     .photos {
         border-radius: 5%;
         height: 220px !important;
+        width: 100% !important;
         object-fit: cover !important;
-        width: 100%;
+        
     }
     
     .wrap {
@@ -156,5 +158,5 @@
 .gallery-item {
     display: inline-block;
     position: relative;
-    width: 100% !important;
+    /*width: 100% !important;*/
 }

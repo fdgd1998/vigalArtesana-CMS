@@ -28,7 +28,7 @@
     <div class="login-clean" style="background-color: rgba(241,247,252,0);">
         <form class="border rounded shadow-lg" method="post" style="margin-top: 20px;" action="./scripts/authenticate.php">
             <div style="margin-bottom: 20px;">
-                <a href="./index.php">
+                <a href="/">
                     <i class="fas fa-arrow-left" style="margin-right: 10px;"></i>
                     Volver a Inicio
                 </a>

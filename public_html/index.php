@@ -29,7 +29,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diseñamos y restauramos tus muebles con madera antigua - ViGal Artesana</title>
-    <meta name="description" content="Restauración, construcción de muebles y objetos de madera.">
+    <meta name="description" content="Artesanía y restauración con madera antigua, muebles y objetos decorativos de madera.">
     <meta name="robots" content="index, follow">
     <link rel="icon" href="includes/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="includes/bootstrap/css/bootstrap.min.css">
@@ -48,7 +48,7 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'G-FZJ25SLN42');
+        gtag('config', 'G-PR2VVLQM5B');
     </script>
 </head>
 

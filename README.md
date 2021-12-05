@@ -11,17 +11,19 @@ The main purpose of this CMS is to be simple, lightweight and without any unnece
 - Frameworks: Bootstrap, jQuery.
 - Web development techniques: AJAX.
 
-Features:
+## Features:
 - Fully featured site control panel.
 - Encryption of sensible data stored in the database.
 - Gallery system organized by categories.
-- Blog system.(*)
 - Customizable company info.
 - In-site contact form.
 - Search Engine Optimization.
 - Under construction / maintenance website template.
 
-Broken features (might be fixed in the future):
+## Future features:
+- Blog system.(*)
+
+## Broken features (might be fixed in the future):
 - User management (creation, deletion, edition, profiles, privileges).
 - Account password recovery by unique token sent via email.
 

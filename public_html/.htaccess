@@ -1,5 +1,5 @@
 # Deshabilitando listado de directorios FTP
-Options -Indexes
+# Options -Indexes
 
 # Mensajes de error personalizados
 ErrorDocument 400 /errorpages/400.php
@@ -18,8 +18,8 @@ ErrorDocument 503 /errorpages/503.php
 
 # Activar HTTPS
 RewriteEngine On
-RewriteCond %{Server_Port} !=443
-RewriteRule ^(.*)$ https:// vigalartesana.es/$1 [R=301,L]
+# RewriteCond %{Server_Port} !=443
+# RewriteRule ^(.*)$ locahost/$1 [R=301,L]
 
 #URLs amigables
 RewriteRule ^contacto$ /contacto.php

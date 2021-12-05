@@ -1,4 +1,7 @@
-# ViGal Artesana CMS
+# **IMPORTANT NOTICE:
+The code contained in this repository can be used and modified by anyone. If you plan to use this work in production, please consider mentioning me as the creator.**
+
+## ViGal Artesana CMS
 This is a small, custom CMS developed from scratch for my family's carprenty and restoration company.
 
 See the project on vigalartesana.es
@@ -11,7 +14,7 @@ The main purpose of this CMS is to be simple, lightweight and without any unnece
 - Frameworks: Bootstrap, jQuery.
 - Web development techniques: AJAX.
 
-## Features:
+### Features:
 - Fully featured site control panel.
 - Encryption of sensible data stored in the database.
 - Gallery system organized by categories.
@@ -20,10 +23,10 @@ The main purpose of this CMS is to be simple, lightweight and without any unnece
 - Search Engine Optimization.
 - Under construction / maintenance website template.
 
-## Future features:
+### Future features:
 - Blog system.(*)
 
-## Broken features (might be fixed in the future):
+### Broken features (might be fixed in the future):
 - User management (creation, deletion, edition, profiles, privileges).
 - Account password recovery by unique token sent via email.
 

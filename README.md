@@ -1,5 +1,5 @@
-# **IMPORTANT NOTICE:
-The code contained in this repository can be used and modified by anyone. If you plan to use this work in production, please consider mentioning me as the creator.**
+# **IMPORTANT NOTICE:**
+**The code contained in this repository can be used and modified by anyone. If you plan to use this work in production, please consider mentioning me as the creator.**
 
 ## ViGal Artesana CMS
 This is a small, custom CMS developed from scratch for my family's carprenty and restoration company.

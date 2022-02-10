@@ -47,14 +47,8 @@ Remember to change your settings in connection.php and email_settings.php after 
 
 In order to make everything work, you'll need to do the following.
 
-Move cryptograhpic_key.php, connection.php and email_settings.php outside your website's root folder (at same directory level).
-Copy all the content inside public_html into the root of your website's root folder.
-Your folder tree must see like the following:
+Move cryptograhpic_key.php, connection.php and email_settings.php outside your website's root folder (at same directory level). This is because theese files have to be in a non public accesible location.
 
-|----website_root(html_public contents go here)
-|
-|----cryptographic_key.php
-|----connection.php
-|----email_settings.php
+Copy all the content inside public_html into the root of your website's root folder.
 
 You may see some missing elements until you populate the website with contents.

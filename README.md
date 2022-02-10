@@ -37,3 +37,26 @@ The main purpose of this CMS is to be simple, lightweight and without any unnece
 - Account password recovery by unique token sent via email.
 
 NOTE: Features marked with (*) are in the works.
+
+## Setup
+There's a default key for data encryption in database in cryptograhic_key.php. Change this key later on if you plan to upload the code to any hosting.
+
+Control panel access user is "admin" and password "admin", without the quotes.
+
+Remember to change your settings in connection.php and email_settings.php after your have exported the database in your machine.
+
+In order to make everything work, you'll need to do the following.
+
+Move cryptograhpic_key.php, connection.php and email_settings.php outside htdocs folder (on the same directory level).
+Copy all the content inside public_html into the root of htdocs.
+Your folder tree must see like the following:
+
+__xampp
+|
+|_____htdocs(html_public contents go here)
+|
+|_____cryptographic_key.php
+|_____connection.php
+|_____email_settings.php
+
+You may see some missing elements until you populate the website with contents.

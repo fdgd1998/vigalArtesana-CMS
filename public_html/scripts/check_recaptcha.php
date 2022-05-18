@@ -4,7 +4,7 @@
     require_once "send_mail.php";
     
     function reCaptcha($recaptcha){
-      $secret = "your_secret_here";
+      $secret = "6LcpXp0dAAAAACBU4biQYT3mYwKzYuQiG4XMukHr";
       $ip = $_SERVER['REMOTE_ADDR'];
     
       $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secret."&response=".$recaptcha."&remoteip=".$ip);

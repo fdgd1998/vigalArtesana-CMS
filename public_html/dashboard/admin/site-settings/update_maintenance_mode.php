@@ -4,7 +4,7 @@
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
     require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
     
-    if (!HasAccessToResource("update_maintenance_mode")) {
+    if (!HasPermission("manage_siteSettings")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
         exit();
     }

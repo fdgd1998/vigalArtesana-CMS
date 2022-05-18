@@ -5,7 +5,7 @@
         $user_form = trim($_POST['user']);
         $pass_form = trim($_POST['password']);
 
-        require_once "../../connection.php"; //datos de conexión
+        require_once dirname($_SERVER["DOCUMENT_ROOT"], 1)."/connection.php"; //datos de conexión
 
         $mysqli = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
 
@@ -15,7 +15,7 @@
         } else {
 
             // Verificación de las credenciales de usuario
-            $stmt = $mysqli->prepare("select id, username, passwd, account_type, account_enabled, passwd_reset from users where username = ?");
+            $stmt = $mysqli->prepare("select users.id, users.username, users.passwd, user_roles.role, users.account_enabled, users.passwd_reset from users inner join user_roles on user_roles.id = users.account_type where username = ?");
             $stmt->bind_param("s", $user_form);
             $stmt->execute();
             $stmt->store_result();
@@ -26,9 +26,9 @@
             if ($stmt->num_rows == 1) {
                 if($row = $stmt->fetch()) {
                     if (password_verify($pass_form, $pass)) {
-                        if ($account_enabled == "NO") {
+                        if ($account_enabled == 0) {
                             $_SESSION["error"] = "Esta cuenta ha sido deshabilitada. Contacta con el administrador del sitio.";
-                        } else if ($passwd_reset == "YES") {
+                        } else if ($passwd_reset == 1) {
                             $_SESSION["error"] = "No se puede iniciar sesión porque tienes pendiente una recuperación de contraseña. Revisa tu bandeja de entrada para encontrar las intrucciones y restablecerla o contacta con el administrador del sitio.";
                         } else {
                             $_SESSION['loggedin'] = true;
@@ -48,6 +48,5 @@
             header("Location: ../login");
             exit();
         }
-        
     }
 ?>

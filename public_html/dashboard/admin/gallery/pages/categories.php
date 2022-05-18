@@ -1,11 +1,10 @@
 <?php
-    error_reporting(0);
+    //error_reporting(0);
     session_start(); // starting the session.
-    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/check_session.php";
-    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
+    require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
     
-    if (!HasAccessToResource("categories")) {
+    if (!HasPermission("show_categories")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
         exit();
     }
@@ -229,7 +228,7 @@
                                 echo '<td>'.$rows['name'].'</td>';
                                 echo '<td id="catid-'.$rows['id'].'_cat_status">'.$cat_status = $rows['cat_enabled'] == 'YES' ? 'Habilitada':'Deshabilitada'.'</td>';
                                 echo '<td><div>';
-                                if ($_SESSION['user'] == $rows['uploadedBy']) {
+                                if ($_SESSION['userid'] == $rows['uploadedBy']) {
                                     echo '<button class="btn my-button-3 cat-edit-form" title="Editar categoría" type="button" id="catid-'.$rows['id'].'" name="'.$rows['name'].'">
                                                 <i class="far fa-edit"></i>
                                             </button>

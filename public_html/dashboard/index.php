@@ -58,7 +58,7 @@
                                 Configuración del sitio
                             </a>
                             <div role="menu" class="dropdown-menu">
-                                <h6 class="dropdown-header">Opciones generales</h6>
+                                <h6 class="dropdown-header">Información de la empresa</h6>
                                 <a role="presentation" class="dropdown-item" href="/dashboard?page=general-settings">
                                     <i class="fas fa-home"></i>
                                     Página de inicio

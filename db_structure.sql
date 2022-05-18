@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 05-12-2021 a las 01:17:55
+-- Tiempo de generación: 18-05-2022 a las 07:24:48
 -- Versión del servidor: 10.5.12-MariaDB-cll-lve
 -- Versión de PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -35,7 +34,8 @@ CREATE TABLE `categories` (
   `friendly_url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
   `cat_enabled` char(3) CHARACTER SET utf8mb4 DEFAULT 'YES',
-  `image` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL
+  `image` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `uploadedBy` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -49,24 +49,6 @@ CREATE TABLE `company_info` (
   `value_info` longtext CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Volcado de datos para la tabla `company_info`
---
-
-INSERT INTO `company_info` (`key_info`, `value_info`) VALUES
-('phone', '+34 600 00 00 00'),
-('location', 'Calle, 0, 00000 Población, Ciudad'),
-('name', 'ViGal Artesana'),
-('email', 'test@example.es'),
-('social_media', '{\"instagram\":\"example\",\"facebook\":\"example\",\"whatsapp\":\"+34600000000\"}'),
-('index-image', 'index.jpg'),
-('index-image-description', 'Descripción de portada.'),
-('google-map-link', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1130.5455780830325!2d-4.1215623848120835!3d36.73058733416122!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x5e8cd95cc99abae6!2sVigal%20Artesana!5e0!3m2!1ses!2ses!4v1634843687218!5m2!1ses!2se'),
-('opening-hours', '{\"Lunes\":\"9:00 - 13:30 | 16:30 - 18:30\",\"Martes\":\"9:00 - 16:30\",\"Miércoles\":\"9:00 - 13:30 | 16:30 - 18:30\",\"Jueves\":\"9:00 - 16:30\",\"Viernes\":\"9:00 - 13:30 | 16:30 - 18:30\",\"Sábado\":\"con cita previa\",\"Domingo\":\"cerrado\"}'),
-('about-us', '<p><b>Esta</b> es la sección sobre nosotros</p>'),
-('index-brief-description', 'Una breve descripción en la página principal'),
-('maintenance', 'false');
-
 -- --------------------------------------------------------
 
 --
@@ -76,7 +58,8 @@ INSERT INTO `company_info` (`key_info`, `value_info`) VALUES
 CREATE TABLE `gallery` (
   `id` int(5) NOT NULL,
   `filename` varchar(50) CHARACTER SET latin1 NOT NULL,
-  `category` int(3) NOT NULL
+  `category` int(3) NOT NULL,
+  `uploadedBy` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -110,12 +93,50 @@ CREATE TABLE `users` (
   `passwd_reset` char(10) CHARACTER SET utf8mb4 DEFAULT 'NO'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Volcado de datos para la tabla `users`
+-- Estructura de tabla para la tabla `user_permissions`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `passwd`, `firstname`, `surname`, `account_type`, `account_enabled`, `passwd_reset`) VALUES
-(1, 'admin', 'UnRxS0RBSWxJSTcyVnJwa094YVhobDVTdi9RRFlJMmRRckxZcWIzd3E0WT06OqMGfsQTERx8ilZlJcrlTSo=', 'OEEyY3RJZEJpUkxMOVh5QjRWWVFDQT09Ojrjdut8/EOQSEAdY1BgRU7a', '', '', 'superuser', 'YES', 'NO');
+CREATE TABLE `user_permissions` (
+  `id` int(4) NOT NULL,
+  `categories` tinyint(1) DEFAULT 0,
+  `gallery_new` tinyint(1) DEFAULT 0,
+  `manage_gallery` tinyint(1) DEFAULT 0,
+  `get_friendly_url` tinyint(1) DEFAULT 0,
+  `change_category_status` tinyint(1) DEFAULT 0,
+  `check_category_name` tinyint(1) DEFAULT 0,
+  `create_category` tinyint(1) DEFAULT 0,
+  `create_gallery_items` tinyint(1) DEFAULT 0,
+  `delete_category` tinyint(1) DEFAULT 0,
+  `delete_images` tinyint(1) DEFAULT 0,
+  `edit_category` tinyint(1) DEFAULT 0,
+  `get_categories` tinyint(1) DEFAULT 0,
+  `retrieve_cetegory_image` tinyint(1) DEFAULT 0,
+  `about_us` tinyint(1) DEFAULT 0,
+  `advanced` tinyint(1) DEFAULT 0,
+  `contact` tinyint(1) DEFAULT 0,
+  `edit_service` tinyint(1) DEFAULT 0,
+  `general` tinyint(1) DEFAULT 0,
+  `new_service` tinyint(1) DEFAULT 0,
+  `services` tinyint(1) DEFAULT 0,
+  `create_service` tinyint(1) DEFAULT 0,
+  `delete_service` tinyint(1) DEFAULT 0,
+  `update_about_us` tinyint(1) DEFAULT 0,
+  `update_contact_phone_email` tinyint(1) DEFAULT 0,
+  `update_index_brief_description` tinyint(1) DEFAULT 0,
+  `update_index_image` tinyint(1) DEFAULT 0,
+  `update_index_image_description` tinyint(1) DEFAULT 0,
+  `update_maintenance_mode` tinyint(1) DEFAULT 0,
+  `update_map_link` tinyint(1) DEFAULT 0,
+  `update_opening_hours` tinyint(1) DEFAULT 0,
+  `update_service` tinyint(1) DEFAULT 0,
+  `update_social_media` tinyint(1) DEFAULT 0,
+  `create_user` tinyint(1) NOT NULL DEFAULT 0,
+  `manage_users` tinyint(1) NOT NULL DEFAULT 0,
+  `delete_user` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Índices para tablas volcadas
@@ -147,6 +168,12 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `user_permissions`
+--
+ALTER TABLE `user_permissions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -172,7 +199,7 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas

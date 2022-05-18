@@ -1,0 +1,49 @@
+**PERMISSIONS**
+
+ALL (superuser, administrator, gallery_collaborator, no_user)
+--> show_categories 10000000
+--> show_gallery 01000000
+
+GALLERY_COLLABORATOR (superuser, administrator, gallery_collaborator)
+--> manage_categories 00100000
+--> manage_gallery 00010000
+ 
+ADMINISTRATORS (superuser, administrator)
+--> manage_companySettings 00001000
+--> manage_services 00000100
+
+SUPERUSER (superuser)
+--> manage_users 00000010
+--> manage_siteSettings 00000001
+
+------------------------------------------------
+
+**PERMISSION MASK**
+
+superuser: 11111111
+administrator: 11111100
+gallery_collaborator: 11110000
+
+------------------------------------------------
+
+**EXAMPLES**
+
+The binary AND operation determines if the user has correct permissions.
+
+If the result of (permission mask) & (permission) equals (permission), then the user has permissions
+to access the resource.
+
+11111100 --> administrator
+00000010 --> manage_users
+
+00000000 has no permssion to manage users
+____________________________________________________
+
+11111100
+00001000 --> manage_companySetting
+
+00001000 has permissions to manage company settings
+
+
+
+

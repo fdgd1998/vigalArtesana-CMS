@@ -1,7 +1,13 @@
 <?php
     error_reporting(0);
     session_start(); // starting the session.
-    require_once "../scripts/check_session.php";
+    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
+    
+    if (!HasAccessToResource("about_us")) {
+        include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
+        exit();
+    }
 
     $about_text = "";
     

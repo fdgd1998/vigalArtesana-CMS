@@ -54,7 +54,7 @@ jQuery(function($) {
             processData: false,  // tell jQuery not to process the data
             contentType: false,   // tell jQuery not to set contentType
             success: function(response) { // if the http response code is 200
-                alert(response);
+                //alert(response);
                 window.location = location.origin+"/dashboard/?page=categories&order=asc";
             },
             error: function(response) { // if the http response code is other than 200
@@ -90,7 +90,7 @@ jQuery(function($) {
             contentType: false,   // tell jQuery not to set contentType
             success: function(response) { // if the http response code is 200
                 // $('.modal-backdrop').remove();
-                alert(response);
+                //alert(response);
                 window.location = location.origin+"/dashboard/?page=categories&order=asc";
             },
             error: function(response) { // if the http response code is other than 200

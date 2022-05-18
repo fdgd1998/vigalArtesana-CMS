@@ -1,10 +1,17 @@
 User-agent: *
 
-Allow: /$
-Allow: /galeria$
-Allow: /galeria/
-Allow: /contacto$
-Allow: /sobre-nosotros$
+Allow: /
+Allow: /galeria
+Allow: /galeria/*
+Allow: /contacto
+Allow: /sobre-nosotros
+
+Allow: /includes/fonts
+Allow: /includes/bootstrap/css/*.css
+Allow: /includes/bootstrap/js/*.js
+Allow: /includes/css/*.css
+Allow: /includes/js/*.js
+Allow: /includes/*.php
 
 Disallow: /dashboard
 Disallow: /includes

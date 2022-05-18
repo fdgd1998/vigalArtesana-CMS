@@ -1,8 +1,13 @@
 <?php
     session_start();
-    require_once '../../../scripts/check_session.php';
-    require_once '../../../../connection.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
     require_once 'scripts/get_friendly_url.php';
+    
+    if (!HasAccessToResource("edit_category")) {
+        include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
+        exit();
+    }
     
     if (isset($_POST)) {
         try {
@@ -12,7 +17,7 @@
                 echo "No se ha podido conectar a la base de datos.";
                 exit();
             } else {
-                $location = "../../../uploads/categories/"; //location for category images.
+                $location = $_SERVER["DOCUMENT_ROOT"]."/uploads/categories/"; //location for category images.
 
                 if (!isset($_FILES["cat_file"]) && isset($_POST["cat_name"])) { // changing category name
                     $stmt = "update categories set name = '".$_POST['cat_name']."', friendly_url = '".GetFriendlyUrl($_POST["cat_name"])."' where id = ".$_POST["cat_id"];

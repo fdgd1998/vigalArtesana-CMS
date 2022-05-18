@@ -1,5 +1,5 @@
 # Deshabilitando listado de directorios FTP
-# Options -Indexes
+Options -Indexes
 
 # Mensajes de error personalizados
 ErrorDocument 400 /errorpages/400.php
@@ -9,17 +9,13 @@ ErrorDocument 410 /errorpages/410.php
 ErrorDocument 500 /errorpages/500.php
 ErrorDocument 503 /errorpages/503.php
 
+RewriteEngine on
 # Prevenir hotlinking
-# RewriteEngine on 
 # RewriteCond %{HTTP_REFERER} !^$
-# RewriteCond %{HTTP_REFERER} !^http://vigalartesana.es/.*$ [NC] [OR]
-# RewriteCond %{HTTP_REFERER} !^http://www.vigalartesana.es/.*$ [NC] [OR]
-# RewriteRule .*\.(png|PNG|jpg|JPG|jpeg|JPEG)$ - [F]
 
 # Activar HTTPS
-RewriteEngine On
-# RewriteCond %{Server_Port} !=443
-# RewriteRule ^(.*)$ locahost/$1 [R=301,L]
+RewriteCond %{Server_Port} !=443
+RewriteRule ^(.*)$ https:// vigalartesana.es/$1 [R=301,L]
 
 #URLs amigables
 RewriteRule ^contacto$ /contacto.php

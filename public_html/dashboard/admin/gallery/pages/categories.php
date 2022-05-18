@@ -1,7 +1,14 @@
 <?php
     error_reporting(0);
     session_start(); // starting the session.
-    require_once "../scripts/check_session.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/check_session.php";
+    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
+    
+    if (!HasAccessToResource("categories")) {
+        include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
+        exit();
+    }
 
     if (isset($_GET['order'])) $order = $_GET['order']; // getting order if GET variable is set.
     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
@@ -189,7 +196,7 @@
                         exit();
                     } else {
                         // Fetching categories from databases and sorting them.
-                        $sql = "select * from categories";
+                        $sql = "select * from categories ";
                         if (isset($_GET['order'])) {
                           switch($_GET['order']) {
                             case 'asc':
@@ -221,10 +228,9 @@
                                 echo '<tr>';
                                 echo '<td>'.$rows['name'].'</td>';
                                 echo '<td id="catid-'.$rows['id'].'_cat_status">'.$cat_status = $rows['cat_enabled'] == 'YES' ? 'Habilitada':'Deshabilitada'.'</td>';
-                                echo '
-                                    <td>
-                                        <div>
-                                            <button class="btn my-button-3 cat-edit-form" title="Editar categoría" type="button" id="catid-'.$rows['id'].'" name="'.$rows['name'].'">
+                                echo '<td><div>';
+                                if ($_SESSION['user'] == $rows['uploadedBy']) {
+                                    echo '<button class="btn my-button-3 cat-edit-form" title="Editar categoría" type="button" id="catid-'.$rows['id'].'" name="'.$rows['name'].'">
                                                 <i class="far fa-edit"></i>
                                             </button>
                                             <button class="btn my-button-2 cat-delete" title="Borrar categoría" type="button" id="catid-'.$rows['id'].'" name="'.$rows['name'].'">
@@ -232,9 +238,9 @@
                                             </button>
                                             <button class="btn btn-dark cat-status-change-form" title="'.$cat_status.' categoría" type="button" id="catid-'.$rows['id'].'" name="'.$rows['name'].'">
                                                 <i id="catid-'.$rows['id'].'-change-status-btn" class="fas fa-arrow-circle-'.$status_arrow_icon.'"></i>
-                                            </button>
-                                        </div>
-                                    </td>';
+                                            </button>';
+                                }
+                                echo '</div></td>';
                                 echo '</tr>';
                                 }                   
                             }

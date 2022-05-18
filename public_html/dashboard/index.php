@@ -1,7 +1,7 @@
 <?php
     session_start();
-    require_once '../../connection.php';
-    require_once '../scripts/check_session.php';
+    require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
 
     $maintenance = "";
     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
@@ -52,15 +52,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <?php
-                    if ($_SESSION['account_type'] == 'admin' || $_SESSION['account_type'] == 'superuser') {
-                        echo '
+                    <?php if ($_SESSION['account_type'] == 'administrator' || $_SESSION['account_type'] == 'superuser'): ?>
                         <li class="nav-item dropdown">
                             <a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">
                                 Configuración del sitio
                             </a>
                             <div role="menu" class="dropdown-menu">
-                            <h6 class="dropdown-header">Opciones generales</h6>
+                                <h6 class="dropdown-header">Opciones generales</h6>
                                 <a role="presentation" class="dropdown-item" href="/dashboard?page=general-settings">
                                     <i class="fas fa-home"></i>
                                     Página de inicio
@@ -83,17 +81,33 @@
                                     <i class="fas fa-plus-circle"></i>
                                     Nuevo servicio
                                 </a>
+                                <?php if ($_SESSION['account_type'] == 'superuser'): ?>
                                 <div class="dropdown-divider"></div>
                                 <a role="presentation" class="dropdown-item" href="/dashboard?page=advanced">
                                     <i class="fas fa-code"></i>
                                     Opciones avanzadas
                                 </a>
+                                <?php endif; ?>
                             </div>
                         </li>
-                        ';
-                    }
-                ?>
-                
+                    <?php endif; ?>
+                     <?php if ($_SESSION['account_type'] == 'superuser'): ?>
+                        <li class="nav-item dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">
+                                Usuarios
+                            </a>
+                            <div role="menu" class="dropdown-menu">
+                                <a role="presentation" class="dropdown-item" href="/dashboard?page=manage-users">
+                                    <i class="fas fa-user"></i>
+                                    Gestionar usuarios
+                                </a>
+                                <a role="presentation" class="dropdown-item" href="/dashboard?page=new-user">
+                                    <i class="fas fa-plus-circle"></i>
+                                    Nuevo usuario
+                                </a>
+                            </div>
+                        </li>
+                    <?php endif; ?>
                     <li class='nav-item dropdown'>
                         <a data-toggle='dropdown' class='dropdown-toggle nav-link' href='#'>
                             Galería

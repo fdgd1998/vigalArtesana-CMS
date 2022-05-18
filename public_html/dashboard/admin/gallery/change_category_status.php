@@ -1,7 +1,13 @@
 <?php
     session_start();
-    require_once '../../../scripts/check_session.php';
-    require_once '../../../../connection.php';
+    require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
+    
+    if (!HasAccessToResource("change_category_status")) {
+        include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
+        exit();
+    }
     // Publishers cannot modify categories.
     if ($_POST && $_SESSION['account_type'] != 'publisher') {
         try {

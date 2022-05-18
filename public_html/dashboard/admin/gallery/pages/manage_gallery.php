@@ -1,7 +1,14 @@
 <?php
     error_reporting(0);
     session_start(); // stating the session
-    require_once "../scripts/check_session.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/check_session.php";
+    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
+    
+    if (!HasAccessToResource("manage_gallery")) {
+        include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
+        exit();
+    }
 
     $results = array();
 
@@ -28,9 +35,9 @@
 
     // Opening database connection.
     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
-    $sql = "select gallery.id, filename from gallery inner join categories on gallery.category = categories.id";
+    $sql = "select gallery.id, filename from gallery inner join categories on gallery.category = categories.id where gallery.uploadedBy = '".$_SESSION['user']."'";
     if (isset($_GET["c"])) {
-      $sql.=" where gallery.category = ".$_GET["c"];
+      $sql.=" and gallery.category = ".$_GET["c"];
     }
     $sql.=" limit $paginationStart, $limit";
     if ($res = $conn->query($sql)) {
@@ -42,9 +49,9 @@
     // Getting all records from database
     $sql = "";
     if (isset($_GET['c'])) {
-      $sql = "select count(gallery.id) as id from gallery inner join categories on gallery.category = categories.id where gallery.category = ".$_GET['c'];
+      $sql = "select count(gallery.id) as id from gallery inner join categories on gallery.category = categories.id where gallery.uploadedBy = '".$_SESSION['user']."' and gallery.category = ".$_GET['c'];
     } else {
-      $sql = "select count(gallery.id) as id from gallery inner join categories on gallery.category = categories.id";
+      $sql = "select count(gallery.id) as id from gallery inner join categories on gallery.category = categories.id where gallery.uploadedBy = '".$_SESSION['user']."'";
     }
     $allRecords = $conn->query($sql)->fetch_assoc()['id'];
     

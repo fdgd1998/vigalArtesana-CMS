@@ -1,7 +1,13 @@
 <?php
     session_start();
-    require_once '../../../scripts/check_session.php';
-    require_once '../../../../connection.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
+    require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
+    
+    if (!HasAccessToResource("create_service")) {
+        include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
+        exit();
+    }
 
     if (isset($_POST)) {
         try {
@@ -11,7 +17,7 @@
                 echo "No se ha podido conectar con la base de datos.";
                 exit();
             } else {
-                $location = "../../../uploads/services/"; // location for uploaded images.
+                $location = $_SERVER["DOCUMENT_ROOT"]."/uploads/services/"; // location for uploaded images.
                 // If more than one user tries to upload a file at the same time, both can be called the same due to the implemented naming system.
                 // In this case, one will be overwritted by the other.
                 // To prevent this, the userid is attached at the end.

@@ -97,13 +97,13 @@
     <link href='https://fonts.googleapis.com/css?family=Great Vibes' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FZJ25SLN42"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5GCTKSYQEQ"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'G-PR2VVLQM5B');
+        gtag('config', 'G-5GCTKSYQEQ');
     </script>
 </head>
 
@@ -131,23 +131,29 @@
         <?php else: ?>
             <div class="intro">
                 <h1 class="title"><a href="/galeria"><i class="fas fa-arrow-left" style="margin-right: 20px !important;"></i></a><?=$category_name?></h1>
-                <p class="title-descriptionp">Pincha sobre las imágenes para verlas a tamaño completo. Para volver a la página anterior, pincha sobre la flecha a la izquierda del nombre de la categoría.</p>
+                <?php if (count($results) > 0): ?>
+                    <p class="title-description">Pincha sobre las imágenes para verlas a tamaño completo. Para volver a la página anterior, pincha sobre la flecha a la izquierda del nombre de la categoría.</p>
+                <?php else: ?>
+                    <p class="title-description">No se han encontrado elementos en esta categoría. Visita esta página más tarde.</p>
+                <?php endif; ?>
             </div>
-            <div class="galeria">
-                <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4"> 
-                    <?php foreach ($results as $element): ?>    
-                    <a class="animated-item wrap" href="/uploads/images/<?=$element[1]?>">
-                        <img loading="lazy" id="image-<?=$element[0]?>" class='img-fluid photos' src="/uploads/images/<?=$element[1]?>" alt="<?=$category_name?>"/>
-                    </a>
-                    <?php endforeach; ?>
+            <?php if (count($results) > 0): ?>
+                <div class="galeria">
+                    <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4"> 
+                        <?php foreach ($results as $element): ?>    
+                        <a class="animated-item wrap" href="/uploads/images/<?=$element[1]?>">
+                            <img loading="lazy" id="image-<?=$element[0]?>" class='img-fluid photos' src="/uploads/images/<?=$element[1]?>" alt="<?=$category_name?>"/>
+                        </a>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
-            </div>
+            <?php endif; ?>
         </div>
         <?php endif; ?>
     </div>
 
     <!-- Pagination -->
-    <?php if (isset($_GET['category'])): ?>
+    <?php if (isset($_GET['category']) && count($results) > 0): ?>
     <nav aria-label="Page navigation example mt-5" style="margin-bottom: 50px;">
         <ul class="pagination justify-content-center">
             <li class="page-item <?php if($page <= 1){ echo 'disabled'; } ?>">

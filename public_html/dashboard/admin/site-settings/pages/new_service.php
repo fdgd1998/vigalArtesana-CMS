@@ -1,3 +1,12 @@
+<?php
+    require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
+    
+    if (!HasAccessToResource("new_service")) {
+        include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
+        exit();
+    }
+?>
 <div class="container content">
     <h1 class="title">Nuevo servicio</h1>
     <p class="title-description">Tamaño máximo de imagen: 2 MB.</p>

@@ -1,7 +1,14 @@
 <?php
     session_start();
-    require_once '../../../scripts/check_session.php';
-    require_once '../../../../connection.php';
+    require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
+    
+    if (!HasAccessToResource("create_gallery_items")) {
+        include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
+        exit();
+    }
+    
     if (isset($_POST)) {
         try {
             $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
@@ -27,7 +34,7 @@
                         $temp = explode(".", $file["name"]); // Getting current filename.
                         $newfilename = round(microtime(true)+$i).$userid.'.'.end($temp); // Setting new filename.
                         move_uploaded_file($file['tmp_name'],$location.$newfilename); // Moving file to the server.
-                        $stmt = "insert into gallery (filename,category) values ('".$newfilename."',".$categories[$i].")";
+                        $stmt = "insert into gallery (filename,category,uploadedBy) values ('".$newfilename."',".$categories[$i].",'".$_SESSION["user"]."')";
                         $conn->query($stmt);
                         $i++;
                     }

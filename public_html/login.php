@@ -34,16 +34,11 @@
                 </a>
             </div>
             <?php
-                $message = '';
-                if ($_GET) {
-                    if (isset($_GET['wrong_pass'])) {
-                        $message = "Contraseña incorrecta.";
-                        include './snippets/error_message.php';
-                    }
-                    if (isset($_GET['wrong_user'])) {
-                        $message = "Usuario incorrecto.";
-                        include './snippets/error_message.php';
-                    }
+                if ($_SESSION["error"]) {
+                    $message = $_SESSION["error"];
+                    include './snippets/error_message.php';
+                    session_unset();
+                    session_destroy();
                 }
             ?>
                 

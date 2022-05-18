@@ -38,13 +38,13 @@
         }
     </style>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FZJ25SLN42"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5GCTKSYQEQ"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'G-PR2VVLQM5B');
+        gtag('config', 'G-5GCTKSYQEQ');
     </script>
 </head>
 
@@ -123,7 +123,7 @@
                         El mensaje no puede estar vacío.
                     </div>
                 </div>
-                <div class="g-recaptcha brochure__form__captcha" data-callback="recaptchaCallback" data-expired-callback="recaptchaExpired" data-sitekey="6LfjwBQdAAAAAHJFdsQtEaHdFscXMmWjrKlcv2h-"></div>
+                <div class="g-recaptcha brochure__form__captcha" data-callback="recaptchaCallback" data-expired-callback="recaptchaExpired" data-sitekey="6LcpXp0dAAAAAIyqkuLt2hPzrYXE_eJv6adylhP8"></div>
                 <div class="button-group text-right">
                     <button disabled class="btn my-button" id="submit-message">Enviar</button>
                 </div>

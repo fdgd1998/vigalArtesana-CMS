@@ -42,13 +42,13 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Great Vibes">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FZJ25SLN42"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5GCTKSYQEQ"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'G-PR2VVLQM5B');
+        gtag('config', 'G-5GCTKSYQEQ');
     </script>
 </head>
 
@@ -70,8 +70,8 @@
                     <p><?=$GLOBALS["site_settings"][10]?></p>
                 </div>
                 <div class="button-group wow animate__animated animate__fadeInUp">
-                    <button onclick="window.location.href = 'sobre_nosotros.php'" type="button" class="btn my-button">Sobre nosotros</button>
-                    <button onclick="window.location.href = 'galeria.php'" type="button" class="btn my-button">Galería</button>
+                    <button onclick="window.location.href = 'sobre-nosotros'" type="button" class="btn my-button">Sobre nosotros</button>
+                    <button onclick="window.location.href = 'galeria'" type="button" class="btn my-button">Galería</button>
                 </div>
             </div>
         </div>
@@ -121,7 +121,7 @@
                 <h1 class="title wow animate__animated animate__fadeInUp">¿Necesitas más información?</h1>
                 <div class="title-description wow animate__animated animate__fadeInUp">
                     <p class="wow animate__animated animate__fadeInUp">Si quieres pedir más información, preguntar precios, pedir un presupuesto o preguntar cualquier otra cosa, no dudes en contactar con nosotros. ¡Estaremos encantados de atenderte!</p>
-                    <button onclick="window.location.href = 'contacto.php'" type="button" class="btn btn-light my-button wow animate__animated animate__fadeInUp">Ver información de contacto</button>
+                    <button onclick="window.location.href = 'contacto'" type="button" class="btn btn-light my-button wow animate__animated animate__fadeInUp">Ver información de contacto</button>
                 </div>
             </div>
         </div>

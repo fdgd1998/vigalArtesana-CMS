@@ -51,7 +51,7 @@ jQuery(function($) {
             method: 'post',
             data: {filenames: JSON.stringify(filenames)}, // Data to send.
             success: function(response) { // HTTP response code 200
-                alert(response);
+                //alert(response);
                 window.location = location.origin+"/dashboard/?page=manage-gallery"; // Reloading page on success.
             },
             error: function(r) { // HTTP responde code != than 200.

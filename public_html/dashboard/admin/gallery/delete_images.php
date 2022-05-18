@@ -1,7 +1,13 @@
 <?php
     session_start();
-    require_once '../../../scripts/check_session.php';
-    require_once '../../../../connection.php';
+    require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
+    
+    if (!HasAccessToResource("delete_images")) {
+        include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
+        exit();
+    }
     if (isset($_POST["filenames"])) {
         try {
             $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
@@ -21,7 +27,7 @@
 
                 if ($conn->query($stmt) == TRUE) {
                     foreach($filenames as $id=>$image) {
-                        unlink("../../../uploads/images/".$image); // deleting the file
+                        unlink($_SERVER["DOCUMENT_ROOT"]."/uploads/images/".$image); // deleting the file
                     }
                     echo "Las imágenes se han eliminado correctamente.";
                 }

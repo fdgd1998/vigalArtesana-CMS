@@ -2,8 +2,13 @@
     error_reporting(0);
     session_start();
 
-    require_once '../scripts/check_session.php';
-
+    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
+    
+    if (!HasAccessToResource("contact")) {
+        include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
+        exit();
+    }
     $site_settings = array();
 
     try {

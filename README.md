@@ -39,7 +39,6 @@ The main purpose of this CMS is to be simple, lightweight and without any unnece
 NOTE: Features marked with (*) are in the works.
 
 ## Setup
-There's a default key for data encryption in database in cryptograhic_key.php. Change this key later on if you plan to upload the code to any hosting.
 
 Control panel access user is "admin" and password "admin", without the quotes.
 
@@ -47,7 +46,7 @@ Remember to change your settings in connection.php and email_settings.php after 
 
 In order to make everything work, you'll need to do the following.
 
-Move cryptograhpic_key.php, connection.php and email_settings.php outside your website's root folder (at same directory level). This is because theese files have to be in a non public accesible location.
+Move connection.php and email_settings.php outside your website's root folder (at same directory level). This is because theese files have to be in a non public accesible location.
 
 Copy all the content inside public_html into the root of your website's root folder.
 

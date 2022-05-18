@@ -6,7 +6,6 @@
         $pass_form = trim($_POST['password']);
 
         require_once "../../connection.php"; //datos de conexión
-        require_once "./crypt.php"; //funciones criptograficas
 
         $mysqli = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
 
@@ -14,7 +13,6 @@
         if ($mysqli->connect_errno) {
             exit();
         } else {
-            $enc_pass = OpenSSLEncrypt($pass_form);
 
             // Verificación de las credenciales de usuario
             $stmt = $mysqli->prepare("select id, username, passwd, account_type, account_enabled, passwd_reset from users where username = ?");

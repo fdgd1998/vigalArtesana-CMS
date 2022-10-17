@@ -146,7 +146,7 @@ jQuery(function($){
             processData: false,  // tell jQuery not to process the data
             contentType: false,   // tell jQuery not to set contentType
             success: function(response) { // HTTP response code is 200
-                //alert(response);
+                alert(response);
                 window.location.replace("?page=manage-gallery"); // redirect
             },
             error: function(response) { // HTTP response code is != than 200

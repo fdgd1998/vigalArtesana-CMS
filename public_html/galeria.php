@@ -81,7 +81,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php if ($category_name != ""): ?>
     <title><?=$category_name?> - Página <?=$page?> - ViGal Artesana</title>
+    <?php else: ?>
+    <title>Galería - ViGal Artesana</title>
+    <?php endif; ?>
     <meta name="description" content="Nuestra galería, una exposición de los trabajos que hacemos con madera.">
     <meta name="robots" content="index, follow">
     <link rel="icon" href="/includes/img/favicon.ico" type="image/x-icon">
@@ -115,6 +119,7 @@
     <div class="container content">
         <?php if (!isset($_GET['category'])): ?>
             <h1 class="title">Galería</h1>
+            <p class="title-description">Esta es una descripción general de la galería</p>
             <p class="title-description">Selecciona una categoría pinchando sobre una imagen.</p>
             <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" style="margin-bottom: 20px;">
                 <?php foreach ($categories as $element): ?>
@@ -132,6 +137,7 @@
             <div class="intro">
                 <h1 class="title"><a href="/galeria"><i class="fas fa-arrow-left" style="margin-right: 20px !important;"></i></a><?=$category_name?></h1>
                 <?php if (count($results) > 0): ?>
+                    <p>Esta es una breve descripción de la categoría.</p>
                     <p class="title-description">Pincha sobre las imágenes para verlas a tamaño completo. Para volver a la página anterior, pincha sobre la flecha a la izquierda del nombre de la categoría.</p>
                 <?php else: ?>
                     <p class="title-description">No se han encontrado elementos en esta categoría. Visita esta página más tarde.</p>

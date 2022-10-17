@@ -140,6 +140,7 @@
                     <p>Esta es una breve descripción de la categoría.</p>
                     <p class="title-description">Pincha sobre las imágenes para verlas a tamaño completo. Para volver a la página anterior, pincha sobre la flecha a la izquierda del nombre de la categoría.</p>
                 <?php else: ?>
+                    <p>Esta es una breve descripción de la categoría.</p>
                     <p class="title-description">No se han encontrado elementos en esta categoría. Visita esta página más tarde.</p>
                 <?php endif; ?>
             </div>

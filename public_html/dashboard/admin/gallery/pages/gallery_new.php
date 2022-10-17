@@ -40,8 +40,8 @@
 ?>
 <style>
     img {
-        width: 150px;
-        height: 150px;
+        width: 50px;
+        height: 50px;
         object-fit: cover;
     }
     .image {
@@ -64,12 +64,51 @@
         left: -20px;
         top: 3px;
     }
+
+    #images-preview {
+        width: 100%;
+        display: inline-block;
+        *display: inline;
+    }
+
+    .card-div-img {
+        width: 10%;
+        height: auto;
+        object-fit: cover;
+        display: inline-block;
+        padding: 5px 10px 5px 5px;
+        vertical-align: middle;
+    }
+
+    .card-div-alt-text {
+        width: 70%;
+        display: inline-block;
+        padding: 5px;
+    }
+
+    .card-div-category {
+        width: 30%;
+        display: inline-block;
+        padding: 5px;
+    }
+
+    .main-div {
+        border: 1px solid lightgrey;
+        border-radius: 2px;
+        margin-bottom: 10px;
+    }
+    
+    .input-label {
+        display: inline-block;
+        padding-left: 5px:
+    }
+
 </style>
 
 
 <div class="container settings-container">
     <h1 class="title">Subir imágenes</h1>
-    <p class="title-description">Sube imágenes a tu galería. Puedes subir un máximo de 10 ficheros simultáneamente y un peso de 2 MB máximo por cada uno.</p>
+    <p class="title-description">Sube imágenes a tu galería. Puedes subir un máximo de 10 ficheros simultáneamente y un peso de 5 MB máximo por cada uno.</p>
     <form style="margin-bottom: 20px;padding-top: 17px;" enctype="multipart/form-data">
         <div class="form-row" style="margin-top: 10px;">
             <div class="input-group mb-3">
@@ -84,7 +123,8 @@
                 </div>
             </div>
         </div>
-        <div id="images-preview" class="row row-cols-2 row-cols-md-2 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" style="margin-top: 10px;">
+        <!-- class="row row-cols-2 row-cols-md-2 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" -->
+        <div id="images-preview"  style="margin-top: 10px;">
         </div>
         <div class="form-row text-right" style="margin-top: 20px;">
             <div class="col">

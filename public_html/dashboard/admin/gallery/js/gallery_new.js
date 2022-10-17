@@ -1,3 +1,5 @@
+var files = [];
+
 jQuery(function($){
 
     $("#cancel").on("click", function() {
@@ -7,8 +9,16 @@ jQuery(function($){
     var categories = {};
 
     // Creating input select for selecting image category
-    function createCategorySelection() {
-        category_selection = $((document.createElement('select')));
+    function createCategorySelectionInput() {
+        var div = $((document.createElement("div")));
+        var input_label = $((document.createElement("label")));
+        var category_selection = $((document.createElement('select')));
+
+        div.addClass("card-div-category");
+
+        input_label.html("Categoría");
+        input_label.addClass("input-label");
+
         category_selection.addClass("form-control category-upload");
         for (var key in categories) {
             var option = $((document.createElement('option')));
@@ -16,12 +26,35 @@ jQuery(function($){
             option.html(categories[key]);
             category_selection.append(option);
         }
-        return category_selection;
+
+        div.append(input_label);
+        div.append(category_selection);
+
+        return div;
+    }
+
+    function createImageAltTextInput() {
+        var div = $((document.createElement("div")));
+        var input_label = $((document.createElement("label")));
+        var alt_text = $((document.createElement('input')));
+
+        div.addClass("card-div-alt-text");
+
+        input_label.html("Texto descriptivo");
+        input_label.addClass("input-label")
+
+        alt_text.addClass("form-control alt-text-upload");
+        alt_text.attr("type", "text");
+
+        div.append(input_label);
+        div.append(alt_text);
+
+        return div;
     }
 
     $("#upload-files").on("change", function(e){
 
-        var files = $("#upload-files").prop("files");
+        files = Array.from($("#upload-files")[0].files);
 
         // AJAX call to get categories stored in database
         $.ajax({
@@ -47,21 +80,28 @@ jQuery(function($){
                 var filesToRemove = [];
                 for (var i = 0; i < files.length; i++) {
                     console.log(files[i].name +": "+files[i].size);
-                    if (files[i].size > 2097152) {
+                    if (files[i].size > 5242880) {
                         filesToRemove.push(files[i]);
+                        files.splice(files.indexOf(files[i]), 1);
                     }
                 }
                 if (filesToRemove.length > 0) {
-                    // var filesOverSize = "";
-                    // for (var i = 0; i < filesToRemove.length-1; i++) {
-                    //     filesOverSize = filesOverSize + filesToRemove[i].name;
-                    // }
-                    alert("Uno o más ficheros superan el máximo de 2 MB. Se eliminarán de la selección y no se subirán. Comprueba el tamaño de estos ficheros e inténtalo de nuevo.");
+                    var filesOverSize = "";
+                    if (filesToRemove.length > 1) {
+                        for (var i = 0; i <filesToRemove.length - 1; i++) {
+                            filesOverSize = filesOverSize + filesToRemove[i].name;
+                        }
+                        var filesOverSize = filesOverSize + " y " + filesToRemove[filesToRemove.length - 1].name;
+                    } else {
+                        var filesOverSize = filesToRemove[0].name;
+                    }
+
+                    alert("Los ficheros " + filesOverSize + " superan el máximo de 5 MB. Se eliminarán de la selección y no se subirán. Comprueba el tamaño de estos ficheros e inténtalo de nuevo.");
                 }
-                imagesPreview(this, filesToRemove); // Load images preview
+                imagesPreview(filesToRemove); // Load images preview
                 
                 if (filesToRemove.length != files.length) {
-                    $("#upload-files-name").html((files.length-filesToRemove.length)+" fichero(s) seleccionado(s)."); // Updating input text.
+                    $("#upload-files-name").html((files.length)+" fichero(s) seleccionado(s)."); // Updating input text.
                     $("#uploadbtn").removeAttr("disabled","disabled");
                 } else {
                     $("#upload-files-name").html("Subir fichero(s)...");
@@ -82,30 +122,41 @@ jQuery(function($){
         }
     });
 
-    // Getting location URL of input images.
-    function imagesPreview(input, filesToRemove) {
-        if (input.files) {
-            var filesAmount = input.files.length;
+    function ImageReader(file) {
+        var name = file.name;
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            var maindiv = $(document.createElement('div'));
+            var imgdiv = $(document.createElement('div'));
+            var propdiv = $(document.createElement('div'));
 
-            for (i = 0; i < filesAmount; i++) {
-                if (!filesToRemove.includes(input.files[i])) {
-                    var reader = new FileReader();
-                    reader.onload = function(event) {
-                        //Creating each image preview, from here->
-                        var img = $((document.createElement('img')));
-                        img.addClass("card-img-top img-fluid post_img");
-                        img.attr("src", event.target.result);
-                        var card_div =  $((document.createElement('div')));
-                        card_div.addClass("card h-100");
-                        card_div.append(img);
-                        card_div.append(createCategorySelection());
-                        var main_div = $((document.createElement('div')));
-                        main_div.addClass('col mb-4');
-                        main_div.append(card_div);
-                        $("#images-preview").append(main_div);
-                        // ->to here
-                    }
-                    reader.readAsDataURL(input.files[i]);
+            var filename = $(document.createElement("label"));
+            filename.text(name);
+
+            maindiv.addClass("main-div");
+            maindiv.attr("id", name);
+            var img = $((document.createElement('img')));
+            img.addClass("card-div-img");
+            img.attr("src", event.target.result);
+
+            imgdiv.append(img);
+            imgdiv.append(filename);
+            propdiv.append(createCategorySelectionInput());
+            propdiv.append(createImageAltTextInput());
+            maindiv.append(imgdiv);
+            maindiv.append(propdiv);
+
+            $("#images-preview").append(maindiv);
+        }
+        reader.readAsDataURL(file);
+    }
+
+    // Getting location URL of input images.
+    function imagesPreview(filesToRemove) {
+        if (files) {
+            for (var i = 0; i < files.length; i++) {
+                if (!filesToRemove.includes(files[i])) {
+                    ImageReader(files[i]);
                 }
             }
         }
@@ -119,40 +170,55 @@ jQuery(function($){
         $("body").append(spinner_div);
         // Getting data to sent and appending it to the form data.
         var image_categories = [];
+        var image_alt_text = [];
         var formData = new FormData();
-        var i = 0;
+        // var i = 0;
 
         // getting category ids selected for each image
-        jQuery('.category-upload').each(function() {    
+        jQuery('.category-upload').each(function(index) {    
             var value = $(this).val();
-            image_categories[i++] = value;
+            image_categories[index] = value;
+            // image_categories[i++] = value;
+        });
+
+        // getting alt text for each image
+        jQuery('.alt-text-upload').each(function(index) {    
+            var value = $(this).val();
+            image_alt_text[index] = value;
         });
 
         formData.append("categories", JSON.stringify(image_categories)); // encoding string to pass it to php file
+        formData.append("alt_text", JSON.stringify(image_alt_text));
 
         // getting files metadata to pass it to php file
-        var files = $("#upload-files").prop("files");
+        // var files = $("#upload-files").prop("files");
             for (var i = 0; i < files.length; i++) {
-                formData.append("image"+i, files[i]);
+                // formData.append("image"+i, files[i]);
+                formData.append(files[i].name, files[i]);
             }
 
+        // Display the key/value pairs
+        for (var pair of formData.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]); 
+        }
+
         // Sending AJAX request to the server.
-        $.ajax({
-            url: './admin/gallery/create_gallery_items.php', // this is the target
-            type: 'post', // method
-            dataType: 'text', // what is expected to be returned
-            cache: false,
-            data: formData, // pass the input valuse to serve
-            processData: false,  // tell jQuery not to process the data
-            contentType: false,   // tell jQuery not to set contentType
-            success: function(response) { // HTTP response code is 200
-                alert(response);
-                window.location.replace("?page=manage-gallery"); // redirect
-            },
-            error: function(response) { // HTTP response code is != than 200
-                alert(response);
-                $(document).find("#spinner-div").remove();
-            }
-        });
+        // $.ajax({
+        //     url: './admin/gallery/create_gallery_items.php', // this is the target
+        //     type: 'post', // method
+        //     dataType: 'text', // what is expected to be returned
+        //     cache: false,
+        //     data: formData, // pass the input valuse to serve
+        //     processData: false,  // tell jQuery not to process the data
+        //     contentType: false,   // tell jQuery not to set contentType
+        //     success: function(response) { // HTTP response code is 200
+        //         alert(response);
+        //         window.location.replace("?page=manage-gallery"); // redirect
+        //     },
+        //     error: function(response) { // HTTP response code is != than 200
+        //         alert(response);
+        //         $(document).find("#spinner-div").remove();
+        //     }
+        // });
     });
 });

@@ -81,7 +81,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galería - ViGal Artesana</title>
+    <title><?=$category_name?> - Página <?=$page?> - ViGal Artesana</title>
     <meta name="description" content="Nuestra galería, una exposición de los trabajos que hacemos con madera.">
     <meta name="robots" content="index, follow">
     <link rel="icon" href="/includes/img/favicon.ico" type="image/x-icon">

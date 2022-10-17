@@ -14,20 +14,20 @@ RewriteEngine on
 # RewriteCond %{HTTP_REFERER} !^$
 
 # Activar HTTPS
-RewriteCond %{Server_Port} !=443
-RewriteRule ^(.*)$ https:// vigalartesana.es/$1 [R=301,L]
+#RewriteCond %{Server_Port} !=443
+#RewriteRule ^(.*)$ https://vigalartesana.es/$1 [R=301,L]
 
 #URLs amigables
-RewriteRule ^contacto$ /contacto.php
-RewriteRule ^sobre-nosotros$ /sobre_nosotros.php
+RewriteRule ^contacto$ contacto.php
+RewriteRule ^sobre-nosotros$ sobre_nosotros.php
 RewriteRule ^galeria/([^/]+)/?$ galeria.php?category=$1 [L,QSA]
 RewriteRule ^galeria/([^/]+)/([1-9]+)/?$ galeria.php?category=$1&page=$2 [L,QSA]
-RewriteRule ^galeria$ /galeria.php
-RewriteRule ^politica-privacidad$ /privacidad.php
-RewriteRule ^aviso-legal$ /legal.php
-RewriteRule ^mantenimiento$ /mantenimiento.php
-RewriteRule ^login$ /login.php
+RewriteRule ^galeria$ galeria.php
+RewriteRule ^politica-privacidad$ privacidad.php
+RewriteRule ^aviso-legal$ legal.php
+RewriteRule ^mantenimiento$ mantenimiento.php
+RewriteRule ^login$ login.php
 
-RewriteRule ^404$ /errorpages/404.php
-RewriteRule ^403$ /errorpages/403.php
-RewriteRule ^503$ /errorpages/503.php
+RewriteRule ^404$ errorpages/404.php
+RewriteRule ^403$ errorpages/403.php
+RewriteRule ^503$ errorpages/503.php

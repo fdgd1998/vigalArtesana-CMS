@@ -56,6 +56,10 @@
                     <label for="new-cat-image-preview" style="width: 100%;">Vista previa: </label>
                     <center><img id="new-cat-image-preview" src="#" alt="" width="50%"></center>
                 </div>
+                <div class="form-group">
+                    <label for="new-cat-desc">Descripción: </label>
+                    <textarea class="form-control" id="new-cat-desc" rows="8"></textarea>
+                </div>
             </form>
         </div>
         <div id="modal-footer1" class="modal-footer">
@@ -98,43 +102,50 @@
           </button>
         </div>
         <div id="modal-body" class="modal-body"> 
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="change-edit-name-chkbx">
-          <label class="custom-control-label" for="change-edit-name-chkbx">Editar nombre.</label>
-        </div>
-        <div id="edit-change-name" class="input-group mb-3 disabled-form">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Nombre</span>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="change-edit-name-chkbx">
+            <label class="custom-control-label" for="change-edit-name-chkbx">Editar nombre.</label>
           </div>
-          <input type="text" class="form-control" id="update-cat-name" aria-describedby="basic-addon1">
-        </div>
-        <div class="form-group" hidden id="update-cat-image-preview-div">
-            <label for="update-cat-image-preview" style="width: 100%;">Imagen actual: </label>
-            <center><img id="update-cat-image-preview" src="#" alt="" width="50%"></center>
-        </div>
-        <div>
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="change-edit-image-chkbx">
-          <label class="custom-control-label" for="change-edit-image-chkbx">Establecer nueva imagen.</label>
-        </div>
-          <div id="edit-change-image" class="disabled-form">
-            <label>Nueva imagen : </label>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class='fas fa-upload'></i></span>
-              </div>
-              <div class="custom-file">
-                <input type="file" class="custom-file-input" id="update-new-cat-image" aria-describedby="inputGroupFileAddon01">
-                <label id="update-new-cat-image-name" class="custom-file-label" for="update-new-cat-image" data-browse="Buscar...">Seleccionar imagen...</label>
-              </div>
+          <div id="edit-change-name" class="input-group mb-3 disabled-form">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Nombre</span>
             </div>
-            <div style="margin-top: 15px;" class="form-group" hidden id="update-new-cat-image-preview-div">
-              <label for="update-new-cat-image-preview" style="width: 100%;">Vista previa de nueva imagen: </label>
-              <center><img id="update-new-cat-image-preview" src="#" alt="" width="100%" style="width: 50%;"></center>
+            <input type="text" class="form-control" id="update-cat-name" aria-describedby="basic-addon1">
           </div>
-          </div>           
+          <div class="form-group" hidden id="update-cat-image-preview-div">
+              <label for="update-cat-image-preview" style="width: 100%;">Imagen actual: </label>
+              <center><img id="update-cat-image-preview" src="#" alt="" width="50%"></center>
           </div>
-          
+          <div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="change-edit-image-chkbx">
+            <label class="custom-control-label" for="change-edit-image-chkbx">Establecer nueva imagen.</label>
+          </div>
+            <div id="edit-change-image" class="disabled-form">
+              <label>Nueva imagen : </label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class='fas fa-upload'></i></span>
+                </div>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="update-new-cat-image" aria-describedby="inputGroupFileAddon01">
+                  <label id="update-new-cat-image-name" class="custom-file-label" for="update-new-cat-image" data-browse="Buscar...">Seleccionar imagen...</label>
+                </div>
+              </div>
+              <div style="margin-top: 15px;" class="form-group" hidden id="update-new-cat-image-preview-div">
+                <label for="update-new-cat-image-preview" style="width: 100%;">Vista previa de nueva imagen: </label>
+                <center><img id="update-new-cat-image-preview" src="#" alt="" width="100%" style="width: 50%;"></center>
+              </div>
+            </div>           
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="change-edit-desc-chkbx">
+            <label class="custom-control-label" for="change-edit-desc-chkbx">Editar descripción.</label>
+          </div>
+          <div id="edit-change-desc" class=" mb-3 disabled-form">
+            <label for="edit-cat-desc">Descripción: </label>
+            <textarea class="form-control" id="update-cat-desc" rows="8"></textarea>
+          </div>
         </div>
         <div id="modal-footer1" class="modal-footer">
           <button id="cancel-cat-edit" type="button" class="btn my-button-2" data-dismiss="modal">Cancelar</button>

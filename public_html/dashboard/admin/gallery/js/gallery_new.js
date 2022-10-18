@@ -175,14 +175,14 @@ jQuery(function($){
         // var i = 0;
 
         // getting category ids selected for each image
-        jQuery('.category-upload').each(function(index) {    
+        $(".category-upload").each(function(index) {    
             var value = $(this).val();
             image_categories[index] = value;
             // image_categories[i++] = value;
         });
 
         // getting alt text for each image
-        jQuery('.alt-text-upload').each(function(index) {    
+        $(".alt-text-upload").each(function(index) {    
             var value = $(this).val();
             image_alt_text[index] = value;
         });
@@ -203,22 +203,22 @@ jQuery(function($){
         }
 
         // Sending AJAX request to the server.
-        // $.ajax({
-        //     url: './admin/gallery/create_gallery_items.php', // this is the target
-        //     type: 'post', // method
-        //     dataType: 'text', // what is expected to be returned
-        //     cache: false,
-        //     data: formData, // pass the input valuse to serve
-        //     processData: false,  // tell jQuery not to process the data
-        //     contentType: false,   // tell jQuery not to set contentType
-        //     success: function(response) { // HTTP response code is 200
-        //         alert(response);
-        //         window.location.replace("?page=manage-gallery"); // redirect
-        //     },
-        //     error: function(response) { // HTTP response code is != than 200
-        //         alert(response);
-        //         $(document).find("#spinner-div").remove();
-        //     }
-        // });
+        $.ajax({
+            url: './admin/gallery/create_gallery_items.php', // this is the target
+            type: 'post', // method
+            dataType: 'text', // what is expected to be returned
+            cache: false,
+            data: formData, // pass the input valuse to serve
+            processData: false,  // tell jQuery not to process the data
+            contentType: false,   // tell jQuery not to set contentType
+            success: function(response) { // HTTP response code is 200
+                alert(response);
+                window.location.replace("?page=manage-gallery"); // redirect
+            },
+            error: function(response) { // HTTP response code is != than 200
+                alert(response);
+                $(document).find("#spinner-div").remove();
+            }
+        });
     });
 });

@@ -19,22 +19,34 @@
             } else {
                 $location = $_SERVER["DOCUMENT_ROOT"]."/uploads/images/"; // location for post images.
                 $categories = json_decode($_POST["categories"]);
-                //more than one file is selected.
-                // If more than one user tries to upload a file at the same time, both can be called the same due to the implemented naming system.
-                // In this case, one will be overwritted by the other.
-                // To prevent this, the userid is attached at the end.
-                $userid = 0;
-                // $fileNames = ""; // String for storing filenames on the database.
+                $altText = json_decode($_POST["alt_text"]);
+
                 $i = 0;
                 $sql = "select id from users where username = '".$_SESSION['user']."'";
                 if ($res = $conn->query($sql)) {
                     $rows = $res->fetch_assoc();
                     $userid = $rows['id'];
                     foreach ($_FILES as $file) { // Setting new filename for each file to upload
-                        $temp = explode(".", $file["name"]); // Getting current filename.
-                        $newfilename = round(microtime(true)+$i).$userid.'.'.end($temp); // Setting new filename.
-                        move_uploaded_file($file['tmp_name'],$location.$newfilename); // Moving file to the server.
-                        $stmt = "insert into gallery (filename,category,uploadedBy) values ('".$newfilename."',".$categories[$i].",'".$_SESSION["user"]."')";
+                        //Year in YYYY format.
+                        $year = date("Y");
+
+                        //Month in mm format, with leading zeros.
+                        $month = date("m");
+
+                        //Day in dd format, with leading zeros.
+                        $day = date("d");
+
+                        //The folder path for our file should be YYYY/MM/DD
+                        $directory = "$year/$month/$day/";
+
+                        //If the directory doesn't already exists.
+                        if(!is_dir($location.$directory)){
+                            //Create our directory.
+                            mkdir($location.$directory, 755, true);
+                        }
+                       
+                        move_uploaded_file($file['tmp_name'],$location.$directory.$file["name"]); // Moving file to the server.
+                        $stmt = "insert into gallery (filename,dir,category,altText,uploadedBy) values ('".$file["name"]."','".$directory."',".$categories[$i].",'".$altText[$i]."','".$_SESSION["user"]."')";
                         $conn->query($stmt);
                         $i++;
                     }

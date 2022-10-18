@@ -16,19 +16,26 @@
                 echo "No se ha podido conectar a la base de datos.";
                 exit();
             } else {
-                // getting filename and deleting it
                 $filenames = json_decode($_POST["filenames"], true);
+                $dir = json_decode($_POST["directories"], true);
+                var_dump($filenames);
+
                 $images = "";
                 for($i = 0; $i < count($filenames) - 1; $i++) {
                     $images .= "'".$filenames[$i]."',";
                 }
                 $images .= "'".$filenames[count($filenames) - 1]."'";
+
                 $stmt = "delete from gallery where filename in(".$images.")";
 
                 if ($conn->query($stmt) == TRUE) {
-                    foreach($filenames as $id=>$image) {
-                        unlink($_SERVER["DOCUMENT_ROOT"]."/uploads/images/".$image); // deleting the file
+                    for ($i = 0; $i < count($filenames); $i++) {
+                        unlink($_SERVER["DOCUMENT_ROOT"]."/uploads/images/".$dir[$i].$filenames[$i]); // deleting the file
                     }
+                    
+                    // foreach($filenames as $id=>$image) {
+                    //     unlink($_SERVER["DOCUMENT_ROOT"]."/uploads/images/"$image); // deleting the file
+                    // }
                     echo "Las imágenes se han eliminado correctamente.";
                 }
                 $conn->close();

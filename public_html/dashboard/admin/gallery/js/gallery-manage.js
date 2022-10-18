@@ -41,20 +41,25 @@ jQuery(function($) {
 
     $(document).on("click", "#delete-images", function() {
         var filenames = {};
+        var directories = {};
         $(document).find(".delete-selected > img").each(function(i) {
-            
-            filenames[i] = this.id;
+            filenames[i] = $(this).attr("id");
+            directories[i] = $(this).attr("dir");
         });
         console.log(JSON.stringify(filenames));
+        console.log(JSON.stringify(directories));
         $.ajax({
-            url: location.origin+'/dashboard/admin/gallery/delete_images.php',
+            url: './admin/gallery/delete_images.php',
             method: 'post',
-            data: {filenames: JSON.stringify(filenames)}, // Data to send.
+            data: {
+                filenames: JSON.stringify(filenames),
+                directories: JSON.stringify(directories)
+            }, // Data to send.
             success: function(response) { // HTTP response code 200
-                //alert(response);
+                alert(response);
                 window.location = location.origin+"/dashboard/?page=manage-gallery"; // Reloading page on success.
             },
-            error: function(r) { // HTTP responde code != than 200.
+            error: function(response) { // HTTP responde code != than 200.
                 alert(response);
             }
         });

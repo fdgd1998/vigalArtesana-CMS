@@ -34,14 +34,14 @@
 
     // Opening database connection.
     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
-    $sql = "select gallery.id, filename from gallery inner join categories on gallery.category = categories.id where gallery.uploadedBy = '".$_SESSION['userid']."'";
+    $sql = "select gallery.id, dir, filename from gallery inner join categories on gallery.category = categories.id where gallery.uploadedBy = '".$_SESSION['userid']."'";
     if (isset($_GET["c"])) {
       $sql.=" and gallery.category = ".$_GET["c"];
     }
     $sql.=" limit $paginationStart, $limit";
     if ($res = $conn->query($sql)) {
         while ($rows = $res->fetch_assoc()) {
-            array_push($results, array($rows['id'], $rows['filename']));
+            array_push($results, array($rows["id"], $rows["dir"], $rows["filename"]));
         }
         $res->free();
     }
@@ -131,7 +131,7 @@
     <?php foreach ($results as $element): ?>
       <div class="wrap animated-item">
         <a class='gallery-item '>
-          <img id="<?=$element[1]?>" class='photos img-fluid' src='../uploads/images/<?=$element[1]?>'/>
+          <img id="<?=$element[2]?>" class='photos img-fluid' dir="<?=$element[1]?>" src='../uploads/images/<?=$element[1].$element[2]?>'/>
         </a>
       </div>
     <?php endforeach; ?>

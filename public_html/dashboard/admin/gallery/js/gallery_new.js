@@ -1,6 +1,6 @@
-var files = [];
+var input_files = [];
 
-jQuery(function($){
+// jQuery(function($){
 
     $("#cancel").on("click", function() {
         window.location.href="?page=manage-gallery";
@@ -54,7 +54,16 @@ jQuery(function($){
 
     $("#upload-files").on("change", function(e){
 
-        files = Array.from($("#upload-files")[0].files);
+        input_files = Array.from($("#upload-files")[0].files);
+        console.log(input_files);
+        var filenames = [];
+        var filesToRemove = [];
+
+        for (var i = 0; i < input_files.length; i++) {
+            filenames.push(input_files[i].name);
+        }
+
+        console.log(filenames);
 
         // AJAX call to get categories stored in database
         $.ajax({
@@ -75,14 +84,14 @@ jQuery(function($){
         // Emptying previous images preview
         $("#images-preview").empty();
 
-        if (files.length > 0) { // Checking if there's selected files
-            if (files.length <= 10) { // Checking if there's less than 10 files selected.
-                var filesToRemove = [];
-                for (var i = 0; i < files.length; i++) {
-                    console.log(files[i].name +": "+files[i].size);
-                    if (files[i].size > 5242880) {
-                        filesToRemove.push(files[i]);
-                        files.splice(files.indexOf(files[i]), 1);
+        if (input_files.length > 0) { // Checking if there's selected files
+            if (input_files.length <= 10) { // Checking if there's less than 10 files selected.
+                
+                for (var i = 0; i < input_files.length; i++) {
+                    console.log(input_files[i].name +": "+input_files[i].size);
+                    if (input_files[i].size > 5242880) {
+                        filesToRemove.push(input_files[i]);
+                        input_files.splice(input_files.indexOf(input_files[i]), 1);
                     }
                 }
                 if (filesToRemove.length > 0) {
@@ -96,28 +105,71 @@ jQuery(function($){
                         var filesOverSize = filesToRemove[0].name;
                     }
 
-                    alert("Los ficheros " + filesOverSize + " superan el máximo de 5 MB. Se eliminarán de la selección y no se subirán. Comprueba el tamaño de estos ficheros e inténtalo de nuevo.");
+                    alert("Los ficheros " + filesOverSize + " superan el máximo de 5 MB. Comprueba el tamaño de estos ficheros e inténtalo de nuevo.");
                 }
-                imagesPreview(filesToRemove); // Load images preview
+
+                var formData = new FormData();
+                formData.append("filenames", JSON.stringify(filenames));
+                $.ajax({
+                    url: './admin/gallery/scripts/check_current_filenames.php', // this is the target
+                    type: 'post', // method
+                    dataType: 'text', // what is expected to be returned
+                    cache: false,
+                    data: formData, // pass the input valuse to serve
+                    processData: false,  // tell jQuery not to process the data
+                    contentType: false,   // tell jQuery not to set contentType
+                    success: function(response) { // HTTP response code is 200
+                        console.log(response);
+                        var existentFiles = JSON.parse(response);
+                        
+                        if (existentFiles.length > 0) {
+                            var files = "";
+                            if (existentFiles.length > 1) {
+                                for (var i = 0; i <existentFiles.length - 1; i++) {
+                                    files = files + existentFiles[i];
+                                }
+                                files = files + " y " + existentFiles[existentFiles.length - 1];
+                            } else {
+                                files = existentFiles[0];
+                            }
+                            $("#upload-files-name").html("Seleccionar fichero(s)...");
+                            $("#uploadbtn").attr("disabled","disabled");
+                            alert("Los siguientes ficheros ya existen el servidor: " + files + ". Renómbralos e inténtalo de nuevo.")
+                        } else {
+                            // imagesPreview(filesToRemove); // Load images preview
+                            imagesPreview();
+
+                            // $("#upload-files-name").html((input_files.length)+" fichero(s) seleccionado(s)."); // Updating input text.
+                            if (filesToRemove.length == 0) {
+                                $("#upload-files-name").html((input_files.length)+" fichero(s) seleccionado(s)."); // Updating input text.
+                                // $("#uploadbtn").removeAttr("disabled","disabled");
+                            } else {
+                                $("#upload-files-name").html("Seleccionar fichero(s)...");
+                                $("#uploadbtn").attr("disabled","disabled");
+                            }
+                        }
+                        
+                    },
+                    error: function(response) { // HTTP response code is != than 200
+                        alert(response);
+                        $("#upload-files").val("");
+                        $("#upload-files-name").html("Seleccionar fichero(s)...");
+                        $("#uploadbtn").attr("disabled","disabled");
+                    }
+                });
+
                 
-                if (filesToRemove.length != files.length) {
-                    $("#upload-files-name").html((files.length)+" fichero(s) seleccionado(s)."); // Updating input text.
-                    $("#uploadbtn").removeAttr("disabled","disabled");
-                } else {
-                    $("#upload-files-name").html("Subir fichero(s)...");
-                    $("#uploadbtn").attr("disabled","disabled");
-                }
             } else {
                 // If more than 10 files are selected, a warning is shown and form is resetted.
                 alert("El número máximo de ficheros permitidos es 10. Revisa tu selección e inténtalo de nuevo.");
                 $("#upload-files").val("");
-                $("#upload-files-name").html("Subir fichero(s)...");
+                $("#upload-files-name").html("Seleccionar fichero(s)...");
                 $("#uploadbtn").attr("disabled","disabled");
             }
         } else {
             // If no files are selected, reset form.
             $("#file-list").empty();
-            $("#upload-files-name").html("Subir fichero(s)...");
+            $("#upload-files-name").html("Seleccionar fichero(s)...");
             $("#uploadbtn").attr("disabled","disabled");
         }
     });
@@ -153,13 +205,13 @@ jQuery(function($){
 
     // Getting location URL of input images.
     function imagesPreview(filesToRemove) {
-        if (files) {
-            for (var i = 0; i < files.length; i++) {
-                if (!filesToRemove.includes(files[i])) {
-                    ImageReader(files[i]);
-                }
+        // if (input_files.length > 0) {
+            for (var i = 0; i < input_files.length; i++) {
+        //         if (!filesToRemove.includes(input_files[i])) {
+                    ImageReader(input_files[i]);
+            //     }
             }
-        }
+        // }
 
     };
 
@@ -192,9 +244,9 @@ jQuery(function($){
 
         // getting files metadata to pass it to php file
         // var files = $("#upload-files").prop("files");
-            for (var i = 0; i < files.length; i++) {
+            for (var i = 0; i < input_files.length; i++) {
                 // formData.append("image"+i, files[i]);
-                formData.append(files[i].name, files[i]);
+                formData.append(input_files[i].name, input_files[i]);
             }
 
         // Display the key/value pairs
@@ -221,4 +273,40 @@ jQuery(function($){
             }
         });
     });
-});
+
+    $(document).on("change", ".category-upload", function() {
+        enableUploadBtn()
+    });
+
+    $(document).on("keyup", ".alt-text-upload", function() {
+        enableUploadBtn()
+    });
+
+    function enableUploadBtn() {
+        console.log("enabling button...")
+        var categories = $(document).find(".category-upload option:selected");
+        var alt_text = $(document).find(".alt-text-upload");
+
+        // var cat_values = [];
+        // var alt_text_values = [];
+
+        var cat_bool = false;
+        var alt_text_bool = false;
+    
+        $.each(categories, function() {
+            if ($(this).text() != "") cat_bool = true;
+            else cat_bool = false;
+        });
+
+        $.each(alt_text, function() {
+            if ($(this).val() != "") alt_text_bool = true;
+            else alt_text_bool = false;
+        });
+
+        console.log(cat_bool);
+        console.log(alt_text_bool);
+        
+        if (cat_bool && alt_text_bool) $("#uploadbtn").prop("disabled", false);
+        else $("#uploadbtn").prop("disabled", true);
+    }
+// });

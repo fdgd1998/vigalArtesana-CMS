@@ -111,7 +111,7 @@ var input_files = [];
                 var formData = new FormData();
                 formData.append("filenames", JSON.stringify(filenames));
                 $.ajax({
-                    url: './admin/gallery/scripts/check_current_filenames.php', // this is the target
+                    url: './admin/gallery/scripts/check_current_images_filenames.php', // this is the target
                     type: 'post', // method
                     dataType: 'text', // what is expected to be returned
                     cache: false,

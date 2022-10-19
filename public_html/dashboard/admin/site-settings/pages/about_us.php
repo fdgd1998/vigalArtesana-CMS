@@ -36,6 +36,3 @@
         <button id="save-about-us" class="btn my-button"><i class="far fa-save"></i>Guardar</button>
     </div>
 </div>
-<? if ($about_text != ""): ?>
-
-<? endif; ?>

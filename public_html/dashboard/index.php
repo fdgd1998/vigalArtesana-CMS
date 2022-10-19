@@ -145,7 +145,7 @@
                         case $_GET['page'] == 'new-category':
                             include 'admin/gallery/pages/category_new.php';
                             break;
-                        case preg_match('^edit-category&id=(\d{1,2})$^', isset($_GET["id"])?$_GET["page"]."&id=".$_GET["id"]:$_GET["page"]):
+                        case ($_GET['page'] == 'edit-category' && isset($_GET['id'])):
                             include 'admin/gallery/pages/category_new.php';
                             break;
                         case $_GET['page'] == 'manage-gallery':
@@ -175,7 +175,7 @@
                         case $_GET['page'] == 'advanced':
                             include 'admin/site-settings/pages/advanced.php';
                             break;
-                        case preg_match('^edit-service&id=(\d{1,2})$^', isset($_GET["id"])?$_GET["page"]."&id=".$_GET["id"]:$_GET["page"]):
+                        case ($_GET['page'] == 'edit-service' && isset($_GET['id'])):
                             include 'admin/site-settings/pages/edit_service.php';
                             break;
                         default:
@@ -198,11 +198,72 @@
     <script src="js/hide_spinner.js"></script>
     <script src="js/check_image_size.js"></script>
 
-    <?php if (isset($_GET["page"]) && ($_GET["page"] == "manage-gallery" || $_GET["page"] == "gallery-new" || $_GET["page"] == "categories")): ?>
+    <?php if (isset($_GET["page"]) && ($_GET["page"] == "manage-gallery" || $_GET["page"] == "gallery-new")): ?>
     <script src="admin/gallery/js/gallery_new.js"></script>
     <script src="admin/gallery/js/gallery-manage.js"></script>
-    <script src="admin/gallery/js/ajax.js"></script>
+    <!-- <script src="admin/gallery/js/ajax.js"></script> -->
+    <!-- <script src="admin/gallery/js/categories.js"></script> -->
+    <?php endif; ?>
+
+    <?php if (isset($_GET["page"]) && ($_GET["page"] == "categories")): ?>
     <script src="admin/gallery/js/categories.js"></script>
+    <?php endif; ?>
+
+    <?php if (isset($_GET["page"]) && ($_GET["page"] == "new-category" || $_GET["page"] == "edit-category")): ?>
+    <script src="admin/gallery/js/new_category.js"></script>
+    <script src="../includes/summernote/summernote-bs4.min.js"></script>
+    <script src="../includes/summernote/lang/summernote-es-ES.js"></script>
+    <script>
+        $("#edit-cat-desc").summernote({
+            lang: 'es-ES',
+            height: 300,
+            disableDragAndDrop: true,
+            styleTags: [
+                {
+                    title: 'párrafo',
+                    tag: 'p',
+                    value: 'p'
+                },
+                {
+                    title: 'H2 título',
+                    tag: 'h2',
+                    className: 'title',
+                    value: 'h2'
+                },
+                {
+                    title: 'H3 título',
+                    tag: 'h3',
+                    className: 'title',
+                    value: 'h3'
+                }
+            ],
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear', 'style']],
+                ['font', ['superscript', 'subscript']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['picture', ['picture']],
+                ['table', ['table']],
+                ['hr', ['hr']],
+                ['misc', ['undo', 'redo', 'codeview']]
+            ],
+            callbacks: {
+                onInit: function() {
+                    // $(this).summernote('code', '');
+                },
+                onChange: function() {
+                    <?php if ($_GET["page"] == "edit-category"):?>
+                        console.log('onEditChange:', $(this).summernote("code"));
+                        enableEditFormBtn();
+                    <?php else: ?>
+                        console.log('onNewChange:', $(this).summernote("code"));
+                        enableCreateFormBtn();
+                    <?php endif; ?>
+                }
+            },
+        });
+    </script>
     <?php endif; ?>
 
     <?php if (isset($_GET["page"]) && $_GET["page"] == "general-settings"): ?>

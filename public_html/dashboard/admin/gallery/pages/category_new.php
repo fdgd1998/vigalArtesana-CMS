@@ -33,55 +33,83 @@
             echo $e;
         }
     }
-    
+    var_dump($categories);
 ?>
+<style>
+  .disabled-form {
+      pointer-events: none;
+      opacity: 0.4;
+  }
+  .custom-checkbox {
+    margin-bottom: 10px;
+}
+</style>
 
 <div class="container settings-container">
-    <?php if (isset($_GET["id"])): ?>
+    <?php if ($_GET["page"] == "edit-category"): ?>
     <h1 class="title">Editando categoría "<?=$categories["name"]?>"</h1>
     <?php else: ?>
     <h1 class="title">Crear categoría</h1>
     <?php endif; ?>
+    <?php if ($_GET["page"] == "edit-category"): ?>
     <div class="custom-control custom-checkbox">
         <input type="checkbox" class="custom-control-input" id="change-edit-name-chkbx">
         <label class="custom-control-label" for="change-edit-name-chkbx">Editar nombre.</label>
     </div>
-    <div id="edit-change-name" class="input-group mb-3 disabled-form">
+    <?php endif; ?>
+    <div id="edit-change-name" class="input-group mb-3 <?=$_GET["page"] == "edit-category"?'disabled-form':''?>">
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Nombre</span>
         </div>
-        <input type="text" class="form-control" id="update-cat-name" aria-describedby="basic-addon1">
+        <input type="text" class="form-control" id="<?=$_GET["page"] == "edit-category"?'update':'new'?>-cat-name" aria-describedby="basic-addon1">
     </div>
-    <div class="form-group" hidden id="update-cat-image-preview-div">
-        <label for="update-cat-image-preview" style="width: 100%;">Imagen actual: </label>
-        <center><img id="update-cat-image-preview" src="#" alt="" width="50%"></center>
-    </div>
+    <?php if ($_GET["page"] == "edit-category"): ?>
     <div class="custom-control custom-checkbox">
         <input type="checkbox" class="custom-control-input" id="change-edit-image-chkbx">
         <label class="custom-control-label" for="change-edit-image-chkbx">Establecer nueva imagen.</label>
     </div>
-    <div id="edit-change-image" class="disabled-form">
-        <label>Nueva imagen : </label>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><i class='fas fa-upload'></i></span>
-            </div>
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" id="update-new-cat-image" aria-describedby="inputGroupFileAddon01">
-                <label id="update-new-cat-image-name" class="custom-file-label" for="update-new-cat-image" data-browse="Buscar...">Seleccionar imagen...</label>
-            </div>
+    <?php endif; ?>
+    <div  id="edit-change-image" class="<?=$_GET["page"] == "edit-category"?'disabled-form':''?>">
+    <?php if ($_GET["page"] != "edit-category"): ?>
+    <label>Nueva imagen : </label>
+    <?php endif; ?>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class='fas fa-upload'></i></span>
         </div>
-        <div style="margin-top: 15px;" class="form-group" hidden id="update-new-cat-image-preview-div">
-            <label for="update-new-cat-image-preview" style="width: 100%;">Vista previa de nueva imagen: </label>
-            <center><img id="update-new-cat-image-preview" src="#" alt="" width="100%" style="width: 50%;"></center>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="<?=$_GET["page"] == "edit-category"?'update':'new'?>-cat-image" aria-describedby="inputGroupFileAddon01">
+            <label id="update-cat-image-name" class="custom-file-label" for="<?=$_GET["page"] == "edit-category"?'update':'new'?>-cat-image" data-browse="Buscar...">Seleccionar imagen...</label>
         </div>
     </div>
+    <?php if ($_GET["page"] == "edit-category"): ?>
+    <div class="row text-center mb-4">
+        <div class="col-6 col-sm-6 col-md-6">
+            <p>Imagen actual:</p>
+            <img width="100%" style="object-fit: cover !important;" src="../uploads/categories/<?=$categories["image"]?>"/>
+        </div>
+        <div class="col-6 col-sm-6 col-md-6">
+            <p>Nueva imagen:</p>
+            <img id="update-cat-image-preview" width="100%" style="object-fit: cover !important;" src="../includes/img/placeholder-image.jpg"/>
+        </div>
+    </div>
+    <?php else: ?>
+    <div style="margin-top: 15px;" class="form-group" hidden id="new-cat-image-preview-div">
+        <label for="new-cat-image-preview" style="width: 100%;">Vista previa de nueva imagen: </label>
+        <center><img id="new-cat-image-preview" src="#" alt="" width="100%" style="width: 50%;"></center>
+    </div>
+    <?php endif; ?>
+    </div>
+    <?php if ($_GET["page"] == "edit-category"): ?>
     <div class="custom-control custom-checkbox">
         <input type="checkbox" class="custom-control-input" id="change-edit-desc-chkbx">
         <label class="custom-control-label" for="change-edit-desc-chkbx">Editar descripción.</label>
     </div>
-    <div id="edit-change-desc" class=" mb-3 disabled-form">
-        <label for="edit-cat-desc">Descripción: </label>
-        <textarea class="form-control" id="update-cat-desc" rows="8"></textarea>
-    </div>     
+    <?php endif; ?>
+    <div id="<?=$_GET["page"] == "edit-category"?'edit':'new'?>-cat-desc" class="disabled-form">
+    </div> 
+    <div class="button-group text-right" style="margin-top: 20px">
+        <button id="cancel-btn" class="btn my-button-2">Cancelar</button>
+        <button disabled id="<?=($_GET["page"] == "edit-category")?"cat-edit":"cat-create"?>" class="btn my-button-3"><i class="far fa-<?=($_GET["page"] == "edit-category")?"edit":"save"?>"></i><?=($_GET["page"] == "edit-category")?"Editar":"Crear"?></button>
+    </div>   
 </div>

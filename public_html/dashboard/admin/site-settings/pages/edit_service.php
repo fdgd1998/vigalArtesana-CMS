@@ -30,6 +30,7 @@
     echo "<script>var servId = ".$_GET["id"]."</script>";
 ?>
 
+</style>
 <div class="container settings-container">
     <h1 class="title">Editando servicio</h1>
     <p class="title-description">Selecciona los atributos del servicio que quieres modificar.</p>

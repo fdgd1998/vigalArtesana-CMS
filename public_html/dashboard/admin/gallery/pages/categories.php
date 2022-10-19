@@ -13,17 +13,6 @@
     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
 ?>
 
-<style>
-  .disabled-form {
-      pointer-events: none;
-      opacity: 0.4;
-  }
-  .custom-checkbox {
-    margin-bottom: 10px;
-}
-</style>
-
-
 <!-- create category modal -->
 <div class="modal fade" id="new-cat" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">

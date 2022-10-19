@@ -99,7 +99,12 @@ jQuery(function($) {
         // perform an ajax call
         var formData = new FormData();
         formData.append("cat_name", $("#new-cat-name").val());
+        formData.append("cat_desc", $("#new-cat-desc").val());
         formData.append("file", $("#new-cat-image").prop("files")[0]);
+
+        for (var pair of formData.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]); 
+        }
         $.ajax({
             url: location.origin+'/dashboard/admin/gallery/create_category.php', // this is the target
             type: 'post', // method
@@ -109,7 +114,7 @@ jQuery(function($) {
             processData: false,  // tell jQuery not to process the data
             contentType: false,   // tell jQuery not to set contentType
             success: function(response) { // if the http response code is 200
-                //alert(response);
+                alert(response);
                 window.location = location.origin+"/dashboard/?page=categories&order=asc";
             },
             error: function(response) { // if the http response code is other than 200
@@ -382,6 +387,7 @@ $('.cat-status-change-form').on('click', function(e) {
 $("#update-new-cat-image").on("change", function(e) {
     if ($(this).prop("files")[0]) {
         if (!CheckImageSize($(this).prop("files")[0], 2097152)) {
+            
             var fileName = $(this).val().substring(12);
             console.log(fileName);
             $('#update-new-cat-image-name').html(fileName);
@@ -400,17 +406,48 @@ $("#update-new-cat-image").on("change", function(e) {
 
 // Getting current category image URL and setting a preview.
 $("#new-cat-image").on("change", function(e) {
-    if ($(this).prop("files")[0]) {
-        if (!CheckImageSize($(this).prop("files")[0], 2097152)) {
-            var fileName = $(this).val().substring(12);
-            console.log(fileName.substring(12));
-            $('#new-cat-image-name').html(fileName);
-            $('#new-cat-image-preview-div').removeAttr("hidden");
-            readURL(this, $("#new-cat-image-preview"));
-            $("#new-cat-image-preview-div").prop("hidden", false);
-        } else {
-            $(this).val('');   
-        }
+    var cat_file_blob = $(this).prop("files")[0];
+    if (cat_file_blob) {
+        var cat_filename = $("#new-cat-image")[0].files[0].name;
+        console.log(cat_filename);
+        var formData = new FormData();
+        formData.append("filenames", cat_filename);
+        $.ajax({
+            url: './admin/gallery/scripts/check_current_category_filenames.php', // this is the target
+            type: 'post', // method
+            dataType: 'text', // what is expected to be returned
+            cache: false,
+            data: formData, // pass the input valuse to serve
+            processData: false,  // tell jQuery not to process the data
+            contentType: false,   // tell jQuery not to set contentType
+            success: function(response) { // HTTP response code is 200
+                console.log(response);
+                var existentFile = response;
+                if (existentFile) {
+                    
+                } else {
+                    if (cat_file_blob.size < 2097152) {
+                        console.log(cat_file_blob.name);
+                        $('#new-cat-image-name').html(cat_file_blob.name);
+                        $('#new-cat-image-preview-div').removeAttr("hidden");
+                        readURL($("#new-cat-image")[0], $("#new-cat-image-preview"));
+                        $("#new-cat-image-preview-div").prop("hidden", false);
+                    } else {
+                        alert("El tamaño de la foto supera los 2 MB. Selecciona otro fichero.")
+                        $("#new-cat-image").html("Seleccionar imagen...");
+                        $("#new-cat-image-preview-div").prop("hidden", true);  
+                        $("#new-cat-image").val("");
+
+                    }
+                }
+            },
+            error: function(response) { 
+                $("#new-cat-image-name").html("Seleccionar imagen...");
+                $("#new-cat-image-preview-div").prop("hidden", true);  
+                $("#new-cat-image").val("");
+                alert("El fichero " + cat_filename + " ya existe en el servidor. Renómbralo e inténtalo de nuevo.");
+            }
+        });
     } else {
         // $('#cat-create').attr('disabled', 'disabled');
         $('#new-cat-image-preview-div').attr("hidden","true");

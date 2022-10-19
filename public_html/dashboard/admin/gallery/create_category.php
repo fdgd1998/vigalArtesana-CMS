@@ -2,7 +2,7 @@
     session_start();
     
     require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
-    require_once 'scripts/get_friendly_url.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/gallery/scripts/get_friendly_url.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
     
@@ -34,13 +34,13 @@
                     $userid = $rows['id'];
                     $res->free();
                 }
-                $temp = explode(".", $_FILES["file"]["name"]); // Getting current filename
-                $newfilename = round(microtime(true)).$userid.'.'.end($temp); // Setting new filename
+                // $temp = explode(".", $_FILES["file"]["name"]); // Getting current filename
+                // $newfilename = round(microtime(true)).$userid.'.'.end($temp); // Setting new filename
 
                 // Saving the name and the image filename into database.
-                $sql = "insert into categories (friendly_url, name, image, uploadedBy) values ('".GetFriendlyUrl($_POST["cat_name"])."','".$_POST['cat_name']."','".$newfilename."','".$_SESSION["user"]."')";
+                $sql = "insert into categories (friendly_url, name, description, image, uploadedBy) values ('".GetFriendlyUrl($_POST["cat_name"])."','".$_POST['cat_name']."','".$_POST["cat_desc"]."' ,'".$_FILES['file']["name"]."','".$_SESSION["user"]."')";
                 if ($conn->query($sql) === TRUE) {
-                    move_uploaded_file($_FILES['file']['tmp_name'],$location.$newfilename); // Moving file to the server
+                    move_uploaded_file($_FILES['file']['tmp_name'],$location.$_FILES['file']["name"]); // Moving file to the server
                     echo "La categoría se ha creado correctamente.";
                 }
             }

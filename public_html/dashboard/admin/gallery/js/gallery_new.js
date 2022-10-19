@@ -204,7 +204,7 @@ var input_files = [];
     }
 
     // Getting location URL of input images.
-    function imagesPreview(filesToRemove) {
+    function imagesPreview() {
         // if (input_files.length > 0) {
             for (var i = 0; i < input_files.length; i++) {
         //         if (!filesToRemove.includes(input_files[i])) {

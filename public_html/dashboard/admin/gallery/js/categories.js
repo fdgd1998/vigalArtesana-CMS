@@ -125,21 +125,41 @@ jQuery(function($) {
     });
 
     $('#cat-edit').on('click', function(e) {
-        ShowSpinnerOverlay("Editando categoría...");
+        // ShowSpinnerOverlay("Editando categoría...");
         // perform an ajax call
         var formData = new FormData();
         formData.append("cat_id", editing_cat_id);
-        if ($("#change-edit-image-chkbx").is(":checked") && $("#change-edit-name-chkbx").is(":checked")) {
+        if ($("#change-edit-name-chkbx").is(":checked") && $("#change-edit-image-chkbx").is(":not(:checked)") && $("#change-edit-desc-chkbx").is(":not(:checked)")) {
+            formData.append("cat_name", $("#update-cat-name").val());
+        } else if ($("#change-edit-name-chkbx").is(":not(:checked)") && $("#change-edit-image-chkbx").is(":checked") && $("#change-edit-desc-chkbx").is(":not(:checked)")) {
+            formData.append("cat_file", $("#update-new-cat-image").prop("files")[0]);
+        } else if ($("#change-edit-name-chkbx").is(":not(:checked)") && $("#change-edit-image-chkbx").is(":not(:checked)") && $("#change-edit-desc-chkbx").is(":checked")) {
+            formData.append("cat_desc", $("#update-cat-desc").val());
+        } else if ($("#change-edit-name-chkbx").is(":checked") && $("#change-edit-image-chkbx").is(":checked") && $("#change-edit-desc-chkbx").is(":not(:checked)")) {
             formData.append("cat_name", $("#update-cat-name").val());
             formData.append("cat_file", $("#update-new-cat-image").prop("files")[0]);
-        } else if ($("#change-edit-image-chkbx").is(":checked") && $("#change-edit-name-chkbx").is(":not(:checked)")) {
+        } else if ($("#change-edit-name-chkbx").is(":not(:checked)") && $("#change-edit-image-chkbx").is(":checked") && $("#change-edit-desc-chkbx").is(":checked")) {
             formData.append("cat_file", $("#update-new-cat-image").prop("files")[0]);
-        } else if ($("#change-edit-image-chkbx").is(":not(:checked)") && $("#change-edit-name-chkbx").is(":checked")) {
+            formData.append("cat_desc", $("#update-cat-desc").val());
+        } else if ($("#change-edit-name-chkbx").is(":checked") && $("#change-edit-image-chkbx").is(":not(:checked)") && $("#change-edit-desc-chkbx").is(":checked")) {
             formData.append("cat_name", $("#update-cat-name").val());
-        }
-        // for(var pair of formData.entries()) {
-        //     console.log(pair[0]+ ', '+ pair[1]); 
-        //  }
+            formData.append("cat_desc", $("#update-cat-desc").val());
+        } else if ($("#change-edit-name-chkbx").is(":checked") && $("#change-edit-image-chkbx").is(":checked") && $("#change-edit-desc-chkbx").is(":checked")) {
+            formData.append("cat_name", $("#update-cat-name").val());
+            formData.append("cat_file", $("#update-new-cat-image").prop("files")[0]);
+            formData.append("cat_desc", $("#update-cat-desc").val());
+        } 
+        // if ($("#change-edit-image-chkbx").is(":checked") && $("#change-edit-name-chkbx").is(":checked")) {
+        //     formData.append("cat_name", $("#update-cat-name").val());
+        //     formData.append("cat_file", $("#update-new-cat-image").prop("files")[0]);
+        // } else if ($("#change-edit-image-chkbx").is(":checked") && $("#change-edit-name-chkbx").is(":not(:checked)")) {
+        //     formData.append("cat_file", $("#update-new-cat-image").prop("files")[0]);
+        // } else if ($("#change-edit-image-chkbx").is(":not(:checked)") && $("#change-edit-name-chkbx").is(":checked")) {
+        //     formData.append("cat_name", $("#update-cat-name").val());
+        // }
+        for(var pair of formData.entries()) {
+            console.log(pair[0]+ ', '+ pair[1]); 
+         }
         $.ajax({
             url: location.origin+'/dashboard/admin/gallery/edit_category.php', // this is the target
             type: 'post', // method
@@ -150,7 +170,7 @@ jQuery(function($) {
             contentType: false,   // tell jQuery not to set contentType
             success: function(response) { // if the http response code is 200
                 // $('.modal-backdrop').remove();
-                //alert(response);
+                alert(response);
                 window.location = location.origin+"/dashboard/?page=categories&order=asc";
             },
             error: function(response) { // if the http response code is other than 200

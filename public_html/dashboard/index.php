@@ -142,6 +142,12 @@
                 <?php
                     // reading GET variable and load corresponding page
                     switch(true) {
+                        case $_GET['page'] == 'new-category':
+                            include 'admin/gallery/pages/category_new.php';
+                            break;
+                        case preg_match('^edit-category&id=(\d{1,2})$^', isset($_GET["id"])?$_GET["page"]."&id=".$_GET["id"]:$_GET["page"]):
+                            include 'admin/gallery/pages/category_new.php';
+                            break;
                         case $_GET['page'] == 'manage-gallery':
                             include 'admin/gallery/pages/manage_gallery.php';
                             break;

@@ -70,9 +70,6 @@
     </div>
     <?php endif; ?>
     <div  id="edit-change-image" class="<?=$_GET["page"] == "edit-category"?'disabled-form':''?>">
-    <?php if ($_GET["page"] != "edit-category"): ?>
-    <label>Nueva imagen : </label>
-    <?php endif; ?>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text"><i class='fas fa-upload'></i></span>
@@ -105,8 +102,10 @@
         <input type="checkbox" class="custom-control-input" id="change-edit-desc-chkbx">
         <label class="custom-control-label" for="change-edit-desc-chkbx">Editar descripción.</label>
     </div>
+    <?php else: ?>
+    <label  for="cat-edit">Descripción:</label>
     <?php endif; ?>
-    <div id="<?=$_GET["page"] == "edit-category"?'edit':'new'?>-cat-desc" class="disabled-form">
+    <div id="cat-desc" class="disabled-form">
     </div> 
     <div class="button-group text-right" style="margin-top: 20px">
         <button id="cancel-btn" class="btn my-button-2">Cancelar</button>

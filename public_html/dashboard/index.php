@@ -214,7 +214,7 @@
     <script src="../includes/summernote/summernote-bs4.min.js"></script>
     <script src="../includes/summernote/lang/summernote-es-ES.js"></script>
     <script>
-        $("#edit-cat-desc").summernote({
+        $("#cat-desc").summernote({
             lang: 'es-ES',
             height: 300,
             disableDragAndDrop: true,

@@ -107,7 +107,7 @@ function isImageEditValid() {
 }
 
 function isDescEditValid() {
-    if ($('#edit-cat-desc').summernote('code') != "") {
+    if ($('#cat-desc').summernote('code') != "") {
         return true;
     } else {
         return false;

@@ -25,7 +25,6 @@
 
         $location = $_SERVER["DOCUMENT_ROOT"]."/uploads/images/";
         $fileExists = array();
-        $searchDir = scandir($location.$directory);
         // echo var_dump($searchDir);
         if(is_dir($location.$directory)) {
             $searchDir = scandir($location.$directory);

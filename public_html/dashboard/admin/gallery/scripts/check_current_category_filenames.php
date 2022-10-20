@@ -13,7 +13,7 @@
 
         $location = $_SERVER["DOCUMENT_ROOT"]."/uploads/categories/";
         $fileExists = array();
-        $searchDir = scandir($location);
+        
         // echo var_dump($searchDir);
         if(is_dir($location)) {
             $searchDir = scandir($location);

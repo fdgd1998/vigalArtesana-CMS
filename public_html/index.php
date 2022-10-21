@@ -59,7 +59,7 @@
             include 'includes/header.php';
         ?>
         <div class="index-image-container">
-            <img class="index-image wow animate__animated animate__fadeIn" src="https://<?=$_SERVER["SERVER_NAME"]?>/uploads/<?=$GLOBALS["site_settings"][5]?>"></img>
+            <img class="index-image wow animate__animated animate__fadeIn" src="<?=(isset($_SERVER["HTTPS"])?"https://":"http://").$_SERVER["SERVER_NAME"]?>/uploads/<?=$GLOBALS["site_settings"][5]?>"></img>
             <div class="index-text-image">
                 <h1 class="wow animate__animated animate__fadeInUp"><?=$GLOBALS["site_settings"][6]?></h1>
             </div>
@@ -97,7 +97,7 @@
                                     <div class="card mb-3">
                                         <div class="row no-gutters">
                                             <div class="col-md-6">
-                                                <img src="./uploads/services/<?=$service[3]?>" class="card-img" alt="...">
+                                                <img src="<?=(isset($_SERVER["HTTPS"])?"https://":"http://").$_SERVER["SERVER_NAME"]?>/uploads/services/<?=$service[3]?>" class="card-img" alt="...">
                                             </div>
                                             <div class="col-md-6 d-flex">
                                                 <div class="card-body align-self-center">

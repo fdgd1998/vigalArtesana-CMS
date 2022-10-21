@@ -20,10 +20,10 @@
                 $location = $_SERVER["DOCUMENT_ROOT"]."/uploads//"; // location for post images.
                 $i = 0;
                 foreach ($_FILES as $file) { // Setting new filename for each file to upload
-                    $temp = explode(".", $file["name"]); // Getting current filename.
-                    $newfilename = 'index.'.end($temp); // Setting new filename.
-                    move_uploaded_file($file['tmp_name'],$location.$newfilename); // Moving file to the server.
-                    $stmt = "update company_info set value_info='".$newfilename."' where key_info='index-image'";
+                    // $temp = explode(".", $file["name"]); // Getting current filename.
+                    // $newfilename = 'index.'.end($temp); // Setting new filename.
+                    move_uploaded_file($file['tmp_name'],$location.$file["name"]); // Moving file to the server.
+                    $stmt = "update company_info set value_info='".$file["name"]."' where key_info='index-image'";
                     if ($conn->query($stmt) === TRUE) {
                         echo "La imagen se ha modificado correctamente.";
                     }

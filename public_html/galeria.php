@@ -4,6 +4,7 @@
     $categories = array();
 
     $category_name = "";
+    $category_description = "";
     $results = array();
 
     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
@@ -29,7 +30,7 @@
             $sql = "select * from categories where cat_enabled='YES'";
             $res = $conn->query($sql);
             while ($rows = $res->fetch_assoc()) {
-                array_push($categories, array($rows['friendly_url'], $rows['name'], $rows['image']));
+                array_push($categories, array($rows['friendly_url'], $rows['name'], $rows['image'], $rows['description']));
             }
             $res->free();
         } else {
@@ -39,11 +40,11 @@
                 header("Location: /404");
                 exit();
             } else {
-                $sql = "select gallery.id, filename from gallery inner join categories on gallery.category = categories.id where gallery.category = (select id from categories where friendly_url = '".$_GET['category']."') limit $paginationStart, $limit";
+                $sql = "select gallery.id, filename, dir, altText from gallery inner join categories on gallery.category = categories.id where gallery.category = (select id from categories where friendly_url = '".$_GET['category']."') limit $paginationStart, $limit";
                 if ($res = $conn->query($sql)) {
                     if ($res->num_rows >= 0) {
                         while ($rows = $res->fetch_assoc()) {
-                            array_push($results, array($rows['id'], $rows['filename']));
+                            array_push($results, array($rows['id'], $rows['filename'], $rows['dir'], $rows['altText']));
                         }
                         $res->free();
                     } else {
@@ -65,10 +66,11 @@
                 exit();
             }
 
-            $sql = "select name from categories where id = (select id from categories where friendly_url = '".$_GET['category']."')";
+            $sql = "select name, description from categories where id = (select id from categories where friendly_url = '".$_GET['category']."')";
             if ($res = $conn->query($sql)) {
                 $rows = $res->fetch_assoc();
                 $category_name = $rows['name'];
+                $category_description = $rows['description'];
                 $res->free();
             }
         }
@@ -124,10 +126,10 @@
             <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" style="margin-bottom: 20px;">
                 <?php foreach ($categories as $element): ?>
                     <div class='category col-sm-6 col-md-4 col-lg-3 item' style='margin-bottom: 30px;'>
-                        <a href='/galeria/<?=$element[0]?>'>
+                        <a href='<?=(isset($_SERVER["HTTPS"])?"https://":"http://").$_SERVER["SERVER_NAME"]?>/galeria/<?=$element[0]?>'>
                             <div class='wrap-category animated-item'>
                                 <label class='category-title'><?=$element[1]?></label>
-                                <img loading="lazy" class='img-fluid category photos' src='https://<?=$_SERVER["SERVER_NAME"]?>/uploads/categories/<?=$element[2]?>' alt="<?=$element[1]?>"/>
+                                <img loading="lazy" class='img-fluid category photos' src='<?=(isset($_SERVER["HTTPS"])?"https://":"http://").$_SERVER["SERVER_NAME"]?>/uploads/categories/<?=$element[2]?>' alt="<?=$element[1]?>"/>
                             </div>
                         </a>
                     </div>
@@ -135,12 +137,12 @@
             </div>   
         <?php else: ?>
             <div class="intro">
-                <h1 class="title"><a href="/galeria"><i class="fas fa-arrow-left" style="margin-right: 20px !important;"></i></a><?=$category_name?></h1>
+                <h1 class="title"><a href="<?=(isset($_SERVER["HTTPS"])?"https://":"http://").$_SERVER["SERVER_NAME"]?>/galeria"><i class="fas fa-arrow-left" style="margin-right: 20px !important;"></i></a><?=$category_name?></h1>
                 <?php if (count($results) > 0): ?>
-                    <p>Esta es una breve descripción de la categoría.</p>
+                    <p><?=$category_description?></p>
                     <p class="title-description">Pincha sobre las imágenes para verlas a tamaño completo. Para volver a la página anterior, pincha sobre la flecha a la izquierda del nombre de la categoría.</p>
                 <?php else: ?>
-                    <p>Esta es una breve descripción de la categoría.</p>
+                    <p><?=$category_description?></p>
                     <p class="title-description">No se han encontrado elementos en esta categoría. Visita esta página más tarde.</p>
                 <?php endif; ?>
             </div>
@@ -148,8 +150,8 @@
                 <div class="galeria">
                     <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4"> 
                         <?php foreach ($results as $element): ?>    
-                        <a class="animated-item wrap" href="/uploads/images/<?=$element[1]?>">
-                            <img loading="lazy" id="image-<?=$element[0]?>" class='img-fluid photos' src="/uploads/images/<?=$element[1]?>" alt="<?=$category_name?>"/>
+                        <a class="animated-item wrap" href="<?=(isset($_SERVER["HTTPS"])?"https://":"http://").$_SERVER["SERVER_NAME"]?>/uploads/images/<?=$element[2].$element[1]?>">
+                            <img loading="lazy" id="image-<?=$element[0]?>" class='img-fluid photos' src="<?=(isset($_SERVER["HTTPS"])?"https://":"http://").$_SERVER["SERVER_NAME"]?>/uploads/images/<?=$element[2].$element[1]?>" alt="<?=$element[3]?>"/>
                         </a>
                         <?php endforeach; ?>
                     </div>
@@ -161,7 +163,7 @@
 
     <!-- Pagination -->
     <?php if (isset($_GET['category']) && count($results) > 0): ?>
-    <nav aria-label="Page navigation example mt-5" style="margin-bottom: 50px;">
+    <nav style="margin-bottom: 50px;">
         <ul class="pagination justify-content-center">
             <li class="page-item <?php if($page <= 1){ echo 'disabled'; } ?>">
                 <a class="page-link" href="<?php if($page <= 1){ echo '#'; } else { echo "/galeria/".$_GET['category']."/" . $prev; } ?>"><</a>

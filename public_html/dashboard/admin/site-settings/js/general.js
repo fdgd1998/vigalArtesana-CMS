@@ -11,13 +11,17 @@ $(document).ready(function() {
     $("#upload-index-image").on("change", function(e){
         var files = $("#upload-index-image").prop("files");
         if (files.length > 0) { // Checking if there's selected files
-            if (!CheckImageSize(files[0], 2097152)) {
+            if (files[0].size < 2097152) {
                 readURL(this, $("#index-image-preview"));
                 $("#index-image-preview").parent().removeAttr("hidden");
                 $("#upload-index-name").html(files[0].name); // Updating input text.
                 $("#submit-index-image").removeAttr("disabled");
             } else {
                 $(this).val('');
+                alert("El fichero supera el máximo de 5 MB. Comprueba el tamaño e inténtalo de nuevo.");
+                $("#index-image-preview").parent().attr("hidden",true);
+                $("#upload-index-name").html("Seleccionar imagen...");
+                $("#submit-index-image").attr("disabled","disabled");
             }
         } else {
             // If no files are selected, reset form.

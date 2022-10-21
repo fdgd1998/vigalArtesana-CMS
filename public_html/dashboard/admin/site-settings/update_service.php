@@ -34,9 +34,9 @@
                         echo "No se ha podido actualizar la descripción del servicio.";
                     }
                 } else if (!isset($_POST["title"]) && !isset($_POST["description"]) && isset($_FILES["image"])){ //changing service image
-                    $temp = explode(".", $_FILES["image"]["name"]); //getting current filename
-                    $newfilename = round(microtime(true)) . '.' . end($temp); //setting new filename
-                    move_uploaded_file($_FILES['image']['tmp_name'],$location.$newfilename); //moving file to the server.
+                    // $temp = explode(".", $_FILES["image"]["name"]); //getting current filename
+                    // $newfilename = round(microtime(true)) . '.' . end($temp); //setting new filename
+                    move_uploaded_file($_FILES['image']['tmp_name'],$location.$_FILES["image"]["name"]); //moving file to the server.
 
                     // undating entry on database
                     $stmt = "select image from services where id = ".$_POST["id"];
@@ -48,7 +48,7 @@
                     }
                     $res->free(); //releasing results from RAM.
 
-                    $stmt = "update services set image = '".$newfilename."' where id = ".$_POST["id"];
+                    $stmt = "update services set image = '".$_FILES["image"]["name"]."' where id = ".$_POST["id"];
                     if ($conn->query($stmt) == TRUE) {
                         echo "La imagen del servicio se ha actualizado correctamente.";
                     } else {
@@ -62,9 +62,9 @@
                         echo "No se han podido actualizar el nombre y la descripción del servicio.";
                     }
                 } else if (isset($_POST["title"]) && !isset($_POST["description"]) && isset($_FILES["image"])) { //changing service title and image
-                    $temp = explode(".", $_FILES["image"]["name"]); //getting current filename
-                    $newfilename = round(microtime(true)) . '.' . end($temp); //setting new filename
-                    move_uploaded_file($_FILES['image']['tmp_name'],$location.$newfilename); //moving file to the server.
+                    // $temp = explode(".", $_FILES["image"]["name"]); //getting current filename
+                    // $newfilename = round(microtime(true)) . '.' . end($temp); //setting new filename
+                    move_uploaded_file($_FILES['image']['tmp_name'],$location.$_FILES["image"]["name"]); //moving file to the server.
 
                     // undating entry on database
                     $stmt = "select image from services where id = ".$_POST["id"];
@@ -76,16 +76,16 @@
                     }
                     $res->free(); //releasing results from RAM.
 
-                    $stmt = "update services set title = '".$_POST["title"]."', image = '".$newfilename."' where id = ".$_POST["id"];
+                    $stmt = "update services set title = '".$_POST["title"]."', image = '".$_FILES["image"]["name"]."' where id = ".$_POST["id"];
                     if ($conn->query($stmt) == TRUE) {
                         echo "El título y la imagen del servicio se han actualizado correctamente.";
                     } else {
                         echo "No se han podido actualizar el título y la imagen del servicio.";
                     }
                 } else { //changing service description and image
-                    $temp = explode(".", $_FILES["image"]["name"]); //getting current filename
-                    $newfilename = round(microtime(true)) . '.' . end($temp); //setting new filename
-                    move_uploaded_file($_FILES['image']['tmp_name'],$location.$newfilename); //moving file to the server.
+                    // $temp = explode(".", $_FILES["image"]["name"]); //getting current filename
+                    // $newfilename = round(microtime(true)) . '.' . end($temp); //setting new filename
+                    move_uploaded_file($_FILES['image']['tmp_name'],$location.$_FILES["image"]["name"]); //moving file to the server.
 
                     // undating entry on database
                     $stmt = "select image from services where id = ".$_POST["id"];
@@ -97,7 +97,7 @@
                     }
                     $res->free(); //releasing results from RAM.
 
-                    $stmt = "update services set title = '".$_POST["title"]."', description = '".$_POST["description"]."', image = '".$newfilename."' where id = ".$_POST["id"];
+                    $stmt = "update services set title = '".$_POST["title"]."', description = '".$_POST["description"]."', image = '".$_FILES["image"]["name"]."' where id = ".$_POST["id"];
                     if ($conn->query($stmt) == TRUE) {
                         echo "La descripción y la imagen del servicio se han actualizado correctamente.";
                     } else {

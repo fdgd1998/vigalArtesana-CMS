@@ -113,6 +113,11 @@
                             Galería
                         </a>
                         <div role='menu' class='dropdown-menu'>
+                        <h6 class="dropdown-header">Galería</h6>
+                            <a role='presentation' class='dropdown-item' href='/dashboard?page=gallery-new'>
+                                <i class='fas fa-cog'></i>
+                                General
+                            </a>
                             <a role='presentation' class='dropdown-item' href='/dashboard?page=gallery-new'>
                                 <i class='fas fa-upload'></i>
                                 Subir imágenes
@@ -122,9 +127,14 @@
                                 Gestionar galería
                             </a>
                             <div class="dropdown-divider"></div>
+                            <h6 class="dropdown-header">Categorías</h6>
                             <a role='presentation' class="dropdown-item" href="/dashboard?page=categories">
                                 <i class="fas fa-ellipsis-h"></i>
-                                Categorías
+                                Gestionar categorías
+                            </a>
+                            <a role='presentation' class="dropdown-item" href="/dashboard?page=new-category">
+                                <i class="fas fa-plus-circle"></i>
+                                Nueva categoría
                             </a>
                         </div>
                     </li>

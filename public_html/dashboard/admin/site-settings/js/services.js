@@ -34,12 +34,15 @@ $(document).ready(function() {
 
     $("#image-input-new").on("change", function(){
         if ($(this).prop("files")[0]) {
-            if (!CheckImageSize($(this).prop("files")[0], 2097152)) {
+            if ($(this).prop("files")[0].size < 5242880) {
                 $("#image-preview-div-new").removeAttr("hidden");
                 readURL(this, $("#image-preview-new"));
                 $("#image-input-label-new").html($(this).prop("files")[0].name);        
             } else {
                 $(this).val('');
+                alert("El fichero supera el máximo de 5 MB. Comprueba el tamaño e inténtalo de nuevo.");
+                $("#image-preview-div-new").attr("hidden", true);
+                $("#image-input-label-new").html("Selecccionar imagen...");
             }
         } else {
             $("#image-preview-div-new").attr("hidden", true);
@@ -108,7 +111,7 @@ $(document).ready(function() {
 
     function IsImageValid() {
         console.log("image valid: "+$("#image-input-edit").prop("files")[0]);
-        if ($("#image-input-edit").prop("files")[0] && !CheckImageSize($("#image-input-edit").prop("files")[0], 2097152)) 
+        if ($("#image-input-edit").prop("files")[0] && $("#image-input-edit").prop("files")[0].size < 5242880) 
         {
             return true;
         } else {
@@ -202,12 +205,16 @@ $(document).ready(function() {
 
     $("#image-input-edit").on("change", function(){
         if ($(this).prop("files")[0]) {
-            if (!CheckImageSize($(this).prop("files")[0], 2097152)) {
+            if ($(this).prop("files")[0].size < 5242880) {
                 $("#image-input-edit-label").html($(this).prop("files")[0].name);
                 readURL(this, $("#service-edit-image-preview"));
                 EnableEditServiceBtn(true);
             } else {
-                $(this).val('');   
+                $(this).val('');
+                alert("El fichero supera el máximo de 5 MB. Comprueba el tamaño e inténtalo de nuevo.");
+                $("#image-input-edit-label").html("Escoger imagen...");
+                $("#service-edit-image-preview").attr("src","../includes/img/placeholder-image.jpg"); 
+                EnableEditServiceBtn(false);
             }
         } else {
             $("#image-input-edit-label").html("Escoger imagen...");

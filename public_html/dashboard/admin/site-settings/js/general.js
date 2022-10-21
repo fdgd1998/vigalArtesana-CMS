@@ -11,7 +11,7 @@ $(document).ready(function() {
     $("#upload-index-image").on("change", function(e){
         var files = $("#upload-index-image").prop("files");
         if (files.length > 0) { // Checking if there's selected files
-            if (files[0].size < 2097152) {
+            if (files[0].size < 5242880) {
                 readURL(this, $("#index-image-preview"));
                 $("#index-image-preview").parent().removeAttr("hidden");
                 $("#upload-index-name").html(files[0].name); // Updating input text.

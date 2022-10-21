@@ -97,7 +97,7 @@
                                     <div class="card mb-3">
                                         <div class="row no-gutters">
                                             <div class="col-md-6">
-                                                <img src="<?=(isset($_SERVER["HTTPS"])?"https://":"http://").$_SERVER["SERVER_NAME"]?>/uploads/services/<?=$service[3]?>" class="card-img" alt="...">
+                                                <img src="<?=(isset($_SERVER["HTTPS"])?"https://":"http://").$_SERVER["SERVER_NAME"]?>/uploads/services/<?=$service[3]?>" class="card-img" alt="<?=$service[1]?>">
                                             </div>
                                             <div class="col-md-6 d-flex">
                                                 <div class="card-body align-self-center">

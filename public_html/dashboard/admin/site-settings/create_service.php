@@ -21,20 +21,20 @@
                 // If more than one user tries to upload a file at the same time, both can be called the same due to the implemented naming system.
                 // In this case, one will be overwritted by the other.
                 // To prevent this, the userid is attached at the end.
-                $userid = 0;
-                $sql = "select id from users where username = '".$_SESSION['user']."'";
-                if ($res = $conn->query($sql)) {
-                    $rows = $res->fetch_assoc();
-                    $userid = $rows['id'];
-                }
-                $res->free(); // Releasing results from RAM.
+                // $userid = 0;
+                // $sql = "select id from users where username = '".$_SESSION['user']."'";
+                // if ($res = $conn->query($sql)) {
+                //     $rows = $res->fetch_assoc();
+                //     $userid = $rows['id'];
+                // }
+                // $res->free(); // Releasing results from RAM.
                 
-                $temp = explode(".", $_FILES["file"]["name"]); // Getting current filename
-                $newfilename = round(microtime(true)).$userid.'.'.end($temp); // Setting new filename
+                // $temp = explode(".", $_FILES["file"]["name"]); // Getting current filename
+                // $newfilename = round(microtime(true)).$userid.'.'.end($temp); // Setting new filename
 
-                $sql = "insert into services (title, description, image) values ('".$_POST['title']."','".$_POST["description"]."','".$newfilename."')";
+                $sql = "insert into services (title, description, image) values ('".$_POST['title']."','".$_POST["description"]."','".$_FILES["file"]["name"]."')";
                 if ($conn->query($sql) === TRUE) {
-                    move_uploaded_file($_FILES['file']['tmp_name'],$location.$newfilename); // Moving file to the server
+                    move_uploaded_file($_FILES['file']['tmp_name'],$location.$_FILES["file"]["name"]); // Moving file to the server
                     echo "La imagen se ha subido correctamente.";
                 }
                 echo $conn->error;

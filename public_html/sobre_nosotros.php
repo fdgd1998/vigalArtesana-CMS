@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobre nosotros - ViGal Artesana</title>
+    <title>Sobre nosotros - <?=$GLOBALS["site_settings"][2]?></title>
     <meta name="description" content="Aprende más sobre nosotros y lo que hacemos.">
     <meta name="robots" content="index, follow">
     <link rel="icon" href="./includes/img/favicon.ico" type="image/x-icon">

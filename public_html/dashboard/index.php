@@ -268,6 +268,50 @@
 
     <?php if (isset($_GET["page"]) && $_GET["page"] == "general-settings"): ?>
     <script src="admin/site-settings/js/general.js"></script>
+    <script src="../includes/summernote/summernote-bs4.min.js"></script>
+    <script src="../includes/summernote/lang/summernote-es-ES.js"></script>
+    <script>
+        $("#index-brief-description").summernote({
+            lang: 'es-ES',
+            height: 200,
+            disableDragAndDrop: true,
+            styleTags: [
+                {
+                    title: 'párrafo',
+                    tag: 'p',
+                    value: 'p'
+                },
+                {
+                    title: 'H2 título',
+                    tag: 'h2',
+                    className: 'title',
+                    value: 'h2'
+                },
+                {
+                    title: 'H3 título',
+                    tag: 'h3',
+                    className: 'title',
+                    value: 'h3'
+                }
+            ],
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear', 'style']],
+                ['font', ['superscript', 'subscript']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['picture', ['picture']],
+                ['table', ['table']],
+                ['hr', ['hr']],
+                ['misc', ['undo', 'redo', 'codeview']]
+            ],
+            callbacks: {
+                onInit: function() {
+                    if (indexDescription) $(this).summernote('code', indexDescription);
+                }
+            }
+        });
+    </script>
     <?php endif; ?>
 
     <?php if (isset($_GET["page"]) && $_GET["page"] == "contact-settings"): ?>

@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Política de privacidad - ViGal Artesana</title>
+    <title>Política de privacidad - <?=$GLOBALS["site_settings"][2]?></title>
     <link rel="icon" href="./includes/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="./includes/css/footer.css">

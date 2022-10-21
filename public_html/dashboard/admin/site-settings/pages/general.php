@@ -26,6 +26,7 @@
             }
         }
         $site_settings[4] = json_decode($site_settings[4], true);
+        echo "<script>var indexDescription = '".$site_settings[10]."'</script>";
         $conn->close();
     } catch (Exception $e) {
 
@@ -94,7 +95,8 @@
                 <p class="title-description">Describe brevemente tu negocio. Esta descripción aparecerá debajo de la imagen de la página principal.</p>
             </div>
         </div>
-        <div class="form-row">
+        <div id="index-brief-description"></div>
+        <!-- <div class="form-row">
             <div class="col">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -103,7 +105,7 @@
                     <textarea id="index-brief-description" rows="5" class="form-control"><?= ($site_settings[10] != ""? $site_settings[10]:"")?></textarea>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="form-row text-right">
             <div class="col"><button id="submit-index-brief-description" class="btn my-button" type="button"><i class="far fa-save"></i>Guardar</button></div>
         </div>

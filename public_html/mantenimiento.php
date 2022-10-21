@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mantenimiento - ViGal Artesana</title>
+    <title>Mantenimiento - <?=$GLOBALS["site_settings"][2]?></title>
     <link rel="icon" href="./includes/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="./includes/css/styles.css">
@@ -41,7 +41,7 @@
             </div>
         </div>
         <hr>
-        <p style="margin-top: 30px;">Si eres el propietario del sitio web, puedes iniciar sesión haciendo clic <u><a href="login">aquí.</a></u></p>
+        <p style="margin-top: 30px;">Si eres el propietario del sitio web, puedes iniciar sesión haciendo clic <u><a href="<?=(isset($_SERVER["HTTPS"])?"https://":"http://").$_SERVER["SERVER_NAME"]?>/login">aquí.</a></u></p>
     </div>
 </body>
 </html>

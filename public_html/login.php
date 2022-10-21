@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Iniciar sesión en ViGal Artesana</title>
+    <title>Iniciar sesión en <?=$GLOBALS["site_settings"][2]?></title>
     <meta name="description" content="Iniciar sesión en ViGal Artesana">
     <link rel="icon" href="./includes/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./includes/bootstrap/css/bootstrap.min.css">
@@ -28,7 +28,7 @@
     <div class="login-clean" style="background-color: rgba(241,247,252,0);">
         <form class="border rounded shadow-lg" method="post" style="margin-top: 20px;" action="./scripts/authenticate.php">
             <div style="margin-bottom: 20px;">
-                <a href="/">
+                <a href="<?=(isset($_SERVER["HTTPS"])?"https://":"http://").$_SERVER["SERVER_NAME"]?>">
                     <i class="fas fa-arrow-left" style="margin-right: 10px;"></i>
                     Volver a Inicio
                 </a>

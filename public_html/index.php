@@ -28,7 +28,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diseñamos y restauramos tus muebles con madera antigua - ViGal Artesana</title>
+    <title>Diseñamos y restauramos tus muebles con madera antigua - <?=$GLOBALS["site_settings"][2]?></title>
     <meta name="description" content="Artesanía y restauración con madera antigua, muebles y objetos decorativos de madera.">
     <meta name="robots" content="index, follow">
     <link rel="icon" href="includes/img/favicon.ico" type="image/x-icon">
@@ -70,8 +70,8 @@
                     <p><?=$GLOBALS["site_settings"][10]?></p>
                 </div>
                 <div class="button-group wow animate__animated animate__fadeInUp">
-                    <button onclick="window.location.href = 'sobre-nosotros'" type="button" class="btn my-button">Sobre nosotros</button>
-                    <button onclick="window.location.href = 'galeria'" type="button" class="btn my-button">Galería</button>
+                    <a href="<?=(isset($_SERVER["HTTPS"])?"https://":"http://").$_SERVER["SERVER_NAME"]?>/sobre-nosotros" class="btn my-button">Sobre nosotros</a>
+                    <a href="<?=(isset($_SERVER["HTTPS"])?"https://":"http://").$_SERVER["SERVER_NAME"]?>/galeria" class="btn my-button">Galería</a>
                 </div>
             </div>
         </div>
@@ -121,7 +121,7 @@
                 <h1 class="title wow animate__animated animate__fadeInUp">¿Necesitas más información?</h1>
                 <div class="title-description wow animate__animated animate__fadeInUp">
                     <p class="wow animate__animated animate__fadeInUp">Si quieres pedir más información, preguntar precios, pedir un presupuesto o preguntar cualquier otra cosa, no dudes en contactar con nosotros. ¡Estaremos encantados de atenderte!</p>
-                    <button onclick="window.location.href = 'contacto'" type="button" class="btn btn-light my-button wow animate__animated animate__fadeInUp">Ver información de contacto</button>
+                    <a href = "<?=(isset($_SERVER["HTTPS"])?"https://":"http://").$_SERVER["SERVER_NAME"]?>/contacto" class="btn btn-light my-button wow animate__animated animate__fadeInUp">Ver información de contacto</a>
                 </div>
             </div>
         </div>

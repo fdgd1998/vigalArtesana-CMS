@@ -345,6 +345,10 @@ li > i {
     color: var(--button-hover-bg-color);
   }
   
+  div[id=main] > p {
+    text-align: left;
+  }
+
   .title-description {
     text-align: left;
     margin-bottom: 30px;
@@ -448,6 +452,10 @@ li > i {
     margin-bottom: 30px;
     margin-top: 30px;
   }
+
+  div[id=main] > p {
+    text-align: left;
+  }
   
   .index-description {
     text-align: left;
@@ -539,6 +547,10 @@ li > i {
     color: var(--button-hover-bg-color);
   }
 
+  div[id=main] > p {
+    text-align: left;
+  }
+
   .title-description {
     text-align: left;
     margin-bottom: 30px;
@@ -624,6 +636,9 @@ li > i {
     color: var(--button-hover-bg-color);
   }
 
+  p {
+    text-align: center;
+  }
   
   .title-description {
     text-align: center;

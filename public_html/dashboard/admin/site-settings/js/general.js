@@ -98,7 +98,7 @@ $(document).ready(function() {
             type: 'post', // method
             dataType: 'text', // what is expected to be returned
             cache: false,
-            data: {description: $("#index-brief-description").val()}, // pass the input valuse to serve
+            data: {description: $("#index-brief-description").summernote("code")}, // pass the input valuse to serve
             success: function(response) { // HTTP response code is 200
                 alert(response);
                 window.location.replace("?page=general-settings"); // redirect

@@ -84,9 +84,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php if ($category_name != ""): ?>
-    <title><?=$category_name?> - Página <?=$page?> - ViGal Artesana</title>
+    <title><?=$category_name?> - Página <?=$page?> - <?=$GLOBALS["site_settings"][2]?></title>
     <?php else: ?>
-    <title>Galería - ViGal Artesana</title>
+    <title>Galería - <?=$GLOBALS["site_settings"][2]?></title>
     <?php endif; ?>
     <meta name="description" content="Nuestra galería, una exposición de los trabajos que hacemos con madera.">
     <meta name="robots" content="index, follow">

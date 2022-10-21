@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacta con nosotros - ViGal Artesana</title>
+    <title>Contacta con nosotros - <?=$GLOBALS["site_settings"][2]?></title>
     <meta name="description" content="Ponte en contacto con ViGal Artesana.">
     <meta name="robots" content="index, follow">
     <link rel="icon" href="./includes/img/favicon.ico" type="image/x-icon">

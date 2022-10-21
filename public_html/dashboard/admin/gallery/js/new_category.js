@@ -3,8 +3,9 @@ $('#cat-create').on('click', function(e) {
     // perform an ajax call
     var formData = new FormData();
     formData.append("cat_name", $("#new-cat-name").val());
-    formData.append("cat_desc", $("#new-cat-desc").val());
+    formData.append("cat_desc", $("#cat-desc").summernote("code"));
     formData.append("file", $("#new-cat-image").prop("files")[0]);
+    console.log($("#cat-desc").summernote("code"));
 
     for (var pair of formData.entries()) {
         console.log(pair[0]+ ', ' + pair[1]); 
@@ -30,26 +31,26 @@ $('#cat-create').on('click', function(e) {
 
 $('#cat-edit').on('click', function(e) {
     var formData = new FormData();
-    formData.append("cat_id", editing_cat_id);
+    formData.append("cat_id", $(this).attr("catid"));
     if ($("#change-edit-name-chkbx").is(":checked") && $("#change-edit-image-chkbx").is(":not(:checked)") && $("#change-edit-desc-chkbx").is(":not(:checked)")) {
         formData.append("cat_name", $("#update-cat-name").val());
     } else if ($("#change-edit-name-chkbx").is(":not(:checked)") && $("#change-edit-image-chkbx").is(":checked") && $("#change-edit-desc-chkbx").is(":not(:checked)")) {
         formData.append("cat_file", $("#update-cat-image").prop("files")[0]);
     } else if ($("#change-edit-name-chkbx").is(":not(:checked)") && $("#change-edit-image-chkbx").is(":not(:checked)") && $("#change-edit-desc-chkbx").is(":checked")) {
-        formData.append("cat_desc", $("#update-cat-desc").val());
+        formData.append("cat_desc", $("#cat-desc").summernote("code"));
     } else if ($("#change-edit-name-chkbx").is(":checked") && $("#change-edit-image-chkbx").is(":checked") && $("#change-edit-desc-chkbx").is(":not(:checked)")) {
         formData.append("cat_name", $("#update-cat-name").val());
         formData.append("cat_file", $("#update-cat-image").prop("files")[0]);
     } else if ($("#change-edit-name-chkbx").is(":not(:checked)") && $("#change-edit-image-chkbx").is(":checked") && $("#change-edit-desc-chkbx").is(":checked")) {
         formData.append("cat_file", $("#update-cat-image").prop("files")[0]);
-        formData.append("cat_desc", $("#update-cat-desc").val());
+        formData.append("cat_desc", $("#cat-desc").summernote("code"));
     } else if ($("#change-edit-name-chkbx").is(":checked") && $("#change-edit-image-chkbx").is(":not(:checked)") && $("#change-edit-desc-chkbx").is(":checked")) {
         formData.append("cat_name", $("#update-cat-name").val());
-        formData.append("cat_desc", $("#update-cat-desc").val());
+        formData.append("cat_desc", $("#cat-desc").summernote("code"));
     } else if ($("#change-edit-name-chkbx").is(":checked") && $("#change-edit-image-chkbx").is(":checked") && $("#change-edit-desc-chkbx").is(":checked")) {
         formData.append("cat_name", $("#update-cat-name").val());
         formData.append("cat_file", $("#update-cat-image").prop("files")[0]);
-        formData.append("cat_desc", $("#update-cat-desc").val());
+        formData.append("cat_desc", $("#cat-desc").summernote("code"));
     } 
 
     for(var pair of formData.entries()) {
@@ -338,4 +339,8 @@ $("#change-edit-desc-chkbx").on("change", function(e){
         $("#edit-change-desc").addClass("disabled-form");
     }
     enableEditFormBtn();
+});
+
+$("#cancel-btn").on("click", function() {
+    window.location = location.origin + "/dashboard?page=categories";
 });

@@ -250,7 +250,7 @@
             ],
             callbacks: {
                 onInit: function() {
-                    // $(this).summernote('code', '');
+                    if (catDesc) $(this).summernote('code', catDesc);
                 },
                 onChange: function() {
                     <?php if ($_GET["page"] == "edit-category"):?>

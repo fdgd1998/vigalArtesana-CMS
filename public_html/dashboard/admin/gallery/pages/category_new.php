@@ -1,3 +1,4 @@
+
 <?php
     //error_reporting(0);
     session_start(); // Starting the session.
@@ -12,7 +13,7 @@
     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
     $categories = array(); // Array to save categories
 
-    if (isset($_GET["id"])) {
+    if ($_GET["page"] == "edit-category") {
         try {
             if ($conn->connect_error) {
                 echo "No se ha podido establecer una conexión con la base de datos.";
@@ -26,6 +27,8 @@
                         $categories["name"] = $rows["name"];
                         $categories["description"] = $rows["description"];
                         $categories["image"] = $rows["image"];
+                        $desc = ($_GET["page"] == "edit-category")?$categories["description"]:"";
+                        echo "<script>var catDesc = '".$desc."'</script>";
                     }
                 }
             }
@@ -33,7 +36,6 @@
             echo $e;
         }
     }
-    var_dump($categories);
 ?>
 <style>
   .disabled-form {
@@ -61,7 +63,7 @@
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Nombre</span>
         </div>
-        <input type="text" class="form-control" id="<?=$_GET["page"] == "edit-category"?'update':'new'?>-cat-name" aria-describedby="basic-addon1">
+        <input type="text" class="form-control" id="<?=$_GET["page"] == "edit-category"?'update':'new'?>-cat-name">
     </div>
     <?php if ($_GET["page"] == "edit-category"): ?>
     <div class="custom-control custom-checkbox">
@@ -109,6 +111,6 @@
     </div> 
     <div class="button-group text-right" style="margin-top: 20px">
         <button id="cancel-btn" class="btn my-button-2">Cancelar</button>
-        <button disabled id="<?=($_GET["page"] == "edit-category")?"cat-edit":"cat-create"?>" class="btn my-button-3"><i class="far fa-<?=($_GET["page"] == "edit-category")?"edit":"save"?>"></i><?=($_GET["page"] == "edit-category")?"Editar":"Crear"?></button>
+        <button disabled id="<?=($_GET["page"] == "edit-category")?"cat-edit":"cat-create"?>" <?=($_GET["page"] == "edit-category")?'catid="'.$categories["id"].'"':''?> class="btn my-button-3"><i class="far fa-<?=($_GET["page"] == "edit-category")?"edit":"save"?>"></i><?=($_GET["page"] == "edit-category")?"Editar":"Crear"?></button>
     </div>   
 </div>

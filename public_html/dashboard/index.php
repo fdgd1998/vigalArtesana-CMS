@@ -65,7 +65,7 @@
                                 </a>
                                 <a role="presentation" class="dropdown-item" href="/dashboard?page=contact-settings">
                                     <i class="fas fa-address-book"></i>
-                                    Contacto y ubicación
+                                    Contacto, ubicación y horario
                                 </a>
                                 <a role="presentation" class="dropdown-item" href="/dashboard?page=about-us">
                                     <i class="fas fa-address-card"></i>
@@ -94,6 +94,29 @@
                      <?php if ($_SESSION['account_type'] == 'superuser'): ?>
                         <li class="nav-item dropdown">
                             <a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">
+                                SEO
+                            </a>
+                            <div role="menu" class="dropdown-menu">
+                                <a role="presentation" class="dropdown-item" href="/dashboard?page=general-settings">
+                                    <i class="fas fa-align-justify"></i>
+                                    Descripción de las páginas (metadatos)
+                                </a>
+                                <a role="presentation" class="dropdown-item" href="/dashboard?page=contact-settings">
+                                    <i class="fas fa-heading"></i>
+                                    Títulos de las páginas (metadatos)
+                                </a>
+                                <a role="presentation" class="dropdown-item" href="/dashboard?page=about-us">
+                                    <i class="fas fa-file-code"></i>
+                                    Modificar sitemap.xml
+                                </a>
+                                <a role="presentation" class="dropdown-item" href="/dashboard?page=about-us">
+                                    <i class="fas fa-file-alt"></i>
+                                    Modificar robots.txt
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">
                                 Usuarios
                             </a>
                             <div role="menu" class="dropdown-menu">
@@ -116,7 +139,7 @@
                         <h6 class="dropdown-header">Galería</h6>
                             <a role='presentation' class='dropdown-item' href='/dashboard?page=gallery-new'>
                                 <i class='fas fa-cog'></i>
-                                General
+                                Descripción general
                             </a>
                             <a role='presentation' class='dropdown-item' href='/dashboard?page=gallery-new'>
                                 <i class='fas fa-upload'></i>

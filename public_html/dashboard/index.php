@@ -357,6 +357,10 @@
     <?php if (isset($_GET["page"]) && ($_GET["page"] == "manage-services") || $_GET["page"] == "new-service" || preg_match('^edit-service&id=(\d{1,2})$^', isset($_GET["id"])?$_GET["page"]."&id=".$_GET["id"]:$_GET["page"])): ?>
     <script src="admin/site-settings/js/services.js"></script>
     <?php endif; ?>
+
+    <?php if (isset($_GET["page"]) && ($_GET["page"] == "metadata-settings") || $_GET["page"] == "new-service" || preg_match('^edit-service&id=(\d{1,2})$^', isset($_GET["id"])?$_GET["page"]."&id=".$_GET["id"]:$_GET["page"])): ?>
+    <script src="admin/site-settings/js/pages-metadata.js"></script>
+    <?php endif; ?>
     
     <?php if(isset($_GET["page"]) && $_GET["page"] == "about-us"): ?>
     <script src="../includes/summernote/summernote-bs4.min.js"></script>

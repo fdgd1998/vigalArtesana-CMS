@@ -30,46 +30,30 @@
 ?>
 
 <!-- create category modal -->
-<div class="modal fade" id="new-cat" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="page-edit" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel-create">Nueva categoría</h5>
-          <button id="close-cat-create" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <h5 class="modal-title" id="page-edit-title"></h5>
+          <button id="page-edit-close" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div id="modal-body" class="modal-body">
             <form id="new-cat-form">
                 <div class="form-group">
-                    <label for="new-cat-name">Nombre: </label>
-                    <input class="form-control" id="new-cat-name" type="text">
+                    <label for="page-title">Título: </label>
+                    <input class="form-control" id="page-title" type="text">
                 </div>
                 <div class="form-group">
-                    <label for="new-cat-image">Imagen (máximo 2 MB): </label>
-                    <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupFileAddon01"><icon class='fas fa-upload'></icon></span>
-                      </div>
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="new-cat-image" aria-describedby="inputGroupFileAddon01">
-                        <label id="new-cat-image-name" class="custom-file-label" for="new-cat-image" data-browse="Buscar...">Seleccionar imagen...</label>
-                      </div>
-                    </div>
-                </div>
-                <div class="form-group" hidden id="new-cat-image-preview-div">
-                    <label for="new-cat-image-preview" style="width: 100%;">Vista previa: </label>
-                    <center><img id="new-cat-image-preview" src="#" alt="" width="50%"></center>
-                </div>
-                <div class="form-group">
-                    <label for="new-cat-desc">Descripción: </label>
-                    <textarea class="form-control" id="new-cat-desc" rows="8"></textarea>
+                    <label for="page-desc">Descripción: </label>
+                    <textarea class="form-control" id="page-desc" rows="8"></textarea>
                 </div>
             </form>
         </div>
         <div id="modal-footer1" class="modal-footer">
-          <button id="cancel-cat-create" type="button" class="btn my-button-2" data-dismiss="modal">Cancelar</button>
-          <button id="cat-create" type="button" disabled class="btn my-button">Crear</button>
+          <button id="cancel-page-edit" type="button" class="btn my-button-2" data-dismiss="modal">Cancelar</button>
+          <button id="page-edit-btn" type="button" disabled class="btn my-button">Editar</button>
         </div>
       </div>
     </div>
@@ -82,7 +66,7 @@
     <ul style="list-style-type:disc; margin-left: 30px;">
       <?php foreach ($pages as $page): ?>
         <li>
-          <a id="pageid-<?=$page["id"]?>" href=""><?=$page["page"]?></a>
+          <a class="metadata-edit" id="pageid-<?=$page["id"]?>" href="#"><?=$page["page"]?></a>
         </li>
       <?php endforeach; ?>
     </ul>

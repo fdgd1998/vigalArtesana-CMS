@@ -48,7 +48,8 @@
                     $res->free(); //releasing results from RAM.
                 }
                 $conn->query("insert into pages (page, cat_id) values ('galeria/".GetFriendlyUrl($_POST["cat_name"])."', ".$cat_name.")");
-                if ($conn->commit() === TRUE) {
+                $conn->query("insert into pages_metadata (title, description, id_page) values ('', '', (select id from pages where cat_id = ".$cat_name."))");
+                if ($conn->commit()) {
                     move_uploaded_file($_FILES['file']['tmp_name'],$location.$_FILES['file']["name"]); // Moving file to the server
                     echo "La categoría se ha creado correctamente.";
                 } else {

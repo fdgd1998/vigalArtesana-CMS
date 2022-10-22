@@ -97,13 +97,9 @@
                                 SEO
                             </a>
                             <div role="menu" class="dropdown-menu">
-                                <a role="presentation" class="dropdown-item" href="/dashboard?page=general-settings">
+                                <a role="presentation" class="dropdown-item" href="/dashboard?page=metadata-settings">
                                     <i class="fas fa-align-justify"></i>
-                                    Descripción de las páginas (metadatos)
-                                </a>
-                                <a role="presentation" class="dropdown-item" href="/dashboard?page=contact-settings">
-                                    <i class="fas fa-heading"></i>
-                                    Títulos de las páginas (metadatos)
+                                    Título y descripción de las páginas (metadatos)
                                 </a>
                                 <a role="presentation" class="dropdown-item" href="/dashboard?page=about-us">
                                     <i class="fas fa-file-code"></i>
@@ -183,6 +179,9 @@
                             break;
                         case $_GET['page'] == 'manage-gallery':
                             include 'admin/gallery/pages/manage_gallery.php';
+                            break;
+                        case $_GET['page'] == 'metadata-settings':
+                            include 'admin/site-settings/pages/pages_metadata.php';
                             break;
                         case $_GET['page'] == 'gallery-new':
                             include 'admin/gallery/pages/gallery_new.php';

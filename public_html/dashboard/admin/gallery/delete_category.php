@@ -34,7 +34,8 @@
                 
                 // deleting entry from database
                 $conn->query("delete from categories where id = ".$_POST['cat_id']);
-                $conn->query("delete from pages where id = ".$_POST['cat_id']);
+                $conn->query("delete from pages where cat_id = ".$_POST['cat_id']);
+                $conn->query("delete from pages_metadata where id_page = (select id from pages where cat_id = ".$_POST['cat_id']."))");
                 if ($conn->commit()) {
                     unlink($_SERVER["DOCUMENT_ROOT"]."/uploads/categories/".$image_name); // deleting the file
                     echo "La categoría se ha eliminado correctamente.";

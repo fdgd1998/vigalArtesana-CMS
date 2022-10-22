@@ -33,20 +33,56 @@ $(document).ready(function() {
     });
 
     $("#image-input-new").on("change", function(){
-        if ($(this).prop("files")[0]) {
-            if ($(this).prop("files")[0].size < 5242880) {
-                $("#image-preview-div-new").removeAttr("hidden");
-                readURL(this, $("#image-preview-new"));
-                $("#image-input-label-new").html($(this).prop("files")[0].name);        
-            } else {
-                $(this).val('');
-                alert("El fichero supera el máximo de 5 MB. Comprueba el tamaño e inténtalo de nuevo.");
-                $("#image-preview-div-new").attr("hidden", true);
-                $("#image-input-label-new").html("Selecccionar imagen...");
-            }
+        var input = this;
+        var blob = $(this).prop("files")[0];
+        if (blob) {
+            var formData = new FormData();
+            formData.append("filenames", blob.name);
+            $.ajax({
+                url: './admin/site-settings/check_current_services_filenames.php', // this is the target
+                type: 'post', // method
+                dataType: 'text', // what is expected to be returned
+                cache: false,
+                data: formData, // pass the input valuse to serve
+                processData: false,  // tell jQuery not to process the data
+                contentType: false,   // tell jQuery not to set contentType
+                success: function(response) { // HTTP response code is 200
+                    console.log(response);
+                    var existentFile = response;
+                    if (!existentFile) {
+                        if (blob.size < 5242880) {
+                            $("#image-preview-div-new").removeAttr("hidden");
+                            readURL(input, $("#image-preview-new"));
+                            $("#image-input-label-new").html(blob.name);        
+                        } else {
+                            $("#image-input-new").val('');
+                            alert("El fichero supera el máximo de 5 MB. Comprueba el tamaño e inténtalo de nuevo.");
+                            $("#image-preview-div-new").attr("hidden", true);
+                            $("#image-input-label-new").html("Selecccionar imagen...");
+                        }
+                    }
+                },
+                error: function(response) { 
+                    $("#image-input-label-new").html("Seleccionar imagen...");
+                    $("#image-preview-div-new").attr("hidden", true);
+                    $("#image-input-new").val("");
+                    alert("El fichero " + blob.name + " ya existe en el servidor. Renómbralo e inténtalo de nuevo.");
+                }
+            // if (!CheckImageSize($(this).prop("files")[0], 2097152)) {
+                
+            //     var fileName = $(this).val().substring(12);
+            //     console.log(fileName);
+            //     $('#cat-image-name').html(fileName);
+            //     readURL(this, $("#cat-image-preview"));
+            //     $("#cat-image-preview-div").prop("hidden", false);  
+            // } else {
+            //     $(this).val('');   
+            });
         } else {
             $("#image-preview-div-new").attr("hidden", true);
-            $("#image-input-label-new").html("Selecccionar imagen...");
+            $("#image-input-label-new").html("Seleccionar imagen...");
+            // $("#cat-image-preview-div").prop("hidden", true);
+            // $("#update-cat-image-preview").prop("src", "../includes/img/placeholder-image.jpg"); 
         }
         EnableSaveCategoryBtn ();
     });

@@ -256,13 +256,13 @@ $("#update-cat-image").on("change", function(e) {
         // } else {
         //     $(this).val('');   
         });
-        } else {
-            $('#cat-edit').attr('disabled', 'disabled');
-            $("#update-cat-image-name").html("Escoger fichero...");
-            // $("#cat-image-preview-div").prop("hidden", true);
-            $("#update-cat-image-preview").prop("src", "../includes/img/placeholder-image.jpg"); 
-        }
-        enableEditFormBtn();
+    } else {
+        $('#cat-edit').attr('disabled', 'disabled');
+        $("#update-cat-image-name").html("Escoger fichero...");
+        // $("#cat-image-preview-div").prop("hidden", true);
+        $("#update-cat-image-preview").prop("src", "../includes/img/placeholder-image.jpg"); 
+    }
+    enableEditFormBtn();
 });
 
 $("#new-cat-image").on("change", function(e) {

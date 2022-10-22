@@ -9,25 +9,59 @@ $(document).ready(function() {
     });
 
     $("#upload-index-image").on("change", function(e){
-        var files = $("#upload-index-image").prop("files");
-        if (files.length > 0) { // Checking if there's selected files
-            if (files[0].size < 5242880) {
-                readURL(this, $("#index-image-preview"));
-                $("#index-image-preview").parent().removeAttr("hidden");
-                $("#upload-index-name").html(files[0].name); // Updating input text.
-                $("#submit-index-image").removeAttr("disabled");
-            } else {
-                $(this).val('');
-                alert("El fichero supera el máximo de 5 MB. Comprueba el tamaño e inténtalo de nuevo.");
-                $("#index-image-preview").parent().attr("hidden",true);
-                $("#upload-index-name").html("Seleccionar imagen...");
-                $("#submit-index-image").attr("disabled","disabled");
-            }
+        var input = this;
+        var blob = $(this).prop("files")[0];
+        if (blob) { // Checking if there's selected files
+            var formData = new FormData();
+            formData.append("filenames", blob.name);
+            $.ajax({
+                url: './admin/site-settings/check_current_index_filenames.php', // this is the target
+                type: 'post', // method
+                dataType: 'text', // what is expected to be returned
+                cache: false,
+                data: formData, // pass the input valuse to serve
+                processData: false,  // tell jQuery not to process the data
+                contentType: false,   // tell jQuery not to set contentType
+                success: function(response) { // HTTP response code is 200
+                    console.log(response);
+                    var existentFile = response;
+                    if (!existentFile) {
+                        if (blob.size < 5242880) {
+                            readURL(input, $("#index-image-preview"));
+                            $("#index-image-preview").parent().removeAttr("hidden");
+                            $("#upload-index-name").html(blob.name); // Updating input text.
+                            $("#submit-index-image").removeAttr("disabled");
+                        } else {
+                            $(input).val('');
+                            alert("El fichero supera el máximo de 5 MB. Comprueba el tamaño e inténtalo de nuevo.");
+                            $("#index-image-preview").parent().attr("hidden",true);
+                            $("#upload-index-name").html("Seleccionar imagen...");
+                            $("#submit-index-image").attr("disabled","disabled");
+                        }
+                    }
+                },
+                error: function(response) { 
+                    $("#upload-index-name").html("Seleccionar imagen...");
+                    $("#index-image-preview").parent().attr("hidden",true);
+                    $("#upload-index-image").val("");
+                    $("#submit-index-image").attr("disabled","disabled");
+                    alert("El fichero " + blob.name + " ya existe en el servidor. Renómbralo e inténtalo de nuevo.");
+                }
+            // if (!CheckImageSize($(this).prop("files")[0], 2097152)) {
+                
+            //     var fileName = $(this).val().substring(12);
+            //     console.log(fileName);
+            //     $('#cat-image-name').html(fileName);
+            //     readURL(this, $("#cat-image-preview"));
+            //     $("#cat-image-preview-div").prop("hidden", false);  
+            // } else {
+            //     $(this).val('');   
+            });
         } else {
-            // If no files are selected, reset form.
-            $("#index-image-preview").parent().attr("hidden",true);
-            $("#upload-index-name").html("Seleccionar imagen...");
-            $("#submit-index-image").attr("disabled","disabled");
+             // If no files are selected, reset form.
+             $("#index-image-preview").parent().attr("hidden",true);
+             $("#upload-index-name").html("Seleccionar imagen...");
+             $("#submit-index-image").attr("disabled","disabled");
         }
     });
 

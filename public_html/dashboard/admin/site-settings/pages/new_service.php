@@ -9,7 +9,7 @@
 ?>
 <div class="container content">
     <h1 class="title">Nuevo servicio</h1>
-    <p class="title-description">Tamaño máximo de imagen: 2 MB.</p>
+    <p class="title-description">Tamaño máximo de imagen: 5 MB.</p>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Título</span>

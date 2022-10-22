@@ -283,7 +283,7 @@
     <script>
         $("#index-brief-description").summernote({
             lang: 'es-ES',
-            height: 200,
+            height: 400,
             disableDragAndDrop: true,
             styleTags: [
                 {

@@ -12,12 +12,13 @@
     if (isset($_POST)) {
         try {
             $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
-
+            $image_name = "";
             if ($conn->connect_error) {
                 echo "No se ha podido conectar a la base de datos.";
                 exit();
             } else {
                 // checking if there are posts of the category to be deleted
+                $conn->begin_transaction();
                 $stmt = "select count(id) as id from gallery where category = ".$_POST["cat_id"];
                 if ($conn->query($stmt)->fetch_assoc()["id"]> 0) {
                     throw new Exception("Existen posts pertenecientes a esta categoría. La categoría no se puede eliminar. Para borrarla, comprueba que no existen posts de dicha categoría e inténtalo de nuevo.");
@@ -27,15 +28,18 @@
                 $stmt = "select image from categories where id = ".$_POST["cat_id"];
                     if ($res = $conn->query($stmt)) {
                         $rows = $res->fetch_assoc();
-                        unlink($_SERVER["DOCUMENT_ROOT"]."/uploads/categories/".$rows['image']); // deleting the file
+                        $image_name = $rows['image'];
                         $res->free();
                     }
                 
                 // deleting entry from database
-                $stmt = "delete from categories where id = ".$_POST['cat_id']."";
-                if ($conn->query($stmt) === TRUE) {
+                $conn->query("delete from categories where id = ".$_POST['cat_id']);
+                $conn->query("delete from pages where id = ".$_POST['cat_id']);
+                if ($conn->commit()) {
+                    unlink($_SERVER["DOCUMENT_ROOT"]."/uploads/categories/".$image_name); // deleting the file
                     echo "La categoría se ha eliminado correctamente.";
                 } else {
+                    $conn->rollback();
                     echo "Ha ocurrido un error al eliminar la categoría.";
                 }
             }

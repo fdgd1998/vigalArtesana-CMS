@@ -38,10 +38,22 @@
                 // $newfilename = round(microtime(true)).$userid.'.'.end($temp); // Setting new filename
 
                 // Saving the name and the image filename into database.
-                $sql = "insert into categories (friendly_url, name, description, image, uploadedBy) values ('".GetFriendlyUrl($_POST["cat_name"])."','".$_POST['cat_name']."','".$_POST["cat_desc"]."' ,'".$_FILES['file']["name"]."','".$_SESSION["user"]."')";
-                if ($conn->query($sql) === TRUE) {
+                $conn->begin_transaction();
+                $conn->query("insert into categories (friendly_url, name, description, image, uploadedBy) values ('".GetFriendlyUrl($_POST["cat_name"])."','".$_POST['cat_name']."','".$_POST["cat_desc"]."' ,'".$_FILES['file']["name"]."','".$_SESSION["user"]."')");
+                $cat_name = "";
+                if ($res = $conn->query("select id from categories where name = '".$_POST['cat_name']."'")) {
+                    $rows = $res->fetch_assoc();
+                    $cat_name = $rows['id'];
+                    echo "El ID de la categoría de ".$rows["id"];
+                    $res->free(); //releasing results from RAM.
+                }
+                $conn->query("insert into pages (page, cat_id) values ('galeria/".GetFriendlyUrl($_POST["cat_name"])."', ".$cat_name.")");
+                if ($conn->commit() === TRUE) {
                     move_uploaded_file($_FILES['file']['tmp_name'],$location.$_FILES['file']["name"]); // Moving file to the server
                     echo "La categoría se ha creado correctamente.";
+                } else {
+                    $conn->rollback();
+                    echo "Ha ocurrido un error al crear la categoría.";
                 }
             }
             $conn->close();

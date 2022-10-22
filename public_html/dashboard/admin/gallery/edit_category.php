@@ -70,70 +70,80 @@
                         echo "No se ha podido actualizar la categoría.";
                     }
                 } else if (isset($_POST["cat_name"]) && isset($_FILES["cat_file"]) && !isset($_POST["cat_desc"])) {
+                    $conn->begin_transaction();
+                    $image = "";
                     $stmt = "select image from categories where id = ".$_POST["cat_id"];
                     if ($res = $conn->query($stmt)) {
                         $rows = $res->fetch_assoc();
-                        unlink($location.$rows['image']);
+                        $image = $rows['image'];
                         $res->free(); //releasing results from RAM.
-                    } else {
-                        echo "Ha ocurrido un error borrando la imagen actual.";
                     }
 
                     // $temp = explode(".", $_FILES["cat_file"]["name"]); //getting current filename
                     // $newfilename = round(microtime(true)) . '.' . end($temp); //setting new filename
                       
                     // updating entry on database
-                    $stmt = "update categories set name = '".$_POST['cat_name']."', friendly_url = '".GetFriendlyUrl($_POST["cat_name"])."', image = '".$_FILES['cat_file']["name"]."' where id = ".$_POST["cat_id"];
-                    if ($conn->query($stmt) == TRUE) {
+                    $conn->query("update pages set page = 'gallery/".GetFriendlyUrl($_POST["cat_name"])."' where cat_id = ".$_POST["cat_id"]);
+                    $conn->query("update categories set name = '".$_POST['cat_name']."', friendly_url = '".GetFriendlyUrl($_POST["cat_name"])."', image = '".$_FILES['cat_file']["name"]."' where id = ".$_POST["cat_id"]);
+                    if ($conn->commit()) {
+                        unlink($location.$image);
                         move_uploaded_file($_FILES['cat_file']['tmp_name'],$location.$_FILES['cat_file']["name"]); //moving file to the server
                         echo "La imagen y el nombre de la categoría se han actualizado correctamente.";
                     } else {
+                        $conn->rollback();
                         echo "No se ha podido actualizar la categoría.";
                     }
                 } else if (!isset($_POST["cat_name"]) && isset($_FILES["cat_file"]) && isset($_POST["cat_desc"])) {
+                    $conn->begin_transaction();
+                    $image = "";
                     $stmt = "select image from categories where id = ".$_POST["cat_id"];
                     if ($res = $conn->query($stmt)) {
                         $rows = $res->fetch_assoc();
-                        unlink($location.$rows['image']);
+                        $image = $rows['image'];
                         $res->free(); //releasing results from RAM.
-                    } else {
-                        echo "Ha ocurrido un error borrando la imagen actual.";
                     }
 
                     // $temp = explode(".", $_FILES["cat_file"]["name"]); //getting current filename
                     // $newfilename = round(microtime(true)) . '.' . end($temp); //setting new filename
                       
                     // updating entry on database
-                    $stmt = "update categories set description = '".$_POST['cat_desc']."', image = '".$_FILES['cat_file']["name"]."' where id = ".$_POST["cat_id"];
-                    if ($conn->query($stmt) == TRUE) {
+                    $conn->query("update categories set description = '".$_POST['cat_desc']."', image = '".$_FILES['cat_file']["name"]."' where id = ".$_POST["cat_id"]);
+                    if ($conn->commit()) {
+                        unlink($location.$image);
                         move_uploaded_file($_FILES['cat_file']['tmp_name'],$location.$_FILES['cat_file']["name"]); //moving file to the server
                         echo "La imagen y descripción de la categoría se han actualizado correctamente.";
                     } else {
+                        $conn->rollback();
                         echo "No se ha podido actualizar la categoría.";
                     }
                 } else if (isset($_POST["cat_name"]) && !isset($_FILES["cat_file"]) && isset($_POST["cat_desc"])) {
-                    $stmt = "update categories set name = '".$_POST['cat_name']."', description = '".$_POST['cat_desc']."', friendly_url = '".GetFriendlyUrl($_POST["cat_name"])."' where id = ".$_POST["cat_id"];
-                    if ($conn->query($stmt) == TRUE) {
+                    $conn->begin_transaction();
+                    $stmt->query("update categories set name = '".$_POST['cat_name']."', description = '".$_POST['cat_desc']."', friendly_url = '".GetFriendlyUrl($_POST["cat_name"])."' where id = ".$_POST["cat_id"]);
+                    $conn->query("update pages set page = 'gallery/".GetFriendlyUrl($_POST["cat_name"])."' where cat_id = ".$_POST["cat_id"]);
+                    if ($conn->commit()) {
                         echo "El nombre y la descripción de la categoría se han actualizado correctamente.";
                     } else {
+                        $conn->rollback();
                         echo "No se ha podido actualizar la categoría.";
                     }
                 } else if (isset($_POST["cat_name"]) && isset($_FILES["cat_file"]) && isset($_POST["cat_desc"])) {
+                    $conn->begin_transaction();
+                    $image = "";
                     $stmt = "select image from categories where id = ".$_POST["cat_id"];
                     if ($res = $conn->query($stmt)) {
                         $rows = $res->fetch_assoc();
-                        unlink($location.$rows['image']);
+                        $image = $rows['image'];
                         $res->free(); //releasing results from RAM.
-                    } else {
-                        echo "Ha ocurrido un error borrando la imagen actual.";
                     }
 
                     // $temp = explode(".", $_FILES["cat_file"]["name"]); //getting current filename
                     // $newfilename = round(microtime(true)) . '.' . end($temp); //setting new filename
                       
                     // updating entry on database
-                    $stmt = "update categories set name = '".$_POST['cat_name']."', description = '".$_POST['cat_desc']."', friendly_url = '".GetFriendlyUrl($_POST["cat_name"])."', image = '".$_FILES['cat_file']["name"]."' where id = ".$_POST["cat_id"];
+                    $conn->query("update categories set name = '".$_POST['cat_name']."', description = '".$_POST['cat_desc']."', friendly_url = '".GetFriendlyUrl($_POST["cat_name"])."', image = '".$_FILES['cat_file']["name"]."' where id = ".$_POST["cat_id"]);
+                    $conn->query("update pages set page = 'gallery/".GetFriendlyUrl($_POST["cat_name"])."' where cat_id = ".$_POST["cat_id"]);
                     if ($conn->query($stmt) == TRUE) {
+                        unlink($location.$image);
                         move_uploaded_file($_FILES['cat_file']['tmp_name'],$location.$_FILES['cat_file']["name"]); //moving file to the server
                         echo "El nombre, imagen y descripción de la categoría se han actualizado correctamente.";
                     } else {

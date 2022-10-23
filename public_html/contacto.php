@@ -1,5 +1,7 @@
 <?php
     require_once "scripts/get_company_info.php";
+    require_once "scripts/get_Uri.php";
+
     $services = array(); // Array to save categories
     $page_id = 8;
     
@@ -55,6 +57,7 @@
     <title>Página en mantenimiento</title>
     <?php endif; ?>
     <link rel="icon" href="./includes/img/favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="<?=GetUri();?>">
     <link rel="stylesheet" href="./includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="./includes/css/footer.css">
     <link rel="stylesheet" href="./includes/css/Navigation-Clean.css">

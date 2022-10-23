@@ -1,5 +1,6 @@
 <?php
     require_once "scripts/get_company_info.php";
+    require_once "scripts/get_Uri.php";
 
     if ($GLOBALS["site_settings"][11] == "false" || ($GLOBALS["site_settings"][11] == "true" && isset($_SESSION["loggedin"]))) { 
         $categories = array();
@@ -129,6 +130,7 @@
     <?php else: ?>
     <title>Página en mantenimiento</title>
     <?php endif; ?>
+    <link rel="canonical" href="<?=GetUri();?>">
     <link rel="icon" href="/includes/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/includes/css/footer.css">

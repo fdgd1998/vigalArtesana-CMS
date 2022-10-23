@@ -1,16 +1,16 @@
 <nav class="nav-solid navbar navbar-expand-lg navigation-clean">
     <div class="container">
-        <a class="navbar-brand" href="<?=(isset($_SERVER["HTTPS"])?"https://":"http://").$_SERVER["SERVER_NAME"]?>" name="company_name"><?=$GLOBALS["site_settings"][2]?></a>
+        <a class="navbar-brand" href="<?=GetBaseUri()?>" name="company_name"><?=$GLOBALS["site_settings"][2]?></a>
         <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1" style="color: white; border: 1px solid grey">
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon" style="background-image: url('/includes/img/icons8-menu.svg');"></span>
         </button>
         <div class="collapse navbar-collapse" id="navcol-1" style="margin-left: 5%;">
             <ul class="navbar-nav nav ml-auto mt-2 mt-lg-0">
-                <li class="nav-item"><a class="nav-link underline-animated" href="<?=(isset($_SERVER["HTTPS"])?"https://":"http://").$_SERVER["SERVER_NAME"]?>">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link underline-animated" href="<?=(isset($_SERVER["HTTPS"])?"https://":"http://").$_SERVER["SERVER_NAME"]?>/galeria">Galería</a></li>
-                <li class="nav-item"><a class="nav-link underline-animated" href="<?=(isset($_SERVER["HTTPS"])?"https://":"http://").$_SERVER["SERVER_NAME"]?>/sobre-nosotros">Sobre nosotros</a></li>
-                <li class="nav-item"><a class="nav-link underline-animated" href="<?=(isset($_SERVER["HTTPS"])?"https://":"http://").$_SERVER["SERVER_NAME"]?>/contacto">Contacto</a></li>
+                <li class="nav-item"><a class="nav-link underline-animated" href="<?=GetBaseUri()?>">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link underline-animated" href="<?=GetBaseUri()?>/galeria">Galería</a></li>
+                <li class="nav-item"><a class="nav-link underline-animated" href="<?=GetBaseUri()?>/sobre-nosotros">Sobre nosotros</a></li>
+                <li class="nav-item"><a class="nav-link underline-animated" href="<?=GetBaseUri()?>/contacto">Contacto</a></li>
 
                 <li class="nav-item">
                     <div class="social-div">

@@ -1,6 +1,7 @@
 <?php
     session_start();
     require_once "./scripts/get_company_info.php";
+    require_once "scripts/get_Uri.php";
 
     if ($GLOBALS["site_settings"][11] == "true" || ($GLOBALS["site_settings"][11] == "false" && !isset($_SESSION["loggedin"]))) { 
         require_once "./scripts/set_503_header.php";
@@ -29,6 +30,7 @@
     <?php else: ?>
     <title>Página en mantenimiento</title>
     <?php endif; ?>
+    <link rel="canonical" href="<?=GetUri();?>">
     <link rel="icon" href="./includes/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="./includes/css/footer.css">

@@ -1,5 +1,6 @@
 <?php
     require_once "scripts/get_company_info.php";
+    require_once "scripts/get_Uri.php";
     
     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
     $services = array(); // Array to save categories
@@ -54,6 +55,7 @@
     <?php else: ?>
     <title>Página en mantenimiento</title>
     <?php endif; ?>
+    <link rel="canonical" href="<?=GetUri();?>">
     <link rel="icon" href="./includes/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="./includes/css/footer.css">

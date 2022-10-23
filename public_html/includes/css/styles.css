@@ -1,13 +1,13 @@
 :root {
-  --navbar-main-color:   #d4b2d4;
-  --navbar-link-hover-color: #955095;
-  --footer-main-color: #461146;
-  --footer-link-hover-color: #EF8DFF;
+  --navbar-main-color:   #ffcc99;
+  --navbar-link-hover-color: #F08000;
+  --footer-main-color: #36454F;
+  --footer-link-hover-color: #ffcc99;
   --body-background-color:  #f0f0f0;
   --navbar-text-color: black ;
-  --title-color: #ff6666;
-  --button-main-color: #ffcc99;
-  --button-hover-bg-color:  #ffd9b3;
+  --title-color: #E34234;
+  --button-main-color: #FFDB58;
+  --button-hover-bg-color:  #F3E5AB;
   --button-hover-text-color: rgb(37, 37, 37);
   --button-text-color: black;
   --navigation-button-text-color: white;
@@ -18,6 +18,7 @@
   --div-bg-color-1: #e6e6e6;
   --div-bg-color-2: #f2f2f2;
   --custom-checkbox-bg-selected: #ffcc99;
+  --pagination-main-color: #ffb162;
 }
 
 .custom-checkbox .custom-control-input:checked~.custom-control-label::before{
@@ -269,12 +270,13 @@ a.instagram:hover {
 }
 
 li[class~="active"]>a {
-  background-color: var(--title-color) !important;
-  border: 1px solid var(--button-hover-bg-color) !important;
+  background-color: var(--pagination-main-color) !important;
+  border: 1px solid var(--pagination-main-color) !important;
 }
 
 a[class="page-link"]:active {
   outline-color: white !important;
+  color: black !important;
 }
 
 li[class="page-item active"] {

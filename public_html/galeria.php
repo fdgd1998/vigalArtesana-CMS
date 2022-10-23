@@ -14,7 +14,7 @@
     $conn->set_charset("utf8");
 
     // Variables for pagination
-    $limit = 8; // Dynamic limit
+    $limit = 12; // Dynamic limit
     $page = (isset($_GET['page']) && is_numeric($_GET['page']) ) ? $_GET['page'] : 1; // Current pagination page number
     $paginationStart = ($page - 1) * $limit; // Offset
 
@@ -166,7 +166,7 @@
                     <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4"> 
                         <?php foreach ($results as $element): ?>    
                         <a class="animated-item wrap" href="<?=(isset($_SERVER["HTTPS"])?"https://":"http://").$_SERVER["SERVER_NAME"]?>/uploads/images/<?=$element[2].$element[1]?>">
-                            <img loading="lazy" id="image-<?=$element[0]?>" class='img-fluid photos' src="<?=(isset($_SERVER["HTTPS"])?"https://":"http://").$_SERVER["SERVER_NAME"]?>/uploads/images/<?=$element[2].$element[1]?>" alt="<?=$element[3]?>"/>
+                            <img loading="lazy" id="image-<?=$element[0]?>" class='img-fluid photos' src="<?=(isset($_SERVER["HTTPS"])?"https://":"http://").$_SERVER["SERVER_NAME"]?>/uploads/images/<?=$element[2].$element[1]?>" alt="<?=$element[3]?>" title="<?=$element[3]?>"/>
                         </a>
                         <?php endforeach; ?>
                     </div>

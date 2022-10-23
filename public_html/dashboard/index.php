@@ -100,11 +100,11 @@
                                     <i class="fas fa-align-justify"></i>
                                     Título y descripción de las páginas (metadatos)
                                 </a>
-                                <a role="presentation" class="dropdown-item" href="/dashboard?page=about-us">
+                                <a role="presentation" class="dropdown-item" href="/dashboard?page=text-editor&file=sitemap.xml">
                                     <i class="fas fa-file-code"></i>
                                     Modificar sitemap.xml
                                 </a>
-                                <a role="presentation" class="dropdown-item" href="/dashboard?page=about-us">
+                                <a role="presentation" class="dropdown-item" href="/dashboard?page=text-editor&file=robots.txt">
                                     <i class="fas fa-file-alt"></i>
                                     Modificar robots.txt
                                 </a>
@@ -170,6 +170,9 @@
                 <?php
                     // reading GET variable and load corresponding page
                     switch(true) {
+                        case ($_GET['page'] == 'text-editor' && isset($_GET["file"])):
+                            include 'admin/site-settings/pages/text_editor.php';
+                            break;
                         case $_GET['page'] == 'new-category':
                             include 'admin/gallery/pages/category_new.php';
                             break;
@@ -235,12 +238,14 @@
     <?php if (isset($_GET["page"]) && ($_GET["page"] == "manage-gallery" || $_GET["page"] == "gallery-new")): ?>
     <script src="admin/gallery/js/gallery_new.js"></script>
     <script src="admin/gallery/js/gallery-manage.js"></script>
-    <!-- <script src="admin/gallery/js/ajax.js"></script> -->
-    <!-- <script src="admin/gallery/js/categories.js"></script> -->
     <?php endif; ?>
 
     <?php if (isset($_GET["page"]) && ($_GET["page"] == "categories")): ?>
     <script src="admin/gallery/js/categories.js"></script>
+    <?php endif; ?>
+
+    <?php if (isset($_GET["page"]) && ($_GET["page"] == "text-editor")): ?>
+    <!-- <script src="admin/gallery/js/categories.js"></script> -->
     <?php endif; ?>
 
     <?php if (isset($_GET["page"]) && ($_GET["page"] == "new-category" || $_GET["page"] == "edit-category")): ?>

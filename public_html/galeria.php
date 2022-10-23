@@ -2,11 +2,14 @@
     require_once "scripts/get_company_info.php";
 
     $categories = array();
-
+    $results = array();
     $category_name = "";
     $category_description = "";
-    $results = array();
-
+    $category_id = 0;
+    $page_id = "6";
+    $page_title = "";
+    $page_description = "";
+    
     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
     $conn->set_charset("utf8");
 
@@ -54,6 +57,7 @@
                 } 
             }
 
+
             // Getting all records from database
             $sql = "select count(gallery.id) as id from gallery inner join categories on gallery.category = categories.id where cat_enabled='YES' and gallery.category = (select id from categories where friendly_url = '".$_GET['category']."')"; 
             $allRecords = $conn->query($sql)->fetch_assoc()['id'];
@@ -66,13 +70,28 @@
                 exit();
             }
 
-            $sql = "select name, description from categories where id = (select id from categories where friendly_url = '".$_GET['category']."')";
+            $sql = "select id, name, description from categories where id = (select id from categories where friendly_url = '".$_GET['category']."')";
             if ($res = $conn->query($sql)) {
                 $rows = $res->fetch_assoc();
+                $category_id = $rows['id'];
                 $category_name = $rows['name'];
                 $category_description = $rows['description'];
                 $res->free();
             }
+        }
+
+        // Getting page metadata
+        if (!isset($_GET["category"])) {
+            $sql = "select title, description from pages_metadata where id_page = (select id from pages where id = ".$page_id.")";  
+        } else {
+            $sql = "select title, description from pages_metadata where id_page = (select id from pages where cat_id = ".$category_id.")";
+        }
+        
+        if ($res = $conn->query($sql)) {
+            $rows = $res->fetch_assoc();
+            $page_title = $rows['title'];
+            $page_description = $rows['description'];
+            $res->free();
         }
     }
 
@@ -83,12 +102,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php if ($category_name != ""): ?>
-    <title><?=$category_name?> - Página <?=$page?> - <?=$GLOBALS["site_settings"][2]?></title>
-    <?php else: ?>
-    <title>Galería - <?=$GLOBALS["site_settings"][2]?></title>
-    <?php endif; ?>
-    <meta name="description" content="Nuestra galería, una exposición de los trabajos que hacemos con madera.">
+    <title><?=$page_title?> | <?=$GLOBALS["site_settings"][2]?> | <?= isset($_GET["page"])?"Página ".$page:"Página 1"?></title>
+    <meta name="description" content="<?=$page_description?>">
     <meta name="robots" content="index, follow">
     <link rel="icon" href="/includes/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/includes/bootstrap/css/bootstrap.min.css">

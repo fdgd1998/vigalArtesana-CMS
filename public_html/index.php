@@ -3,6 +3,7 @@
 
     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
     $services = array(); // Array to save categories
+    $page_id = 5;
 
     try {
         if ($conn->connect_error) {
@@ -17,6 +18,15 @@
                 }
                 $res->free();
             }
+
+            // Getting page metadata
+            $sql = "select title, description from pages_metadata where id_page = (select id from pages where id = ".$page_id.")";  
+            if ($res = $conn->query($sql)) {
+                $rows = $res->fetch_assoc();
+                $page_title = $rows['title'];
+                $page_description = $rows['description'];
+                $res->free();
+            }
         }
     } catch (Exception $e) {
         echo $e;
@@ -28,8 +38,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diseñamos y restauramos tus muebles con madera antigua - <?=$GLOBALS["site_settings"][2]?></title>
-    <meta name="description" content="Artesanía y restauración con madera antigua, muebles y objetos decorativos de madera.">
+    <title><?=$page_title?> | <?=$GLOBALS["site_settings"][2]?></title>
+    <meta name="description" content="<?=$page_description?>">
     <meta name="robots" content="index, follow">
     <link rel="icon" href="includes/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="includes/bootstrap/css/bootstrap.min.css">

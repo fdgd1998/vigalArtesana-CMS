@@ -4,6 +4,7 @@
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
 
     $maintenance = "";
+    $metadata = array();
     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
     $conn->set_charset("utf8");
 

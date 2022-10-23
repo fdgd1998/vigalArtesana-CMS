@@ -1,5 +1,29 @@
 <?php
-    require_once "./scripts/get_company_info.php";
+    require_once "scripts/get_company_info.php";
+    
+    $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
+    $services = array(); // Array to save categories
+    $page_id = 7;
+
+    try {
+        if ($conn->connect_error) {
+            echo "No se ha podido establecer una conexión con la base de datos.";
+            exit();
+        } else {
+            // Fetching categories from database and storing then in the array for further use.
+
+            // Getting page metadata
+            $sql = "select title, description from pages_metadata where id_page = (select id from pages where id = ".$page_id.")";  
+            if ($res = $conn->query($sql)) {
+                $rows = $res->fetch_assoc();
+                $page_title = $rows['title'];
+                $page_description = $rows['description'];
+                $res->free();
+            }
+        }
+    } catch (Exception $e) {
+        echo $e;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -7,8 +31,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobre nosotros - <?=$GLOBALS["site_settings"][2]?></title>
-    <meta name="description" content="Aprende más sobre nosotros y lo que hacemos.">
+    <title><?=$page_title." | ".$GLOBALS["site_settings"][2]?></title>
+    <meta name="description" content="<?=$page_description?>">
     <meta name="robots" content="index, follow">
     <link rel="icon" href="./includes/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./includes/bootstrap/css/bootstrap.min.css">

@@ -18,8 +18,6 @@
             $maintenance = $res->fetch_assoc()["value_info"];
         }
     }
-    
-    $conn->close();
 ?>
 <!DOCTYPE html>
 <html>
@@ -134,7 +132,7 @@
                         </a>
                         <div role='menu' class='dropdown-menu'>
                         <h6 class="dropdown-header">Galería</h6>
-                            <a role='presentation' class='dropdown-item' href='/dashboard?page=gallery-new'>
+                            <a role='presentation' class='dropdown-item' href='/dashboard?page=gallery-desc'>
                                 <i class='fas fa-cog'></i>
                                 Descripción general
                             </a>
@@ -174,6 +172,9 @@
                     switch(true) {
                         case $_GET['page'] == 'new-category':
                             include 'admin/gallery/pages/category_new.php';
+                            break;
+                        case $_GET['page'] == 'gallery-desc':
+                            include 'admin/gallery/pages/gallery_desc.php';
                             break;
                         case ($_GET['page'] == 'edit-category' && isset($_GET['id'])):
                             include 'admin/gallery/pages/category_new.php';
@@ -341,6 +342,57 @@
             callbacks: {
                 onInit: function() {
                     if (indexDescription) $(this).summernote('code', indexDescription);
+                }
+            }
+        });
+    </script>
+    <?php endif; ?>
+    <?php if (isset($_GET["page"]) && $_GET["page"] == "gallery-desc"): ?>
+    <script src="admin/gallery/js/category_desc.js"></script>
+    <script src="../includes/summernote/summernote-bs4.min.js"></script>
+    <script src="../includes/summernote/lang/summernote-es-ES.js"></script>
+    <script>
+        $("#gallery-desc").summernote({
+            lang: 'es-ES',
+            height: 400,
+            disableDragAndDrop: true,
+            styleTags: [
+                {
+                    title: 'párrafo',
+                    tag: 'p',
+                    value: 'p'
+                },
+                {
+                    title: 'H2 título',
+                    tag: 'h2',
+                    className: 'title',
+                    value: 'h2'
+                },
+                {
+                    title: 'H3 título',
+                    tag: 'h3',
+                    className: 'title',
+                    value: 'h3'
+                }
+            ],
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear', 'style']],
+                ['font', ['superscript', 'subscript']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['picture', ['picture']],
+                ['table', ['table']],
+                ['hr', ['hr']],
+                ['misc', ['undo', 'redo', 'codeview']]
+            ],
+            callbacks: {
+                onInit: function() {
+                    if (galleryDesc) $(this).summernote('code', galleryDesc);
+                },
+                onChange: function() {
+                    console.log('onChange:', $(this).summernote("code"));
+                    enableEditBtn($(this).summernote("code"));
                 }
             }
         });

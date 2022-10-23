@@ -1,6 +1,11 @@
 <?php
     session_start();
     require_once "./scripts/get_company_info.php";
+
+    if ($GLOBALS["site_settings"][11] == "true" || ($GLOBALS["site_settings"][11] == "false" && !isset($_SESSION["loggedin"]))) { 
+        require_once "./scripts/set_503_header.php";
+        set_503_header();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +13,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php if ($GLOBALS["site_settings"][11] == "false"): ?>
     <title>Política de privacidad - <?=$GLOBALS["site_settings"][2]?></title>
+    <meta name="description" content="Política de privacidad.">
+    <meta name="robots" content="index, follow">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5GCTKSYQEQ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-5GCTKSYQEQ');
+    </script>
+    <?php else: ?>
+    <title>Página en mantenimiento</title>
+    <?php endif; ?>
     <link rel="icon" href="./includes/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="./includes/css/footer.css">
@@ -20,11 +40,17 @@
 </head>
 
 <body>
+    <?php
+    if ($GLOBALS["site_settings"][11] == "true" && !isset($_SESSION["loggedin"])) {
+        include "snippets/maintenance_page.php";
+        exit();
+    }
+    if ($GLOBALS["site_settings"][11] == "true" && isset($_SESSION["loggedin"])) {
+        include "snippets/maintenance_message.php";
+    }
+    include 'includes/header.php';
+    ?>
     <div id="main">
-        <?php
-            require_once "./scripts/check_maintenance.php";
-            include './includes/header.php';
-        ?>
         <div class="container content">
             <h1 class="title">Política de privacidad</h1>
             <p>De acuerdo con lo establecido en el Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo, de 27 de abril de 2016, relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales y a la libre circulación de estos datos (RGPD) y LO 3/2018, de 5 de diciembre, de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD),  les informamos sobre el tratamiento de los datos personales que nos facilitan a través de esta Web </p>

@@ -1,110 +1,134 @@
 <?php
     require_once "scripts/get_company_info.php";
 
-    $categories = array();
-    $results = array();
-    $category_name = "";
-    $category_description = "";
-    $category_id = 0;
-    $page_id = "6";
-    $page_title = "";
-    $page_description = "";
-    
-    $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
-    $conn->set_charset("utf8");
+    if ($GLOBALS["site_settings"][11] == "false" || ($GLOBALS["site_settings"][11] == "true" && isset($_SESSION["loggedin"]))) { 
+        $categories = array();
+        $results = array();
+        $category_name = "";
+        $category_description = "";
+        $category_id = 0;
+        $page_id = "6";
+        $page_title = "";
+        $page_description = "";
+        $gallery_description = "";
+        
+        $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
+        $conn->set_charset("utf8");
 
-    // Variables for pagination
-    $limit = 12; // Dynamic limit
-    $page = (isset($_GET['page']) && is_numeric($_GET['page']) ) ? $_GET['page'] : 1; // Current pagination page number
-    $paginationStart = ($page - 1) * $limit; // Offset
+        // Variables for pagination
+        $limit = 12; // Dynamic limit
+        $page = (isset($_GET['page']) && is_numeric($_GET['page']) ) ? $_GET['page'] : 1; // Current pagination page number
+        $paginationStart = ($page - 1) * $limit; // Offset
 
-    $allRecords = 0;
-    $totalPages = 0;
+        $allRecords = 0;
+        $totalPages = 0;
 
-    // Prev + Next page
-    $prev = $page - 1;
-    $next = $page + 1;
+        // Prev + Next page
+        $prev = $page - 1;
+        $next = $page + 1;
 
-    if ($conn->connect_error) {
-        print("No se ha podido conectar a la base de datos");
-        exit();
-    } else {
-        if(!isset($_GET['category'])) {
-            $sql = "select * from categories where cat_enabled='YES'";
-            $res = $conn->query($sql);
-            while ($rows = $res->fetch_assoc()) {
-                array_push($categories, array($rows['friendly_url'], $rows['name'], $rows['image'], $rows['description']));
-            }
-            $res->free();
+        if ($conn->connect_error) {
+            print("No se ha podido conectar a la base de datos");
+            exit();
         } else {
-            $sql = "select id from categories where friendly_url = '".$_GET['category']."'";
-            if ($conn->query($sql)->num_rows == 0) {
-                $conn->close();
-                header("Location: /404");
-                exit();
-            } else {
-                $sql = "select gallery.id, filename, dir, altText from gallery inner join categories on gallery.category = categories.id where gallery.category = (select id from categories where friendly_url = '".$_GET['category']."') limit $paginationStart, $limit";
+            if(!isset($_GET['category'])) {
+                $sql = "select * from categories where cat_enabled='YES'";
+                $res = $conn->query($sql);
+                while ($rows = $res->fetch_assoc()) {
+                    array_push($categories, array($rows['friendly_url'], $rows['name'], $rows['image'], $rows['description']));
+                }
+                $sql = "select value_info from company_info where key_info = 'gallery-desc'";
                 if ($res = $conn->query($sql)) {
-                    if ($res->num_rows >= 0) {
-                        while ($rows = $res->fetch_assoc()) {
-                            array_push($results, array($rows['id'], $rows['filename'], $rows['dir'], $rows['altText']));
+                    $gallery_description = $res->fetch_assoc()["value_info"];
+                }
+
+                $res->free();
+            } else {
+                $sql = "select id from categories where friendly_url = '".$_GET['category']."'";
+                if ($conn->query($sql)->num_rows == 0) {
+                    $conn->close();
+                    header("Location: /404");
+                    exit();
+                } else {
+                    $sql = "select gallery.id, filename, dir, altText from gallery inner join categories on gallery.category = categories.id where gallery.category = (select id from categories where friendly_url = '".$_GET['category']."') limit $paginationStart, $limit";
+                    if ($res = $conn->query($sql)) {
+                        if ($res->num_rows >= 0) {
+                            while ($rows = $res->fetch_assoc()) {
+                                array_push($results, array($rows['id'], $rows['filename'], $rows['dir'], $rows['altText']));
+                            }
+                            $res->free();
+                        } else {
+                            header("Location: /404");
+                            exit();
                         }
-                        $res->free();
-                    } else {
-                        header("Location: /404");
-                        exit();
-                    }
-                } 
+                    } 
+                }
+
+
+                // Getting all records from database
+                $sql = "select count(gallery.id) as id from gallery inner join categories on gallery.category = categories.id where cat_enabled='YES' and gallery.category = (select id from categories where friendly_url = '".$_GET['category']."')"; 
+                $allRecords = $conn->query($sql)->fetch_assoc()['id'];
+                
+                // Calculate total pages
+                $totalPages = ceil($allRecords / $limit);
+                
+                if ($_GET['page'] > $totalPages) {
+                    header("Location: /404");
+                    exit();
+                }
+
+                $sql = "select id, name, description from categories where id = (select id from categories where friendly_url = '".$_GET['category']."')";
+                if ($res = $conn->query($sql)) {
+                    $rows = $res->fetch_assoc();
+                    $category_id = $rows['id'];
+                    $category_name = $rows['name'];
+                    $category_description = $rows['description'];
+                    $res->free();
+                }
             }
 
-
-            // Getting all records from database
-            $sql = "select count(gallery.id) as id from gallery inner join categories on gallery.category = categories.id where cat_enabled='YES' and gallery.category = (select id from categories where friendly_url = '".$_GET['category']."')"; 
-            $allRecords = $conn->query($sql)->fetch_assoc()['id'];
-            
-            // Calculate total pages
-            $totalPages = ceil($allRecords / $limit);
-            
-            if ($_GET['page'] > $totalPages) {
-                header("Location: /404");
-                exit();
+            // Getting page metadata
+            if (!isset($_GET["category"])) {
+                $sql = "select title, description from pages_metadata where id_page = (select id from pages where id = ".$page_id.")";  
+            } else {
+                $sql = "select title, description from pages_metadata where id_page = (select id from pages where cat_id = ".$category_id.")";
             }
-
-            $sql = "select id, name, description from categories where id = (select id from categories where friendly_url = '".$_GET['category']."')";
+            
             if ($res = $conn->query($sql)) {
                 $rows = $res->fetch_assoc();
-                $category_id = $rows['id'];
-                $category_name = $rows['name'];
-                $category_description = $rows['description'];
+                $page_title = $rows['title'];
+                $page_description = $rows['description'];
                 $res->free();
             }
+            $conn->close();
         }
-
-        // Getting page metadata
-        if (!isset($_GET["category"])) {
-            $sql = "select title, description from pages_metadata where id_page = (select id from pages where id = ".$page_id.")";  
-        } else {
-            $sql = "select title, description from pages_metadata where id_page = (select id from pages where cat_id = ".$category_id.")";
-        }
-        
-        if ($res = $conn->query($sql)) {
-            $rows = $res->fetch_assoc();
-            $page_title = $rows['title'];
-            $page_description = $rows['description'];
-            $res->free();
-        }
+    } else {
+        $conn->close();
+        require_once "./scripts/set_503_header.php";
+        set_503_header();
     }
-
-    $conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php if ($GLOBALS["site_settings"][11] == "false"): ?>
     <title><?=$page_title?> | <?=$GLOBALS["site_settings"][2]?> | <?= isset($_GET["page"])?"Página ".$page:"Página 1"?></title>
     <meta name="description" content="<?=$page_description?>">
     <meta name="robots" content="index, follow">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5GCTKSYQEQ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-5GCTKSYQEQ');
+    </script>
+    <?php else: ?>
+    <title>Página en mantenimiento</title>
+    <?php endif; ?>
     <link rel="icon" href="/includes/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/includes/css/footer.css">
@@ -117,27 +141,25 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand" />    
     <link href='https://fonts.googleapis.com/css?family=Great Vibes' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5GCTKSYQEQ"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-5GCTKSYQEQ');
-    </script>
+    
 </head>
 
 <body>
-    <?php 
-        require_once "scripts/check_maintenance.php";
-        include 'includes/header.php';
+    <?php
+    if ($GLOBALS["site_settings"][11] == "true" && !isset($_SESSION["loggedin"])) {
+        include "snippets/maintenance_page.php";
+        exit();
+    }
+    if ($GLOBALS["site_settings"][11] == "true" && isset($_SESSION["loggedin"])) {
+        include "snippets/maintenance_message.php";
+    }
+    include 'includes/header.php';
     ?>
     <div class="container content">
         <?php if (!isset($_GET['category'])): ?>
             <h1 class="title">Galería</h1>
-            <p class="title-description">Esta es una descripción general de la galería</p>
-            <p class="title-description">Selecciona una categoría pinchando sobre una imagen.</p>
+            <p class="title-description"><?=$gallery_description?></p>
+            <p class="title-description">Selecciona una categoría pulsando sobre una imagen.</p>
             <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" style="margin-bottom: 20px;">
                 <?php foreach ($categories as $element): ?>
                     <div class='category col-sm-6 col-md-4 col-lg-3 item' style='margin-bottom: 30px;'>
@@ -155,7 +177,7 @@
                 <h1 class="title"><a href="<?=(isset($_SERVER["HTTPS"])?"https://":"http://").$_SERVER["SERVER_NAME"]?>/galeria"><i class="fas fa-arrow-left" style="margin-right: 20px !important;"></i></a><?=$category_name?></h1>
                 <?php if (count($results) > 0): ?>
                     <p><?=$category_description?></p>
-                    <p class="title-description">Pincha sobre las imágenes para verlas a tamaño completo. Para volver a la página anterior, pincha sobre la flecha a la izquierda del nombre de la categoría.</p>
+                    <p class="title-description">Pincha sobre las imágenes para verlas a tamaño completo. Para volver a la página anterior, pulsa la flecha a la izquierda del nombre de la categoría.</p>
                 <?php else: ?>
                     <p><?=$category_description?></p>
                     <p class="title-description">No se han encontrado elementos en esta categoría. Visita esta página más tarde.</p>

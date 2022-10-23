@@ -5,31 +5,38 @@
     $services = array(); // Array to save categories
     $page_id = 5;
 
-    try {
-        if ($conn->connect_error) {
-            echo "No se ha podido establecer una conexión con la base de datos.";
-            exit();
-        } else {
-            // Fetching categories from database and storing then in the array for further use.
-            $sql = "select * from services";
-            if ($res = $conn->query($sql)) {
-                while ($rows = $res->fetch_assoc()) {
-                    array_push($services, array($rows["id"], $rows["title"], $rows["description"], $rows["image"]));
+    if ($GLOBALS["site_settings"][11] == "false" || ($GLOBALS["site_settings"][11] == "true" && isset($_SESSION["loggedin"]))) {
+        try {
+            if ($conn->connect_error) {
+                echo "No se ha podido establecer una conexión con la base de datos.";
+                exit();
+            } else {
+                // Fetching categories from database and storing then in the array for further use.
+                $sql = "select * from services";
+                if ($res = $conn->query($sql)) {
+                    while ($rows = $res->fetch_assoc()) {
+                        array_push($services, array($rows["id"], $rows["title"], $rows["description"], $rows["image"]));
+                    }
+                    $res->free();
                 }
-                $res->free();
-            }
 
-            // Getting page metadata
-            $sql = "select title, description from pages_metadata where id_page = (select id from pages where id = ".$page_id.")";  
-            if ($res = $conn->query($sql)) {
-                $rows = $res->fetch_assoc();
-                $page_title = $rows['title'];
-                $page_description = $rows['description'];
-                $res->free();
+                // Getting page metadata
+                $sql = "select title, description from pages_metadata where id_page = (select id from pages where id = ".$page_id.")";  
+                if ($res = $conn->query($sql)) {
+                    $rows = $res->fetch_assoc();
+                    $page_title = $rows['title'];
+                    $page_description = $rows['description'];
+                    $res->free();
+                }
+                $conn->close();
             }
+        } catch (Exception $e) {
+            echo $e;
         }
-    } catch (Exception $e) {
-        echo $e;
+    } else {
+        $conn->close();
+        require_once "./scripts/set_503_header.php";
+        set_503_header();
     }
 ?>
 
@@ -38,9 +45,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php if ($GLOBALS["site_settings"][11] == "false"): ?>
     <title><?=$page_title?> | <?=$GLOBALS["site_settings"][2]?></title>
     <meta name="description" content="<?=$page_description?>">
     <meta name="robots" content="index, follow">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5GCTKSYQEQ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-5GCTKSYQEQ');
+    </script>
+    <?php else: ?>
+    <title>Página en mantenimiento</title>
+    <?php endif; ?>
     <link rel="icon" href="includes/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="includes/css/footer.css">
@@ -51,21 +71,21 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand" />    
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Great Vibes">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5GCTKSYQEQ"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-5GCTKSYQEQ');
-    </script>
 </head>
 
 <body>
+    <?php
+    if ($GLOBALS["site_settings"][11] == "true" && !isset($_SESSION["loggedin"])) {
+        include "snippets/maintenance_page.php";
+        exit();
+    }
+    ?>
     <div id="main">
+
         <?php
-            require_once "scripts/check_maintenance.php";
+            if ($GLOBALS["site_settings"][11] == "true" && isset($_SESSION["loggedin"])) {
+                include "snippets/maintenance_message.php";
+            }
             include 'includes/header.php';
         ?>
         <div class="index-image-container">

@@ -96,16 +96,6 @@
             </div>
         </div>
         <div id="index-brief-description"></div>
-        <!-- <div class="form-row">
-            <div class="col">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Descripción</span>
-                    </div>
-                    <textarea id="index-brief-description" rows="5" class="form-control"><?= ($site_settings[10] != ""? $site_settings[10]:"")?></textarea>
-                </div>
-            </div>
-        </div> -->
         <div style="margin-top: 15px;" class="form-row text-right">
             <div class="col"><button id="submit-index-brief-description" class="btn my-button" type="button"><i class="far fa-save"></i>Guardar</button></div>
         </div>

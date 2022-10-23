@@ -593,6 +593,10 @@ li > i {
     text-align: right;
     margin-bottom: 20px;
   }
+  
+  .contact-data {
+    text-align: center;
+  }
 }
 
 @media (max-width: 576px){

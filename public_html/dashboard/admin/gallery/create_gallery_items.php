@@ -44,14 +44,35 @@
                             //Create our directory.
                             mkdir($location.$directory, 755, true);
                         }
-                       
                         move_uploaded_file($file['tmp_name'],$location.$directory.$file["name"]); // Moving file to the server.
                         $stmt = "insert into gallery (filename,dir,category,altText,uploadedBy) values ('".$file["name"]."','".$directory."',".$categories[$i].",'".$altText[$i]."','".$_SESSION["user"]."')";
                         $conn->query($stmt);
                         $i++;
                     }
-                    echo "Las imágenes se han subido correctamente.";
                     $res->free();
+
+                    $countExistentImages = array();
+                    $categoriesUnique = array_unique($categories);
+                    for ($i = 0; $i < count($categoriesUnique); $i++) {
+                        $sql = "select count(id) from gallery where category = ".$categoriesUnique[$i];
+                        if ($res = $conn->query($sql)->fetch_assoc()["count(id)"]) {
+                            $countExistentImages[intval($categoriesUnique[$i])] = $res;
+                        }
+                    }
+
+                    $totalPages = array();
+                    foreach ($countExistentImages as $key => $value) {
+                        echo $value/12;
+                        $totalPages[$key] = ceil($value/12);
+                    }
+
+                    // siguiente tarea: general todas las URL de las paginas y registrarlas en el sitemap.xml
+                    // la primera página, registrar la url sin el /1 al final, para que sea la canónica
+                    // valorar crear una tabla en la base de datos para almacenar el total de paginas por categoria.
+
+                    echo var_dump($totalPages);
+
+                    echo "Las imágenes se han subido correctamente.";
                 } else {
                     echo "Ha ocurrido un error subiendo las imágenes.";
                 }

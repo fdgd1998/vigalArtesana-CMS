@@ -5,6 +5,7 @@
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/gallery/scripts/get_friendly_url.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/XMLSitemapFunctions.php";
     
     if (!HasPermission("manage_categories")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
@@ -34,8 +35,6 @@
                     $userid = $rows['id'];
                     $res->free();
                 }
-                // $temp = explode(".", $_FILES["file"]["name"]); // Getting current filename
-                // $newfilename = round(microtime(true)).$userid.'.'.end($temp); // Setting new filename
 
                 // Saving the name and the image filename into database.
                 $conn->begin_transaction();
@@ -50,12 +49,16 @@
                 $conn->query("insert into pages (page, cat_id) values ('galeria/".GetFriendlyUrl($_POST["cat_name"])."', ".$cat_name.")");
                 $conn->query("insert into pages_metadata (title, description, id_page) values ('', '', (select id from pages where cat_id = ".$cat_name."))");
                 if ($conn->commit()) {
+                    $sitemap = readSitemapXML();
+                    addSitemapUrl($sitemap, "https://vigalartesana.es/galeria/".GetFriendlyUrl($_POST["cat_name"]));
+                    writeSitemapXML($sitemap);
                     move_uploaded_file($_FILES['file']['tmp_name'],$location.$_FILES['file']["name"]); // Moving file to the server
                     echo "La categoría se ha creado correctamente.";
                 } else {
                     $conn->rollback();
                     echo "Ha ocurrido un error al crear la categoría.";
                 }
+
             }
             $conn->close();
         } catch (Exception $e) {

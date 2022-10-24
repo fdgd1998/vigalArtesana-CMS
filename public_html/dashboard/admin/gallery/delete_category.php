@@ -3,6 +3,8 @@
     require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/gallery/scripts/get_friendly_url.php';
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/XMLSitemapFunctions.php";
     
     if (!HasPermission("manage_categories")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
@@ -13,6 +15,8 @@
         try {
             $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
             $image_name = "";
+            $cat_name = "";
+            
             if ($conn->connect_error) {
                 echo "No se ha podido conectar a la base de datos.";
                 exit();
@@ -25,10 +29,11 @@
                 }
 
                 // getting filename and deleting it
-                $stmt = "select image from categories where id = ".$_POST["cat_id"];
+                $stmt = "select friendly_url, image from categories where id = ".$_POST["cat_id"];
                     if ($res = $conn->query($stmt)) {
                         $rows = $res->fetch_assoc();
                         $image_name = $rows['image'];
+                        $cat_name = $rows['friendly_url'];
                         $res->free();
                     }
                 
@@ -38,6 +43,9 @@
                 $conn->query("delete from pages_metadata where id_page = (select id from pages where cat_id = ".$_POST['cat_id']."))");
                 if ($conn->commit()) {
                     unlink($_SERVER["DOCUMENT_ROOT"]."/uploads/categories/".$image_name); // deleting the file
+                    $sitemap = readSitemapXML();
+                    deleteSitemapUrl($sitemap, "https://vigalartesana.es/galeria/".$cat_name);
+                    writeSitemapXML($sitemap);
                     echo "La categoría se ha eliminado correctamente.";
                 } else {
                     $conn->rollback();

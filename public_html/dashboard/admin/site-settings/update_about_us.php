@@ -3,7 +3,8 @@
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
     require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
-    
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/XMLSitemapFunctions.php";
+
     if (!HasPermission("manage_companySettings")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
         exit();
@@ -19,6 +20,9 @@
             } else {
                 $stmt = "update company_info set value_info='".$_POST["about_text"]."' where key_info='about-us'";
                 if ($conn->query($stmt) === TRUE) {
+                    $sitemap = readSitemapXML();
+                    changeSitemapUrl($sitemap, "https://vigalartesana.es/sobre-nosotros", "https://vigalartesana.es/sobre-nosotros");
+                    writeSitemapXML($sitemap);
                     echo "Se ha guardado correctamente.";
                 }
                 $conn->close();

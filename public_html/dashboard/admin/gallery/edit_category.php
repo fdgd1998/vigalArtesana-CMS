@@ -3,6 +3,7 @@
     require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/XMLSitemapFunctions.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/gallery/scripts/get_friendly_url.php';
     
     if (!HasPermission("manage_categories")) {
@@ -19,9 +20,7 @@
                 exit();
             } else {
                 $location = $_SERVER["DOCUMENT_ROOT"]."/uploads/categories/"; //location for category images.
-                echo $_POST["cat_name"];
-                echo $_POST["cat_image"];
-                echo $_POST["cat_desc"];
+                $categoryName = "";
 
                 if (isset($_POST["cat_name"]) && !isset($_FILES["cat_file"]) && !isset($_POST["cat_desc"])) { // changing category name
                     $conn->begin_transaction();
@@ -33,10 +32,7 @@
                         $conn->rollback();
                         echo "No se ha podido actualizar la categoría.";
                     }
-                } else if (!isset($_POST["cat_name"]) && isset($_FILES["cat_file"]) && !isset($_POST["cat_desc"])) {
-                    // $temp = explode(".", $_FILES["cat_file"]["name"]); //getting current filename
-                    // $newfilename = round(microtime(true)) . '.' . end($temp); //setting new filename
-                    
+                } else if (!isset($_POST["cat_name"]) && isset($_FILES["cat_file"]) && !isset($_POST["cat_desc"])) {    
                     // updating entry on database
                     $conn->begin_transaction();
                     $image = "";
@@ -47,12 +43,6 @@
                         $res->free(); //releasing results from RAM.
                     }
                     $conn->query("update categories set image = '".$_FILES['cat_file']["name"]."' where id = ".$_POST["cat_id"]);
-                        // if ($conn->query($stmt) == TRUE) {
-                            
-                        //     echo "La imagen de la categoría se ha actualizado correctamente.";
-                        // } else {
-                        //     echo "No se ha podido actualizar la imagen de la categoría.";
-                        // }
                     if ($conn->commit()) {
                         unlink($location.$image);
                         move_uploaded_file($_FILES['cat_file']['tmp_name'],$location.$_FILES['cat_file']["name"]); //moving file to the server.
@@ -79,9 +69,6 @@
                         $res->free(); //releasing results from RAM.
                     }
 
-                    // $temp = explode(".", $_FILES["cat_file"]["name"]); //getting current filename
-                    // $newfilename = round(microtime(true)) . '.' . end($temp); //setting new filename
-                      
                     // updating entry on database
                     $conn->query("update pages set page = 'gallery/".GetFriendlyUrl($_POST["cat_name"])."' where cat_id = ".$_POST["cat_id"]);
                     $conn->query("update categories set name = '".$_POST['cat_name']."', friendly_url = '".GetFriendlyUrl($_POST["cat_name"])."', image = '".$_FILES['cat_file']["name"]."' where id = ".$_POST["cat_id"]);
@@ -103,9 +90,6 @@
                         $res->free(); //releasing results from RAM.
                     }
 
-                    // $temp = explode(".", $_FILES["cat_file"]["name"]); //getting current filename
-                    // $newfilename = round(microtime(true)) . '.' . end($temp); //setting new filename
-                      
                     // updating entry on database
                     $conn->query("update categories set description = '".$_POST['cat_desc']."', image = '".$_FILES['cat_file']["name"]."' where id = ".$_POST["cat_id"]);
                     if ($conn->commit()) {
@@ -136,9 +120,6 @@
                         $res->free(); //releasing results from RAM.
                     }
 
-                    // $temp = explode(".", $_FILES["cat_file"]["name"]); //getting current filename
-                    // $newfilename = round(microtime(true)) . '.' . end($temp); //setting new filename
-                      
                     // updating entry on database
                     $conn->query("update categories set name = '".$_POST['cat_name']."', description = '".$_POST['cat_desc']."', friendly_url = '".GetFriendlyUrl($_POST["cat_name"])."', image = '".$_FILES['cat_file']["name"]."' where id = ".$_POST["cat_id"]);
                     $conn->query("update pages set page = 'gallery/".GetFriendlyUrl($_POST["cat_name"])."' where cat_id = ".$_POST["cat_id"]);
@@ -151,58 +132,14 @@
                     }
                 }
 
-
-
-                // if (isset($_POST["cat_name"]) && !isset($_FILES["cat_file"])) { // changing category name
-                //     $stmt = "update categories set name = '".$_POST['cat_name']."', friendly_url = '".GetFriendlyUrl($_POST["cat_name"])."' where id = ".$_POST["cat_id"];
-                //     if ($conn->query($stmt) == TRUE) {
-                //         echo "El nombre de la categoría se ha actualizado correctamente.";
-                //     } else {
-                //         echo "No se ha podido actualizar la categoría.";
-                //     }
-                // } else if (isset($_FILES["cat_file"]) && isset($_POST["cat_name"])) { //changing both category name and image.
-                //     $stmt = "select image from categories where id = ".$_POST["cat_id"];
-                //     if ($res = $conn->query($stmt)) {
-                //         $rows = $res->fetch_assoc();
-                //         unlink($location.$rows['image']);
-                //         $res->free(); //releasing results from RAM.
-                //     } else {
-                //         echo "Ha ocurrido un error borrando la imagen actual.";
-                //     }
-
-                //     $temp = explode(".", $_FILES["cat_file"]["name"]); //getting current filename
-                //     $newfilename = round(microtime(true)) . '.' . end($temp); //setting new filename
-                      
-                //     // updating entry on database
-                //     $stmt = "update categories set name = '".$_POST['cat_name']."', friendly_url = '".GetFriendlyUrl($_POST["cat_name"])."', image = '".$newfilename."' where id = ".$_POST["cat_id"];
-                //     if ($conn->query($stmt) == TRUE) {
-                //         move_uploaded_file($_FILES['cat_file']['tmp_name'],$location.$newfilename); //moving file to the server
-                //         echo "La imagen y el nombre de la categoría se han actualizado correctamente.";
-                //     } else {
-                //         echo "No se ha podido actualizar la categoría.";
-                //     }
-                // } else if (isset($_FILES["cat_file"]) && !isset($_POST["cat_name"])){ //changing category image
-                //     $temp = explode(".", $_FILES["cat_file"]["name"]); //getting current filename
-                //     $newfilename = round(microtime(true)) . '.' . end($temp); //setting new filename
-                    
-                //     // undating entry on database
-                //     $stmt = "select image from categories where id = ".$_POST["cat_id"];
-                //     if ($res = $conn->query($stmt)) {
-                //         $rows = $res->fetch_assoc();
-                //         unlink($location.$rows['image']);
-                //         $res->free(); //releasing results from RAM.
-                //     } else {
-                //         echo "Ha ocurrido un error borrando la imagen actual.";
-                //     }
-                    
-                //     $stmt = "update categories set image = '".$newfilename."' where id = ".$_POST["cat_id"];
-                //     if ($conn->query($stmt) == TRUE) {
-                //         move_uploaded_file($_FILES['cat_file']['tmp_name'],$location.$newfilename); //moving file to the server.
-                //         echo "La imagen de la categoría se ha actualizado correctamente.";
-                //     } else {
-                //         echo "No se ha podido actualizar la imagen de la categoría.";
-                //     }
-                // }
+                $categoryUrl = "";
+                $sql = "select friendly_url from categories where id = ".$_POST["cat_id"];
+                if ($res = $conn->query($sql)->fetch_assoc()[0]) {
+                    $categoryName = $res["friendly_url"];
+                }
+                $sitemap = readSitemapXML();
+                deleteSitemapUrl($sitemap, "https://vigalartesana.es/galeria/".$categoryUrl);
+                writeSitemapXML($sitemap);
             }
             $conn->close(); //closing database connection
         } catch (Exception $e) {

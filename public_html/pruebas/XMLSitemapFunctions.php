@@ -1,5 +1,8 @@
 <?php
-function createXML($data) {
+
+function 
+
+function WriteSitemapXML($data) {
     // $title = $data['title'];
     $rowCount = count($data['url']);
     
@@ -45,7 +48,7 @@ function changeUrlSitemap(&$arr, $search, $value) {
 }
 
 function addUrlSitemap(&$arr, $value){
-    array_push($arr, array(
+    array_push($arr["url"], array(
         "loc" => $value, 
         "lastmod" => date('Y-m-d\TH:i:s', time())."+00:00",
         "priority" => 0.5
@@ -54,9 +57,11 @@ function addUrlSitemap(&$arr, $value){
 
 function deleteUrlSitemap(&$arr, $value) {
     for ($i = 0; $i < count($arr); $i++) {
-        if($arr[$i]["loc"] == $value) {
+        if($arr["url"][$i]["loc"] == $value) {
             unset($arr[$i]);
         }
     }
 }
+
+function 
 ?>

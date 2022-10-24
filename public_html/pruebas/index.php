@@ -37,5 +37,4 @@ print_r($xmlArr["url"]);
 echo "<br><br>";
 echo createXML($xmlArr);
 
-
 ?>

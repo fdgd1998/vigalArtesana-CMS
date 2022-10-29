@@ -22,8 +22,9 @@ The main purpose of this CMS is to be simple, lightweight and without any unnece
 - Dynamic sitemap.xml generation.
 - Users and permissions. Explanation can be read in permissions_explanations.txt.
 
-### Future features:
-- Blog system.(*)
+### Future planned features:
+- Blog system.
+- User management.
 
 ### Broken features (might be fixed in the future):
 - User management (creation, deletion, edition, profiles, privileges).

@@ -17,6 +17,7 @@ The main purpose of this CMS is to be simple, lightweight and without any unnece
 - Completa gallery system, organized by categories.
 - In-site contact form.
 - Search Engine Optimization options.
+- Loing attempts limit.
 - Under construction / maintenance website template.
 - Dynamic sitemap.xml generation.
 - Users and permissions. Explanation can be read in permissions_explanations.txt.

@@ -1,5 +1,5 @@
 <?php
-    //error_reporting(0);
+
     session_start(); // starting the session.
     require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
@@ -52,8 +52,8 @@
             </form>
         </div>
         <div id="modal-footer1" class="modal-footer">
-          <button id="cancel-page-edit" type="button" class="btn my-button-2" data-dismiss="modal">Cancelar</button>
-          <button id="page-edit-btn" type="button" disabled class="btn my-button">Editar</button>
+          <button id="cancel-page-edit" type="button" class="btn my-button-2" data-dismiss="modal"><i class="i-margin fas fa-times-circle"></i>Cancelar</button>
+          <button id="page-edit-btn" type="button" disabled class="btn my-button-3"><i class="i-margin fas fa-edit"></i>Guardar</button>
         </div>
       </div>
     </div>

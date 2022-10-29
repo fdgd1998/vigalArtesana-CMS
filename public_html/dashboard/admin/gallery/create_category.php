@@ -5,7 +5,7 @@
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/gallery/scripts/get_friendly_url.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
-    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/XMLSitemapFunctions.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/XMLSitemapFunctions.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
     
     if (!HasPermission("manage_categories")) {
@@ -51,7 +51,7 @@
                 $conn->query("insert into pages_metadata (title, description, id_page) values ('', '', (select id from pages where cat_id = ".$cat_name."))");
                 if ($conn->commit()) {
                     $sitemap = readSitemapXML();
-                    addSitemapUrl($sitemap, GetBaseUri()."galeria/".GetFriendlyUrl($_POST["cat_name"]));
+                    addSitemapUrl($sitemap, GetBaseUri()."/"."galeria/".GetFriendlyUrl($_POST["cat_name"]));
                     writeSitemapXML($sitemap);
                     move_uploaded_file($_FILES['file']['tmp_name'],$location.$_FILES['file']["name"]); // Moving file to the server
                     echo "La categoría se ha creado correctamente.";

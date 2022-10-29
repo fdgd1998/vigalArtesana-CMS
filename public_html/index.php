@@ -1,6 +1,6 @@
 <?php
     require_once "scripts/get_company_info.php";
-    require_once "scripts/get_Uri.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
 
     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
     $services = array(); // Array to save categories
@@ -36,7 +36,7 @@
         }
     } else {
         $conn->close();
-        require_once "./scripts/set_503_header.php";
+        require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/set_503_header.php";
         set_503_header();
     }
 ?>
@@ -63,13 +63,13 @@
     <title>Página en mantenimiento</title>
     <?php endif; ?>
     <link rel="canonical" href="<?=GetUri();?>">
-    <link rel="icon" href="includes/img/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="includes/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="includes/css/footer.css">
+    <link rel="icon" href="<?=GetBaseUri()?>/includes/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="includes/css/Navigation-Clean.css">
-    <link rel="stylesheet" href="includes/css/styles.css">
-    <link rel="stylesheet" href="includes/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/Navigation-Clean.css">
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/styles.css">
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand" />    
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Great Vibes">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
@@ -78,7 +78,7 @@
 <body>
     <?php
     if ($GLOBALS["site_settings"][11] == "true" && !isset($_SESSION["loggedin"])) {
-        include "snippets/maintenance_page.php";
+        include $_SERVER["DOCUMENT_ROOT"]."/snippets/maintenance_page.php";
         exit();
     }
     ?>
@@ -86,9 +86,9 @@
 
         <?php
             if ($GLOBALS["site_settings"][11] == "true" && isset($_SESSION["loggedin"])) {
-                include "snippets/maintenance_message.php";
+                include $_SERVER["DOCUMENT_ROOT"]."/snippets/maintenance_message.php";
             }
-            include 'includes/header.php';
+            include $_SERVER["DOCUMENT_ROOT"].'/includes/header.php';
         ?>
         <div class="index-image-container">
             <img class="index-image wow animate__animated animate__fadeIn" src="<?=(isset($_SERVER["HTTPS"])?"https://":"http://").$_SERVER["SERVER_NAME"]?>/uploads/<?=$GLOBALS["site_settings"][5]?>"></img>
@@ -161,10 +161,10 @@
             include 'includes/footer.php';
         ?>
     </div>
-    <script src="includes/js/jquery.min.js"></script>
-    <script src="includes/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?=GetBaseUri()?>/includes/js/jquery.min.js"></script>
+    <script src="<?=GetBaseUri()?>/includes/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="includes/js/wow-init.js"></script>
+    <script src="<?=GetBaseUri()?>/includes/js/wow-init.js"></script>
     <script>
         $("#services").carousel({
             interval: 10000,

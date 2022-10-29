@@ -1,6 +1,6 @@
 <?php
-    require_once "scripts/get_company_info.php";
-    require_once "scripts/get_Uri.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_company_info.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
 
     $services = array(); // Array to save categories
     $page_id = 8;
@@ -30,7 +30,7 @@
         }
     } else {
         $conn->close();
-        require_once "./scripts/set_503_header.php";
+        require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/set_503_header.php";
         set_503_header();
     }
 ?>
@@ -58,11 +58,11 @@
     <?php endif; ?>
     <link rel="icon" href="./includes/img/favicon.ico" type="image/x-icon">
     <link rel="canonical" href="<?=GetUri();?>">
-    <link rel="stylesheet" href="./includes/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./includes/css/footer.css">
-    <link rel="stylesheet" href="./includes/css/Navigation-Clean.css">
-    <link rel="stylesheet" href="./includes/css/styles.css">
-    <link rel="stylesheet" href="./includes/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/footer.css">
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/Navigation-Clean.css">
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/styles.css">
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/fonts/fontawesome-all.min.css">
     <link href='https://fonts.googleapis.com/css?family=Great Vibes' rel='stylesheet'>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -90,13 +90,13 @@
 <body>
 <?php
     if ($GLOBALS["site_settings"][11] == "true" && !isset($_SESSION["loggedin"])) {
-        include "snippets/maintenance_page.php";
+        include $_SERVER["DOCUMENT_ROOT"]."/snippets/maintenance_page.php";
         exit();
     }
     if ($GLOBALS["site_settings"][11] == "true" && isset($_SESSION["loggedin"])) {
-        include "snippets/maintenance_message.php";
+        include $_SERVER["DOCUMENT_ROOT"]."/snippets/maintenance_message.php";
     }
-    include 'includes/header.php';
+    include $_SERVER["DOCUMENT_ROOT"].'/includes/header.php';
     ?>
     <div class="container content">
         <h1 class="title">Contacto</h1>
@@ -178,13 +178,13 @@
     </div>
 
     <?php
-        include './includes/footer.php';
+        include $_SERVER["DOCUMENT_ROOT"].'/includes/footer.php';
     ?>
-    <script src="./includes/js/jquery.min.js"></script>
-    <script src="./includes/bootstrap/js/bootstrap.min.js"></script>
-    <script src="./includes/js/contact.js"></script>
-    <script src="./dashboard/js/hide_spinner.js"></script>
-    <script src="./dashboard/js/show_spinner.js"></script>
+    <script src="<?=GetBaseUri()?>/includes/js/jquery.min.js"></script>
+    <script src="<?=GetBaseUri()?>/includes/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?=GetBaseUri()?>/includes/js/contact.js"></script>
+    <script src="<?=GetBaseUri()?>/dashboard/js/hide_spinner.js"></script>
+    <script src="<?=GetBaseUri()?>/dashboard/js/show_spinner.js"></script>
     <script src="https://www.google.com/recaptcha/api.js"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/get_uri.php';
-    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/XMLSitemapFunctions.php';
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/XMLSitemapFunctions.php";
     
     if (!HasPermission("manage_gallery")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
@@ -111,12 +111,6 @@
                         $totalPagesUpdate[$value] = $pagesModified;
                         $totalPagesDelete[$value] = $pagesDelete;
 
-                        echo "category $value -->\n";
-                        echo "- pages before: $pagesBefore\n";
-                        echo "- pages after: $pagesAfter\n";
-                        echo "- pages modified: $pagesModified\n";
-                        echo "- pages delete: $pagesDelete\n";
-
                     }
 
                     $sql = "select id, friendly_url from categories where id in(".implode(",", $categoriesUnique).")";
@@ -131,15 +125,13 @@
 
                     foreach ($totalPagesUpdate as $key => $value) {
                         if ($value != 0)  {
-                            $url = GetBaseUri()."galeria/".$categoriesFriendlyUrl[$key].($totalPagesBefore[$key] == 0 ? "" : ($totalPagesBefore[$key] != 1 ? "/".$totalPagesBefore[$key]: ""));
-                            echo "update: $url\n";
+                            $url = GetBaseUri()."/"."galeria/".$categoriesFriendlyUrl[$key].($totalPagesBefore[$key] == 0 ? "" : ($totalPagesBefore[$key] != 1 ? "/".$totalPagesBefore[$key]: ""));
                             changeSitemapUrl($sitemap, $url, $url);
                         }
                     }
                     foreach ($totalPagesDelete as $key => $value) {
                         if ($value != 0)  {
-                            $url = GetBaseUri()."galeria/".$categoriesFriendlyUrl[$key]."/".($totalPagesBefore[$key]);
-                            echo "delete: $url\n";
+                            $url = GetBaseUri()."/"."galeria/".$categoriesFriendlyUrl[$key]."/".($totalPagesBefore[$key]);
                             deleteSitemapUrl($sitemap, $url);
                         }
                     }

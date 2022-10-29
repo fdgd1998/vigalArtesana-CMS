@@ -5,7 +5,7 @@
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/gallery/scripts/get_friendly_url.php';
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
-    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/XMLSitemapFunctions.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/XMLSitemapFunctions.php";
     
     if (!HasPermission("manage_categories")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
@@ -45,8 +45,7 @@
                 if ($conn->commit()) {
                     unlink($_SERVER["DOCUMENT_ROOT"]."/uploads/categories/".$image_name); // deleting the file
                     $sitemap = readSitemapXML();
-                    echo GetBaseUri()."galeria/".$cat_name;
-                    deleteSitemapUrl($sitemap, GetBaseUri()."galeria/".$cat_name);
+                    deleteSitemapUrl($sitemap, GetBaseUri()."/"."galeria/".$cat_name);
                     writeSitemapXML($sitemap);
                     echo "La categoría se ha eliminado correctamente.";
                 } else {

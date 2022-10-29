@@ -4,14 +4,14 @@
         <div class="row">
             <div class="col-12 col-sm-5 col-md-3 footer-links">
                 <ul>
-                    <li><a href="<?=GetBaseUri()?>politica-privacidad"><i class="fas fa-user-secret" style="margin-right: 5px;"></i>Política de privacidad</a></li>
-                    <li><a href="<?=GetBaseUri()?>aviso-legal"><i class="fas fa-balance-scale" style="margin-right: 5px;"></i>Aviso legal</a></li>
+                    <li><a href="<?=GetBaseUri()?>/politica-privacidad"><i class="fas fa-user-secret" style="margin-right: 5px;"></i>Política de privacidad</a></li>
+                    <li><a href="<?=GetBaseUri()?>/aviso-legal"><i class="fas fa-balance-scale" style="margin-right: 5px;"></i>Aviso legal</a></li>
                     <?php
                         if (!isset($_SESSION['user'])) {
-                            echo '<li><a href="'.GetBaseUri().'login"><i class="fas fa-sign-in-alt" style="margin-right: 5px;"></i>Iniciar sesión</a></li>';
+                            echo '<li><a href="'.GetBaseUri().'/login"><i class="fas fa-sign-in-alt" style="margin-right: 5px;"></i>Iniciar sesión</a></li>';
                         } else {
-                            echo '<li><a href="'.GetBaseUri().'dashboard?page=start"><i class="fas fa-cog" style="margin-right: 5px;"></i>Configuración</a></li>';
-                            echo '<li><a href="'.GetBaseUri().'scripts/logout.php"><i class="fas fa-sign-out-alt" style="margin-right: 5px;"></i>Cerrar sesión</a></li>';
+                            echo '<li><a href="'.GetBaseUri().'/dashboard?page=start"><i class="fas fa-cog" style="margin-right: 5px;"></i>Configuración</a></li>';
+                            echo '<li><a href="'.GetBaseUri().'/scripts/logout.php"><i class="fas fa-sign-out-alt" style="margin-right: 5px;"></i>Cerrar sesión</a></li>';
                         }
                     ?>
                 </ul>

@@ -3,7 +3,8 @@
     require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
-    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/XMLSitemapFunctions.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/XMLSitemapFunctions.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
     
     if (!HasPermission("manage_categories")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
@@ -24,7 +25,7 @@
                 if ($conn->query($stmt)) {
                     echo "La descripción se ha editado correctamente.";
                     $sitemap = readSitemapXML();
-                    changeSitemapUrl($sitemap, "https://vigalartesana.es/galeria", "https://vigalartesana.es/galeria");
+                    changeSitemapUrl($sitemap, GetBaseUri()."/"."galeria", GetBaseUri()."/"."galeria");
                     writeSitemapXML($sitemap);
                 } else {
                     $conn->rollback();

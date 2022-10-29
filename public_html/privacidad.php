@@ -1,10 +1,10 @@
 <?php
     session_start();
     require_once "./scripts/get_company_info.php";
-    require_once "scripts/get_Uri.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
 
     if ($GLOBALS["site_settings"][11] == "true" || ($GLOBALS["site_settings"][11] == "false" && !isset($_SESSION["loggedin"]))) { 
-        require_once "./scripts/set_503_header.php";
+        require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/set_503_header.php";
         set_503_header();
     }
 ?>
@@ -31,12 +31,12 @@
     <title>Página en mantenimiento</title>
     <?php endif; ?>
     <link rel="canonical" href="<?=GetUri();?>">
-    <link rel="icon" href="./includes/img/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="./includes/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./includes/css/footer.css">
-    <link rel="stylesheet" href="./includes/css/Navigation-Clean.css">
-    <link rel="stylesheet" href="./includes/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="./includes/css/styles.css">
+    <link rel="icon" href="<?=GetBaseUri()?>/includes/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/footer.css">
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/Navigation-Clean.css">
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand" />    
     <link href='https://fonts.googleapis.com/css?family=Great Vibes' rel='stylesheet'>
 </head>
@@ -44,13 +44,13 @@
 <body>
     <?php
     if ($GLOBALS["site_settings"][11] == "true" && !isset($_SESSION["loggedin"])) {
-        include "snippets/maintenance_page.php";
+        include $_SERVER["DOCUMENT_ROOT"]."/snippets/maintenance_page.php";
         exit();
     }
     if ($GLOBALS["site_settings"][11] == "true" && isset($_SESSION["loggedin"])) {
-        include "snippets/maintenance_message.php";
+        include $_SERVER["DOCUMENT_ROOT"]."/snippets/maintenance_message.php";
     }
-    include 'includes/header.php';
+    include $_SERVER["DOCUMENT_ROOT"].'/includes/header.php';
     ?>
     <div id="main">
         <div class="container content">
@@ -88,11 +88,11 @@
             <p>Cualquier interesado podrá presentar una reclamación ante la Autoridad de Control competente en materia de Protección de Datos, especialmente cuando no haya obtenido satisfacción en el ejercicio de sus derechos y la forma de ponerse en contacto con ella sería dirigir un escrito a Agencia Española de Protección de Datos Personales en C/Jorge Juan n.º 6, 28001 Madrid o a través de su sede electrónica en www.agpd.es </p>
         </div>
         <?php
-            include './includes/footer.php';
+            include $_SERVER["DOCUMENT_ROOT"].'/includes/footer.php';
         ?>
     </div>
-    <script src="./includes/js/jquery.min.js"></script>
-    <script src="./includes/js/header.js"></script>
-    <script src="./includes/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?=GetBaseUri()?>/includes/js/jquery.min.js"></script>
+    <script src="<?=GetBaseUri()?>/includes/js/header.js"></script>
+    <script src="<?=GetBaseUri()?>/includes/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

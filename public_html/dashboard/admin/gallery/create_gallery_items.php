@@ -4,7 +4,7 @@
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/get_uri.php';
-    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/XMLSitemapFunctions.php';
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/XMLSitemapFunctions.php";
     
     if (!HasPermission("manage_gallery")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
@@ -126,13 +126,13 @@
 
                     foreach ($totalPagesUpdate as $key => $value) {
                         if ($value != 0)  {
-                            $url = GetBaseUri()."galeria/".$categoriesFriendlyUrl[$key].($totalPagesBefore[$key] == 0 ? "" : ($totalPagesBefore[$key] != 1 ? "/".$totalPagesBefore[$key]: ""));
+                            $url = GetBaseUri()."/"."galeria/".$categoriesFriendlyUrl[$key].($totalPagesBefore[$key] == 0 ? "" : ($totalPagesBefore[$key] != 1 ? "/".$totalPagesBefore[$key]: ""));
                             changeSitemapUrl($sitemap, $url, $url);
                         }
                     }
                     foreach ($totalPagesNew as $key => $value) {
                         if ($value != 0)  {
-                            $url = GetBaseUri()."galeria/".$categoriesFriendlyUrl[$key]."/".($totalPagesBefore[$key] + 1);
+                            $url = GetBaseUri()."/"."galeria/".$categoriesFriendlyUrl[$key]."/".($totalPagesBefore[$key] + 1);
                             addSitemapUrl($sitemap, $url);
                         }
                     }

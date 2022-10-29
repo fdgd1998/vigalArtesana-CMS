@@ -6,7 +6,7 @@
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/XMLSitemapFunctions.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/gallery/scripts/get_friendly_url.php';
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
-    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/XMLSitemapFunctions.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/XMLSitemapFunctions.php";
     
     if (!HasPermission("manage_categories")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
@@ -139,8 +139,7 @@
                     $categoryUrl = $res->fetch_assoc()["friendly_url"];
                 }
                 $sitemap = readSitemapXML();
-                echo GetBaseUri()."galeria/".$categoryUrl."\n";
-                changeSitemapUrl($sitemap, GetBaseUri()."galeria/".$categoryUrl, GetBaseUri()."galeria/".$categoryUrl);
+                changeSitemapUrl($sitemap, GetBaseUri()."/"."galeria/".$categoryUrl, GetBaseUri()."/"."galeria/".$categoryUrl);
                 writeSitemapXML($sitemap);
             }
             $conn->close(); //closing database connection

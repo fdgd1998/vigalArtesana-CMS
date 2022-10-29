@@ -8,9 +8,9 @@
         <div class="collapse navbar-collapse" id="navcol-1" style="margin-left: 5%;">
             <ul class="navbar-nav nav ml-auto mt-2 mt-lg-0">
                 <li class="nav-item"><a class="nav-link underline-animated" href="<?=GetBaseUri()?>">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link underline-animated" href="<?=GetBaseUri()?>/galeria">Galería</a></li>
-                <li class="nav-item"><a class="nav-link underline-animated" href="<?=GetBaseUri()?>/sobre-nosotros">Sobre nosotros</a></li>
-                <li class="nav-item"><a class="nav-link underline-animated" href="<?=GetBaseUri()?>/contacto">Contacto</a></li>
+                <li class="nav-item"><a class="nav-link underline-animated" href="<?=GetBaseUri()?>galeria">Galería</a></li>
+                <li class="nav-item"><a class="nav-link underline-animated" href="<?=GetBaseUri()?>sobre-nosotros">Sobre nosotros</a></li>
+                <li class="nav-item"><a class="nav-link underline-animated" href="<?=GetBaseUri()?>contacto">Contacto</a></li>
 
                 <li class="nav-item">
                     <div class="social-div">

@@ -97,6 +97,12 @@
                             </a>
                             <div role="menu" class="dropdown-menu">
                                 <a role="presentation" class="dropdown-item" href="/dashboard?page=metadata-settings">
+                                    <i class="fab fa-searchengin"></i>
+                                    Notificar cambios a motores de búsqueda
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <h6 class="dropdown-header">Metadatos</h6>
+                                <a role="presentation" class="dropdown-item" href="/dashboard?page=metadata-settings">
                                     <i class="fas fa-window-maximize"></i>
                                     Título y descripción de las páginas (metadatos)
                                 </a>

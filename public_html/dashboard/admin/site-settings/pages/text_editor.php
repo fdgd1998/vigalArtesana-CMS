@@ -4,6 +4,7 @@
 
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/get_uri.php';
     
     if (!HasPermission("manage_companySettings")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
@@ -36,6 +37,7 @@
         <div class="form-row text-right" style="margin-top: 20px;">
             <div class="col">
                 <input class="btn my-button" type="submit" value="Guardar"></input>
+                <a class="btn my-button" href="<?=GetBaseUri().'dashboard/admin/site-settings/download.php?file='.$_GET['file']?>">Descargar</a>
             </div>
         </div>
     </form>

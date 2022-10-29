@@ -37,8 +37,8 @@
                 if ($_SESSION["error"] != "") {
                     $message = $_SESSION["error"];
                     include './snippets/error_message.php';
-                    // session_unset();
-                    // session_destroy();
+                    session_unset();
+                    session_destroy();
                 }
             ?>
                 

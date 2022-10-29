@@ -5,6 +5,8 @@
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/XMLSitemapFunctions.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/gallery/scripts/get_friendly_url.php';
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/XMLSitemapFunctions.php";
     
     if (!HasPermission("manage_categories")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
@@ -20,7 +22,6 @@
                 exit();
             } else {
                 $location = $_SERVER["DOCUMENT_ROOT"]."/uploads/categories/"; //location for category images.
-                $categoryName = "";
 
                 if (isset($_POST["cat_name"]) && !isset($_FILES["cat_file"]) && !isset($_POST["cat_desc"])) { // changing category name
                     $conn->begin_transaction();
@@ -134,11 +135,12 @@
 
                 $categoryUrl = "";
                 $sql = "select friendly_url from categories where id = ".$_POST["cat_id"];
-                if ($res = $conn->query($sql)->fetch_assoc()[0]) {
-                    $categoryName = $res["friendly_url"];
+                if ($res = $conn->query($sql)) {
+                    $categoryUrl = $res->fetch_assoc()["friendly_url"];
                 }
                 $sitemap = readSitemapXML();
-                deleteSitemapUrl($sitemap, "https://vigalartesana.es/galeria/".$categoryUrl);
+                echo GetBaseUri()."galeria/".$categoryUrl."\n";
+                changeSitemapUrl($sitemap, GetBaseUri()."galeria/".$categoryUrl, GetBaseUri()."galeria/".$categoryUrl);
                 writeSitemapXML($sitemap);
             }
             $conn->close(); //closing database connection

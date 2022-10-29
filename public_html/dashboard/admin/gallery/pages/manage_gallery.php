@@ -17,7 +17,7 @@
     }
 
     // Variables for pagination
-    $limit = isset($_SESSION['records-limit']) ? $_SESSION['records-limit'] : 8; // Dynamic limit
+    $limit = isset($_SESSION['records-limit']) ? $_SESSION['records-limit'] : 12; // Dynamic limit
     $page = (isset($_GET['n']) && is_numeric($_GET['n']) ) ? $_GET['n'] : 1; // Current pagination page number
     $paginationStart = ($page - 1) * $limit; // Offset
 
@@ -34,14 +34,14 @@
 
     // Opening database connection.
     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
-    $sql = "select gallery.id, dir, filename from gallery inner join categories on gallery.category = categories.id where gallery.uploadedBy = '".$_SESSION['userid']."'";
+    $sql = "select gallery.id, dir, filename, category from gallery inner join categories on gallery.category = categories.id where gallery.uploadedBy = '".$_SESSION['userid']."'";
     if (isset($_GET["c"])) {
       $sql.=" and gallery.category = ".$_GET["c"];
     }
     $sql.=" limit $paginationStart, $limit";
     if ($res = $conn->query($sql)) {
         while ($rows = $res->fetch_assoc()) {
-            array_push($results, array($rows["id"], $rows["dir"], $rows["filename"]));
+            array_push($results, array($rows["id"], $rows["dir"], $rows["filename"], $rows["category"]));
         }
         $res->free();
     }
@@ -117,7 +117,7 @@
             <span class="input-group-text" id="basic-addon1">Mostrar</span>
         </div>
         <select name="records-limit" id="records-limit" class="custom-select">
-            <?php foreach([8,16,24] as $limit) : ?>
+            <?php foreach([12,16,24] as $limit) : ?>
             <option
                 <?php if(isset($_SESSION['records-limit']) && $_SESSION['records-limit'] == $limit) echo 'selected'; ?>
                 value="<?= $limit; ?>">
@@ -131,7 +131,7 @@
     <?php foreach ($results as $element): ?>
       <div class="wrap animated-item">
         <a class='gallery-item '>
-          <img id="<?=$element[2]?>" class='photos img-fluid' dir="<?=$element[1]?>" src='../uploads/images/<?=$element[1].$element[2]?>'/>
+          <img class="photos img-fluid" id="<?=$element[2]?>" category="<?=$element[3]?>" dir="<?=$element[1]?>" src='../uploads/images/<?=$element[1].$element[2]?>'/>
         </a>
       </div>
     <?php endforeach; ?>

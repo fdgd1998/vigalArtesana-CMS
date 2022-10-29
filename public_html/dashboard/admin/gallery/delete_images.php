@@ -3,11 +3,26 @@
     require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/get_uri.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/XMLSitemapFunctions.php';
     
     if (!HasPermission("manage_gallery")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
         exit();
     }
+
+    function dirIsEmpty($dir) {
+        $handle = opendir($dir);
+        while (false !== ($entry = readdir($handle))) {
+            if ($entry != "." && $entry != "..") {
+            closedir($handle);
+            return false;
+            }
+        }
+        closedir($handle);
+        return true;
+    }
+
     if (isset($_POST["filenames"])) {
         try {
             $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
@@ -16,26 +31,121 @@
                 echo "No se ha podido conectar a la base de datos.";
                 exit();
             } else {
+                $location = $_SERVER["DOCUMENT_ROOT"]."/uploads/images/";
                 $filenames = json_decode($_POST["filenames"], true);
                 $dir = json_decode($_POST["directories"], true);
+                $categories = json_decode($_POST["categories"], true);
                 var_dump($filenames);
 
-                $images = "";
-                for($i = 0; $i < count($filenames) - 1; $i++) {
-                    $images .= "'".$filenames[$i]."',";
+                $countImagesBefore = array();
+                $countImagesAfter = array();
+                $categoriesUnique = array_values(array_unique($categories));
+
+                for ($i = 0; $i < count($categoriesUnique); $i++) {
+                    $sql = "select count(id) from gallery where category = ".$categoriesUnique[$i];
+                    if ($res = $conn->query($sql)) {
+                        $row = $res->fetch_assoc()["count(id)"];
+                        $countImagesBefore[intval($categoriesUnique[$i])] = $row;
+                    } else {
+                        $countImagesBefore[intval($categoriesUnique[$i])] = 0;
+                    }
                 }
-                $images .= "'".$filenames[count($filenames) - 1]."'";
 
-                $stmt = "delete from gallery where filename in(".$images.")";
+                $images = "'".implode("','", $filenames)."'";
+                $sql= "delete from gallery where filename in(".$images.")";
 
-                if ($conn->query($stmt) == TRUE) {
+                if ($conn->query($sql) == TRUE) {
                     for ($i = 0; $i < count($filenames); $i++) {
-                        unlink($_SERVER["DOCUMENT_ROOT"]."/uploads/images/".$dir[$i].$filenames[$i]); // deleting the file
+                        unlink($location.$dir[$i].$filenames[$i]); // deleting the file
+                        if (dirIsEmpty($location.$dir[$i])) {
+                            rmdir($location.$dir[$i]);
+                        }
+
+                        if (dirIsEmpty($location.substr($dir[$i], 0, 8))) {
+                            rmdir($location.substr($dir[$i], 0, 8));
+                        }
+
+                        if (dirIsEmpty($location.substr($dir[$i], 0, 5))) {
+                            rmdir($location.substr($dir[$i], 0, 5));
+                        }
+
+                    }
+
+                    for ($i = 0; $i < count($categoriesUnique); $i++) {
+                        $sql = "select count(id) from gallery where category = ".$categoriesUnique[$i];
+                        if ($res = $conn->query($sql)) {
+                            $row = $res->fetch_assoc()["count(id)"];
+                            $countImagesAfter[intval($categoriesUnique[$i])] = $row;
+                        }
                     }
                     
-                    // foreach($filenames as $id=>$image) {
-                    //     unlink($_SERVER["DOCUMENT_ROOT"]."/uploads/images/"$image); // deleting the file
-                    // }
+                    $totalPagesBefore = array();
+                    $totalPagesUpdate = array();
+                    $totalPagesDelete = array();
+                    $categoriesUniqueValues = array_values($categoriesUnique);
+                    $categoriesUniqueKeys = array_keys($categoriesUnique);
+                    $categoriesFriendlyUrl = array();
+
+                    if (count($countImagesAfter) == 0) {
+                        foreach ($countImagesBefore as $key => $value) {
+                            $countImagesAfter[$key] = 0;
+                        }
+                    }
+
+                    foreach($categoriesUniqueValues as $key => $value) {
+                        $imagesBefore = $countImagesBefore[$value];
+                        $imagesAfter = $countImagesAfter[$value];
+                        $pagesBefore = 0;
+                        $pagesAfter = 0;
+                        $pagesModified = 0;
+                        $pagesDelete = 0;
+
+                        $pagesBefore = ceil($imagesBefore / 12);
+                        $pagesAfter = ceil($imagesAfter / 12);
+                        $pagesModified = ($pagesBefore == 1 && $pagesAfter == 0) ? 1 : (($pagesAfter % 12 != 0) ? 1 : 0);
+
+                        if ($pagesBefore == 0) $pagesDelete = 0;
+                        else $pagesDelete = ($pagesBefore == $pagesAfter) ? 0 : $pagesBefore - $pagesModified;
+
+                        $totalPagesBefore[$value] = $pagesBefore;
+                        $totalPagesUpdate[$value] = $pagesModified;
+                        $totalPagesDelete[$value] = $pagesDelete;
+
+                        echo "category $value -->\n";
+                        echo "- pages before: $pagesBefore\n";
+                        echo "- pages after: $pagesAfter\n";
+                        echo "- pages modified: $pagesModified\n";
+                        echo "- pages delete: $pagesDelete\n";
+
+                    }
+
+                    $sql = "select id, friendly_url from categories where id in(".implode(",", $categoriesUnique).")";
+                    if ($res = $conn->query($sql)) {
+                        while ($rows = $res->fetch_assoc()) {
+                            $categoriesFriendlyUrl[$rows["id"]] = $rows["friendly_url"];
+                        }
+                        $res->free();
+                    }
+
+                    $sitemap = readSitemapXML();
+
+                    foreach ($totalPagesUpdate as $key => $value) {
+                        if ($value != 0)  {
+                            $url = GetBaseUri()."galeria/".$categoriesFriendlyUrl[$key].($totalPagesBefore[$key] == 0 ? "" : ($totalPagesBefore[$key] != 1 ? "/".$totalPagesBefore[$key]: ""));
+                            echo "update: $url\n";
+                            changeSitemapUrl($sitemap, $url, $url);
+                        }
+                    }
+                    foreach ($totalPagesDelete as $key => $value) {
+                        if ($value != 0)  {
+                            $url = GetBaseUri()."galeria/".$categoriesFriendlyUrl[$key]."/".($totalPagesBefore[$key]);
+                            echo "delete: $url\n";
+                            deleteSitemapUrl($sitemap, $url);
+                        }
+                    }
+
+                    writeSitemapXML($sitemap);
+
                     echo "Las imágenes se han eliminado correctamente.";
                 }
                 $conn->close();

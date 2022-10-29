@@ -67,7 +67,7 @@
                                     Contacto, ubicación y horario
                                 </a>
                                 <a role="presentation" class="dropdown-item" href="/dashboard?page=about-us">
-                                    <i class="fas fa-address-card"></i>
+                                    <i class="fas fa-industry"></i>
                                     Sobre nosotros
                                 </a>
                                 <div class="dropdown-divider"></div>
@@ -97,7 +97,7 @@
                             </a>
                             <div role="menu" class="dropdown-menu">
                                 <a role="presentation" class="dropdown-item" href="/dashboard?page=metadata-settings">
-                                    <i class="fas fa-align-justify"></i>
+                                    <i class="fas fa-window-maximize"></i>
                                     Título y descripción de las páginas (metadatos)
                                 </a>
                                 <a role="presentation" class="dropdown-item" href="/dashboard?page=text-editor&file=sitemap.xml">
@@ -133,7 +133,7 @@
                         <div role='menu' class='dropdown-menu'>
                         <h6 class="dropdown-header">Galería</h6>
                             <a role='presentation' class='dropdown-item' href='/dashboard?page=gallery-desc'>
-                                <i class='fas fa-cog'></i>
+                                <i class="fas fa-align-left"></i>
                                 Descripción general
                             </a>
                             <a role='presentation' class='dropdown-item' href='/dashboard?page=gallery-new'>
@@ -156,10 +156,11 @@
                             </a>
                         </div>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="../">Volver a inicio</a></li>
+                    <!-- <li class="nav-item"><a class="nav-link" href="../">Volver a inicio</a></li> -->
                 </ul>
                 <div style="display: block;">
-                    <a class="nav-link" href="../scripts/logout.php">Cerrar sesión</a>
+                    <a class="nav-link" href="../"><i class="fas fa-home"></i></a>
+                    <a class="nav-link" href="../scripts/logout.php"><i class="fas fa-power-off"></i></a>
                 <div>
             </div>
         </nav>
@@ -289,7 +290,9 @@
             ],
             callbacks: {
                 onInit: function() {
-                    if (catDesc) $(this).summernote('code', catDesc);
+                    <?php if ($_GET["page"] == "edit-category"):?>
+                        if (catDesc) $(this).summernote('code', catDesc);
+                    <?php endif; ?>
                 },
                 onChange: function() {
                     <?php if ($_GET["page"] == "edit-category"):?>

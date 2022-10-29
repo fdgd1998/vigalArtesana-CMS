@@ -42,18 +42,22 @@ jQuery(function($) {
     $(document).on("click", "#delete-images", function() {
         var filenames = {};
         var directories = {};
+        var categories = {};
         $(document).find(".delete-selected > img").each(function(i) {
             filenames[i] = $(this).attr("id");
             directories[i] = $(this).attr("dir");
+            categories[i] = $(this).attr("category");
         });
         console.log(JSON.stringify(filenames));
         console.log(JSON.stringify(directories));
+        console.log(JSON.stringify(categories));
         $.ajax({
             url: './admin/gallery/delete_images.php',
             method: 'post',
             data: {
                 filenames: JSON.stringify(filenames),
-                directories: JSON.stringify(directories)
+                directories: JSON.stringify(directories),
+                categories: JSON.stringify(categories)
             }, // Data to send.
             success: function(response) { // HTTP response code 200
                 alert(response);

@@ -170,7 +170,7 @@
                 </div>
                 <div class="g-recaptcha brochure__form__captcha" data-callback="recaptchaCallback" data-expired-callback="recaptchaExpired" data-sitekey="6LcpXp0dAAAAAIyqkuLt2hPzrYXE_eJv6adylhP8"></div>
                 <div class="button-group text-right">
-                    <button disabled class="btn my-button" id="submit-message">Enviar</button>
+                    <button disabled style="margin-top: 10px;" class="btn my-button" id="submit-message">Enviar</button>
                 </div>
             </div>
             <div class="col-12 col-sm-2 col-lg-3"></div>

@@ -34,11 +34,11 @@
                 </a>
             </div>
             <?php
-                if ($_SESSION["error"]) {
+                if ($_SESSION["error"] != "") {
                     $message = $_SESSION["error"];
                     include './snippets/error_message.php';
-                    session_unset();
-                    session_destroy();
+                    // session_unset();
+                    // session_destroy();
                 }
             ?>
                 
@@ -50,6 +50,6 @@
     </div>        
     <script src="includes/js/jquery.min.js"></script>
     <script src="includes/bootstrap/js/bootstrap.min.js"></script>
-    <script src="includes/js/bs-init.js"></script>
+    <!-- <script src="includes/js/bs-init.js"></script> -->
 </body>
 </html>

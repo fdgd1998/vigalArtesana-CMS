@@ -60,8 +60,9 @@
   </div>
 
 <div class="container settings-container">
-    <h1 class="title">Título y descripción de las páginas</h1>
-    <p>En esta página se pueden configurar los títulos y descripciones de las páginas del sitio. Selecciona uno de los enlaces para cambiar los metadatos de las páginas.</p>
+    <h1 class="title">Título y descripción de las páginas (metadatos) </h1>
+    <p>En esta página se pueden configurar los títulos y descripciones de las páginas del sitio web. Estos datos se usarán para funciones de SEO.</p>
+    <p>Selecciona uno de los enlaces para cambiar los metadatos de las páginas.</p>
   <div class="input-group mb-6" style="width: 300px; margin-bottom: 20px;">
     <ul style="list-style-type:disc; margin-left: 30px;">
       <?php foreach ($pages as $page): ?>

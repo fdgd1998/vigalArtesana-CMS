@@ -62,7 +62,7 @@
             </div>
         </div>
         <div class="form-row text-right">
-            <div class="col"><button id="submit-index-image" disabled class="btn my-button" type="button"><i class="far fa-save"></i>Guardar</button></div>
+            <div class="col"><button id="submit-index-image" disabled class="btn my-button-3" type="button"><i class=" i-margin fas fa-save"></i>Guardar</button></div>
         </div>
     </form>
     <hr>
@@ -84,7 +84,7 @@
             </div>
         </div>
         <div class="form-row text-right">
-            <div class="col"><button id="submit-index-image-description" class="btn my-button" type="button"><i class="far fa-save"></i>Guardar</button></div>
+            <div class="col"><button id="submit-index-image-description" class="btn my-button-3" type="button"><i class=" i-margin fas fa-save"></i>Guardar</button></div>
         </div>
     </form>
     <hr>
@@ -97,7 +97,7 @@
         </div>
         <div id="index-brief-description"></div>
         <div style="margin-top: 15px;" class="form-row text-right">
-            <div class="col"><button id="submit-index-brief-description" class="btn my-button" type="button"><i class="far fa-save"></i>Guardar</button></div>
+            <div class="col"><button id="submit-index-brief-description" class="btn my-button-3" type="button"><i class=" i-margin fas fa-save"></i>Guardar</button></div>
         </div>
     </form>
 </div>

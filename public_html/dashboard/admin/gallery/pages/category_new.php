@@ -110,7 +110,7 @@
     <div id="cat-desc" class="disabled-form">
     </div> 
     <div class="button-group text-right" style="margin-top: 20px">
-        <button id="cancel-btn" class="btn my-button-2">Cancelar</button>
-        <button disabled id="<?=($_GET["page"] == "edit-category")?"cat-edit":"cat-create"?>" <?=($_GET["page"] == "edit-category")?'catid="'.$categories["id"].'"':''?> class="btn my-button-3"><i style="margin-right: 5px;" class="far fa-<?=($_GET["page"] == "edit-category")?"edit":"save"?>"></i><?=($_GET["page"] == "edit-category")?"Editar":"Crear"?></button>
+        <button id="cancel-btn" class="btn my-button-2"><i class="i-margin fas fa-times-circle"></i>Cancelar</button>
+        <button disabled id="<?=($_GET["page"] == "edit-category")?"cat-edit":"cat-create"?>" <?=($_GET["page"] == "edit-category")?'catid="'.$categories["id"].'"':''?> class="btn my-button-3"><i class="i-margin fas fa-<?=($_GET["page"] == "edit-category")?"edit":"save"?>"></i><?=($_GET["page"] == "edit-category")?"Editar":"Crear"?></button>
     </div>   
 </div>

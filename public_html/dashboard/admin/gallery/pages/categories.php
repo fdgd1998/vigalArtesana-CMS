@@ -52,8 +52,8 @@
             </form>
         </div>
         <div id="modal-footer1" class="modal-footer">
-          <button id="cancel-cat-create" type="button" class="btn my-button-2" data-dismiss="modal">Cancelar</button>
-          <button id="cat-create" type="button" disabled class="btn my-button">Crear</button>
+          <button id="cancel-cat-create" type="button" class="btn my-button-2" data-dismiss="modal"><i class="fas fa-times-circle"></i>Cancelar</button>
+          <button id="cat-create" type="button" disabled class="btn my-button-3"><i class="fas fa-save"></i>Crear</button>
         </div>
       </div>
     </div>
@@ -73,36 +73,17 @@
           <p>¿Estás seguro de que deseas borrar esta categoría? No podrás borrarla si hay imágenes que pertenecen a ella.</p>
         </div>
         <div id="modal-footer1" class="modal-footer">
-          <button id="cancel-cat-delete" type="button" class="btn my-button" data-dismiss="modal">Cancelar</button>
-          <button id="cat-delete" type="button" class="btn my-button-2"><i class="far fa-trash-alt"></i>Borrar</button>
+          <button id="cancel-cat-delete" type="button" class="btn my-button" data-dismiss="modal"><i class="i-margin fas fa-times-circle"></i>Cancelar</button>
+          <button id="cat-delete" type="button" class="btn my-button-2"><i class="i-margin fas fa-trash"></i>Borrar</button>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Enabling/disabling category modal -->
-  <div class="modal fade" id="cat-status-change" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel-statuschange">Editando categoría ...</h5>
-          <button id="close-statuschange-cat" type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div id="modal-body" class="modal-body">
-          <p id="statuschange_modal_info_text"></p>
-        </div>
-        <div id="modal-footer1" class="modal-footer">
-          <button id="cancel-cat-statuschange" type="button" class="btn my-button-2" data-dismiss="modal">Cancelar</button>
-          <button id="cat-statuschange" type="button" class="btn my-button">Aceptar</button>
-        </div>
-      </div>
-    </div>
-  </div>
 <div class="container settings-container">
-    <h1 class="title">Categorías</h1>
-    <button type="button" id="create-cat" class="btn my-button" style="margin-bottom: 15px;"><i class="far fa-plus-square" style="padding-right:5px;"></i>Crear categoría</button>
+<h1 class="title">Categorías</h1>
+<button type="button" id="create-cat" class="btn my-button" style="margin-bottom: 15px;"><i class="far fa-plus-square" style="padding-right:5px;"></i>Crear categoría</button>
 
 <div class="input-group mb-6" style="width: 300px; margin-bottom: 20px;">
       <div class="input-group-prepend">
@@ -111,8 +92,6 @@
       <select id="result-order" class="form-control">
         <option value="asc" <?=isset($order)?($order=='asc'?'selected':''):''?>>Ascendente</option>
         <option value="desc" <?=isset($order)?($order=='desc'?'selected':''):''?>>Descendente</option>
-        <option value="enabled" <?=isset($order)?($order=='enabled'?'selected':''):''?>>Habilitado</option>
-        <option value="disabled" <?=isset($order)?($order=='disabled'?'selected':''):''?>>Deshabilitado</option>
       </select>
     </div>
     <div class="table-responsive">
@@ -120,7 +99,6 @@
             <thead>
                 <tr>
                     <th>Categoría</th>
-                    <th>Estado</th>
                     <th>Opciones</th>
                 </tr>
             </thead>
@@ -140,12 +118,6 @@
                             case 'desc':
                               $sql .= " order by name desc";
                               break;
-                            case 'enabled':
-                              $sql .= " where cat_enabled = 'YES' order by name asc";
-                              break;
-                            case 'disabled':
-                              $sql .= " where cat_enabled = 'NO' order by name asc";
-                              break;
                             default:
                               $sql .= " order by name asc";
                           } 
@@ -158,22 +130,18 @@
                         } else {
                             while ($rows = $res->fetch_assoc()) {
                                 // Showing categories on the page.
-                                $status_arrow_icon = $rows['cat_enabled'] == 'YES' ? 'down':'up' ;
-                                $cat_status = $rows['cat_enabled'] == 'YES' ? 'Deshabilitar':'Habilitar' ;
                                 echo '<tr>';
                                 echo '<td>'.$rows['name'].'</td>';
-                                echo '<td id="catid-'.$rows['id'].'_cat_status">'.$cat_status = $rows['cat_enabled'] == 'YES' ? 'Habilitada':'Deshabilitada'.'</td>';
                                 echo '<td><div>';
                                 if ($_SESSION['userid'] == $rows['uploadedBy']) {
-                                    echo '<button class="btn my-button-3 cat-edit-form" title="Editar categoría" type="button" id="catid-'.$rows['id'].'" name="'.$rows['name'].'">
-                                                <i class="far fa-edit"></i>
-                                            </button>
-                                            <button class="btn my-button-2 cat-delete" title="Borrar categoría" type="button" id="catid-'.$rows['id'].'" name="'.$rows['name'].'">
-                                                <i class="far fa-trash-alt"></i>
-                                            </button>
-                                            <button class="btn btn-dark cat-status-change-form" title="'.$cat_status.' categoría" type="button" id="catid-'.$rows['id'].'" name="'.$rows['name'].'">
-                                                <i id="catid-'.$rows['id'].'-change-status-btn" class="fas fa-arrow-circle-'.$status_arrow_icon.'"></i>
-                                            </button>';
+                                    echo '<a class="btn my-button-3 cat-edit-form" title="Editar categoría" id="catid-'.$rows['id'].'" name="'.$rows['name'].'">
+                                                <i class="i-margin fas fa-edit"></i>
+                                                Editar
+                                            </a>
+                                            <a class="btn my-button-2 cat-delete" title="Borrar categoría" id="catid-'.$rows['id'].'" name="'.$rows['name'].'">
+                                                <i class="i-margin fas fa-trash"></i>
+                                                Borrar
+                                            </a>';
                                 }
                                 echo '</div></td>';
                                 echo '</tr>';

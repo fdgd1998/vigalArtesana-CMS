@@ -127,8 +127,8 @@
         </div>
         <div class="form-row text-right" style="margin-top: 20px;">
             <div class="col">
-                <button id="cancel" class="btn my-button-2" type="button">Cancelar</button>
-                <button id="uploadbtn" disabled class="btn my-button" type="button" style="margin-left: 5px;"><i style="margin-right: 5px;" class="fas fa-upload"></i>Subir imágenes</button>
+                <button id="cancel" class="btn my-button-2" type="button"><i class="i-margin fas fa-times-circle"></i>Cancelar</button>
+                <button id="uploadbtn" disabled class="btn my-button" type="button" style="margin-left: 5px;"><i class="i-margin fas fa-upload"></i>Subir imágenes</button>
             </div>
         </div>
     </form>

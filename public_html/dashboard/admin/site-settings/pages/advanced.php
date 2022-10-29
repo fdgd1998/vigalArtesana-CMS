@@ -36,7 +36,7 @@
     <form style="margin-bottom: 20px;">
         <div class="form-row">
             <div class="col">
-                <h3 class="title"><i class="fas fa-screwdriver"></i>Modo de mantenimiento</h3>
+                <h3 class="title"><i class="i-margin fas fa-toolbox"></i>Modo de mantenimiento</h3>
                 <p class="title-description">Es recomendable activar el modo de mantenimiendo cuando se van a realizar cambios en la estructura o el código de los archivos del sistema de gestión de contenidos.</p>
                 <p> Mientras este modo esté activado, los usuarios no pdrán navegar por el sitio web y verán un aviso inicando que el sitio está en mantenimiento.</p>
                 <p>Mientras este modo esté activo, solo podrás navegar por la web iniciando sesión.</p>
@@ -45,9 +45,9 @@
         <div class="form-row text-right">
             <div class="col">
                 <?php if ($site_settings[0] != "true"): ?>
-                    <button id="maintenance-on" class="btn my-button-3" type="button"><i class="fas fa-arrow-up"></i>Activar</button>
+                    <button id="maintenance-on" class="btn my-button-3" type="button"><i class="i-margin fas fa-arrow-up"></i>Activar</button>
                 <?php else: ?>
-                    <button id="maintenance-off" class="btn my-button-2" type="button"><i class="fas fa-arrow-down"></i>Desactivar</button>
+                    <button id="maintenance-off" class="btn my-button-2" type="button"><i class="i-margin fas fa-arrow-down"></i>Desactivar</button>
                 <?php endif; ?>
             </div>
         </div>

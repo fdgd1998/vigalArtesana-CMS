@@ -69,7 +69,7 @@
   </div>
 
   <div class="button-group">
-    <button <?=$total_services == 10?"disabled":""?> type="button" onclick="window.location.href='?page=new-service'" class="btn my-button" style="margin-bottom: 15px;"><i class="far fa-plus-square"></i>Nuevo servicio</button>
+    <button <?=$total_services == 10?"disabled":""?> type="button" onclick="window.location.href='?page=new-service'" class="btn my-button" style="margin-bottom: 15px;"><i class="i-margin fas fa-plus-circle"></i>Nuevo servicio</button>
   </div>
   <?php if ($total_services != 0): ?>
   <div class="row">

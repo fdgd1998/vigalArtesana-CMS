@@ -122,11 +122,11 @@
                             </a>
                             <div role="menu" class="dropdown-menu">
                                 <a role="presentation" class="dropdown-item" href="/dashboard?page=manage-users">
-                                    <i class="fas fa-user"></i>
+                                    <i class="fas fa-users"></i>
                                     Gestionar usuarios
                                 </a>
                                 <a role="presentation" class="dropdown-item" href="/dashboard?page=new-user">
-                                    <i class="fas fa-plus-circle"></i>
+                                    <i class="fas fa-user-plus"></i>
                                     Nuevo usuario
                                 </a>
                             </div>

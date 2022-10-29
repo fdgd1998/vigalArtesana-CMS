@@ -70,7 +70,7 @@
   <h1 class="title">Galería</h1>
   <p class="title-descirption">Gestiona la galería. Para borrar imágenes, pincha sobre ellas para seleccionarlas.</p>
   <div class="button-group">
-    <button type="button" id="upload-images" class="btn my-button"><i class="fas fa-upload"></i>Subir imágenes...</button>
+    <button type="button" id="upload-images" class="btn my-button"><i class="i-margin fas fa-upload"></i>Subir imágenes...</button>
   </div>
   <div class="input-group" style="margin-bottom: 20px;">
     <div class="input-group-prepend">

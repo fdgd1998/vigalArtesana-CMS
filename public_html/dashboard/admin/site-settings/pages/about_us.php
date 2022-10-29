@@ -32,6 +32,6 @@
     <p class="title-description">Aquí podrás redactar el contenido que aparecerá en la sección <em>"sobre nosotros"</em> del sitio web.</p>
     <div id="summernote"></div>
     <div class="button-group text-right mt-3">
-        <button id="save-about-us" class="btn my-button"><i class="far fa-save"></i>Guardar</button>
+        <button id="save-about-us" class="btn my-button-3"><i class=" i-margin fas fa-save"></i>Guardar</button>
     </div>
 </div>

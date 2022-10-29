@@ -129,6 +129,10 @@
   box-shadow: none !important;
 }
 
+.i-margin {
+  margin-right: 5px !important;
+}
+
 .navbar-brand {
   font-family: 'Great Vibes';
   letter-spacing: 2px; 
@@ -260,8 +264,6 @@ a.instagram:hover {
 .underline-animated:hover:after {
   width: 100% !important;
   background-color: var(--navbar-link-hover-color) !important;
-  /* animation: bounce;
-  animation-duration: .5s; */
 }
 
 .nav-solid {
@@ -705,10 +707,6 @@ h3.title > i {
   margin-bottom: 70px;
 }
 
-.my-button > i, .my-button-2 > i {
-  margin-right: 5px;
-}
-
 .i-no-margin {
   margin: 0 !important;
 }
@@ -736,7 +734,7 @@ p.card-text > span {
 }
 
 h1 > i {
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 #maintenance-warning {

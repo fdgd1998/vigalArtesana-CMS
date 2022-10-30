@@ -6,6 +6,7 @@ Allow: /galeria/*
 Allow: /contacto
 Allow: /sobre-nosotros
 
+Allow: /uploads/*
 Allow: /includes/fonts
 Allow: /includes/bootstrap/css/*.css
 Allow: /includes/bootstrap/js/*.js

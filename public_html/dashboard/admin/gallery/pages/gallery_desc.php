@@ -21,7 +21,6 @@
     <p>Define un texto descriptivo que acompañe a la vista general de la galería.</p>
     <div id="gallery-desc"></div>
     <div style="margin-top: 20px;" class="button-group text-right">
-        <button id="cancel-edit" class="btn my-button-2"><i class="i-margin fas fa-times-circle"></i>Cancelar</button>
         <button disabled id="submit" class="btn my-button-3"><i class="i-margin fas fa-save"></i>Guardar</button>
     </div>
 </div>

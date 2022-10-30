@@ -48,7 +48,7 @@
             <div class="card text-center">
                 <div class="card-body">
                     <img height="30" style="border-radius: 0px !important; margin-bottom: 20px;" src="<?=GetBaseUri()."/dashboard/includes/img/bing-logo.png"?>">
-                    <p class="card-text">Informa de los cambios usando la API de Google Search Console.</p>
+                    <p class="card-text">Informa de los cambios a través de la API de IndexNow.</p>
                     <a href="#" class="btn my-button">Notificar a Bing</a>
                 </div>
             </div>
@@ -57,7 +57,7 @@
             <div class="card text-center">
                 <div class="card-body">
                     <img height="30" style="border-radius: 0px !important; margin-bottom: 20px;" src="<?=GetBaseUri()."/dashboard/includes/img/google-logo.png"?>">
-                    <p class="card-text">Informa de los cambios utilizando la API de IndexNow.</p>
+                    <p class="card-text">Informa de los cambios a través de API de Google Search Console.</p>
                     <a href="#" class="btn my-button">Notificar a Google</a>
                 </div>
             </div>

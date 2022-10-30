@@ -174,6 +174,7 @@
                     </li>
                 </ul>
                 <div style="display: block;">
+                    <a class="nav-link" href="<?=GetBaseUri()?>/dashboard?page=user-profile"><i class="fas fa-user-circle"></i></a>
                     <a class="nav-link" href="<?=GetBaseUri()?>"><i class="fas fa-home"></i></a>
                     <a class="nav-link" href="<?=GetBaseUri()?>/scripts/logout.php"><i class="fas fa-power-off"></i></a>
                 <div>
@@ -186,6 +187,9 @@
                 <?php
                     // reading GET variable and load corresponding page
                     switch(true) {
+                        case ($_GET['page'] == 'user-profile'):
+                            include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/users/pages/user_profile.php';
+                            break;
                         case ($_GET['page'] == 'seo-notify'):
                             include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/site-settings/pages/seo_notify.php';
                             break;

@@ -34,7 +34,12 @@
 
     // Opening database connection.
     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
-    $sql = "select gallery.id, dir, filename, category from gallery inner join categories on gallery.category = categories.id where gallery.uploadedBy = '".$_SESSION['userid']."'";
+    $sql = "";
+    if ($_SESSION["account_type"] == "superuser" || $_SESSION["account_type"] == "administrator" ) {
+      $sql = "select gallery.id, dir, filename, category from gallery inner join categories on gallery.category = categories.id";
+    } else {
+      $sql = "select gallery.id, dir, filename, category from gallery inner join categories on gallery.category = categories.id where gallery.uploadedBy = '".$_SESSION['userid']."'";
+    }
     if (isset($_GET["c"])) {
       $sql.=" and gallery.category = ".$_GET["c"];
     }
@@ -48,7 +53,12 @@
     // Getting all records from database
     $sql = "";
     if (isset($_GET['c'])) {
-      $sql = "select count(gallery.id) as id from gallery inner join categories on gallery.category = categories.id where gallery.uploadedBy = '".$_SESSION['userid']."' and gallery.category = ".$_GET['c'];
+      if ($_SESSION["account_type"] == "superuser" || $_SESSION["account_type"] == "administrator" ) {
+        $sql = "select count(gallery.id) as id from gallery inner join categories on gallery.category = categories.id where and gallery.category = ".$_GET['c'];
+      } else {
+        $sql = "select count(gallery.id) as id from gallery inner join categories on gallery.category = categories.id where gallery.uploadedBy = '".$_SESSION['userid']."' and gallery.category = ".$_GET['c'];
+      }
+      
     } else {
       $sql = "select count(gallery.id) as id from gallery inner join categories on gallery.category = categories.id where gallery.uploadedBy = '".$_SESSION['userid']."'";
     }

@@ -22,18 +22,15 @@ The main purpose of this CMS is to be simple, lightweight and without any unnece
 - Under construction / maintenance website template.
 - Dynamic sitemap.xml generation.
 - User management (*).
+- Password self-recovery via token and email (*).
 - User password complexity requirements.
 - Users and permissions. Explanation can be read in permissions_explanations.txt.
 
-### Future planned features:
-- Blog system.
-
-### Broken features (might be fixed in the future):
-- User management (creation, deletion, edition, profiles, privileges).
-- Account password recovery by unique token sent via email.
-
 NOTE: Features marked with (*) are in the works.
 
-## Setup
+### Planned features:
+- Blog system.
+
+## Admin credentials
 
 Control panel access user is "admin" and password "Admin1234$", without the quotes.

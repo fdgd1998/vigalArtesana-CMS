@@ -44,7 +44,6 @@
                 if ($res = $conn->query("select id from categories where name = '".$_POST['cat_name']."'")) {
                     $rows = $res->fetch_assoc();
                     $cat_name = $rows['id'];
-                    echo "El ID de la categoría de ".$rows["id"];
                     $res->free(); //releasing results from RAM.
                 }
                 $conn->query("insert into pages (page, cat_id) values ('galeria/".GetFriendlyUrl($_POST["cat_name"])."', ".$cat_name.")");

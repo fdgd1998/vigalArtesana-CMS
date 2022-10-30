@@ -225,14 +225,14 @@ $("#update-cat-image").on("change", function(e) {
                 console.log(response);
                 var existentFile = response;
                 if (!existentFile) {
-                    if (cat_file_blob.size < 2097152) {
+                    if (cat_file_blob.size < 5242880) {
                         // var cat_file_blob = $(this).val().substring(12);
                         console.log(cat_file_blob.size);
                         $('#update-cat-image-name').html(cat_file_blob.name);
                         readURL(input, $("#update-cat-image-preview"));
                         $("#update-cat-image-preview-div").prop("hidden", false);  
                     } else {
-                        alert("El tamaño de la foto supera los 2 MB. Selecciona otro fichero.")
+                        alert("El tamaño máximo del fichero son 5 MB. Selecciona otro fichero.");
                         $("#update-cat-image-name").html("Seleccionar imagen...");
                         $("#update-cat-image-preview").prop("src", "../includes/img/placeholder-image.jpg");   
                         $("#update-cat-image").val("");
@@ -245,16 +245,7 @@ $("#update-cat-image").on("change", function(e) {
                 $("#update-cat-image-preview").prop("src", "../includes/img/placeholder-image.jpg"); 
                 $("#update-cat-image").val("");
                 alert("El fichero " + cat_file_blob.name + " ya existe en el servidor. Renómbralo e inténtalo de nuevo.");
-            }
-        // if (!CheckImageSize($(this).prop("files")[0], 2097152)) {
-            
-        //     var fileName = $(this).val().substring(12);
-        //     console.log(fileName);
-        //     $('#cat-image-name').html(fileName);
-        //     readURL(this, $("#cat-image-preview"));
-        //     $("#cat-image-preview-div").prop("hidden", false);  
-        // } else {
-        //     $(this).val('');   
+            } 
         });
     } else {
         $('#cat-edit').attr('disabled', 'disabled');
@@ -284,14 +275,14 @@ $("#new-cat-image").on("change", function(e) {
                 console.log(response);
                 var existentFile = response;
                 if (!existentFile) {
-                    if (cat_file_blob.size < 2097152) {
+                    if (cat_file_blob.size < 5242880) {
                         console.log(cat_file_blob.name);
                         $('#new-cat-image-name').html(cat_file_blob.name);
                         $('#new-cat-image-preview-div').removeAttr("hidden");
                         readURL($("#new-cat-image")[0], $("#new-cat-image-preview"));
                         $("#new-cat-image-preview-div").prop("hidden", false);
                     } else {
-                        alert("El tamaño de la foto supera los 2 MB. Selecciona otro fichero.")
+                        alert("El tamaño máximo del fichero son 5 MB. Selecciona otro fichero.");
                         $("#new-cat-image").html("Seleccionar imagen...");
                         $("#new-cat-image-preview-div").prop("hidden", true);  
                         $("#new-cat-image").val("");

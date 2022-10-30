@@ -26,7 +26,7 @@
                 $conn->begin_transaction();
                 $stmt = "select count(id) as id from gallery where category = ".$_POST["cat_id"];
                 if ($conn->query($stmt)->fetch_assoc()["id"]> 0) {
-                    throw new Exception("Existen posts pertenecientes a esta categoría. La categoría no se puede eliminar. Para borrarla, comprueba que no existen posts de dicha categoría e inténtalo de nuevo.");
+                    throw new Exception("Existen imágenes pertenecientes a esta categoría. La categoría no se puede eliminar. Para borrarla, comprueba que no existen imágenes de dicha categoría e inténtalo de nuevo.");
                 }
 
                 // getting filename and deleting it

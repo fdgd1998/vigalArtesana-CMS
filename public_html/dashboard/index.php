@@ -192,6 +192,9 @@
                         case ($_GET['page'] == 'user-profile'):
                             include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/users/pages/user_profile.php';
                             break;
+                        case ($_GET['page'] == 'manage-users'):
+                            include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/users/pages/manage_users.php';
+                            break;
                         case ($_GET['page'] == 'seo-notify'):
                             include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/site-settings/pages/seo_notify.php';
                             break;

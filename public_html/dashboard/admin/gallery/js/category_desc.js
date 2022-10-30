@@ -1,6 +1,3 @@
-$("#cancel-edit").on("click", function() {
-    window.location = location.origin + "/dashboard?page=gallery-desc"
-})
 
 function enableEditBtn(code) {
     if (code != "") $("#submit").removeAttr("disabled");

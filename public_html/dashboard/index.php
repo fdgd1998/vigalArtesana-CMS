@@ -5,6 +5,7 @@
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
 
     $maintenance = "";
+    $seoModified = "";
     $metadata = array();
     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
     $conn->set_charset("utf8");
@@ -17,6 +18,12 @@
         
         if ($res = $conn->query($sql)) {
             $maintenance = $res->fetch_assoc()["value_info"];
+        }
+
+        $sql = "select value_info from company_info where key_info = 'seo_modified'";
+        
+        if ($res = $conn->query($sql)) {
+            $seoModified = $res->fetch_assoc()["value_info"];
         }
     }
 ?>
@@ -38,13 +45,16 @@
 </head>
 
 <body class="d-flex">
-    <?php if ($maintenance == "true") {
+    <?php 
+    if ($maintenance == "true") {
         include $_SERVER["DOCUMENT_ROOT"]."/snippets/maintenance_message.php";
+    }
+    if ($seoModified == "true") {
+        include $_SERVER["DOCUMENT_ROOT"]."/snippets/seo_message.php";
     }
     ?>
     <nav class="nav-solid navbar navbar-expand-lg navigation-clean">
         <div class="container">
-
             <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1" style="color: white; border: 1px solid grey">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="navbar-toggler-icon" style="background-image: url('<?=GetBaseUri()?>/includes/img/icons8-menu.svg');"></span>
@@ -96,7 +106,7 @@
                                 SEO
                             </a>
                             <div role="menu" class="dropdown-menu">
-                                <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=metadata-settings">
+                                <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=seo-notify">
                                     <i class="fab fa-searchengin"></i>
                                     Notificar cambios a motores de búsqueda
                                 </a>
@@ -176,6 +186,9 @@
                 <?php
                     // reading GET variable and load corresponding page
                     switch(true) {
+                        case ($_GET['page'] == 'seo-notify'):
+                            include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/site-settings/pages/seo_notify.php';
+                            break;
                         case ($_GET['page'] == 'text-editor' && isset($_GET["file"])):
                             include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/site-settings/pages/text_editor.php';
                             break;

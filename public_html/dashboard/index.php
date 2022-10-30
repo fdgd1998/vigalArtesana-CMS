@@ -439,6 +439,10 @@
     <?php if (isset($_GET["page"]) && ($_GET["page"] == "metadata-settings") || $_GET["page"] == "new-service" || preg_match('^edit-service&id=(\d{1,2})$^', isset($_GET["id"])?$_GET["page"]."&id=".$_GET["id"]:$_GET["page"])): ?>
     <script src="<?=GetBaseUri()?>/dashboard/admin/site-settings/js/pages-metadata.js"></script>
     <?php endif; ?>
+
+    <?php if (isset($_GET["page"]) && ($_GET["page"] == "user-profile")): ?>
+    <script src="<?=GetBaseUri()?>/dashboard/admin/users/js/user_profile.js"></script>
+    <?php endif; ?>
     
     <?php if(isset($_GET["page"]) && $_GET["page"] == "about-us"): ?>
     <script src="<?=GetBaseUri()?>/includes/summernote/summernote-bs4.min.js"></script>

@@ -10,15 +10,7 @@ ErrorDocument 500 /errorpages/500.php
 ErrorDocument 503 /errorpages/503.php
 
 RewriteEngine on
-# Prevenir hotlinking
-# RewriteCond %{HTTP_REFERER} !^$
-# RewriteCond %{HTTP_REFERER} !^http://(.+\.)?localhost\.com/ [NC]
-RewriteCond %{HTTP_REFERER} !^http://(.+\.)?localhost/ [NC]
-RewriteRule .*\.(js|css)$ - [F]
-
-# Activar HTTPS
-#RewriteCond %{Server_Port} !=443
-#RewriteRule ^(.*)$ https://vigalartesana.es/$1 [R=301,L]
+RewriteRule .*\.(js)$ - [F]
 
 #URLs amigables
 RewriteRule ^contacto$ contacto.php
@@ -28,7 +20,6 @@ RewriteRule ^galeria/([^/]+)/([1-9]+)/?$ galeria.php?category=$1&page=$2 [L,QSA]
 RewriteRule ^galeria$ galeria.php
 RewriteRule ^politica-privacidad$ privacidad.php
 RewriteRule ^aviso-legal$ legal.php
-RewriteRule ^mantenimiento$ mantenimiento.php
 RewriteRule ^login$ login.php
 
 RewriteRule ^404$ errorpages/404.php

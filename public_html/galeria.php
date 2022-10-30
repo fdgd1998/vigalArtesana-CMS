@@ -47,7 +47,6 @@
             } else {
                 $sql = "select id from categories where friendly_url = '".$_GET['category']."'";
                 if ($conn->query($sql)->num_rows == 0) {
-                    $conn->close();
                     header("Location: /404");
                     exit();
                 } else {
@@ -104,7 +103,6 @@
             $conn->close();
         }
     } else {
-        $conn->close();
         require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/set_503_header.php";
         set_503_header();
     }

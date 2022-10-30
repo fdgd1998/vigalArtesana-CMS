@@ -1,7 +1,9 @@
 <div class="container maintenance text-center">
     <div class="">
+        
+        <img height="200" src="<?=GetBaseUri()?>/includes/img/maintenance.svg">
         <h1 class="maintenance-title "><?=$GLOBALS["site_settings"][2]?></h1><br>
-        <p>En estos momentos estamos realizando el mantenimiento del sitio web. Volveremos en la mayor brevedad posible.</p>
+        <p>En estos momentos estamos realizando cambios en sitio web. Volveremos en la mayor brevedad posible.</p>
         <p>Mientras tanto, puedes visitar nuestros perfiles en redes sociales.</p>
         <div style="margin-top: 30px;">
             <?php if (isset($GLOBALS["site_settings"][4]["whatsapp"])):?>
@@ -21,5 +23,5 @@
         </div>
     </div>
     <hr>
-    <p style="margin-top: 30px;">Si eres el propietario del sitio web, puedes iniciar sesión haciendo clic <u><a href="<?=(isset($_SERVER["HTTPS"])?"https://":"http://").$_SERVER["SERVER_NAME"]?>/login">aquí.</a></u></p>
+    <p style="margin-top: 30px;">Si eres el propietario del sitio web, puedes iniciar sesión haciendo clic <u><a href="<?=GetBaseUri()?>/login">aquí.</a></u></p>
 </div>

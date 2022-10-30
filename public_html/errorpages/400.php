@@ -1,5 +1,6 @@
 <?php
-    require_once "../scripts/set_error_header.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/set_error_header.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
     set_400_header();
 ?>
 <!DOCTYPE html>
@@ -8,10 +9,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>400 - ViGal Artesana</title>ç
-    <link rel="icon" href="../../includes/img/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../../includes/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../includes/css/styles.css">
-    <link rel="stylesheet" href="../../includes/fonts/fontawesome-all.min.css">
+    <link rel="icon" href="<?=GetBaseUri()?>/includes/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/styles.css">
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand" />    
     <link href='https://fonts.googleapis.com/css?family=Great Vibes' rel='stylesheet'>
 </head>

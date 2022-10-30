@@ -1,1 +1,0 @@
-[02-Nov-2021 21:23:23 UTC] PHP Notice:  session_start(): A session had already been started - ignoring in /home/u475745233/domains/vigalartesana.es/public_html/scripts/get_company_info.php on line 17

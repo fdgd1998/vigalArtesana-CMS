@@ -737,7 +737,7 @@ h1 > i {
   margin-right: 5px;
 }
 
-#maintenance-warning {
+.warning-message {
   font-weight: bold;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -747,6 +747,20 @@ h1 > i {
   color: #856404;
 }
 
-#maintenance-warning i {
+.warning-message i {
+  margin-right: 5px;
+}
+
+.seo-warning {
+  font-weight: bold;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+  font-size: 16px;
+  background-color: #D4EDD4;
+  color: #155724;
+}
+
+.seo-warning i {
   margin-right: 5px;
 }

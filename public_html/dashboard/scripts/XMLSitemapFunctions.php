@@ -1,4 +1,22 @@
 <?php
+    function showSeoMessage() {
+        require dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
+        $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
+        
+        try {
+            if ($conn->connect_error) {
+                echo "No se ha podido conectar a la base de datos.";
+                exit();
+            } else {
+                $sql = "update company_info set value_info='true' where key_info='seo_modified'";
+                $conn->query($sql);
+            }
+            $conn->close();
+        } catch (Exception $e) {
+            $conn->rollback();
+            echo $e;
+        }
+    }
 
     function readSitemapXML() {
         //read entire file into string
@@ -42,9 +60,12 @@
         
         //save xml file
         $file_name = $_SERVER["DOCUMENT_ROOT"]."/sitemap.xml";
-        if ($xmlDoc->save($file_name))
+
+        if ($xmlDoc->save($file_name)) {
+            showSeoMessage();
             return true;
-        
+        }
+            
         //return xml file name
         return false;
     }

@@ -33,7 +33,7 @@
             exit();
         } else {
             if(!isset($_GET['category'])) {
-                $sql = "select * from categories where cat_enabled='YES'";
+                $sql = "select * from categories";
                 $res = $conn->query($sql);
                 while ($rows = $res->fetch_assoc()) {
                     array_push($categories, array($rows['friendly_url'], $rows['name'], $rows['image'], $rows['description']));

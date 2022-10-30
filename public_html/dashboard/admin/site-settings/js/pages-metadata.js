@@ -7,7 +7,6 @@ $("li > a[class=metadata-edit]").on("click", function() {
         method: 'post', // method
         data: {id: page_id}, // pass the input value to server
         success: function(response) { // if the http response code is 200
-            alert(response);
             var metadata = JSON.parse(response);
             $('#page-title').val(metadata[0]);
             $('#page-desc').val(metadata[1]);

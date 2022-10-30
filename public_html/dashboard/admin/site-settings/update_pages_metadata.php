@@ -29,7 +29,6 @@
                         }
                     }
                     $sitemap = readSitemapXML();
-                    echo $_POST['id'].": ".$pageName;
                     changeSitemapUrl($sitemap, GetBaseUri()."/$pageName", GetBaseUri()."/$pageName");
                     writeSitemapXML($sitemap);
                     echo "Los datos se han modificado correctamente.";

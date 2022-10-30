@@ -10,7 +10,7 @@ ErrorDocument 500 /errorpages/500.php
 ErrorDocument 503 /errorpages/503.php
 
 RewriteEngine on
-RewriteRule .*\.(js)$ - [F]
+# RewriteRule .*\.(js)$ - [F]
 
 #URLs amigables
 RewriteRule ^contacto$ contacto.php

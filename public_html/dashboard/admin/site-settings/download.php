@@ -3,7 +3,7 @@
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
 
-    if (!HasPermission("manage_companySettings")) {
+    if (!HasPermission("manage_seoSettings")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
         exit();
     }

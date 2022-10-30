@@ -6,7 +6,7 @@
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/get_uri.php';
     require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/XMLSitemapFunctions.php";
     
-    if (!HasPermission("manage_companySettings")) {
+    if (!HasPermission("manage_seoSettings")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
         exit();
     }

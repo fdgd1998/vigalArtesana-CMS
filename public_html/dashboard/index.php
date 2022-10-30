@@ -90,7 +90,7 @@
                                     <i class="fas fa-plus-circle"></i>
                                     Nuevo servicio
                                 </a>
-                                <?php if ($_SESSION['account_type'] == 'superuser'): ?>
+                                <?php if ($_SESSION['account_type'] == 'superuser' || $_SESSION['account_type'] == 'administrator'): ?>
                                 <div class="dropdown-divider"></div>
                                 <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=advanced">
                                     <i class="fas fa-code"></i>
@@ -100,7 +100,7 @@
                             </div>
                         </li>
                     <?php endif; ?>
-                     <?php if ($_SESSION['account_type'] == 'superuser'): ?>
+                    <?php if ($_SESSION['account_type'] == 'superuser' || $_SESSION['account_type'] == 'administrator'): ?>
                         <li class="nav-item dropdown">
                             <a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">
                                 SEO
@@ -126,6 +126,7 @@
                                 </a>
                             </div>
                         </li>
+                        <?php if ($_SESSION['account_type'] == 'superuser'): ?>
                         <li class="nav-item dropdown">
                             <a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">
                                 Usuarios
@@ -141,6 +142,7 @@
                                 </a>
                             </div>
                         </li>
+                        <?php endif; ?>
                     <?php endif; ?>
                     <li class='nav-item dropdown'>
                         <a data-toggle='dropdown' class='dropdown-toggle nav-link' href='#'>

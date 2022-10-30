@@ -8,23 +8,25 @@ The main purpose of this CMS is to be simple, lightweight and without any unnece
 - Programming languages: JS, PHP and SQL.
 - Markup languages: HTML.
 - Styles languages: CSS.
-- Frameworks: Bootstrap, jQuery.
+- Frameworks: Bootstrap, jQuery, Font Awesome.
 - Web development techniques: AJAX.
 
 ### Features:
 - Fully featured site control panel.
 - Encryption of sensible data stored in the database.
-- Completa gallery system, organized by categories.
+- Complete gallery system, organized by categories.
 - In-site contact form.
+- User profile page.
 - Search Engine Optimization options.
 - Loing attempts limit.
 - Under construction / maintenance website template.
 - Dynamic sitemap.xml generation.
+- User management (*).
+- User password complexity requirements.
 - Users and permissions. Explanation can be read in permissions_explanations.txt.
 
 ### Future planned features:
 - Blog system.
-- User management.
 
 ### Broken features (might be fixed in the future):
 - User management (creation, deletion, edition, profiles, privileges).
@@ -34,4 +36,4 @@ NOTE: Features marked with (*) are in the works.
 
 ## Setup
 
-Control panel access user is "admin" and password "admin", without the quotes.
+Control panel access user is "admin" and password "Admin1234$", without the quotes.

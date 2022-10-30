@@ -51,7 +51,7 @@
     <?php if ($_GET["page"] == "edit-category"): ?>
     <h1 class="title">Editando categoría "<?=$categories["name"]?>"</h1>
     <?php else: ?>
-    <h1 class="title">Crear categoría</h1>
+    <h1 class="title">Nueva categoría</h1>
     <?php endif; ?>
     <?php if ($_GET["page"] == "edit-category"): ?>
     <div class="custom-control custom-checkbox">

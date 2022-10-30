@@ -15,9 +15,11 @@
       print("No se ha podido conectar a la base de datos");
       exit();
     } else {
-        // Fetching categories from databases and sorting them.
-        $sql = "select users.id, username, email, role from users inner join user_roles on users.account_type = user_roles.id";
-
+        if ($_SESSION["account_type"] != "superuser") {
+            $sql = "select users.id, username, email, role from users inner join user_roles on users.account_type = user_roles.id where role != 'superuser'";
+        } else {
+            $sql = "select users.id, username, email, role from users inner join user_roles on users.account_type = user_roles.id";
+        }
         if ($res = $conn->query($sql)) {
           while ($rows = $res->fetch_assoc()) {
             array_push($users, array (
@@ -72,22 +74,25 @@
                 <?php
                 foreach ($users as $item) {
                     // Showing categories on the page.
-                    echo '<tr>';
-                    echo '<td>'.$item['username'].'</td>';
-                    echo '<td>'.$item['email'].'</td>';
-                    echo '<td>'.$item['account_type'].'</td>';
-                    echo '<td><div>';
-                    echo '<a class="btn my-button user-edit" userid="'.$item['id'].'">
-                              <i class="i-margin fas fa-user-cog"></i>
-                              Editar
-                          </a>
-                          <a class="btn my-button-2 user-delete" userid="'.$item['id'].'">
-                                <i class="i-margin fas fa-user-times"></i>
-                                Borrar
-                          </a>';
-                    }
-                    echo '</div></td>';
-                    echo '</tr>';    
+                    if ($_SESSION["userid"] != $item["id"]) {
+                        echo '<tr>';
+                        echo '<td>'.$item['username'].'</td>';
+                        echo '<td>'.$item['email'].'</td>';
+                        echo '<td>'.$item['account_type'].'</td>';
+                        echo '<td><div>';
+                        echo '<a class="btn my-button user-edit" userid="'.$item['id'].'">
+                                <i class="i-margin fas fa-user-cog"></i>
+                                Editar
+                            </a>
+                            <a class="btn my-button-2 user-delete" userid="'.$item['id'].'">
+                                    <i class="i-margin fas fa-user-times"></i>
+                                    Borrar
+                            </a>';
+                        echo '</div></td>';
+                        echo '</tr>';
+                        }
+                          
+                    }  
                 ?>
             </tbody>
         </table>

@@ -8,8 +8,6 @@
         exit();
     }
 
-    if (isset($_GET['order'])) $order = $_GET['order']; // getting order if GET variable is set.
-
     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
     $categories = array();
 
@@ -24,22 +22,7 @@
         } else {
           $sql = "select * from categories where uplodadedBy = ".$_SESSION["userid"];
         }
-        
-        if (isset($_GET['order'])) {
-          switch($_GET['order']) {
-            case 'asc':
-              $sql .= " order by name asc";
-              break;
-            case 'desc':
-              $sql .= " order by name desc";
-              break;
-            default:
-              $sql .= " order by name asc";
-          } 
-        } else {
-          $sql .= " order by name asc";
-        }
-        ;
+
         if ($res = $conn->query($sql)) {
           while ($rows = $res->fetch_assoc()) {
             array_push($categories, array ("id" => $rows["id"], "name" => $rows["name"]));
@@ -74,18 +57,8 @@
 </div>
 
 <div class="container settings-container">
-<h1 class="title">Categorías</h1>
-<button type="button" id="create-cat" class="btn my-button" style="margin-bottom: 15px;"><i class="far fa-plus-square" style="padding-right:5px;"></i>Crear categoría</button>
-
-<div class="input-group mb-6" style="width: 300px; margin-bottom: 20px;">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon1">Ordenar</span>
-      </div>
-      <select id="result-order" class="form-control">
-        <option value="asc" <?=isset($order)?($order=='asc'?'selected':''):''?>>Ascendente</option>
-        <option value="desc" <?=isset($order)?($order=='desc'?'selected':''):''?>>Descendente</option>
-      </select>
-    </div>
+    <h1 class="title">Categorías</h1>
+    <button type="button" id="create-cat" class="btn my-button" style="margin-bottom: 15px;"><i class="i-margin fas fa-plus-circle"></i>Nueva categoría</button>
     <div class="table-responsive">
         <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>

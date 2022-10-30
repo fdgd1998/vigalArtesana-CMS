@@ -17,7 +17,7 @@ $('#cat-delete').on('click', function(e) {
         success: function(response) { // if the http response code is 200
             $('.modal-backdrop').remove();
             alert(response);
-            window.location = location.origin+"/dashboard/?page=categories&order=asc";
+            window.location = location.origin+"/dashboard/?page=categories";
         },
         error: function(response) { // if the http response code is other than 200
             alert(response);
@@ -79,12 +79,5 @@ $('#cancel-cat-create, #close-cat-create').on('click', function(e) {
 $('#result-order').on('change', function(e) {
     value = $(this).children("option:selected").val();
     console.log(value);
-    switch(value) {
-        case "asc":
-            window.location = "?page=categories&order=asc";
-            break;
-        case "desc":
-            window.location = "?page=categories&order=desc";
-            break;
-    }
+    window.location = "?page=categories";
 });

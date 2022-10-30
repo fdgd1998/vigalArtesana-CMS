@@ -12,6 +12,9 @@ ErrorDocument 503 /errorpages/503.php
 RewriteEngine on
 # Prevenir hotlinking
 # RewriteCond %{HTTP_REFERER} !^$
+# RewriteCond %{HTTP_REFERER} !^http://(.+\.)?localhost\.com/ [NC]
+RewriteCond %{HTTP_REFERER} !^http://(.+\.)?localhost/ [NC]
+RewriteRule .*\.(js|css)$ - [F]
 
 # Activar HTTPS
 #RewriteCond %{Server_Port} !=443

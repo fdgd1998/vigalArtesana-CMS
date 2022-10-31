@@ -58,7 +58,7 @@
 
 <div class="container settings-container">
     <h1 class="title">Usuarios</h1>
-    <button type="button" id="create-cat" class="btn my-button" style="margin-bottom: 15px;"><i class="i-margin fas fa-user-plus"></i>Crear usuario</button>
+    <button type="button" id="create-user" class="btn my-button" style="margin-bottom: 15px;"><i class="i-margin fas fa-user-plus"></i>Crear usuario</button>
 
     <div class="table-responsive">
         <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">

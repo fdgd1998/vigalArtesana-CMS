@@ -188,59 +188,62 @@
             <div>
                 <?php
                     // reading GET variable and load corresponding page
-                    switch(true) {
-                        case ($_GET['page'] == 'user-profile'):
+                    switch($_GET['page']) {
+                        case 'new-user':
+                            include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/users/pages/new_user.php';
+                            break;
+                        case 'user-profile':
                             include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/users/pages/user_profile.php';
                             break;
-                        case ($_GET['page'] == 'manage-users'):
+                        case 'manage-users':
                             include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/users/pages/manage_users.php';
                             break;
-                        case ($_GET['page'] == 'seo-notify'):
+                        case 'seo-notify':
                             include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/site-settings/pages/seo_notify.php';
                             break;
-                        case ($_GET['page'] == 'text-editor' && isset($_GET["file"])):
+                        case 'text-editor':
                             include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/site-settings/pages/text_editor.php';
                             break;
-                        case $_GET['page'] == 'new-category':
+                        case 'new-category':
                             include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/gallery/pages/category_new.php';
                             break;
-                        case $_GET['page'] == 'gallery-desc':
+                        case 'gallery-desc':
                             include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/gallery/pages/gallery_desc.php';
                             break;
-                        case ($_GET['page'] == 'edit-category' && isset($_GET['id'])):
+                        case 'edit-category':
                             include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/gallery/pages/category_new.php';
                             break;
-                        case $_GET['page'] == 'manage-gallery':
+                        case 'manage-gallery':
                             include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/gallery/pages/manage_gallery.php';
                             break;
-                        case $_GET['page'] == 'metadata-settings':
+                        case 'metadata-settings':
                             include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/site-settings/pages/pages_metadata.php';
                             break;
-                        case $_GET['page'] == 'gallery-new':
+                        case 'gallery-new':
                             include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/gallery/pages/gallery_new.php';
                             break;
-                        case $_GET['page'] == 'categories':
+                        case 'categories':
                             include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/gallery/pages/categories.php';
                             break;
-                        case $_GET['page'] == 'general-settings':
+                        case 'general-settings':
                             include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/site-settings/pages/general.php';
                             break;
-                        case $_GET['page'] == 'contact-settings':
+                        case 'contact-settings':
                             include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/site-settings/pages/contact.php';
                             break;
-                        case $_GET['page'] == 'manage-services':
+                        case 'manage-services':
                             include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/site-settings/pages/services.php';
                             break;
-                        case $_GET['page'] == 'new-service':
+                        case 'new-service':
                             include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/site-settings/pages/new_service.php';
                             break;
-                        case $_GET['page'] == 'about-us':
+                        case 'about-us':
                             include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/site-settings/pages/about_us.php';
                             break;
-                        case $_GET['page'] == 'advanced':
+                        case 'advanced':
                             include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/site-settings/pages/advanced.php';
                             break;
-                        case ($_GET['page'] == 'edit-service' && isset($_GET['id'])):
+                        case 'edit-service':
                             include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/site-settings/pages/edit_service.php';
                             break;
                         default:
@@ -447,6 +450,14 @@
 
     <?php if (isset($_GET["page"]) && ($_GET["page"] == "user-profile")): ?>
     <script src="<?=GetBaseUri()?>/dashboard/admin/users/js/user_profile.js"></script>
+    <?php endif; ?>
+
+    <?php if (isset($_GET["page"]) && ($_GET["page"] == "new-user")): ?>
+    <script src="<?=GetBaseUri()?>/dashboard/admin/users/js/user_new.js"></script>
+    <?php endif; ?>
+
+    <?php if (isset($_GET["page"]) && ($_GET["page"] == "manage-users")): ?>
+    <script src="<?=GetBaseUri()?>/dashboard/admin/users/js/manage_users.js"></script>
     <?php endif; ?>
     
     <?php if(isset($_GET["page"]) && $_GET["page"] == "about-us"): ?>

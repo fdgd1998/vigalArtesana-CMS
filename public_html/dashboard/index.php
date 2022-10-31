@@ -456,14 +456,17 @@
 
     <?php if (isset($_GET["page"]) && ($_GET["page"] == "user-profile")): ?>
     <script src="<?=GetBaseUri()?>/dashboard/admin/users/js/user_profile.js"></script>
+    <script src="<?=GetBaseUri()?>/includes/js/validations.js"></script>
     <?php endif; ?>
 
     <?php if (isset($_GET["page"]) && ($_GET["page"] == "new-user")): ?>
     <script src="<?=GetBaseUri()?>/dashboard/admin/users/js/user_new.js"></script>
+    <script src="<?=GetBaseUri()?>/includes/js/validations.js"></script>
     <?php endif; ?>
 
     <?php if (isset($_GET["page"]) && ($_GET["page"] == "manage-users")): ?>
     <script src="<?=GetBaseUri()?>/dashboard/admin/users/js/manage_users.js"></script>
+    <script src="<?=GetBaseUri()?>/includes/js/validations.js"></script>
     <?php endif; ?>
     
     <?php if(isset($_GET["page"]) && $_GET["page"] == "about-us"): ?>

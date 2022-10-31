@@ -1,12 +1,6 @@
 
 var passValid = false;
 var currentPass = false;
-function passwordComplexity(password) {
-    var requirements = /^(?=(.*[a-z]){1,})(?=(.*[A-Z]){1,})(?=(.*[0-9]){1,})(?=(.*[!@#$%^&*()\-__+.]){1,}).{8,}$/;
-    var meetRequirements = requirements.test(password);
-    if (meetRequirements) return true;
-    else return false;
-}
 
 function enableChangePasswdBtn() {
     if (passValid && currentPass) $("#change-password").removeAttr("disabled");
@@ -44,8 +38,15 @@ $("#new-password-1, #new-password-2").on("keyup", function() {
 })
 
 $("#current-password").on("keyup", function() {
-    if ($(this).val().length > 0) currentPass = true;
-    else currentPass = false;
+    if ($(this).val().length > 0) {
+        currentPass = true;
+        $(this).addClass("is-valid");
+        $(this).removeClass("is-invalid");
+    } else {
+        currentPass = false;
+        $(this).addClass("is-invalid");
+        $(this).removeClass("is-valid");
+    }
     enableChangePasswdBtn();
 })
 

@@ -131,9 +131,10 @@
                         <li>Dígitos del <strong>0 al 9</strong></li>
                         <li>Caracteres especiales (<strong>!, @, #, $, %, ^, &, (, ), \, -, _, +, .</strong>).</li>
                     </ul>
-                    <div class="form-group"><input type="password" class="form-control form-control-sm" name="pass1" placeholder="Nueva contraseña" /></div>
-                    <div class="form-group"><input class="form-control form-control-sm" type="password" name="pass2" placeholder="Confirma nueva contraseña"></div>
-                    <div class="form-group"><button class="btn my-button btn-block" type="submit">Restablecer</button></div>
+                    <div class="form-group"><input class="form-control form-control-sm" id="pass1" type="password" name="pass1" placeholder="Nueva contraseña" /></div>
+                    <div class="form-group"><input class="form-control form-control-sm" id="pass2" type="password" name="pass2" placeholder="Confirma nueva contraseña"></div>
+                    <div class="form-group"><p style="color: red; font-size: 14px;" id="pass-feedback"></p></div>
+                    <div class="form-group"><input class="btn my-button btn-block" id="change-password" disabled type="submit" value="Cambiar contraseña"></div>
                     <?php else: ?>
                     <p style="text-align: center"><strong>Restablecer contraseña</strong></p>
                     <p style="text-align: center; font-size: 14px;">El token proporcionado no es válido o ha caducado.</p>
@@ -145,5 +146,7 @@
     </div>        
     <script src="<?=GetBaseUri()?>/includes/js/jquery.min.js"></script>
     <script src="<?=GetBaseUri()?>/includes/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?=GetBaseUri()?>/includes/js/validations.js"></script>
+    <script src="<?=GetBaseUri()?>/includes/js/reset-password.js"></script>
 </body>
 </html>

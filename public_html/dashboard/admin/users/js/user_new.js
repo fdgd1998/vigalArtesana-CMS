@@ -2,14 +2,6 @@
 var passValid = false;
 var userValid = false;
 var emailValid = false;
-var email_regex = /[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}/;
-
-function passwordComplexity(password) {
-    var requirements = /^(?=(.*[a-z]){1,})(?=(.*[A-Z]){1,})(?=(.*[0-9]){1,})(?=(.*[!@#$%^&*()\-__+.]){1,}).{8,}$/;
-    var meetRequirements = requirements.test(password);
-    if (meetRequirements) return true;
-    else return false;
-}
 
 function enableCreateUserBtn() {
     if (passValid && userValid && emailValid) $("#create-user").removeAttr("disabled");
@@ -102,7 +94,7 @@ $('#username').on('keyup', function(e) {
 
 $('#email').on('keyup', function(e) {
     if ($.trim($('#email').val()) != "") {
-        if (email_regex.test($.trim($(this).val()))) {
+        if (emailFormatValid($.trim($(this).val()))) {
             // perform an ajax call
             $.ajax({
                 url: location.origin + '/dashboard/admin/users/check_email.php', // this is the target

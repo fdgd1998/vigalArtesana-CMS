@@ -1,9 +1,9 @@
 <?php
     session_start();
-    require_once "./scripts/get_company_info.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_company_info.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
 
-    if ($GLOBALS["site_settings"][11] == "true" || ($GLOBALS["site_settings"][11] == "false" && !isset($_SESSION["loggedin"]))) { 
+    if ($GLOBALS["site_settings"][11] == "true" || ($GLOBALS["site_settings"][11] == "true" && !isset($_SESSION["loggedin"]))) { 
         require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/set_503_header.php";
         set_503_header();
     }
@@ -112,7 +112,6 @@
         ?>
     </div>
     <script src="<?=GetBaseUri()?>/includes/js/jquery.min.js"></script>
-    <script src="<?=GetBaseUri()?>/includes/js/header.js"></script>
     <script src="<?=GetBaseUri()?>/includes/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

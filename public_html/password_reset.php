@@ -12,11 +12,6 @@
         exit();
     }
 
-    if ($GLOBALS["site_settings"][11] == "true" || ($GLOBALS["site_settings"][11] == "true" && !isset($_SESSION["loggedin"]))) { 
-        require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/set_503_header.php";
-        set_503_header();
-    }
-
     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
 
     $emailValid = false;

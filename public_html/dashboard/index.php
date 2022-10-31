@@ -4,6 +4,11 @@
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
 
+    if (!HasPermission("standard_user")) {
+        include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
+        exit();
+    }
+
     $maintenance = "";
     $seoModified = "";
     $metadata = array();

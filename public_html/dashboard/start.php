@@ -1,5 +1,10 @@
 <?php
+    session_start();
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
+    if (!HasPermission("standard_user")) {
+        include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
+        exit();
+    }
 ?>
 <div class="container">
     <h1 class="text-center" style="margin-top: 10%;">¡Hola <?=$_SESSION['user']?>!</h1>

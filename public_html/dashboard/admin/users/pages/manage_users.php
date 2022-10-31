@@ -35,21 +35,44 @@
 ?>
 
 <!-- Delete category modal -->
-<div class="modal fade" id="delete-cat" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade" id="delete-user" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel-delete" >Editando categoría ...</h5>
+          <h5 class="modal-title" id="staticBackdropLabel-delete" >Borrando usuario</h5>
           <button id="close-edit-cat" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div id="modal-body" class="modal-body">
-          <p>¿Estás seguro de que deseas borrar esta categoría? No podrás borrarla si hay imágenes que pertenecen a ella.</p>
+          <p>¿Estás seguro de que deseas eliminar este usuario? El contenido que haya creado permanecerá en el sitio web.</p>
         </div>
         <div id="modal-footer1" class="modal-footer">
-          <button id="cancel-cat-delete" type="button" class="btn my-button" data-dismiss="modal"><i class="i-margin fas fa-times-circle"></i>Cancelar</button>
-          <button id="cat-delete" type="button" class="btn my-button-2"><i class="i-margin fas fa-trash"></i>Borrar</button>
+          <button id="cancel-user-delete" type="button" class="btn my-button" data-dismiss="modal"><i class="i-margin fas fa-times-circle"></i>Cancelar</button>
+          <button id="user-delete" type="button" class="btn my-button-2"><i class="i-margin fas fa-user-times"></i>Borrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete category modal -->
+<div class="modal fade" id="reset-user" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel-reset" >Restableciendo contraseña de</h5>
+          <button id="close-edit-cat" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div id="modal-body" class="modal-body">
+          <p>¿Estás seguro de que deseas restablecer la contraseña de este usuario?</p>
+          <p>La solicitud será válida durante 24h, pasado este tiempo, tendrás que enviar otra solicitud de restablecimiento de contraseña.</p>
+        </div>
+        <div id="modal-footer1" class="modal-footer">
+          <button id="cancel-user-reset" type="button" class="btn my-button-2" data-dismiss="modal"><i class="i-margin fas fa-times-circle"></i>Cancelar</button>
+          <button id="user-reset" type="button" class="btn my-button"><i class="i-margin fas fa-key"></i>Restablecer</button>
         </div>
       </div>
     </div>
@@ -76,17 +99,21 @@
                     // Showing categories on the page.
                     if ($_SESSION["userid"] != $item["id"]) {
                         echo '<tr>';
-                        echo '<td>'.$item['username'].'</td>';
+                        echo '<td class="username">'.$item['username'].'</td>';
                         echo '<td>'.$item['email'].'</td>';
                         echo '<td>'.$item['account_type'].'</td>';
                         echo '<td><div>';
-                        echo '<a class="btn my-button user-edit" userid="'.$item['id'].'">
+                        echo '<a class="btn my-button-3 user-edit" userid="'.$item['id'].'">
                                 <i class="i-margin fas fa-user-cog"></i>
                                 Editar
                             </a>
+                            <a class="btn my-button user-reset" userid="'.$item['id'].'">
+                                <i class="i-margin fas fa-key"></i>
+                                Reset
+                            </a>
                             <a class="btn my-button-2 user-delete" userid="'.$item['id'].'">
-                                    <i class="i-margin fas fa-user-times"></i>
-                                    Borrar
+                                <i class="i-margin fas fa-user-times"></i>
+                                Borrar
                             </a>';
                         echo '</div></td>';
                         echo '</tr>';

@@ -52,7 +52,7 @@
         <li>Longitud mínima de 8 caracteres.</li>
         <li>Letras minúsculas (<strong>a-z</strong>).</li>
         <li>Letras mayúsculas (<strong>A-Z</strong>).</li>
-        <li>Un dígitos del <strong>0 al 9</strong></li>
+        <li>Dígitos del <strong>0 al 9</strong></li>
         <li>Caracteres especiales (<strong>!, @, #, $, %, ^, &, (, ), \, -, _, +, .</strong>).</li>
     </ul>
     <div class="row">

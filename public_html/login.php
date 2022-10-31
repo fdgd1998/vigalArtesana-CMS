@@ -29,25 +29,27 @@
 <body style="background-color: rgb(241,247,252);">
     <div class="login-clean" style="background-color: rgba(241,247,252,0);">
         <form class="border rounded shadow-lg" method="post" style="margin-top: 20px;" action="<?=GetBaseUri()?>/scripts/authenticate.php">
-            <div style="margin-bottom: 20px;">
+            <div style="margin-top: 20px;">
                 <a href="<?=GetBaseUri()?>">
                     <i class="fas fa-arrow-left" style="margin-right: 10px;"></i>
                     Volver a Inicio
                 </a>
             </div>
-            <?php
-                if ($_SESSION["error"] != "") {
-                    $message = $_SESSION["error"];
-                    include $_SERVER["DOCUMENT_ROOT"].'/snippets/error_message.php';
-                    session_unset();
-                    session_destroy();
-                }
-            ?>
-                
-            <div class="form-group"><input type="text" class="form-control form-control-sm" name="user" placeholder="Usuario" /></div>
-            <div class="form-group"><input class="form-control form-control-sm" type="password" name="password" placeholder="Contraseña"></div>
-            <div class="form-group"><button class="btn my-button btn-block" type="submit" style="background-color: rgb(0, 98, 204);">Iniciar sesión</button></div>
-            <p class="forgot">Si has olvidado tu contraseña, contacta con el administrador del sitio para restablecerla.</p>
+            <div class="mt-5">
+                <?php
+                    if (isset($_SESSION["error"])) {
+                        $message = $_SESSION["error"];
+                        include $_SERVER["DOCUMENT_ROOT"].'/snippets/error_message.php';
+                        session_unset();
+                        session_destroy();
+                    }
+                ?>
+
+                <div class="form-group"><input type="text" class="form-control form-control-sm" name="user" placeholder="Usuario" /></div>
+                <div class="form-group"><input class="form-control form-control-sm" type="password" name="password" placeholder="Contraseña"></div>
+                <div class="form-group"><button class="btn my-button btn-block" type="submit" style="background-color: rgb(0, 98, 204);">Iniciar sesión</button></div>
+                <p class="forgot">Si has olvidado tu contraseña, puedes restablecerla <u><a href="<?=GetBaseUri()?>/password_reset.php">aquí</a></u>.</p>
+            </div>
         </form>
     </div>        
     <script src="<?=GetBaseUri()?>/includes/js/jquery.min.js"></script>

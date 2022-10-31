@@ -13,8 +13,7 @@
         $page_description = "";
         $gallery_description = "";
         
-        $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
-        $conn->set_charset("utf8");
+        
 
         // Variables for pagination
         $limit = 12; // Dynamic limit
@@ -28,79 +27,86 @@
         $prev = $page - 1;
         $next = $page + 1;
 
-        if ($conn->connect_error) {
-            print("No se ha podido conectar a la base de datos");
-            exit();
-        } else {
-            if(!isset($_GET['category'])) {
-                $sql = "select * from categories";
-                $res = $conn->query($sql);
-                while ($rows = $res->fetch_assoc()) {
-                    array_push($categories, array($rows['friendly_url'], $rows['name'], $rows['image'], $rows['description']));
-                }
-                $sql = "select value_info from company_info where key_info = 'gallery-desc'";
-                if ($res = $conn->query($sql)) {
-                    $gallery_description = $res->fetch_assoc()["value_info"];
-                }
-
-                $res->free();
+        try {
+            if ($conn->connect_error) {
+                print("No se ha podido conectar a la base de datos");
+                exit();
             } else {
-                $sql = "select id from categories where friendly_url = '".$_GET['category']."'";
-                if ($conn->query($sql)->num_rows == 0) {
-                    header("Location: /404");
-                    exit();
-                } else {
-                    $sql = "select gallery.id, filename, dir, altText from gallery inner join categories on gallery.category = categories.id where gallery.category = (select id from categories where friendly_url = '".$_GET['category']."') limit $paginationStart, $limit";
+                $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
+                $conn->set_charset("utf8");
+                if(!isset($_GET['category'])) {
+                    $sql = "select * from categories";
+                    $res = $conn->query($sql);
+                    while ($rows = $res->fetch_assoc()) {
+                        array_push($categories, array($rows['friendly_url'], $rows['name'], $rows['image'], $rows['description']));
+                    }
+                    $sql = "select value_info from company_info where key_info = 'gallery-desc'";
                     if ($res = $conn->query($sql)) {
-                        if ($res->num_rows >= 0) {
-                            while ($rows = $res->fetch_assoc()) {
-                                array_push($results, array($rows['id'], $rows['filename'], $rows['dir'], $rows['altText']));
+                        $gallery_description = $res->fetch_assoc()["value_info"];
+                    }
+    
+                    $res->free();
+                } else {
+                    $sql = "select id from categories where friendly_url = '".$_GET['category']."'";
+                    if ($conn->query($sql)->num_rows == 0) {
+                        header("Location: /404");
+                        exit();
+                    } else {
+                        $sql = "select gallery.id, filename, dir, altText from gallery inner join categories on gallery.category = categories.id where gallery.category = (select id from categories where friendly_url = '".$_GET['category']."') limit $paginationStart, $limit";
+                        if ($res = $conn->query($sql)) {
+                            if ($res->num_rows >= 0) {
+                                while ($rows = $res->fetch_assoc()) {
+                                    array_push($results, array($rows['id'], $rows['filename'], $rows['dir'], $rows['altText']));
+                                }
+                                $res->free();
+                            } else {
+                                header("Location: /404");
+                                exit();
                             }
-                            $res->free();
-                        } else {
-                            header("Location: /404");
-                            exit();
-                        }
-                    } 
+                        } 
+                    }
+    
+    
+                    // Getting all records from database
+                    $sql = "select count(gallery.id) as id from gallery inner join categories on gallery.category = categories.id where cat_enabled='YES' and gallery.category = (select id from categories where friendly_url = '".$_GET['category']."')"; 
+                    $allRecords = $conn->query($sql)->fetch_assoc()['id'];
+                    
+                    // Calculate total pages
+                    $totalPages = ceil($allRecords / $limit);
+                    
+                    if ($_GET['page'] > $totalPages) {
+                        header("Location: /404");
+                        exit();
+                    }
+    
+                    $sql = "select id, name, description from categories where id = (select id from categories where friendly_url = '".$_GET['category']."')";
+                    if ($res = $conn->query($sql)) {
+                        $rows = $res->fetch_assoc();
+                        $category_id = $rows['id'];
+                        $category_name = $rows['name'];
+                        $category_description = $rows['description'];
+                        $res->free();
+                    }
                 }
-
-
-                // Getting all records from database
-                $sql = "select count(gallery.id) as id from gallery inner join categories on gallery.category = categories.id where cat_enabled='YES' and gallery.category = (select id from categories where friendly_url = '".$_GET['category']."')"; 
-                $allRecords = $conn->query($sql)->fetch_assoc()['id'];
-                
-                // Calculate total pages
-                $totalPages = ceil($allRecords / $limit);
-                
-                if ($_GET['page'] > $totalPages) {
-                    header("Location: /404");
-                    exit();
+    
+                // Getting page metadata
+                if (!isset($_GET["category"])) {
+                    $sql = "select title, description from pages_metadata where id_page = (select id from pages where id = ".$page_id.")";  
+                } else {
+                    $sql = "select title, description from pages_metadata where id_page = (select id from pages where cat_id = ".$category_id.")";
                 }
-
-                $sql = "select id, name, description from categories where id = (select id from categories where friendly_url = '".$_GET['category']."')";
+                
                 if ($res = $conn->query($sql)) {
                     $rows = $res->fetch_assoc();
-                    $category_id = $rows['id'];
-                    $category_name = $rows['name'];
-                    $category_description = $rows['description'];
+                    $page_title = $rows['title'];
+                    $page_description = $rows['description'];
                     $res->free();
                 }
+                $conn->close();
             }
-
-            // Getting page metadata
-            if (!isset($_GET["category"])) {
-                $sql = "select title, description from pages_metadata where id_page = (select id from pages where id = ".$page_id.")";  
-            } else {
-                $sql = "select title, description from pages_metadata where id_page = (select id from pages where cat_id = ".$category_id.")";
-            }
-            
-            if ($res = $conn->query($sql)) {
-                $rows = $res->fetch_assoc();
-                $page_title = $rows['title'];
-                $page_description = $rows['description'];
-                $res->free();
-            }
-            $conn->close();
+        } catch (Exception $e) {
+            include $_SERVER["DOCUMENT_ROOT"]."/errorpages/500.php";
+            exit();
         }
     } else {
         require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/set_503_header.php";

@@ -1,4 +1,5 @@
 <?php
+
     session_start(); // starting the session.
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/get_uri.php';

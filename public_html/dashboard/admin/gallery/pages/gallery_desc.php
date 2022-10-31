@@ -1,5 +1,5 @@
 <?php
-    //error_reporting(0);
+
     session_start(); // starting the session.
     require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';

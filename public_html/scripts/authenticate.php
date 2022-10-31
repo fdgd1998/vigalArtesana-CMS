@@ -1,4 +1,9 @@
 <?php
+    if ( $_SERVER['REQUEST_METHOD']=='GET' && realpath(__FILE__) == realpath( $_SERVER['SCRIPT_FILENAME'] ) ) {
+        include_once $_SERVER["DOCUMENT_ROOT"]."/errorpages/403.php";
+        exit();
+    }
+
     session_start();
 
     require_once dirname($_SERVER["DOCUMENT_ROOT"], 1)."/connection.php"; //datos de conexión

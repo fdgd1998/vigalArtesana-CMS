@@ -17,21 +17,28 @@
     session_start();
     require_once dirname(__DIR__, 2).'/connection.php';
     $GLOBALS["site_settings"] = array();
-    $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
-    $conn->set_charset("utf8");
 
-    if ($conn->connect_error) {
-        header("Location: /500");
-        die();
-    } else {
-        $sql = "select value_info from company_info";
-        if ($res = $conn->query($sql)) {
-            while ($rows = $res->fetch_assoc()) {
-                array_push($GLOBALS["site_settings"], $rows['value_info']);
+    try {
+        $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
+        $conn->set_charset("utf8");
+
+        if ($conn->connect_error) {
+            header("Location: /500");
+            die();
+        } else {
+            $sql = "select value_info from company_info";
+            if ($res = $conn->query($sql)) {
+                while ($rows = $res->fetch_assoc()) {
+                    array_push($GLOBALS["site_settings"], $rows['value_info']);
+                }
             }
         }
+        $GLOBALS["site_settings"][4] = json_decode($GLOBALS["site_settings"][4], true);
+        $GLOBALS["site_settings"][8] = json_decode($GLOBALS["site_settings"][8], true);
+        $conn->close();
+    } catch (Exception $e){
+        include $_SERVER["DOCUMENT_ROOT"]."/errorpages/500.php";
+        exit();
     }
-    $GLOBALS["site_settings"][4] = json_decode($GLOBALS["site_settings"][4], true);
-    $GLOBALS["site_settings"][8] = json_decode($GLOBALS["site_settings"][8], true);
-    $conn->close();
+    
 ?>

@@ -1,4 +1,9 @@
 <?php
+    if ( $_SERVER['REQUEST_METHOD']=='GET' && realpath(__FILE__) == realpath( $_SERVER['SCRIPT_FILENAME'] ) ) {
+        include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
+        exit();
+    }
+    
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
@@ -7,8 +12,6 @@
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/PHPMailer/Exception.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/PHPMailer/SMTP.php";
     require_once dirname($_SERVER["DOCUMENT_ROOT"], 1)."/connection.php";
-
-    
 
     function sendEmail($to, $subject, $body) {
         try {

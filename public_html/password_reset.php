@@ -11,65 +11,69 @@
         header("Location: index.php");
         exit();
     }
+    try {
+        $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
 
-    $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
+        $emailValid = false;
+        $emailSend = false;
+        if (isset($_POST["email"])) {
+            $email = $_POST["email"];
+            $sql = $conn->prepare("select id, username, email from users where email = ?");
+            $sql->bind_param("s", $email);
+            $sql->execute();
+            $sql->store_result();
+            $sql->bind_result($userid, $username, $email);
+            
+            if ($sql->num_rows > 0) {
+                $sql->fetch();  
+                $generatedToken = bin2hex(random_bytes(64));
 
-    $emailValid = false;
-    $emailSend = false;
-    if (isset($_POST["email"])) {
-        $email = $_POST["email"];
-        $sql = $conn->prepare("select id, username, email from users where email = ?");
-        $sql->bind_param("s", $email);
-        $sql->execute();
-        $sql->store_result();
-        $sql->bind_result($userid, $username, $email);
-        
-        if ($sql->num_rows > 0) {
-            $sql->fetch();  
-            $generatedToken = bin2hex(random_bytes(64));
+                $sql = $conn->prepare("select token from password_reset where userid = ?");
+                $sql->bind_param("i", $userid);
+                $sql->execute();
+                $sql->store_result();
+                $sql->bind_result($token);
+                if ($sql->num_rows > 0) {
+                    $sql->fetch();
+                    $sql = $conn->prepare("update password_reset set token = ?, timestamp = CURRENT_TIMESTAMP where userid = ?");
+                    $sql->bind_param("si", $generatedToken, $userid);
+                    $sql->execute();
+                } else {
+                    $sql->prepare("insert into password_reset (token, userid) values (?, ?)");
+                    $sql->bind_param("si", $generatedToken, $userid);
+                    $sql->execute();
+                }
+                echo "sending email<br>";
+                $url = GetUri()."?token=$generatedToken";
+                $subject = "Recuperación de contraseña en ViGal Boutique.";
+                $body = "<p>Has solicitado un restablecimiento de contraseña para el usuario <strong>$username</strong> en ViGal Boutique.  Si no lo has solicitado, ignora este mensaje.</p>";
+                $body .= "<p>Si has sido tú, puedes restablecerla desde el siguiente enlace (válido durante 24 horas).</p>";
+                $body .= $url;
+                $body .= "<p><strong>NOTA: No respondas a este mensaje, ha sido generado automáticamente.</strong></p>";
+                sendEmail($email, $subject, $body);
+            }
+        }
 
-            $sql = $conn->prepare("select token from password_reset where userid = ?");
-            $sql->bind_param("i", $userid);
+        $validToken = false;
+        if (isset($_GET["token"])) {
+            $token = $_GET["token"];
+            $sql = $conn->prepare("select token from password_reset where token = ? and timestamp >= (now() - interval 1 day)");
+            $sql->bind_param("s", $token);
             $sql->execute();
             $sql->store_result();
             $sql->bind_result($token);
+
             if ($sql->num_rows > 0) {
-                $sql->fetch();
-                $sql = $conn->prepare("update password_reset set token = ?, timestamp = CURRENT_TIMESTAMP where userid = ?");
-                $sql->bind_param("si", $generatedToken, $userid);
-                $sql->execute();
+                $validToken = true;
             } else {
-                $sql->prepare("insert into password_reset (token, userid) values (?, ?)");
-                $sql->bind_param("si", $generatedToken, $userid);
-                $sql->execute();
+                $validToken = false;
             }
-            echo "sending email<br>";
-            $url = GetUri()."?token=$generatedToken";
-            $subject = "Recuperación de contraseña en ViGal Boutique.";
-            $body = "<p>Has solicitado un restablecimiento de contraseña para el usuario <strong>$username</strong> en ViGal Boutique.  Si no lo has solicitado, ignora este mensaje.</p>";
-            $body .= "<p>Si has sido tú, puedes restablecerla desde el siguiente enlace (válido durante 24 horas).</p>";
-            $body .= $url;
-            $body .= "<p><strong>NOTA: No respondas a este mensaje, ha sido generado automáticamente.</strong></p>";
-            sendEmail($email, $subject, $body);
-        }
-    }
-
-    $validToken = false;
-    if (isset($_GET["token"])) {
-        $token = $_GET["token"];
-        $sql = $conn->prepare("select token from password_reset where token = ? and timestamp >= (now() - interval 1 day)");
-        $sql->bind_param("s", $token);
-        $sql->execute();
-        $sql->store_result();
-        $sql->bind_result($token);
-
-        if ($sql->num_rows > 0) {
-            $validToken = true;
         } else {
             $validToken = false;
         }
-    } else {
-        $validToken = false;
+    } catch (Exception $e) {
+        include $_SERVER["DOCUMENT_ROOT"]."/errorpages/500.php";
+        exit();
     }
 ?>
 <!DOCTYPE html>
@@ -104,7 +108,11 @@
                 <?php
                     if (isset($_POST["email"])) {
                         $message = "Se ha enviado el correo electrónico. Comprueba tu bandeja de entrada.";
-                        include $_SERVER["DOCUMENT_ROOT"].'/snippets/info_message.php';
+                        echo '<div class="illustration">
+                                <div style="font-size: 16px;" class="alert alert-info" >
+                                    '.$message.'
+                                </div>
+                            </div>';
                     }
                 ?>
                 <?php if (!isset($_GET["token"])): ?>

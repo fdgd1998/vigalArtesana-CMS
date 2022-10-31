@@ -39,7 +39,11 @@
                 <?php
                     if (isset($_SESSION["error"])) {
                         $message = $_SESSION["error"];
-                        include $_SERVER["DOCUMENT_ROOT"].'/snippets/error_message.php';
+                        echo '<div class="illustration">
+                                <div style="font-size: 16px;" class="alert alert-danger" >
+                                    '.$message.'
+                                </div>
+                            </div>';
                         session_unset();
                         session_destroy();
                     }

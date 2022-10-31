@@ -26,7 +26,8 @@
                 $conn->close();
             }
         } catch (Exception $e) {
-            echo $e;
+            include $_SERVER["DOCUMENT_ROOT"]."/errorpages/500.php";
+            exit();
         }
     } else {
         $conn->close();

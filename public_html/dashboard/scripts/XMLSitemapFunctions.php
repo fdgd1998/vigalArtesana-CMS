@@ -1,4 +1,14 @@
 <?php
+    session_start();
+    require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
+    
+    if (!HasPermission("manage_seoSettings")) {
+        include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
+        exit();
+    }
+
     function showSeoMessage() {
         require dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
         $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);

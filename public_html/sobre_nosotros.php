@@ -2,12 +2,13 @@
     require_once "scripts/get_company_info.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
     
-    $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
+    
     $services = array(); // Array to save categories
     $page_id = 7;
 
     if ($GLOBALS["site_settings"][11] == "false" || ($GLOBALS["site_settings"][11] == "true" && isset($_SESSION["loggedin"]))) { 
         try {
+            $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
             if ($conn->connect_error) {
                 echo "No se ha podido establecer una conexión con la base de datos.";
                 exit();
@@ -25,7 +26,8 @@
                 $conn->close();
             }
         } catch (Exception $e) {
-            echo $e;
+            include $_SERVER["DOCUMENT_ROOT"]."/errorpages/500.php";
+            exit();
         }
     } else {
         $conn->close();

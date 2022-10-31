@@ -1,4 +1,9 @@
 <?php
+    if ( $_SERVER['REQUEST_METHOD']=='GET' && realpath(__FILE__) == realpath( $_SERVER['SCRIPT_FILENAME'] ) ) {
+        include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
+        exit();
+    }
+    
     function validatePasswd($passwd) {
         $regex = "/^(?=(.*[a-z]){1,})(?=(.*[A-Z]){1,})(?=(.*[0-9]){1,})(?=(.*[!@#$%^&*()\-__+.]){1,}).{8,}$/";
         if (preg_match($regex, $passwd)) return true;

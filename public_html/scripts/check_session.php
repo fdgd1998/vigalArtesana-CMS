@@ -1,6 +1,6 @@
 <?php
     if (!isset($_SESSION['loggedin'])) {
-        header("Location: /403");
+        include_once $_SERVER["DOCUMENT_ROOT"]."/errorpages/403.php";
         exit();
     }
 ?>

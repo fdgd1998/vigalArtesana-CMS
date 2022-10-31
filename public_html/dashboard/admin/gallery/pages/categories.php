@@ -1,6 +1,6 @@
 <?php
-    session_start(); // starting the session.
-    require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
+    session_start(); // Starting the session.
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/check_session.php";
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
     
     if (!HasPermission("manage_categories")) {
@@ -12,7 +12,7 @@
     $categories = array();
 
     if ($conn->connect_error) {
-      print("No se ha podido conectar a la base de datos");
+      include $_SERVER["DOCUMENT_ROOT"]."/errorpages/500.php";
       exit();
     } else {
         // Fetching categories from databases and sorting them.

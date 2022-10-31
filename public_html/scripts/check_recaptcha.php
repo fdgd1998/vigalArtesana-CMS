@@ -1,4 +1,8 @@
 <?php
+    if ( $_SERVER['REQUEST_METHOD']=='GET' && realpath(__FILE__) == realpath( $_SERVER['SCRIPT_FILENAME'] ) ) {
+        include_once $_SERVER["DOCUMENT_ROOT"]."/errorpages/403.php";
+        exit();
+    }
     
     // require_once "send_mail.php";
     require_once "send_mail.php";

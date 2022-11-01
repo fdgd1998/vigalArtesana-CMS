@@ -18,8 +18,9 @@
               "manage_services" =>  "0010000",
               "manage_users" =>  "0001000",
               "manage_siteSettings" =>  "0000100",
-              "standard_user" =>  "0000010",
-              "manage_seoSettings" => "0000001"
+              "manage_seoSettings" => "0000010",
+              "standard_user" =>  "0000001"
+              
             );
         
         $userPerm = 0;

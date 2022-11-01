@@ -5,7 +5,7 @@
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/check_session.php";
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
     
-    if (!HasPermission("manage_categories")) {
+    if (!HasPermission("manage_gallery")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
         exit();
     }

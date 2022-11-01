@@ -8,6 +8,7 @@
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
         exit();
     }
+    echo var_dump($_SESSION);
 ?>
 <div class="container">
     <h1 class="text-center" style="margin-top: 10%;">¡Hola <?=$_SESSION['user']?>!</h1>

@@ -1,11 +1,11 @@
 <?php
-
+    error_reporting(0);
     session_start();
     require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
 
-    if (!HasPermission("manage_categories")) {
+    if (!HasPermission("manage_gallery")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
         exit();
     }
@@ -19,7 +19,7 @@
                 print("No se ha podido conectar a la base de datos");
                 exit();
             } else {
-                $sql = "select id, name from categories order by name asc";
+                $sql = "select id, name from categories";
                 if ($res = $conn->query($sql)) {
                     while ($rows = $res->fetch_assoc()) {
                         $categories[$rows["id"]] = $rows["name"];

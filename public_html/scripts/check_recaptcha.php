@@ -4,7 +4,6 @@
         exit();
     }
     
-    // require_once "send_mail.php";
     require_once "send_mail.php";
     
     function reCaptcha($recaptcha){

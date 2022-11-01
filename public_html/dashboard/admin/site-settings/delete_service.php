@@ -1,6 +1,8 @@
 <?php
+    // error_reporting(0);
     session_start();
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/get_uri.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
     require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
     require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/XMLSitemapFunctions.php";
@@ -23,12 +25,13 @@
                 if ($res = $conn->query($stmt)) {
                     $rows = $res->fetch_assoc();
                     unlink($_SERVER["DOCUMENT_ROOT"]."/uploads/services/".$rows['image']); // deleting the file
-                    $stmt = "delete from services where id = ".$_POST['service_id']."";
+                    $stmt = "delete from services where id = ".$_POST['service_id'];
                     if ($conn->query($stmt) === TRUE) {
+                        echo "El servicio se ha eliminado correctamente";
                         $sitemap = readSitemapXML();
                         changeSitemapUrl($sitemap, GetBaseUri(), GetBaseUri());
                         writeSitemapXML($sitemap);
-                        echo "El servicio se ha eliminado correctamente";
+                        
                     }
                     $res->free();
                 }

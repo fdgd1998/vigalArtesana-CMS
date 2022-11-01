@@ -34,7 +34,7 @@
     $conn->close();
 ?>
 
-<!-- Delete category modal -->
+
 <div class="modal fade" id="delete-user" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -56,7 +56,7 @@
   </div>
 </div>
 
-<!-- Delete category modal -->
+
 <div class="modal fade" id="reset-user" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -107,7 +107,7 @@
                                 <i class="i-margin fas fa-user-cog"></i>
                                 Editar
                             </a>
-                            <a class="btn my-button user-reset" userid="'.$item['id'].'">
+                            <a class="btn my-button user-reset" email="'.$item['email'].'">
                                 <i class="i-margin fas fa-key"></i>
                                 Reset
                             </a>
@@ -117,8 +117,7 @@
                             </a>';
                         echo '</div></td>';
                         echo '</tr>';
-                        }
-                          
+                        }  
                     }  
                 ?>
             </tbody>

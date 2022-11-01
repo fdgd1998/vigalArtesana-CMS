@@ -71,10 +71,10 @@ var input_files = [];
             async: false,
             url: './admin/gallery/get_categories.php',
             dataType: 'json',
-            data: 'id=testdata',
+            data: {id: 'testdata'},
             cache: false,
             success: function(result) {
-                //alert(result);
+                // alert(result);
                 $.each(result, function(key, value) {
                     categories[key] = value;
                 });

@@ -13,16 +13,13 @@
         
         $pages = array 
             (
-              "show_categories" =>  "1000000000",
-              "show_gallery" =>  "0100000000",
-              "manage_categories" =>  "0010000000",
-              "manage_gallery" =>  "0001000000",
-              "manage_companySettings" =>  "0000100000",
-              "manage_services" =>  "0000010000",
-              "manage_users" =>  "0000001000",
-              "manage_siteSettings" =>  "0000000100",
-              "standard_user" =>  "0000000010",
-              "manage_seoSettings" => "0000000001"
+              "manage_gallery" =>  "1000000",
+              "manage_companySettings" =>  "0100000",
+              "manage_services" =>  "0010000",
+              "manage_users" =>  "0001000",
+              "manage_siteSettings" =>  "0000100",
+              "standard_user" =>  "0000010",
+              "manage_seoSettings" => "0000001"
             );
         
         $userPerm = 0;

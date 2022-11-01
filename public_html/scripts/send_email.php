@@ -21,7 +21,7 @@
             $mail->CharSet = "utf-8"; 
             $mail->Host = $host;
             $mail->Port = $port;
-            $mail->SMTPDebug = $debugLevel;
+            // $mail->SMTPDebug = $debugLevel;
             $mail->SMTPSecure = "ssl";
             $mail->SMTPAuth = true;
             $mail->Username = $username;

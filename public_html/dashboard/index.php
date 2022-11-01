@@ -1,4 +1,5 @@
 <?php
+    error_reporting(0);
     session_start();
     require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
@@ -52,10 +53,10 @@
 
 <body class="d-flex">
     <?php 
-    if ($maintenance == "true") {
+    if ($maintenance == "true" && HasPermission("manage_siteSettings")) {
         include $_SERVER["DOCUMENT_ROOT"]."/snippets/maintenance_message.php";
     }
-    if ($seoModified == "true") {
+    if ($seoModified == "true" && HasPermission("manage_seoSettings")) {
         include $_SERVER["DOCUMENT_ROOT"]."/snippets/seo_message.php";
     }
     ?>

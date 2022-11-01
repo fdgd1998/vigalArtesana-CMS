@@ -29,7 +29,7 @@
 <body style="background-color: rgb(241,247,252);">
     <div class="login-clean" style="background-color: rgba(241,247,252,0);">
         <form class="border rounded shadow-lg" method="post" style="margin-top: 20px;" action="<?=GetBaseUri()?>/scripts/authenticate.php">
-            <div style="margin-top: 20px;">
+            <div style="margin-top: 20px; text-align: center;">
                 <a href="<?=GetBaseUri()?>">
                     <i class="fas fa-arrow-left" style="margin-right: 10px;"></i>
                     Volver a Inicio

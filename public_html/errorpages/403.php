@@ -37,7 +37,8 @@
     <?php
         include $_SERVER["DOCUMENT_ROOT"].'/includes/footer.php';
     ?>
-    <script src="<?=GetBaseUri()?>/includes/js/jquery.min.js"></script>
-    <script src="<?=GetBaseUri()?>/includes/bootstrap/js/bootstrap.min.js"></script>
+        <script src="<?=GetBaseUri()?>/includes/js/jquery.min.js"></script>
+        <script src="<?=GetBaseUri()?>/includes/bootstrap/js/bootstrap.min.js"></script>
+        <script src="<?=GetBaseUri()?>/includes/js/popper.min.js"></script>
 </body>
 </html>

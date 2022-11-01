@@ -5,6 +5,8 @@
     require_once dirname($_SERVER["DOCUMENT_ROOT"], 1)."/connection.php"; //datos de conexión
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_company_info.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/reset_password_function.php";
+
 
     session_start();
     if (isset($_SESSION["loggedin"])) {
@@ -16,46 +18,37 @@
 
         $emailValid = false;
         $emailSend = false;
-        if (isset($_POST["email"])) {
-            $email = $_POST["email"];
-            $sql = $conn->prepare("select id, username, email from users where email = ?");
-            $sql->bind_param("s", $email);
-            $sql->execute();
-            $sql->store_result();
-            $sql->bind_result($userid, $username, $email);
-            
-            if ($sql->num_rows > 0) {
-                $sql->fetch();  
-                $generatedToken = bin2hex(random_bytes(64));
+        $message = "";
+        $passChanged = false;
+        $validToken = false;
 
-                $sql = $conn->prepare("select token from password_reset where userid = ?");
-                $sql->bind_param("i", $userid);
+        if (isset($_POST["email"])) {
+            resetPassword($_POST["email"], $conn);
+            $message = "Se ha enviado el correo electrónico. Comprueba tu bandeja de entrada.";
+        } else if (isset($_POST["pass1"]) && isset($_POST["pass2"]) && isset($_GET["token"])) {
+            $pass1 = $_POST["pass1"];
+            $pass2 = $_POST["pass2"];
+            $token = $_GET["token"];
+            if (validatePasswd($pass1) && validatePasswd($pass2)) {
+                $sql = $conn->prepare("select userid from password_reset where token = ?");
+                $sql->bind_param("s", $token);
                 $sql->execute();
                 $sql->store_result();
-                $sql->bind_result($token);
-                if ($sql->num_rows > 0) {
-                    $sql->fetch();
-                    $sql = $conn->prepare("update password_reset set token = ?, timestamp = CURRENT_TIMESTAMP where userid = ?");
-                    $sql->bind_param("si", $generatedToken, $userid);
-                    $sql->execute();
-                } else {
-                    $sql->prepare("insert into password_reset (token, userid) values (?, ?)");
-                    $sql->bind_param("si", $generatedToken, $userid);
-                    $sql->execute();
+                $sql->bind_result($userid);
+                $sql->fetch();
+                $hash = password_hash($pass1, PASSWORD_DEFAULT);
+                $sql = $conn->prepare("update users set passwd = ? where id = ?");
+                $sql->bind_param("si", $hash, $userid);
+                if ($sql->execute()) {
+                    $sql = "delete from password_reset where token = '$token'";
+                    if ($conn->query($sql) === TRUE) {
+                        $passChanged = true;
+                    }
                 }
-                echo "sending email<br>";
-                $url = GetUri()."?token=$generatedToken";
-                $subject = "Recuperación de contraseña en ViGal Boutique.";
-                $body = "<p>Has solicitado un restablecimiento de contraseña para el usuario <strong>$username</strong> en ViGal Boutique.  Si no lo has solicitado, ignora este mensaje.</p>";
-                $body .= "<p>Si has sido tú, puedes restablecerla desde el siguiente enlace (válido durante 24 horas).</p>";
-                $body .= $url;
-                $body .= "<p><strong>NOTA: No respondas a este mensaje, ha sido generado automáticamente.</strong></p>";
-                sendEmail($email, $subject, $body);
+            } else {
+                $message = "Las contraseñas no coninciden.";
             }
-        }
-
-        $validToken = false;
-        if (isset($_GET["token"])) {
+        } else if (isset($_GET["token"])) {
             $token = $_GET["token"];
             $sql = $conn->prepare("select token from password_reset where token = ? and timestamp >= (now() - interval 1 day)");
             $sql->bind_param("s", $token);
@@ -97,19 +90,19 @@
 
 <body style="background-color: rgb(241,247,252);">
     <div class="login-clean" style="background-color: rgba(241,247,252,0);">
-        <form class="border rounded shadow-lg" method="post" style="margin-top: 20px;" action="<?=GetUri()?>">
-            <div style="margin-bottom: 20px;">
+        <form class="border rounded shadow-lg" method="post"  action="<?=GetUri()?>">
+            <?php if (!$passChanged): ?>
+            <div style="margin-bottom: 20px; text-align: center;">
                 <a href="<?=GetBaseUri()?>/login">
-                    <i class="fas fa-arrow-left" style="margin-right: 10px;"></i>
+                    <i class="fas fa-arrow-left" style="margin-right: 5px;"></i>
                     Volver a Iniciar Sesión
                 </a>
             </div>
-            <div class="mt-5">
+            <div class="mt-2">
                 <?php
-                    if (isset($_POST["email"])) {
-                        $message = "Se ha enviado el correo electrónico. Comprueba tu bandeja de entrada.";
+                    if ($message != "") {
                         echo '<div class="illustration">
-                                <div style="font-size: 16px;" class="alert alert-info" >
+                                <div style="font-size: 16px;" class="alert alert-warning" >
                                     '.$message.'
                                 </div>
                             </div>';
@@ -124,12 +117,13 @@
                     <?php if($validToken): ?>
                     <p style="text-align: center"><strong>Restablecer contraseña</strong></p>
                     <p style="text-align: center; font-size: 14px;">Requisitos de complejidad:</p>
-                    <ul style="list-style-type: disc; margin-left: 30px; font-size: 14px;">
+                    <ul style="text-align: center; font-size: 14px;">
                         <li>Longitud mínima de 8 caracteres.</li>
                         <li>Letras minúsculas (<strong>a-z</strong>).</li>
                         <li>Letras mayúsculas (<strong>A-Z</strong>).</li>
                         <li>Dígitos del <strong>0 al 9</strong></li>
-                        <li>Caracteres especiales (<strong>!, @, #, $, %, ^, &, (, ), \, -, _, +, .</strong>).</li>
+                        <li>Caracteres especiales</li>
+                        <li>(<strong>!, @, #, $, %, ^, &, (, ), \, -, _, +, .</strong>).</li>
                     </ul>
                     <div class="form-group"><input class="form-control form-control-sm" id="pass1" type="password" name="pass1" placeholder="Nueva contraseña" /></div>
                     <div class="form-group"><input class="form-control form-control-sm" id="pass2" type="password" name="pass2" placeholder="Confirma nueva contraseña"></div>
@@ -141,7 +135,13 @@
                     <p style="text-align: center; font-size: 14px;">Vuelve a solicitar un nuevo restablecimiento de contraseña.</p>
                     <?php endif; ?>        
                 <?php endif; ?>
-                </div>
+
+                <?php else: ?>
+                <p style="text-align: center"><strong>Restablecer contraseña</strong></p>
+                <p style="text-align: center; font-size: 14px;">La contraseñas se ha cambiado correctamente.</p>
+                <div class="form-group"><a class="btn my-button btn-block" href="<?=GetBaseUri()?>/login">Iniciar sesión</a></div>
+                <?php endif; ?>
+            </div>
         </form>
     </div>        
     <script src="<?=GetBaseUri()?>/includes/js/jquery.min.js"></script>

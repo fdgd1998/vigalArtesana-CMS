@@ -22,6 +22,7 @@ RewriteRule ^politica-privacidad$ privacidad.php
 RewriteRule ^aviso-legal$ legal.php
 RewriteRule ^login$ login.php
 
+
 RewriteRule ^404$ errorpages/404.php
 RewriteRule ^403$ errorpages/403.php
 RewriteRule ^503$ errorpages/503.php

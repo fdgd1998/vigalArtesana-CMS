@@ -3,7 +3,7 @@
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/check_session.php";
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
     
-    if (!HasPermission("manage_categories")) {
+    if (!HasPermission("manage_gallery")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
         exit();
     }
@@ -16,13 +16,7 @@
       exit();
     } else {
         // Fetching categories from databases and sorting them.
-        $sql = "";
-        if ($_SESSION["account_type"] == "superuser" || $_SESSION["account_type"] == "administrator") {
-          $sql = "select * from categories ";
-        } else {
-          $sql = "select * from categories where uplodadedBy = ".$_SESSION["userid"];
-        }
-
+        $sql = "select * from categories ";
         if ($res = $conn->query($sql)) {
           while ($rows = $res->fetch_assoc()) {
             array_push($categories, array ("id" => $rows["id"], "name" => $rows["name"]));

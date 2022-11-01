@@ -11,7 +11,7 @@
     }
 
     // Publishers cannot modify categories.
-    if(isset($_POST['cat_name']) && $_SESSION['account_type'] != 'publisher') {
+    if(isset($_POST['cat_name'])) {
         try {
             $cat_name = $_POST['cat_name'];
 

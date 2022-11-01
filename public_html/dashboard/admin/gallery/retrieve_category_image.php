@@ -10,7 +10,7 @@
         exit();
     }
 
-    if(isset($_POST['cat_id']) && $_SESSION['account_type'] != 'publisher') {
+    if(isset($_POST['cat_id'])) {
         $cat_id = $_POST['cat_id'];
 
         try {

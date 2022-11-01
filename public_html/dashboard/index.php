@@ -68,7 +68,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <?php if ($_SESSION['account_type'] == 'administrator' || $_SESSION['account_type'] == 'superuser'): ?>
+                    <?php if (HasPermission("manage_siteSettings")): ?>
                         <li class="nav-item dropdown">
                             <a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">
                                 Configuración del sitio
@@ -97,17 +97,15 @@
                                     <i class="fas fa-plus-circle"></i>
                                     Nuevo servicio
                                 </a>
-                                <?php if ($_SESSION['account_type'] == 'superuser' || $_SESSION['account_type'] == 'administrator'): ?>
                                 <div class="dropdown-divider"></div>
                                 <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=advanced">
                                     <i class="fas fa-code"></i>
                                     Opciones avanzadas
                                 </a>
-                                <?php endif; ?>
                             </div>
                         </li>
                     <?php endif; ?>
-                    <?php if ($_SESSION['account_type'] == 'superuser' || $_SESSION['account_type'] == 'administrator'): ?>
+                    <?php if (HasPermission("manage_seoSettings")): ?>
                         <li class="nav-item dropdown">
                             <a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">
                                 SEO
@@ -133,7 +131,7 @@
                                 </a>
                             </div>
                         </li>
-                        <?php if ($_SESSION['account_type'] == 'superuser'): ?>
+                        <?php if (HasPermission("manage_users")): ?>
                         <li class="nav-item dropdown">
                             <a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">
                                 Usuarios

@@ -69,7 +69,6 @@
                                     $_SESSION['loggedin'] = true;
                                     $_SESSION['user'] = $user_form;
                                     $_SESSION['userid'] = $userid;
-                                    $_SESSION['account_type'] = $account_type;
                                     $sql = "update ip_register set login_success = 1 where address = '".$_SERVER["REMOTE_ADDR"]."'";
                                     $conn->query($sql);
                                     $conn->close();

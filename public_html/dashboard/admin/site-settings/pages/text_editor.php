@@ -1,17 +1,9 @@
 <?php
-    session_start();
-
-    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
-    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
-    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/get_uri.php';
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
+    checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
     
-    if (!HasPermission("manage_companySettings")) {
-        include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
-        exit();
-    }
-
     // configuration
-    $url = (isset($_SERVER["HTTPS"])?"https://":"http://").$_SERVER["SERVER_NAME"]."/dasboard?page=text-editor&file=".$_GET["file"];
+    $url = GetbaseUri()."/dasboard?page=text-editor&file=".$_GET["file"];
     $file = $_GET["file"];
     $path = $_SERVER["DOCUMENT_ROOT"]."/";
 

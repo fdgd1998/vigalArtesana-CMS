@@ -1,5 +1,5 @@
 <?php
-    //error_reporting(0);
+    error_reporting(0);
     session_start(); // starting the session.
     require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
@@ -8,7 +8,10 @@
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
         exit();
     }
+
     $userdata = array();
+    $editUser = ($_GET["page"] == "edit-user" && isset($_GET["id"]))? $_GET["id"] : false;
+
     $sql = "select username, email, role from users inner join user_roles on users.account_type = user_roles.id where users.id = ".$_SESSION["userid"];
 
 
@@ -21,7 +24,7 @@
 ?>
 
 <div class="container settings-container">
-    <h1 class="title">Perfil de usuario</h1>
+    <h1 class="title"><?php if($editUser) {echo "Editar usuario";} else {echo "Perfil de usuario";}?></h1>
     <h3 class="title">Información de la cuenta</h3>
 
     <div class="row">
@@ -31,12 +34,23 @@
                 <input type="text" disabled class="form-control" value="<?=$userdata["username"]?>">
             </div>
         </div>
+        <?php if (!$editUser): ?>
         <div class="col-12 col-sm-12 col-md-6">
             <label for="basic-url">Tipo de cuenta:</label>
             <div class="input-group mb-3">
                 <input type="text" disabled class="form-control" value="<?=$userdata["role"]?>">
             </div>
         </div>
+        <?php else: ?>
+        <div class="col-12 col-sm-12 col-md-6 mt-3">
+            <label for="basic-url">Tipo de cuenta:</label>
+            <select class="custom-select mr-sm-2" id="role">
+                <?php foreach ($roles as $roles):?>
+                <option value="<?=$roles["id"]?>"><?=$roles["role"]?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <?php endif; ?>
     </div>
     <div class="row">
         <div class="col-12 col-sm-12 col-md-6">

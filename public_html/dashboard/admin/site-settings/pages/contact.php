@@ -1,36 +1,9 @@
 <?php
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
+    checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
 
-    session_start();
-
-    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
-    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
-    
-    if (!HasPermission("manage_companySettings")) {
-        include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
-        exit();
-    }
-    $site_settings = array();
-
-    try {
-        $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
-        
-        if ($conn->connect_error) {
-            echo "No se ha podido conectar a la base de datos.";
-            exit();
-        } else {
-            $stmt = "select * from company_info";
-            if ($res = $conn->query($stmt)) {
-                while ($rows = $res->fetch_assoc()) {
-                    array_push($site_settings, $rows["value_info"]);
-                }
-            }
-        }
-        $site_settings[4] = json_decode($site_settings[4], true);
-        $site_settings[8] = json_decode($site_settings[8], true);
-        $conn->close();
-    } catch (Exception $e) {
-        echo $e;
-    }
+    $site_settings[4]["value_info"] = json_decode($site_settings[4]["value_info"], true);
+    $site_settings[8]["value_info"] = json_decode($site_settings[8]["value_info"], true);
 ?>
 <div class="container settings-container">
     <h1 class="title">Contacto y ubicación</h1>
@@ -49,7 +22,7 @@
                         <i class="fas fa-envelope"></i>
                         </div>
                     </div>
-                    <input type="text" id="email" <?=$site_settings[3]? "value='".$site_settings[3]."'" : ""?> class="form-control" placeholder="perfil" aria-describedby="basic-addon1">
+                    <input type="text" id="email" <?=$site_settings[3]["value_info"]? "value='".$site_settings[3]["value_info"]."'" : ""?> class="form-control" placeholder="perfil" aria-describedby="basic-addon1">
                 </div>
             </div>
         </div>
@@ -61,7 +34,7 @@
                         <i class="fas fa-phone"></i>
                         </div>
                     </div>
-                    <input type="text" id="phone" <?=$site_settings[0]? "value='".$site_settings[0]."'" : ""?> class="form-control" placeholder="perfil" aria-describedby="basic-addon1">
+                    <input type="text" id="phone" <?=$site_settings[0]["value_info"]? "value='".$site_settings[0]["value_info"]."'" : ""?> class="form-control" placeholder="perfil" aria-describedby="basic-addon1">
                 </div>
             </div>
         </div>
@@ -82,11 +55,11 @@
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
-                            <input class="social" id="instagram_chkbx" type="checkbox" <?=isset($site_settings[4]["instagram"])? "checked" : ""?>>
+                            <input class="social" id="instagram_chkbx" type="checkbox" <?=isset($site_settings[4]["value_info"]["instagram"])? "checked" : ""?>>
                         </div>
                         <span class="input-group-text" id="basic-addon1">instagram.com/</span>
                     </div>
-                    <input type="text" id="instagram_url" <?=isset($site_settings[4]["instagram"])? "value='".$site_settings[4]["instagram"]."'" : "disabled"?> class="form-control" placeholder="perfil" aria-describedby="basic-addon1">
+                    <input type="text" id="instagram_url" <?=isset($site_settings[4]["value_info"]["instagram"])? "value='".$site_settings[4]["value_info"]["instagram"]."'" : "disabled"?> class="form-control" placeholder="perfil" aria-describedby="basic-addon1">
                 </div>
             </div>
         </div>
@@ -95,11 +68,11 @@
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
-                            <input class="social" id="facebook_chkbx" type="checkbox" <?=isset($site_settings[4]["facebook"])? "checked" : ""?>>
+                            <input class="social" id="facebook_chkbx" type="checkbox" <?=isset($site_settings[4]["value_info"]["facebook"])? "checked" : ""?>>
                         </div>
                         <span class="input-group-text" id="basic-addon1">facebook.com/</span>
                     </div>
-                    <input type="text" id="facebook_url" <?=isset($site_settings[4]["facebook"])? "value='".$site_settings[4]["facebook"]."'" : "disabled"?> class="form-control" placeholder="perfil" aria-describedby="basic-addon1">
+                    <input type="text" id="facebook_url" <?=isset($site_settings[4]["value_info"]["facebook"])? "value='".$site_settings[4]["value_info"]["facebook"]."'" : "disabled"?> class="form-control" placeholder="perfil" aria-describedby="basic-addon1">
                 </div>
             </div>
         </div>
@@ -108,11 +81,11 @@
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
-                            <input class="social" id="whatsapp_chkbx" type="checkbox" <?=isset($site_settings[4]["whatsapp"])? "checked" : ""?>>
+                            <input class="social" id="whatsapp_chkbx" type="checkbox" <?=isset($site_settings[4]["value_info"]["whatsapp"])? "checked" : ""?>>
                         </div>
                         <span class="input-group-text" id="basic-addon1">wa.me/</span>
                     </div>
-                    <input type="text" id="whatsapp_url" <?=isset($site_settings[4]["whatsapp"])? "value='".$site_settings[4]["whatsapp"]."'" : "disabled"?> class="form-control" placeholder="teléfono con prefijo" aria-label="Username" aria-describedby="basic-addon1">
+                    <input type="text" id="whatsapp_url" <?=isset($site_settings[4]["value_info"]["whatsapp"])? "value='".$site_settings[4]["value_info"]["whatsapp"]."'" : "disabled"?> class="form-control" placeholder="teléfono con prefijo" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
             </div>
         </div>
@@ -133,7 +106,7 @@
         <div class="form-row" style="margin-bottom: 15px;">
             <div class="col">
                 <label>Enlace:</label>
-                <textarea id="map-link" class="form-control" rows="3" style="margin-bottom: 15px;"><?=$site_settings[7]?></textarea>
+                <textarea id="map-link" class="form-control" rows="3" style="margin-bottom: 15px;"><?=$site_settings[7]["value_info"]?></textarea>
             </div>
         </div>
         <div class="form-row">
@@ -153,65 +126,65 @@
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
-                            <input type="checkbox" id="chkbx-Lunes" class="week" <?=isset($site_settings[8]["Lunes"])? "checked":""?>>
+                            <input type="checkbox" id="chkbx-Lunes" class="week" <?=isset($site_settings[8]["value_info"]["Lunes"])? "checked":""?>>
                         </div>
                         <span class="input-group-text">Lunes</span>
                     </div>
-                    <input type="text" id="Lunes" class="form-control" <?=isset($site_settings[8]["Lunes"])? "value='".$site_settings[8]["Lunes"]."'":"disabled"?>>
+                    <input type="text" id="Lunes" class="form-control" <?=isset($site_settings[8]["value_info"]["Lunes"])? "value='".$site_settings[8]["value_info"]["Lunes"]."'":"disabled"?>>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
-                            <input type="checkbox" id="chkbx-Martes" class="week" <?=isset($site_settings[8]["Martes"])? "checked":""?>>
+                            <input type="checkbox" id="chkbx-Martes" class="week" <?=isset($site_settings[8]["value_info"]["Martes"])? "checked":""?>>
                         </div>
                         <span class="input-group-text">Martes</span>
                     </div>
-                    <input type="text" id="Martes" class="form-control" <?=isset($site_settings[8]["Martes"])? "value='".$site_settings[8]["Martes"]."'":"disabled"?>>
+                    <input type="text" id="Martes" class="form-control" <?=isset($site_settings[8]["value_info"]["Martes"])? "value='".$site_settings[8]["value_info"]["Martes"]."'":"disabled"?>>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
-                            <input type="checkbox" id="chkbx-Miércoles" class="week" <?=isset($site_settings[8]["Miércoles"])? "checked":""?>>
+                            <input type="checkbox" id="chkbx-Miércoles" class="week" <?=isset($site_settings[8]["value_info"]["Miércoles"])? "checked":""?>>
                         </div>
                         <span class="input-group-text">Miércoles</span>
                     </div>
-                    <input type="text" id="Miércoles" class="form-control" <?=isset($site_settings[8]["Miércoles"])? "value='".$site_settings[8]["Miércoles"]."'":"disabled"?>>
+                    <input type="text" id="Miércoles" class="form-control" <?=isset($site_settings[8]["value_info"]["Miércoles"])? "value='".$site_settings[8]["value_info"]["Miércoles"]."'":"disabled"?>>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
-                            <input type="checkbox" id="chkbx-Jueves" class="week" <?=isset($site_settings[8]["Jueves"])? "checked":""?>>
+                            <input type="checkbox" id="chkbx-Jueves" class="week" <?=isset($site_settings[8]["value_info"]["Jueves"])? "checked":""?>>
                         </div>
                         <span class="input-group-text">Jueves</span>
                     </div>
-                    <input type="text" id="Jueves" class="form-control" <?=isset($site_settings[8]["Jueves"])? "value='".$site_settings[8]["Jueves"]."'":"disabled"?>>
+                    <input type="text" id="Jueves" class="form-control" <?=isset($site_settings[8]["value_info"]["Jueves"])? "value='".$site_settings[8]["value_info"]["Jueves"]."'":"disabled"?>>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
-                            <input type="checkbox" id="chkbx-Viernes" class="week" <?=isset($site_settings[8]["Viernes"])? "checked":""?>>
+                            <input type="checkbox" id="chkbx-Viernes" class="week" <?=isset($site_settings[8]["value_info"]["Viernes"])? "checked":""?>>
                         </div>
                         <span class="input-group-text">Viernes</span>
                     </div>
-                    <input type="text" id="Viernes" class="form-control" <?=isset($site_settings[8]["Viernes"])? "value='".$site_settings[8]["Viernes"]."'":"disabled"?>>
+                    <input type="text" id="Viernes" class="form-control" <?=isset($site_settings[8]["value_info"]["Viernes"])? "value='".$site_settings[8]["value_info"]["Viernes"]."'":"disabled"?>>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
-                            <input type="checkbox" id="chkbx-Sábado" class="week" <?=isset($site_settings[8]["Sábado"])? "checked":""?>>
+                            <input type="checkbox" id="chkbx-Sábado" class="week" <?=isset($site_settings[8]["value_info"]["Sábado"])? "checked":""?>>
                         </div>
                         <span class="input-group-text">Sábado</span>
                     </div>
-                    <input type="text" id="Sábado" class="form-control" <?=isset($site_settings[8]["Sábado"])? "value='".$site_settings[8]["Sábado"]."'":"disabled"?>>
+                    <input type="text" id="Sábado" class="form-control" <?=isset($site_settings[8]["value_info"]["Sábado"])? "value='".$site_settings[8]["value_info"]["Sábado"]."'":"disabled"?>>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
-                            <input type="checkbox" id="chkbx-Domingo" class="week" <?=isset($site_settings[8]["Domingo"])? "checked":""?>>
+                            <input type="checkbox" id="chkbx-Domingo" class="week" <?=isset($site_settings[8]["value_info"]["Domingo"])? "checked":""?>>
                         </div>
                         <span class="input-group-text">Domingo</span>
                     </div>
-                    <input type="text" id="Domingo" class="form-control" <?=isset($site_settings[8]["Domingo"])? "value='".$site_settings[8]["Domingo"]."'":"disabled"?>>
+                    <input type="text" id="Domingo" class="form-control" <?=isset($site_settings[8]["value_info"]["Domingo"])? "value='".$site_settings[8]["value_info"]["Domingo"]."'":"disabled"?>>
                 </div>
             </div>
         </div>

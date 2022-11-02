@@ -1,36 +1,8 @@
-<?php
+<?php   
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
+    checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
 
-    session_start();
-
-    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
-    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
-    
-    if (!HasPermission("manage_companySettings")) {
-        include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
-        exit();
-    }
-
-    $site_settings = array();
-
-    try {
-        $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
-        if ($conn->connect_error) {
-            echo "No se ha podido conectar a la base de datos.";
-            exit();
-        } else {
-            $stmt = "select * from company_info";
-            if ($res = $conn->query($stmt)) {
-                while ($rows = $res->fetch_assoc()) {
-                    array_push($site_settings, $rows["value_info"]);
-                }
-            }
-        }
-        $site_settings[4] = json_decode($site_settings[4], true);
-        echo "<script>var indexDescription = '".$site_settings[10]."'</script>";
-        $conn->close();
-    } catch (Exception $e) {
-
-    }
+    echo "<script>var indexDescription = '".$site_settings[10]["value_info"]."'</script>";
 ?>
 <div class="container settings-container">
     <h1 class="title"></i>Página de inicio</h1>
@@ -79,7 +51,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Descripción</span>
                     </div>
-                    <textarea id="index-image-description" class="form-control"><?= ($site_settings[6] != ""? $site_settings[6]:"")?></textarea>
+                    <textarea id="index-image-description" class="form-control"><?= ($site_settings[6]["value_info"] != ""? $site_settings[6]["value_info"]:"")?></textarea>
                 </div>
             </div>
         </div>

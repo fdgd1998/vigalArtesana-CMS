@@ -2,35 +2,14 @@
     session_start(); // starting the session.
     require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/users/get_user_roles.php';
     
     if (!HasPermission("manage_users")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
         exit();
     }
 
-    $roles = array();
-
-    try {
-        $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
-        $roles = array(); // Array to save categories
-    
-        if ($conn->connect_error) {
-            print("No se ha podido conectar a la base de datos");
-            exit();
-        } else {
-            $sql = "select id, role from user_roles";
-            if ($res = $conn->query($sql)) {
-                while ($rows = $res->fetch_assoc()) {
-                    array_push($roles, array("id" => $rows["id"], "role" => $rows["role"]));
-                }
-                $res->free();
-            }
-            $conn->close();
-        }
-    } catch (Exception $e) {
-        $conn->close();
-        echo $e;
-    }
+    $roles = getUserRoles();
 
 ?>
 

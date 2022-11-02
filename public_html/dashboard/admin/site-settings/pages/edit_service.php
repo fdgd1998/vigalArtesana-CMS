@@ -1,32 +1,9 @@
 <?php
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
+    checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
 
-    session_start(); // starting the session.
+    $services = $conn->query("select * from services where id = ".$_GET["id"]);
 
-    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php'; 
-    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
-    
-    if (!HasPermission("manage_companySettings")) {
-        include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
-        exit();
-    }
-
-    $services = array();
-    
-    try {
-        $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
-        if ($conn->connect_error) {
-            print("No se ha podido conectar a la base de datos");
-            exit();
-        } else {
-            $stmt = "select * from services where id = ".$_GET["id"];
-            if ($res = $conn->query($stmt)) {
-                if ($rows = $res->fetch_assoc())
-                    $services = array($rows["id"],$rows["title"],$rows["description"],$rows["image"]);
-            }
-        }
-    } catch (Exception $e) {
-        echo $e;
-    }
     echo "<script>var servId = ".$_GET["id"]."</script>";
 ?>
 
@@ -42,7 +19,7 @@
         <div class="input-group-prepend">
             <span class="input-group-text">Título</span>
         </div>
-        <input disabled type="text" class="form-control" id="title-input-edit" value="<?=$services[1]?>">
+        <input disabled type="text" class="form-control" id="title-input-edit" value="<?=$services[0]["title"]?>">
     </div>
     <div class="custom-control custom-checkbox mb-2">
         <input type="checkbox" class="custom-control-input" id="edit-description">
@@ -52,7 +29,7 @@
         <div class="input-group-prepend">
             <span class="input-group-text">Descripción:</span>
         </div>
-        <textarea disabled class="form-control" id="description-input-edit"><?=$services[2]?></textarea>
+        <textarea disabled class="form-control" id="description-input-edit"><?=$services[0]["description"]?></textarea>
     </div>
     <div class="custom-control custom-checkbox mb-2">
         <input type="checkbox" class="custom-control-input" id="edit-image">
@@ -70,7 +47,7 @@
     <div class="row text-center mb-4">
         <div class="col-6 col-sm-6 col-md-6">
             <p>Imagen actual:</p>
-            <img width="100%" style="object-fit: cover !important;" src="../uploads/services/<?=$services[3]?>"/>
+            <img width="100%" style="object-fit: cover !important;" src="../uploads/services/<?=$services[0]["image"]?>"/>
         </div>
         <div class="col-6 col-sm-6 col-md-6">
             <p>Nueva imagen:</p>

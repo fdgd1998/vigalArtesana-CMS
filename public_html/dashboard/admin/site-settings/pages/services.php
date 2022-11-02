@@ -1,36 +1,9 @@
 <?php
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
+    checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
 
-    session_start(); // starting the session.
-    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
-    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
-    
-    if (!HasPermission("manage_companySettings")) {
-        include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
-        exit();
-    }
-
-    $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
-
-    $total_services = 0;
-    $services = array();
-    try {
-      if ($conn->connect_error) {
-        print("No se ha podido conectar a la base de datos");
-        exit();
-      } else {
-        $stmt = "select count(id) from services";
-        if ($res = $conn->query($stmt)) {
-          $total_services = $res->fetch_assoc()["count(id)"];
-        }
-        $sql = "select * from services";
-        $res = $conn->query($sql);
-        while ($rows = $res->fetch_assoc()) {
-            array_push($services, array($rows["id"],$rows["title"],$rows["description"],$rows["image"]));
-        }
-      }
-    } catch (Exception $e) {
-      echo $e;
-    }
+    $services = $conn->query("select * from services");
+    $total_services = $conn->num_rows;
 ?>
 
 <!-- Delete category modal -->
@@ -93,15 +66,15 @@
             <div class="card mb-3">
               <div class="row no-gutters">
                 <div class="col-md-6">
-                  <img src="../uploads/services/<?=$service[3]?>" class="card-img" alt="...">
+                  <img src="../uploads/services/<?=$service["image"]?>" class="card-img" alt="...">
                 </div>
                 <div class="col-md-6 d-flex">
                   <div class="card-body align-self-center">
-                    <h5 class="card-title font-weight-bold"><?=$service[1]?></h5>
-                    <p class="card-text"><?=$service[2]?></p>
+                    <h5 class="card-title font-weight-bold"><?=$service["title"]?></h5>
+                    <p class="card-text"><?=$service["description"]?></p>
                     <div class="button-group carousel-buttons">
-                      <button type="button" id="edit-<?=$service[0]?>" class="btn my-button-3 edit-service"><i class="far fa-edit"></i>Editar</button>
-                      <button type="button" id="delete-<?=$service[0]?>" class="btn my-button-2 delete-service"><i class="far fa-trash-alt"></i>Borrar</button>
+                      <button type="button" id="edit-<?=$service["id"]?>" class="btn my-button-3 edit-service"><i class="far fa-edit"></i>Editar</button>
+                      <button type="button" id="delete-<?=$service["id"]?>" class="btn my-button-2 delete-service"><i class="far fa-trash-alt"></i>Borrar</button>
                     </div>
                   </div>
                 </div>

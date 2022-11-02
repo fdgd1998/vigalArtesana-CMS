@@ -1,38 +1,21 @@
 <?php
-    error_reporting(0);
+    // error_reporting(0);
     session_start();
-    require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
-    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
-    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/check_session.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_permissions.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/database_connection.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_site_settings.php";
 
     if (!HasPermission("standard_user")) {
-        include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
+        include $_SERVER["DOCUMENT_ROOT"]."/dashboard/includes/forbidden.php";
         exit();
     }
 
-    $maintenance = "";
-    $seoModified = "";
-    $metadata = array();
-    $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
-    $conn->set_charset("utf8");
+    // $metadata = array();
+    $conn = new DatabaseConnection();
+    $site_settings = getSiteSettings();
 
-    if ($conn->connect_error) {
-        print("No se ha podido conectar a la base de datos");
-        exit();
-    } else {
-        $sql = "select value_info from company_info where key_info = 'maintenance'";
-        
-        if ($res = $conn->query($sql)) {
-            $maintenance = $res->fetch_assoc()["value_info"];
-        }
-
-        $sql = "select value_info from company_info where key_info = 'seo_modified'";
-        
-        if ($res = $conn->query($sql)) {
-            $seoModified = $res->fetch_assoc()["value_info"];
-        }
-    }
 ?>
 <!DOCTYPE html>
 <html>

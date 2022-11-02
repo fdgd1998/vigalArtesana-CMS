@@ -1,32 +1,9 @@
 <?php
 
-    session_start(); // starting the session.
-    require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
-    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
-    
-    if (!HasPermission("show_categories")) {
-        include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
-        exit();
-    }
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
+    checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
 
-    $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
-    $pages = array();
-    try {
-      if ($conn->connect_error) {
-          echo "No se ha podido establecer una conexión con la base de datos.";
-          exit();
-      } else {
-          // Fetching categories from database and storing then in the array for further use.
-          $sql = "select * from pages";
-          if ($res = $conn->query($sql)) {
-              while ($rows = $res->fetch_assoc()) {
-                array_push($pages, array("id" => $rows["id"], "page" => $rows["page"], "cat_id" => $rows["cat_id"]));
-              }
-          }
-      }
-  } catch (Exception $e) {
-      echo $e;
-  }
+    $pages = $conn->query("select * from pages");
 ?>
 
 <!-- create category modal -->

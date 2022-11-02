@@ -1,33 +1,7 @@
 <?php
 
-    session_start(); // starting the session.
-    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
-    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/get_uri.php';
-    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
-    
-    if (!HasPermission("manage_seoSettings")) {
-        include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
-        exit();
-    }
-
-    $about_text = "";
-    
-    try {
-        $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
-        if ($conn->connect_error) {
-            echo "No se ha podido conectar a la base de datos.";
-            exit();
-        } else {
-            $stmt = "select value_info from company_info where key_info = 'about-us'";
-            if ($res = $conn->query($stmt)) {
-                $about_text = $res->fetch_assoc()["value_info"];
-                $res->free();
-            }
-        }
-        $conn->close();
-    } catch (Exception $e) {
-
-    }
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
+    checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
 ?>
 <div class="container content">
     <h1 class="title">Notificar cambios a motores de búsqueda</h1>

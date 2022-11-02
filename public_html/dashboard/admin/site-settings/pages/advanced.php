@@ -1,35 +1,6 @@
 <?php
-
-    session_start();
-    
-    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
-    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
-    
-    if (!HasPermission("manage_siteSettings")) {
-        include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
-        exit();
-    }
-
-    $site_settings = array();
-
-    try {
-        $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
-        
-        if ($conn->connect_error) {
-            echo "No se ha podido conectar a la base de datos.";
-            exit();
-        } else {
-            $stmt = "select value_info from company_info where key_info = 'maintenance'";
-            if ($res = $conn->query($stmt)) {
-                while ($rows = $res->fetch_assoc()) {
-                    array_push($site_settings, $rows["value_info"]);
-                }
-            }
-        }
-        $conn->close();
-    } catch (Exception $e) {
-        echo $e;
-    }
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
+    checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
 ?>
 <div class="container settings-container">
     <h1 class="title">Opciones avanzadas</h1>
@@ -44,7 +15,7 @@
         </div>
         <div class="form-row text-right">
             <div class="col">
-                <?php if ($site_settings[0] != "true"): ?>
+                <?php if ($site_settings[11]["value_info"] != "true"): ?>
                     <button id="maintenance-on" class="btn my-button-3" type="button"><i class="i-margin fas fa-arrow-up"></i>Activar</button>
                 <?php else: ?>
                     <button id="maintenance-off" class="btn my-button-2" type="button"><i class="i-margin fas fa-arrow-down"></i>Desactivar</button>

@@ -8,10 +8,10 @@
         exit();
     }
 
-    function HasPermission($pageName) {
+    function HasPermission($permName) {
         require dirname($_SERVER["DOCUMENT_ROOT"], 1)."/connection.php";
         
-        $pages = array 
+        $permissions = array 
             (
               "manage_gallery" =>  "1000000",
               "manage_companySettings" =>  "0100000",
@@ -40,7 +40,7 @@
         
         $conn->close();
 
-        return (($userPerm & bindec($pages[$pageName])) == bindec($pages[$pageName])) ? true : false;
+        return (($userPerm & bindec($permissions[$permName])) == bindec($permissions[$permName])) ? true : false;
         
     }
 ?>

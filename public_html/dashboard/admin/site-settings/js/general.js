@@ -1,11 +1,25 @@
+function enableIndexImageEditBtn() {
+    total_inputs = 0;
+    if ($("#upload-index-image").prop("files").length == 1) total_inputs++;
+    if ($.trim($("#image-desc").val()) != "") total_inputs++;
+    if (total_inputs == 2) {
+        $("#submit-index-image").removeAttr("disabled");
+    } else {
+        $("#submit-index-image").attr("disabled",true);
+    }
+}
+
 $(document).ready(function() {
-    $("#index-image-description").on("input", function() {
-        console.log($(this).val());
-        if ($(this).val()) {
+    $("#index-image-description").on("keyup", function() {
+        if ($.trim($(this).val()) != "") {
             $("#submit-index-image-description").removeAttr("disabled");
         } else {
             $("#submit-index-image-description").attr("disabled","disabled");
         }
+    });
+
+    $("#image-desc").on("keyup", function() {
+        enableIndexImageEditBtn()
     });
 
     $("#upload-index-image").on("change", function(e){
@@ -30,13 +44,11 @@ $(document).ready(function() {
                             readURL(input, $("#index-image-preview"));
                             $("#index-image-preview").parent().removeAttr("hidden");
                             $("#upload-index-name").html(blob.name); // Updating input text.
-                            $("#submit-index-image").removeAttr("disabled");
                         } else {
                             $(input).val('');
                             alert("El fichero supera el máximo de 5 MB. Comprueba el tamaño e inténtalo de nuevo.");
                             $("#index-image-preview").parent().attr("hidden",true);
                             $("#upload-index-name").html("Seleccionar imagen...");
-                            $("#submit-index-image").attr("disabled","disabled");
                         }
                     }
                 },
@@ -44,25 +56,15 @@ $(document).ready(function() {
                     $("#upload-index-name").html("Seleccionar imagen...");
                     $("#index-image-preview").parent().attr("hidden",true);
                     $("#upload-index-image").val("");
-                    $("#submit-index-image").attr("disabled","disabled");
                     alert("El fichero " + blob.name + " ya existe en el servidor. Renómbralo e inténtalo de nuevo.");
-                }
-            // if (!CheckImageSize($(this).prop("files")[0], 2097152)) {
-                
-            //     var fileName = $(this).val().substring(12);
-            //     console.log(fileName);
-            //     $('#cat-image-name').html(fileName);
-            //     readURL(this, $("#cat-image-preview"));
-            //     $("#cat-image-preview-div").prop("hidden", false);  
-            // } else {
-            //     $(this).val('');   
+                } 
             });
         } else {
              // If no files are selected, reset form.
              $("#index-image-preview").parent().attr("hidden",true);
              $("#upload-index-name").html("Seleccionar imagen...");
-             $("#submit-index-image").attr("disabled","disabled");
         }
+        enableIndexImageEditBtn();
     });
 
     $("#submit-index-image-description").on("click", function(e){
@@ -96,13 +98,13 @@ $(document).ready(function() {
         // Getting data to sent and appending it to the form data.
         var formData = new FormData();
 
-        formData.append("filename", "index.php"); // encoding string to pass it to php file
-
+        formData.append("image", $("#upload-index-image").prop("files")[0]);
+        formData.append("image-desc", $.trim($("#image-desc").val()));
         // getting files metadata to pass it to php file
-        var files = $("#upload-index-image").prop("files");
-            for (var i = 0; i < files.length; i++) {
-                formData.append("image"+i, files[i]);
-            }
+        // var files = $("#upload-index-image").prop("files")[0];
+        //     for (var i = 0; i < files.length; i++) {
+        //         formData.append("image"+i, files[i]);
+        //     }
 
         // Sending AJAX request to the server.
         $.ajax({

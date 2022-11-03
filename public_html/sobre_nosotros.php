@@ -4,8 +4,6 @@
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
 
     $site_settings = getSiteSettings();
-    $site_settings[8]["value_info"] = json_decode($site_settings[8]["value_info"], true);
-    $site_settings[4]["value_info"] = json_decode($site_settings[4]["value_info"], true);
     $conn = new DatabaseConnection(); // Opening database connection.
     
     $page_id = 7;

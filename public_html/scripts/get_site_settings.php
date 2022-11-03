@@ -10,7 +10,7 @@
         3 => email
         4 => social media
         5 => index image
-        6 => image index description
+        6 => index slogan
         7 => google maps link
         8 => opening hours
         9 => about us
@@ -18,6 +18,7 @@
         11 => maintenance mode
         12 => gallery description
         13 => seo update
+        14 => index image description
     */
 
     function getSiteSettings() {

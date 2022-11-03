@@ -15,11 +15,14 @@
     if (isset($_POST)) {
         $location = $_SERVER["DOCUMENT_ROOT"]."/uploads//";
         $conn = new DatabaseConnection();
-        echo var_dump($_FILES);
-        $sql = "update company_info set value_info='".$_FILES["image0"]["name"]."' where key_info='index-image'";
 
-        if ($conn->query($sql)) {
-            move_uploaded_file($_FILES["image0"]['tmp_name'],$location.$_FILES["image0"]["name"]); 
+        $sql = array(
+            "update company_info set value_info='".$_POST["image-desc"]."' where key_info='index-image-desc'",
+            "update company_info set value_info='".$_FILES["image"]["name"]."' where key_info='index-image'"
+        );
+
+        if ($conn->transaction($sql)) {
+            move_uploaded_file($_FILES["image"]['tmp_name'],$location.$_FILES["image"]["name"]); 
             $sitemap = readSitemapXML();
             changeSitemapUrl($sitemap, GetBaseUri(), GetBaseUri());
             writeSitemapXML($sitemap);

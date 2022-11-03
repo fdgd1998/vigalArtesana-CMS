@@ -80,7 +80,7 @@
             include $_SERVER["DOCUMENT_ROOT"].'/includes/header.php';
         ?>
         <div class="index-image-container">
-            <img class="index-image wow animate__animated animate__fadeIn" src="<?=GetBaseUri()?>/uploads/<?=$site_settings[5]["value_info"]?>"></img>
+            <img class="index-image wow animate__animated animate__fadeIn" src="<?=GetBaseUri()?>/uploads/<?=$site_settings[5]["value_info"]?>" alt="<?=$site_settings[14]["value_info"]?>"></img>
             <div class="index-text-image">
                 <h1 class="wow animate__animated animate__fadeInUp"><?=$site_settings[6]["value_info"]?></h1>
             </div>

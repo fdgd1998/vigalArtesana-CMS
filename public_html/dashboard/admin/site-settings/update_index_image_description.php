@@ -14,7 +14,7 @@
 
     if (isset($_POST)) {
         $conn = new DatabaseConnection();
-        $sql = "update company_info set value_info='".$_POST["index-image-description"]."' where key_info='index-image-description'";
+        $sql = "update company_info set value_info='".$_POST["index-image-description"]."' where key_info='index-slogan'";
         if ($conn->query($sql)) {
             $sitemap = readSitemapXML();
             changeSitemapUrl($sitemap, GetBaseUri(), GetBaseUri());

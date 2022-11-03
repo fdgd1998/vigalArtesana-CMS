@@ -26,6 +26,12 @@
                         <label id="upload-index-name" class="custom-file-label" for="upload-files" data-browse="Buscar...">Seleccionar imagen...</label>
                     </div>
                 </div>
+                <div class="mb-3">
+                    <label for="basic-url">Descripción de la imagen:</label>
+                    <div class="input-group mb-3">
+                        <input id="image-desc" type="text" class="form-control" maxlength="60">
+                    </div>
+                </div>
             </div>
         </div>
         <div class="form-row">
@@ -41,16 +47,13 @@
     <form style="margin-bottom: 20px;">
         <div class="form-row">
             <div class="col">
-                <h3 class="title">Descripción de la imagen de portada</h3>
-                <p class="title-description">Establece una descripción que se mostrará sobre la imagen de la página principal configurada en la opción de arriba.</p>
+                <h3 class="title">Eslogan de la empresa</h3>
+                <p class="title-description">Establece un eslogan que se mostrará sobre la imagen de la página principal configurada en la opción de arriba.</p>
             </div>
         </div>
         <div class="form-row">
             <div class="col">
                 <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Descripción</span>
-                    </div>
                     <textarea id="index-image-description" class="form-control"><?= ($site_settings[6]["value_info"] != ""? $site_settings[6]["value_info"]:"")?></textarea>
                 </div>
             </div>

@@ -88,7 +88,7 @@
     }
 
     function deleteSitemapUrl(&$arr, $value) {
-        for ($i = 0; $i < count($arr["url"]); $i++) {
+        for ($i = 0; $i <= count($arr["url"]); $i++) {
             if($arr["url"][$i]["loc"] == $value) {
                 unset($arr["url"][$i]);
             }

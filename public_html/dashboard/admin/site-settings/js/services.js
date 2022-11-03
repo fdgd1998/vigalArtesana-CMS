@@ -4,8 +4,9 @@ $(document).ready(function() {
         var total_inputs = 0;
         if($.trim($("#title-new").val()) != "") total_inputs++;
         if($.trim($("#description-new").val()) != "") total_inputs++;
+        if($.trim($("#new-image-desc").val()) != "") total_inputs++;
         if($("#image-input-new").prop("files")[0]) total_inputs++;
-        if(total_inputs == 3) $("#new-service-btn").removeAttr("disabled");
+        if(total_inputs == 4) $("#new-service-btn").removeAttr("disabled");
         else $("#new-service-btn").attr("disabled","disabled");
     }
     $("#new-service-btn").on("click", function(){
@@ -13,6 +14,7 @@ $(document).ready(function() {
         var formData = new FormData();
         formData.append("title", $("#title-new").val());
         formData.append("description", $("#description-new").val());
+        formData.append("image-desc", $("#new-image-desc").val());
         formData.append("file", $("#image-input-new").prop("files")[0]);
         $.ajax({
             url: location.origin+'/dashboard/admin/site-settings/create_service.php', // this is the target
@@ -76,7 +78,7 @@ $(document).ready(function() {
         EnableSaveCategoryBtn ();
     });
 
-    $("#title-new, #description-new").on("keyup", function() {
+    $("#title-new, #description-new, #new-image-desc").on("keyup", function() {
         EnableSaveCategoryBtn ();
     })
 
@@ -136,8 +138,11 @@ $(document).ready(function() {
 
     function IsImageValid() {
         console.log("image valid: "+$("#image-input-edit").prop("files")[0]);
-        if ($("#image-input-edit").prop("files")[0] && $("#image-input-edit").prop("files")[0].size < 5242880) 
-        {
+        if (
+            $("#image-input-edit").prop("files")[0] && 
+            $("#image-input-edit").prop("files")[0].size < 5242880 &&
+            $.trim($("#edit-image-desc").val()) != ""
+        ) {
             return true;
         } else {
             return false;
@@ -209,6 +214,7 @@ $(document).ready(function() {
     $("#edit-image").on("change", function(){
         if ($(this).is(":checked")) {
             $("#image-input-edit").removeAttr("disabled");
+            $("#edit-image-desc").removeAttr("disabled");
             EnableEditServiceBtn(IsImageValid());
         } else {
             if ($("#edit-title, #edit-description").is(":checked")) {
@@ -224,8 +230,13 @@ $(document).ready(function() {
                 console.log("solo imagen seleccionado");
                 EnableEditServiceBtn(false);
             }
-            $("#image-input-edit").attr("disabled","disabled");
+            $("#image-input-edit").attr("disabled", true);
+            $("#edit-image-desc").attr("disabled", true);
         } 
+    });
+
+    $("#edit-image-desc").on("keyup", function() {
+        EnableEditServiceBtn(IsImageValid());
     });
 
     $("#image-input-edit").on("change", function(){
@@ -249,12 +260,12 @@ $(document).ready(function() {
                         if (blob.size < 5242880) {
                             readURL(input, $("#service-edit-image-preview"));
                             $("#image-input-edit-label").html(blob.name); 
-                            EnableEditServiceBtn(true);       
+                            EnableEditServiceBtn(IsImageValid());       
                         } else {
                             $("#image-input-edit").val("");
                             alert("El fichero supera el máximo de 5 MB. Comprueba el tamaño e inténtalo de nuevo.");
                             $("#image-input-edit-label").html("Selecccionar imagen...");
-                            EnableEditServiceBtn(false);
+                            EnableEditServiceBtn(fIsImageValid());
                         }
                     }
                 },
@@ -262,33 +273,15 @@ $(document).ready(function() {
                     $("#image-input-edit-label").html("Seleccionar imagen...");
                     $("#image-input-edit").val("");
                     alert("El fichero " + blob.name + " ya existe en el servidor. Renómbralo e inténtalo de nuevo.");
-                    EnableEditServiceBtn(false);
+                    EnableEditServiceBtn(IsImageValid());
                 }
             });
         } else {
             $("#image-input-edit-label").html("Seleccionar imagen...");
             $("#image-input-edit").val("");
             $("#service-edit-image-preview").attr("src","../includes/img/placeholder-image.jpg");
-            EnableEditServiceBtn(false);
+            EnableEditServiceBtn(IsImageValid());
         }
-        EnableSaveCategoryBtn ();
-        // if ($(this).prop("files")[0]) {
-        //     if ($(this).prop("files")[0].size < 5242880) {
-        //         $("#image-input-edit-label").html($(this).prop("files")[0].name);
-        //         readURL(this, $("#service-edit-image-preview"));
-        //         EnableEditServiceBtn(true);
-        //     } else {
-        //         $(this).val('');
-        //         alert("El fichero supera el máximo de 5 MB. Comprueba el tamaño e inténtalo de nuevo.");
-        //         $("#image-input-edit-label").html("Escoger imagen...");
-        //         $("#service-edit-image-preview").attr("src","../includes/img/placeholder-image.jpg"); 
-        //         EnableEditServiceBtn(false);
-        //     }
-        // } else {
-        //     $("#image-input-edit-label").html("Escoger imagen...");
-        //     $("#service-edit-image-preview").attr("src","../includes/img/placeholder-image.jpg");
-        //     EnableEditServiceBtn(false);
-        // }
     });
 
     $("#cancel-service-edit").on("click", function(){
@@ -307,6 +300,7 @@ $(document).ready(function() {
         }
         if ($("#edit-image").is(":checked")) {
             formData.append("image", $("#image-input-edit").prop("files")[0]);
+            formData.append("image-desc", $.trim($("#edit-image-desc").val()));
         }
 
         console.log("title: "+formData.get("title"));

@@ -10,18 +10,28 @@
 ?>
 <div class="container content">
     <h1 class="title">Nuevo servicio</h1>
+    <p class="title-description">
+        Describe el servicio. Aporta un título, descripción e imagen.
+        Junto a la imagen, porporciona una descripción acorde a su contenido para propósitos de SEO.
+    </p>
     <p class="title-description">Tamaño máximo de imagen: 5 MB.</p>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Título</span>
+    <div class="mb-3">
+        <label for="basic-url">Título:</label>
+        <div class="input-group mb-3">
+            <input id="title-new" type="text" class="form-control" maxlength="60">
         </div>
-        <input id="title-new" type="text" class="form-control" maxlength="60">
     </div>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text">Descripción</span>
+    <div class="mb-3">
+        <label for="basic-url">Descripción:</label>
+        <div class="input-group mb-3">
+            <textarea class="form-control" id="description-new" maxlength="200"></textarea>
         </div>
-        <textarea class="form-control" id="description-new" maxlength="200"></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="basic-url">Descripción de la imagen:</label>
+        <div class="input-group mb-3">
+            <input id="new-image-desc" type="text" class="form-control" maxlength="60">
+        </div>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">

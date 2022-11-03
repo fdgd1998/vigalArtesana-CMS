@@ -40,7 +40,7 @@
                 echo "Ha ocurrido un error mientras se borraba la imagen.";
             }
 
-            $sql= "update services set image = '".$_FILES["image"]["name"]."' where id = ".$_POST["id"];
+            $sql= "update services set image = '".$_FILES["image"]["name"]."', image_desc = '".$_POST["image-desc"]."' where id = ".$_POST["id"];
             if ($conn->query($sql)) {
                 echo "La imagen del servicio se ha actualizado correctamente.";
             } else {
@@ -63,7 +63,7 @@
                 echo "Ha ocurrido un error mientras se borraba la imagen.";
             }
 
-            $sql = "update services set title = '".$_POST["title"]."', image = '".$_FILES["image"]["name"]."' where id = ".$_POST["id"];
+            $sql = "update services set title = '".$_POST["title"]."', image = '".$_FILES["image"]["name"]."', image_desc = '".$_POST["image-desc"]."' where id = ".$_POST["id"];
             if ($conn->query($sql) == TRUE) {
                 echo "El título y la imagen del servicio se han actualizado correctamente.";
             } else {
@@ -80,7 +80,7 @@
                 echo "Ha ocurrido un error mientras se borraba la imagen.";
             }
 
-            $sql = "update services set title = '".$_POST["title"]."', description = '".$_POST["description"]."', image = '".$_FILES["image"]["name"]."' where id = ".$_POST["id"];
+            $sql = "update services set title = '".$_POST["title"]."', description = '".$_POST["description"]."', image = '".$_FILES["image"]["name"]."', image_desc = '".$_POST["image-desc"]."' where id = ".$_POST["id"];
             if ($conn->query($sql)) {
                 echo "La descripción y la imagen del servicio se han actualizado correctamente.";
             } else {

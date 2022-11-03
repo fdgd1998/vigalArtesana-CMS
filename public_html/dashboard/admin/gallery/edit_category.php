@@ -1,4 +1,5 @@
 <?php
+    error_reporting(0);
     require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
     checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
 
@@ -17,6 +18,13 @@
         $conn = new DatabaseConnection();
         $nameChange = false;
         $location = $_SERVER["DOCUMENT_ROOT"]."/uploads/categories/"; //location for category images.
+
+        $categoryUrlBefore = "";
+        $sql = "select friendly_url from categories where id = ".$_POST["cat_id"];
+        if ($res = $conn->query($sql)) {
+            $categoryUrlBefore = $res[0]["friendly_url"];
+        }
+        $urlBefore = GetBaseUri()."/"."galeria/".$categoryUrlBefore;
 
         if (isset($_POST["cat_name"]) && !isset($_FILES["cat_file"]) && !isset($_POST["cat_desc"])) { // changing category name
             $sql = array(
@@ -119,19 +127,43 @@
             }
         }
 
-        $categoryUrl = "";
+        $categoryUrlAfter = "";
         $sql = "select friendly_url from categories where id = ".$_POST["cat_id"];
         if ($res = $conn->query($sql)) {
-            $categoryUrl = $res[0]["friendly_url"];
+            $categoryUrlAfter = $res[0]["friendly_url"];
         }
+        
+        $total_pages = 0;
+        $sql = "select count(id) from gallery where category = ".$_POST["cat_id"];
+        if ($res = $conn->query($sql)) {
+            $total_pages += intdiv($res[0]["count(id)"], 12);
+            $total_pages += ($res[0]["count(id)"] % 12 != 0)? 1 : 0;
+        }
+
+        echo "\ntotal pages: $total_pages\n";
+
         $sitemap = readSitemapXML();
+        $urlAfter = GetBaseUri()."/"."galeria/".$categoryUrlAfter;
         if ($nameChange) {
-            deleteSitemapUrl($sitemap, GetBaseUri()."/"."galeria/".$categoryUrl);
-            addSitemapUrl($sitemap, GetBaseUri()."/"."galeria/".$categoryUrl);
-            #falta hacer loop por todas las paginas de la categoria
+            deleteSitemapUrl($sitemap, $urlBefore);
+            // echo "delete: $urlBefore\n";
+            for ($i = 2; $i <= $total_pages; $i++) {
+                // echo "delete: ".$urlBefore."/$i\n";
+                deleteSitemapUrl($sitemap, $urlBefore."/$i");
+            }
+            addSitemapUrl($sitemap, $urlAfter);
+            // echo "add: $urlAfter\n";
+            for ($i = 2; $i <= $total_pages; $i++) {
+                // echo "add: ".$urlAfter."/$i\n";
+                addSitemapUrl($sitemap, $urlAfter."/$i");
+            }
         } else {
-            changeSitemapUrl($sitemap, GetBaseUri()."/"."galeria/".$categoryUrl, GetBaseUri()."/"."galeria/".$categoryUrl);
-            #falta hacer loop por todas las paginas de la categoria
+            changeSitemapUrl($sitemap, $urlAfter, $urlAfter);
+            // echo "change: $urlAfter\n";
+            for ($i = 2; $i <= $total_pages; $i++) {
+                // echo "change: ".$urlAfter."/$i\n";
+                changeSitemapUrl($sitemap, $urlAfter."/$i", $urlAfter."/$i");
+            }
         }
         changeSitemapUrl($sitemap, GetBaseUri()."/galeria", GetBaseUri()."/galeria");
         writeSitemapXML($sitemap);

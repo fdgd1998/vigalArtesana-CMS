@@ -1,9 +1,10 @@
 <?php
     session_start();
-    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_company_info.php";
-    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_site_settings.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/check_maintenance.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/set_error_header.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
+    $site_settings = getSiteSettings();
     set_403_header();
 ?>
 
@@ -12,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso prohibido - ViGal Artesana</title>
+    <title>Acceso prohibido - <?=$site_settings[2]["value_info"]?></title>
     <link rel="icon" href="/includes/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/footer.css">
@@ -28,13 +29,7 @@
 <body>
     <?php
         include $_SERVER["DOCUMENT_ROOT"].'/includes/header.php';
-    ?>
-    <div class="container content">
-        <h1 class="title"><i class="i-margin fas fa-ban"></i>Acceso prohibido</h1>
-        <p class="title-description">No tienes acceso al recurso solicitado. Verifica que tienes permisos para acceder a este recurso e inténtalo de nuevo.</p>
-    </div>
-        
-    <?php
+        include $_SERVER["DOCUMENT_ROOT"].'/snippets/403.php';
         include $_SERVER["DOCUMENT_ROOT"].'/includes/footer.php';
     ?>
         <script src="<?=GetBaseUri()?>/includes/js/jquery.min.js"></script>

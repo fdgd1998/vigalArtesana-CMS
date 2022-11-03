@@ -1,7 +1,11 @@
 <?php
+    session_start();
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_site_settings.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
 
-    session_start();
+    $site_settings = getSiteSettings();
+    $conn = new DatabaseConnection(); // Opening database connection.
+
     if (isset($_SESSION["loggedin"])) {
         header("Location: index.php");
         exit();
@@ -13,7 +17,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Iniciar sesión en <?=$GLOBALS["site_settings"][2]?></title>
+    <title>Iniciar sesión en <?=$site_settings[2]["value_info"]?></title>
     <meta name="description" content="Iniciar sesión en ViGal Artesana">
     <link rel="icon" href="<?=GetBaseUri()?>/includes/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/bootstrap/css/bootstrap.min.css">

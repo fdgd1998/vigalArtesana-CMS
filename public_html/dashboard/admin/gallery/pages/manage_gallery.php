@@ -1,9 +1,9 @@
 <?php
-    error_reporting(0);
-    session_start(); // stating the session
-    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/check_session.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
+    checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
+
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
-    
+
     if (!HasPermission("manage_gallery")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
         exit();
@@ -31,20 +31,18 @@
     // Keeping sort order if the GET variable exists.
     $display = "all";
     if (isset($_GET['display'])&&$_GET['display']=="bycategory") $display = $_GET['display'];
-
-    // Opening database connection.
-    $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
     
     $sql = "select gallery.id, dir, filename, category from gallery inner join categories on gallery.category = categories.id";
     if (isset($_GET["c"])) {
       $sql .= " and gallery.category = ".$_GET["c"];
     }
+    
     $sql.=" limit $paginationStart, $limit";
+
     if ($res = $conn->query($sql)) {
-        while ($rows = $res->fetch_assoc()) {
-            array_push($results, array($rows["id"], $rows["dir"], $rows["filename"], $rows["category"]));
+        foreach ($res as $item) {
+            array_push($results, array($item["id"], $item["dir"], $item["filename"], $item["category"]));
         }
-        $res->free();
     }
     // Getting all records from database
     $sql = "";
@@ -54,7 +52,7 @@
       $sql = "select count(gallery.id) as id from gallery inner join categories on gallery.category = categories.id";
     }
 
-    $allRecords = $conn->query($sql)->fetch_assoc()['id'];
+    $allRecords = $conn->query($sql)[0]['id'];
     
     // Calculate total pages
     $totalPages = ceil($allRecords / $limit);
@@ -82,36 +80,26 @@
       <option value="all" <?=$display=='all'?'selected':''?>>Todos</option>
       <option value="bycategory" <?=isset($_GET['c'])?'selected':''?>>Por categoría</option>
     </select>
-    <?php 
-      //If the GET variable 'category' is set, a dropdown element is created.
-      if (isset($_GET['c'])): 
-    ?>
-      <select id="category-order" class="form-control">
-      <?php else: ?>
-      <select hidden id="category-order" class="form-control">
-      
-      <?php endif; ?>
-      <?php
-          if ($conn->connect_error) {
-            echo "No se ha podido conectar a la base de datos.";
-          } else {
-            $sql = "select id, name from categories";
-            
-            $res = $conn->query($sql);
-            if ($res->num_rows > 0) {
-              while ($row = $res->fetch_assoc()) {
-                $selected = "false";
-                if ($_GET['c']==$row['id']) {
-                  echo "<option value='".$row['id']."' selected>".$row['name']."</option>";
-                } else {
-                  echo "<option value='".$row['id']."'>".$row['name']."</option>";
-                }   
-              }
+    <?php if (isset($_GET['c'])): ?>
+    <select id="category-order" class="form-control">
+    <?php else: ?>
+    <select hidden id="category-order" class="form-control">
+    
+    <?php endif; ?>
+    <?php
+          $sql = "select id, name from categories";
+          if ($res = $conn->query($sql)) {
+            foreach ($res as $item) {
+              $selected = "false";
+              if ($_GET['c']==$item['id']) {
+                echo "<option value='".$item['id']."' selected>".$item['name']."</option>";
+              } else {
+                echo "<option value='".$item['id']."'>".$item['name']."</option>";
+              }   
             }
-            $res->free();
           }
-        ?>
-      </select>
+      ?>
+    </select>
   </div>
   <form id="set-limit" action="<?=$baseURL?>" method="get">
     <div class="input-group mb-3" style="width: 220px; padding-bottom: 20px;">

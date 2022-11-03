@@ -1,33 +1,20 @@
 <?php
-    require_once "scripts/get_company_info.php";
+    session_start();
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_site_settings.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
+
+    $site_settings = getSiteSettings();
+    $site_settings[8]["value_info"] = json_decode($site_settings[8]["value_info"], true);
+    $site_settings[4]["value_info"] = json_decode($site_settings[4]["value_info"], true);
+    $conn = new DatabaseConnection(); // Opening database connection.
     
-    
-    $services = array(); // Array to save categories
     $page_id = 7;
 
-    if ($GLOBALS["site_settings"][11] == "false" || ($GLOBALS["site_settings"][11] == "true" && isset($_SESSION["loggedin"]))) { 
-        try {
-            $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
-            if ($conn->connect_error) {
-                echo "No se ha podido establecer una conexión con la base de datos.";
-                exit();
-            } else {
-                // Fetching categories from database and storing then in the array for further use.
-
-                // Getting page metadata
-                $sql = "select title, description from pages_metadata where id_page = (select id from pages where id = ".$page_id.")";  
-                if ($res = $conn->query($sql)) {
-                    $rows = $res->fetch_assoc();
-                    $page_title = $rows['title'];
-                    $page_description = $rows['description'];
-                    $res->free();
-                }
-                $conn->close();
-            }
-        } catch (Exception $e) {
-            include $_SERVER["DOCUMENT_ROOT"]."/errorpages/500.php";
-            exit();
+    if ($site_settings[11]["value_info"] == "false" || ($site_settings[11]["value_info"] == "true" && isset($_SESSION["loggedin"]))) { 
+        $sql = "select title, description from pages_metadata where id_page = (select id from pages where id = ".$page_id.")";  
+        if ($res = $conn->query($sql)) {
+            $page_title = $res[0]['title'];
+            $page_description = $res[0]['description'];
         }
     } else {
         $conn->close();
@@ -41,8 +28,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php if ($GLOBALS["site_settings"][11] == "false"): ?>
-    <title><?=$page_title." | ".$GLOBALS["site_settings"][2]?></title>
+    <?php if ($site_settings[11]["value_info"] == "false"): ?>
+    <title><?=$page_title." | ".$site_settings[2]["value_info"]?></title>
     <meta name="description" content="<?=$page_description?>">
     <meta name="robots" content="index, follow">
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -72,18 +59,18 @@
 
 <body>
     <?php
-    if ($GLOBALS["site_settings"][11] == "true" && !isset($_SESSION["loggedin"])) {
+    if ($site_settings[11]["value_info"] == "true" && !isset($_SESSION["loggedin"])) {
         include $_SERVER["DOCUMENT_ROOT"]."/snippets/maintenance_page.php";
         exit();
     }
-    if ($GLOBALS["site_settings"][11] == "true" && isset($_SESSION["loggedin"])) {
+    if ($site_settings[11]["value_info"] == "true" && isset($_SESSION["loggedin"])) {
         include $_SERVER["DOCUMENT_ROOT"]."/snippets/maintenance_message.php";
     }
     include $_SERVER["DOCUMENT_ROOT"].'/includes/header.php';
     ?>
     <div class="container content">
         <h1 class="title">Sobre nosotros</h1>
-        <?=$GLOBALS["site_settings"][9]?>
+        <?=$site_settings[9]["value_info"]?>
     </div>
 
     <?php

@@ -12,26 +12,32 @@
 
         public function query($sql) {
             $res = array();
-            if ($aux = $this->conn->query($sql)) {
+            $aux = $this->conn->query($sql);
+            if (gettype($aux) == "object") {
                 $this->num_rows = $aux->num_rows;
                 while ($rows = $aux->fetch_assoc()) {
                     array_push($res, $rows);
                 }
+                return $res;
+            } else {
+                $this->num_rows = 0;
+                return $aux;
             }
-            return $res;
+        }
+
+        public function transaction($sql) {
+            $this->conn->begin_transaction();
+            foreach ($sql as $item) {
+                $this->conn->query($item);
+            }
+
+            if ($this->conn->commit()) {
+                return true;
+            } else {
+                $this->conn->rollback();
+                return false;
+            }
         }
     }
-    // function openConnection() {
-    //     require dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
-    //     $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
-    //     $conn->set_charset("utf8");
-
-    //     if ($conn->connect_error) {
-    //         print("No se ha podido conectar a la base de datos");
-    //         exit();
-    //     } else {
-    //         return $conn;
-    //     }
-    // }
     
 ?>

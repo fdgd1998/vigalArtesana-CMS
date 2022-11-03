@@ -1,7 +1,6 @@
 <?php
-    error_reporting(0);
-    session_start(); // starting the session.
-    require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
+    checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
     
     if (!HasPermission("standard_user")) {
@@ -16,8 +15,7 @@
 
 
     if ($res = $conn->query($sql)) {
-        $rows = $res->fetch_assoc();
-        foreach($rows as $key => $value) {
+        foreach ($res[0] as $key => $value) {
             $userdata[$key] = $value;
         }
     }

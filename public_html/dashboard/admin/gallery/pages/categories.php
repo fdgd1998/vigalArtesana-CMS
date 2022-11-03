@@ -1,6 +1,7 @@
 <?php
-    session_start(); // Starting the session.
-    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/check_session.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
+    checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
+
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
     
     if (!HasPermission("manage_gallery")) {
@@ -8,24 +9,15 @@
         exit();
     }
 
-    $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
     $categories = array();
-
-    if ($conn->connect_error) {
-      include $_SERVER["DOCUMENT_ROOT"]."/errorpages/500.php";
-      exit();
+    $sql = "select * from categories ";
+    if ($res = $conn->query($sql)) {
+      foreach ($res as $item) {
+        array_push($categories, array ("id" => $item["id"], "name" => $item["name"]));
+      }
     } else {
-        // Fetching categories from databases and sorting them.
-        $sql = "select * from categories ";
-        if ($res = $conn->query($sql)) {
-          while ($rows = $res->fetch_assoc()) {
-            array_push($categories, array ("id" => $rows["id"], "name" => $rows["name"]));
-          }
-        } else {
-          echo "No hay resultados.";
-        }
+      echo "No hay resultados.";
     }
-    $conn->close();
 ?>
 
 <!-- Delete category modal -->

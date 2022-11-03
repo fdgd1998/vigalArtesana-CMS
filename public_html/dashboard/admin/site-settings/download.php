@@ -1,7 +1,4 @@
 <?php
-    error_reporting(0);
-    session_start(); // starting the session.
-    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
 
     if (!HasPermission("manage_seoSettings")) {
@@ -9,7 +6,7 @@
         exit();
     }
     
-    if ($_GET) {
+    if (isset($_GET)) {
         $file = $_SERVER["DOCUMENT_ROOT"]."/".$_GET['file'];
         
         if(!file_exists($file)){ // file does not exist

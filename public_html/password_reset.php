@@ -1,14 +1,12 @@
 <?php
-    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
+    session_start();
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/validation.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/send_email.php";
     require_once dirname($_SERVER["DOCUMENT_ROOT"], 1)."/connection.php"; //datos de conexión
-    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_company_info.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_site_settings.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/reset_password_function.php";
 
-
-    session_start();
     if (isset($_SESSION["loggedin"])) {
         header("Location: index.php");
         exit();

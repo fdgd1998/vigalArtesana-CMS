@@ -1,9 +1,7 @@
 <?php
-    // if ( $_SERVER['REQUEST_METHOD']=='GET' && realpath(__FILE__) == realpath( $_SERVER['SCRIPT_FILENAME'] ) ) {
-    //     include_once $_SERVER["DOCUMENT_ROOT"]."/errorpages/403.php";
-    //     exit();
-    // }
-
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
+    checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
+    
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/send_email.php";
 

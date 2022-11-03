@@ -1,6 +1,6 @@
 <?php
-    session_start(); // starting the session.
-    require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
+    checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
     
     if (!HasPermission("manage_users")) {
@@ -8,30 +8,23 @@
         exit();
     }
 
-    $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
     $users = array();
 
-    if ($conn->connect_error) {
-      print("No se ha podido conectar a la base de datos");
-      exit();
+    if ($_SESSION["account_type"] != "superuser") {
+        $sql = "select users.id, username, email, role from users inner join user_roles on users.account_type = user_roles.id where role != 'superuser'";
     } else {
-        if ($_SESSION["account_type"] != "superuser") {
-            $sql = "select users.id, username, email, role from users inner join user_roles on users.account_type = user_roles.id where role != 'superuser'";
-        } else {
-            $sql = "select users.id, username, email, role from users inner join user_roles on users.account_type = user_roles.id";
-        }
-        if ($res = $conn->query($sql)) {
-          while ($rows = $res->fetch_assoc()) {
-            array_push($users, array (
-                "id" => $rows["id"], 
-                "username" => $rows["username"],
-                "email" => $rows["email"],
-                "account_type" => $rows["role"]
-            ));
-          }
-        }
+        $sql = "select users.id, username, email, role from users inner join user_roles on users.account_type = user_roles.id";
     }
-    $conn->close();
+    if ($res = $conn->query($sql)) {
+      foreach ($res as $item) {
+        array_push($users, array (
+            "id" => $item["id"], 
+            "username" => $item["username"],
+            "email" => $item["email"],
+            "account_type" => $item["role"]
+        ));
+      }
+    }
 ?>
 
 

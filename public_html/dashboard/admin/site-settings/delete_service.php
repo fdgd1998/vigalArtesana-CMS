@@ -1,43 +1,33 @@
 <?php
-    // error_reporting(0);
-    session_start();
-    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
-    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/get_uri.php';
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
+    checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
+
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
-    require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
-    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/XMLSitemapFunctions.php";
-    
+    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/database_connection.php';
+
     if (!HasPermission("manage_companySettings")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
         exit();
     }
+
+    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/get_uri.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/XMLSitemapFunctions.php';
     
     if (isset($_POST)) {
-        try {
-            $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
+        $conn = new DatabaseConnection();
 
-            if ($conn->connect_error) {
-                echo "No se ha podido conectar a la base de datos.";
-                exit();
-            } else {
-                $stmt = "select image from services where id = ".$_POST['service_id']."";
+        $sql = "delete from services where id = ".$_POST['service_id'];
+        $image = $conn->query("select image from services where id = ".$_POST['service_id'])[0]["image"];
 
-                if ($res = $conn->query($stmt)) {
-                    $rows = $res->fetch_assoc();
-                    unlink($_SERVER["DOCUMENT_ROOT"]."/uploads/services/".$rows['image']); // deleting the file
-                    $stmt = "delete from services where id = ".$_POST['service_id'];
-                    if ($conn->query($stmt) === TRUE) {
-                        echo "El servicio se ha eliminado correctamente";
-                        $sitemap = readSitemapXML();
-                        changeSitemapUrl($sitemap, GetBaseUri(), GetBaseUri());
-                        writeSitemapXML($sitemap);
-                        
-                    }
-                    $res->free();
-                }
-            }
-        } catch (Exception $e) {
-            echo $e;
+        if ($conn->query($sql)) {
+            unlink($_SERVER["DOCUMENT_ROOT"]."/uploads/services/".$image);
+            $sitemap = readSitemapXML();
+            changeSitemapUrl($sitemap, GetBaseUri(), GetBaseUri());
+            writeSitemapXML($sitemap);
+            echo "El servicio se ha eliminado correctamente";
+                
+        } else {
+            echo "Ha ocurrido un error.";
         }
     }
 ?>

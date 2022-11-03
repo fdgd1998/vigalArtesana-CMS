@@ -1,18 +1,16 @@
 <?php
-    // error_reporting(0);
-    session_start();
-    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/check_session.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_permissions.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/database_connection.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_site_settings.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/check_session.php";
 
     if (!HasPermission("standard_user")) {
         include $_SERVER["DOCUMENT_ROOT"]."/dashboard/includes/forbidden.php";
         exit();
     }
 
-    // $metadata = array();
+    $metadata = array();
     $conn = new DatabaseConnection();
     $site_settings = getSiteSettings();
 
@@ -25,7 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Panel de control - ViGal Artesana</title>
+    <title>Panel de control | ViGal Artesana</title>
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/gallery.css">
@@ -36,10 +34,10 @@
 
 <body class="d-flex">
     <?php 
-    if ($maintenance == "true" && HasPermission("manage_siteSettings")) {
+    if ($site_settings[11]["value_info"] == "true" && HasPermission("manage_siteSettings")) {
         include $_SERVER["DOCUMENT_ROOT"]."/snippets/maintenance_message.php";
     }
-    if ($seoModified == "true" && HasPermission("manage_seoSettings")) {
+    if ($site_settings[13]["value_info"] == "true" && HasPermission("manage_seoSettings")) {
         include $_SERVER["DOCUMENT_ROOT"]."/snippets/seo_message.php";
     }
     ?>

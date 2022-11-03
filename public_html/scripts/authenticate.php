@@ -1,11 +1,6 @@
 <?php
-    if ( $_SERVER['REQUEST_METHOD']=='GET' && realpath(__FILE__) == realpath( $_SERVER['SCRIPT_FILENAME'] ) ) {
-        include_once $_SERVER["DOCUMENT_ROOT"]."/errorpages/403.php";
-        exit();
-    }
-
     session_start();
-
+    // require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/check_session.php";
     require_once dirname($_SERVER["DOCUMENT_ROOT"], 1)."/connection.php"; //datos de conexión
 
     function registerIp($conn) {
@@ -35,7 +30,7 @@
         }
     }
     
-    if ($_POST) {
+    if (isset($_POST)) {
         $user_form = trim($_POST['user']);
         $pass_form = trim($_POST['password']);
 
@@ -91,5 +86,8 @@
         } catch (Exception $e) {
             echo $e;
         }
+    } else {
+        header("Location: ../login");
+        exit();
     }
 ?>

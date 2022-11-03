@@ -1,9 +1,6 @@
 <?php
     require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
     checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
-
-    $site_settings[4]["value_info"] = json_decode($site_settings[4]["value_info"], true);
-    $site_settings[8]["value_info"] = json_decode($site_settings[8]["value_info"], true);
 ?>
 <div class="container settings-container">
     <h1 class="title">Contacto y ubicación</h1>

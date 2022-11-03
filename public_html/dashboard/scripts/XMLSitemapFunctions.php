@@ -1,8 +1,9 @@
 <?php
-    session_start();
-    require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
+    checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/database_connection.php';
     
     if (!HasPermission("standard_user")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
@@ -10,22 +11,9 @@
     }
 
     function showSeoMessage() {
-        require dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
-        $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
-        
-        try {
-            if ($conn->connect_error) {
-                echo "No se ha podido conectar a la base de datos.";
-                exit();
-            } else {
-                $sql = "update company_info set value_info='true' where key_info='seo_modified'";
-                $conn->query($sql);
-            }
-            $conn->close();
-        } catch (Exception $e) {
-            $conn->rollback();
-            echo $e;
-        }
+        $conn = new DatabaseConnection();
+        $sql = "update company_info set value_info='true' where key_info='seo_modified'";
+        $conn->query($sql);
     }
 
     function readSitemapXML() {

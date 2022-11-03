@@ -1,33 +1,20 @@
 <?php
-    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_company_info.php";
+    session_start();
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_site_settings.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
+    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/database_connection.php';
 
     $services = array(); // Array to save categories
     $page_id = 8;
     
-    $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
+    $site_settings = getSiteSettings();
+    $conn = new DatabaseConnection(); // Opening database connection.
     
-    if ($GLOBALS["site_settings"][11] == "false" || ($GLOBALS["site_settings"][11] == "true" && isset($_SESSION["loggedin"]))) {
-        try {
-            if ($conn->connect_error) {
-                echo "No se ha podido establecer una conexión con la base de datos.";
-                exit();
-            } else {
-                // Fetching categories from database and storing then in the array for further use.
-    
-                // Getting page metadata
-                $sql = "select title, description from pages_metadata where id_page = (select id from pages where id = ".$page_id.")";  
-                if ($res = $conn->query($sql)) {
-                    $rows = $res->fetch_assoc();
-                    $page_title = $rows['title'];
-                    $page_description = $rows['description'];
-                    $res->free();
-                }
-                $conn->close();
-            }
-        } catch (Exception $e) {
-            include $_SERVER["DOCUMENT_ROOT"]."/errorpages/500.php";
-            exit();
+    if ($site_settings[11]["value_info"] == "false" || ($site_settings[11]["value_info"] == "true" && isset($_SESSION["loggedin"]))) {
+        $sql = "select title, description from pages_metadata where id_page = (select id from pages where id = ".$page_id.")";  
+        if ($res = $conn->query($sql)) {
+            $page_title = $res[0]['title'];
+            $page_description = $res[0]['description'];
         }
     } else {
         $conn->close();
@@ -42,7 +29,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php if ($GLOBALS["site_settings"][11] == "false"): ?>
-    <title><?=$page_title." | ".$GLOBALS["site_settings"][2]?></title>
+    <title><?=$page_title." | ".$site_settings[2]["value_info"]?></title>
     <meta name="description" content="<?=$page_description?>">
     <meta name="robots" content="index, follow">
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -105,23 +92,23 @@
         <p class="title-description">También puedes usar el formulario de contacto al final de esta página.</p>
         <div class="row">
             <div class="col-lg-7">
-                <p class="address"><?=$GLOBALS["site_settings"][1]?></p>
-                <a class="contact-data" href="tel:<?=str_replace(' ','',$GLOBALS["site_settings"][0])?>"><?=$GLOBALS["site_settings"][0]?></a>
-                <a class="contact-data" href="mailto:<?=$GLOBALS["site_settings"][3]?>"><?=$GLOBALS["site_settings"][3]?></a>
-                <?php if (isset($GLOBALS["site_settings"][4]["whatsapp"])):?>
-                    <a class="contact-data whatsapp" data-bs-hover-animate="pulse" target="blank" href="https://wa.me/<?=$GLOBALS["site_settings"][4]["whatsapp"]?>"><i class="fab fa-whatsapp fa-w-16"></i>WhatsApp</a>
+                <p class="address"><?=$site_settings[1]["value_info"]?></p>
+                <a class="contact-data" href="tel:<?=str_replace(' ','',$site_settings[0]["value_info"])?>"><?=$site_settings[0]["value_info"]?></a>
+                <a class="contact-data" href="mailto:<?=$site_settings[3]["value_info"]?>"><?=$site_settings[3]["value_info"]?></a>
+                <?php if (isset($site_settings[4]["value_info"]["whatsapp"])):?>
+                    <a class="contact-data whatsapp" data-bs-hover-animate="pulse" target="blank" href="https://wa.me/<?=$site_settings[4]["value_info"]["whatsapp"]?>"><i class="fab fa-whatsapp fa-w-16"></i>WhatsApp</a>
                 <?php endif; ?>
-                <?php if (isset($GLOBALS["site_settings"][4]["instagram"])):?>
-                    <a class="contact-data instagram" data-bs-hover-animate="pulse" target="blank" href="https://www.instagram.com/<?=$GLOBALS["site_settings"][4]["instagram"]?>"><i class="fab fa-instagram"></i>@<?=$GLOBALS["site_settings"][4]["instagram"]?></a>
+                <?php if (isset($site_settings[4]["value_info"]["instagram"])):?>
+                    <a class="contact-data instagram" data-bs-hover-animate="pulse" target="blank" href="https://www.instagram.com/<?=$site_settings[4]["value_info"]["instagram"]?>"><i class="fab fa-instagram"></i>@<?=$site_settings[4]["value_info"]["instagram"]?></a>
                 <?php endif; ?>
-                <?php if (isset($GLOBALS["site_settings"][4]["facebook"])):?>
-                    <a class="contact-data facebook" data-bs-hover-animate="pulse" target="blank" href="https://www.facebook.com/<?=$GLOBALS["site_settings"][4]["facebook"]?>"><i class="fab fa-facebook-square"></i>@<?=$GLOBALS["site_settings"][4]["facebook"]?></a>
+                <?php if (isset($site_settings[4]["value_info"]["facebook"])):?>
+                    <a class="contact-data facebook" data-bs-hover-animate="pulse" target="blank" href="https://www.facebook.com/<?=$site_settings[4]["value_info"]["facebook"]?>"><i class="fab fa-facebook-square"></i>@<?=$site_settings[4]["value_info"]["facebook"]?></a>
                 <?php endif; ?>
             </div>
             <div class="col-lg-5">
                 <h2 class="title">Horarios</h2>
                 <ul class="timetable">
-                    <?php $i = 0; foreach ($GLOBALS["site_settings"][8] as $dia=>$horario): ?>
+                    <?php $i = 0; foreach ($site_settings[8]["value_info"] as $dia=>$horario): ?>
                         <li><?=$dia.": <strong>".$horario."</strong>"?></li>
                     <?php endforeach; ?>
                 </ul>
@@ -131,7 +118,7 @@
             <div class="col">
                 <h2 class="title">Ubicación</h2>
                 <div class="map-responsive">
-                    <iframe class="w-100" src="<?=$GLOBALS["site_settings"][7]?>" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <iframe class="w-100" src="<?=$site_settings[7]["value_info"]?>" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </div>

@@ -1,32 +1,20 @@
 <?php
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
+    checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
 
-    session_start(); // Starting the session.
-    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/check_session.php";
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
-    
+
     if (!HasPermission("manage_gallery")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
         exit();
     }
 
-    $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
     $categories = array(); // Array to save categories
-
-    try {
-        if ($conn->connect_error) {
-            echo "No se ha podido establecer una conexión con la base de datos.";
-            exit();
-        } else {
-            // Fetching categories from database and storing then in the array for further use.
-            $sql = "select id, name from categories order by name asc";
-            if ($res = $conn->query($sql)) {
-                while ($rows = $res->fetch_assoc()) {
-                    $categories[$rows["id"]] = $rows["name"];
-                }
-            }
+    $sql = "select id, name from categories order by name asc";
+    if ($res = $conn->query($sql)) {
+        foreach ($res as $item) {
+            $categories[$item["id"]] = $item["name"];
         }
-    } catch (Exception $e) {
-        echo $e;
     }
 
     // Variables for storing data to edit, just in case if needed.

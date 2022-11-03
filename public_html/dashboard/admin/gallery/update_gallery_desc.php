@@ -1,11 +1,10 @@
 <?php
-    error_reporting(0);
-    session_start();
-    require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
-    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
+    checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
     require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/XMLSitemapFunctions.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
+    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/database_connection.php';
     
     if (!HasPermission("manage_gallery")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
@@ -13,29 +12,17 @@
     }
 
     if (isset($_POST)) {
-        try {
-            $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
-            $image_name = "";
-            if ($conn->connect_error) {
-                echo "No se ha podido conectar a la base de datos.";
-                exit();
-            } else {
-                // checking if there are posts of the category to be deleted
-                $stmt = "update company_info set value_info = '".$_POST["desc"]."' where key_info = 'gallery-desc'";
-            
-                if ($conn->query($stmt)) {
-                    echo "La descripción se ha editado correctamente.";
-                    $sitemap = readSitemapXML();
-                    changeSitemapUrl($sitemap, GetBaseUri()."/"."galeria", GetBaseUri()."/"."galeria");
-                    writeSitemapXML($sitemap);
-                } else {
-                    $conn->rollback();
-                    echo "Ha ocurrido un error al editar la descripción.";
-                }
-            }
-        } catch (Exception $e) {
-            $conn->close();
-            echo $e;
+        $conn = new DatabaseConnection();
+        $sql = "update company_info set value_info = '".$_POST["desc"]."' where key_info = 'gallery-desc'";
+    
+        if ($conn->query($sql)) {
+            echo "La descripción se ha editado correctamente.";
+            $sitemap = readSitemapXML();
+            changeSitemapUrl($sitemap, GetBaseUri()."/"."galeria", GetBaseUri()."/"."galeria");
+            writeSitemapXML($sitemap);
+        } else {
+            $conn->rollback();
+            echo "Ha ocurrido un error al editar la descripción.";
         }
     }
 ?>

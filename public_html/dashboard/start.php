@@ -1,7 +1,6 @@
 <?php
-    session_start();
-
-    require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/check_session.php';
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
+    checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
 
     if (!HasPermission("standard_user")) {

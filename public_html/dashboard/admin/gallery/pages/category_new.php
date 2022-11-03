@@ -1,39 +1,29 @@
 
 <?php
 
-    session_start(); // Starting the session.
-    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/check_session.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
+    checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
+
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
-    
+
     if (!HasPermission("manage_gallery")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
         exit();
     }
 
-    $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name); // Opening database connection.
     $categories = array(); // Array to save categories
 
     if ($_GET["page"] == "edit-category") {
-        try {
-            if ($conn->connect_error) {
-                echo "No se ha podido establecer una conexión con la base de datos.";
-                exit();
-            } else {
-                // Fetching categories from database and storing then in the array for further use.
-                $sql = "select id, name, description, image from categories where id = ".$_GET["id"];
-                if ($res = $conn->query($sql)) {
-                    if ($rows = $res->fetch_assoc()) {
-                        $categories["id"] = $rows["id"];
-                        $categories["name"] = $rows["name"];
-                        $categories["description"] = $rows["description"];
-                        $categories["image"] = $rows["image"];
-                        $desc = ($_GET["page"] == "edit-category")?$categories["description"]:"";
-                        echo "<script>var catDesc = '".$desc."'</script>";
-                    }
-                }
+        $sql = "select id, name, description, image from categories where id = ".$_GET["id"];
+        if ($res = $conn->query($sql)) {
+            foreach ($res as $item) {
+                $categories["id"] = $item["id"];
+                $categories["name"] = $item["name"];
+                $categories["description"] = $item["description"];
+                $categories["image"] = $item["image"];
+                $desc = ($_GET["page"] == "edit-category")?$categories["description"]:"";
+                echo "<script>var catDesc = '".$desc."'</script>";
             }
-        } catch (Exception $e) {
-            echo $e;
         }
     }
 ?>

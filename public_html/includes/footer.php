@@ -7,7 +7,7 @@
                     <li><a href="<?=GetBaseUri()?>/politica-privacidad"><i class="fas fa-user-secret" style="margin-right: 5px;"></i>Política de privacidad</a></li>
                     <li><a href="<?=GetBaseUri()?>/aviso-legal"><i class="fas fa-balance-scale" style="margin-right: 5px;"></i>Aviso legal</a></li>
                     <?php
-                        if (!isset($_SESSION['user'])) {
+                        if (!isset($_SESSION['loggedin'])) {
                             echo '<li><a href="'.GetBaseUri().'/login"><i class="fas fa-sign-in-alt" style="margin-right: 5px;"></i>Iniciar sesión</a></li>';
                         } else {
                             echo '<li><a href="'.GetBaseUri().'/dashboard?page=start"><i class="fas fa-cog" style="margin-right: 5px;"></i>Configuración</a></li>';
@@ -19,9 +19,9 @@
             <div class="col-12 col-sm-7 col-md-6">
                 <h3>Contacto</h3>
                 <ul>
-                    <li style="color: rgb(240,249,255);"><i class="fas fa-mobile-alt" style="padding-right: 5px;"></i><label id="telephone"><?=$GLOBALS["site_settings"][0]?></label></li>
-                    <li style="color: rgb(240,249,255);"><i class="fas fa-envelope" style="padding-right: 5px;"></i><label id="email"><?=$GLOBALS["site_settings"][3]?></label></li>
-                    <li style="color: rgb(240,249,255);"><i class="fas fa-location-arrow" style="padding-right: 5px;"></i><label id="address"><?=$GLOBALS["site_settings"][1]?></label></li>
+                    <li style="color: rgb(240,249,255);"><i class="fas fa-mobile-alt" style="padding-right: 5px;"></i><label id="telephone"><?=$site_settings[0]["value_info"]?></label></li>
+                    <li style="color: rgb(240,249,255);"><i class="fas fa-envelope" style="padding-right: 5px;"></i><label id="email"><?=$site_settings[3]["value_info"]?></label></li>
+                    <li style="color: rgb(240,249,255);"><i class="fas fa-location-arrow" style="padding-right: 5px;"></i><label id="address"><?=$site_settings[1]["value_info"]?></label></li>
                 </ul>
             </div>
             <div class="col-12 col-sm-12 col-md-3 web-author">

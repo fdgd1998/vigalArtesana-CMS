@@ -1,9 +1,9 @@
 <?php
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
+    checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
 
-    session_start(); // starting the session.
-    require_once dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
-    
+
     if (!HasPermission("manage_gallery")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
         exit();
@@ -12,7 +12,7 @@
     $sql = "select value_info from company_info where key_info = 'gallery-desc'";
 
     if ($res = $conn->query($sql)) {
-        echo "<script>var galleryDesc = '".$res->fetch_assoc()["value_info"]."'</script>";
+        echo "<script>var galleryDesc = '".$res[0]["value_info"]."'</script>";
     }
 ?>
 

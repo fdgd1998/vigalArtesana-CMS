@@ -1,9 +1,11 @@
 <?php
     session_start();
-    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_company_info.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_site_settings.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
+    $site_settings = getSiteSettings();
+    $conn = new DatabaseConnection(); // Opening database connection.
 
-    if ($GLOBALS["site_settings"][11] == "true" || ($GLOBALS["site_settings"][11] == "true" && !isset($_SESSION["loggedin"]))) { 
+    if ($site_settings[11]["value_info"] == "true" || ($site_settings[11]["value_info"] == "true" && !isset($_SESSION["loggedin"]))) { 
         require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/set_503_header.php";
         set_503_header();
     }
@@ -14,8 +16,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php if ($GLOBALS["site_settings"][11] == "false"): ?>
-    <title>Política de privacidad - <?=$GLOBALS["site_settings"][2]?></title>
+    <?php if ($site_settings[11]["value_info"] == "false"): ?>
+    <title>Política de privacidad | <?=$site_settings[2]["value_info"]?></title>
     <meta name="description" content="Política de privacidad.">
     <meta name="robots" content="index, follow">
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -43,11 +45,11 @@
 
 <body>
     <?php
-    if ($GLOBALS["site_settings"][11] == "true" && !isset($_SESSION["loggedin"])) {
+    if ($site_settings[11]["value_info"] == "true" && !isset($_SESSION["loggedin"])) {
         include $_SERVER["DOCUMENT_ROOT"]."/snippets/maintenance_page.php";
         exit();
     }
-    if ($GLOBALS["site_settings"][11] == "true" && isset($_SESSION["loggedin"])) {
+    if ($site_settings[11]["value_info"] == "true" && isset($_SESSION["loggedin"])) {
         include $_SERVER["DOCUMENT_ROOT"]."/snippets/maintenance_message.php";
     }
     include $_SERVER["DOCUMENT_ROOT"].'/includes/header.php';

@@ -1,21 +1,13 @@
 <?php
-    error_reporting(0);
-    session_start(); // Starting the session.
-    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/check_session.php";
-    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
-    
-    if (!HasPermission("manage_gallery")) {
-        include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
-        exit();
-    }
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
+    checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
 
-    if ($_POST) {    
+    if (isset($_POST)) {    
         $filename = $_POST["filenames"]; 
 
         $location = $_SERVER["DOCUMENT_ROOT"]."/uploads//";
         $fileExists = array();
         
-        // echo var_dump($searchDir);
         if(is_dir($location)) {
             $searchDir = scandir($location);
             if (in_array($filename, $searchDir)) {

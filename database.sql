@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2022 a las 00:07:24
+-- Tiempo de generación: 04-11-2022 a las 22:31:20
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.0.19
 
@@ -29,13 +29,13 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categories` (
   `id` int(3) NOT NULL,
-  `friendly_url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `description` text COLLATE utf8_unicode_ci NOT NULL,
-  `cat_enabled` char(3) COLLATE utf8_unicode_ci DEFAULT 'YES',
-  `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `friendly_url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cat_enabled` char(3) COLLATE utf8mb4_unicode_ci DEFAULT 'YES',
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `uploadedBy` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -44,9 +44,9 @@ CREATE TABLE `categories` (
 --
 
 CREATE TABLE `company_info` (
-  `key_info` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `value_info` longtext COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `key_info` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value_info` longtext COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `company_info`
@@ -58,15 +58,16 @@ INSERT INTO `company_info` (`key_info`, `value_info`) VALUES
 ('name', 'Mi Empresa'),
 ('email', 'contacto@miempresa.es'),
 ('social_media', '{\"instagram\":\"miempresaa\",\"facebook\":\"miempresaa\",\"whatsapp\":\"+34600000000\"}'),
-('index-image', 'llano.jpg'),
-('index-image-description', 'Breve descripción de mi empresa.'),
+('index-image', '16359609031.jpg'),
+('index-slogan', 'Breve descripción de mi empresa.'),
 ('google-map-link', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1654425.3095923811!2d-4.408954431630243!3d35.91517012339416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd7134e9fd7091b5%3A0xd1256645b08b9d84!2sMar%20de%20Albor%C3%A1n!5e0!3m2!1ses!2ses!4v1652859736537!5m2!1ses!2ses'),
 ('opening-hours', '{\"Lunes\":\"7:00 - 15:00\",\"Martes\":\"7:00 - 15:00\",\"Miércoles\":\"7:00 - 15:00\",\"Jueves\":\"7:00 - 15:00\",\"Viernes\":\"7:00 - 13:30\",\"Sábado\":\"cerrado\",\"Domingo\":\"cerrado\"}'),
-('about-us', '<p>Esta es la sección <font color=\"#000000\" style=\"background-color: rgb(255, 255, 0); --darkreader-inline-color:#e8e6e3; --darkreader-inline-bgcolor:#999900;\" data-darkreader-inline-color=\"\" data-darkreader-inline-bgcolor=\"\"><i>sobre nosotros </i></font>de la página web.fgsdg</p>'),
-('index-brief-description', 'Esta es una <b>descripción extensa</b> de<i> la</i> empresa.'),
+('about-us', '<p>Esta es la sección <font color=\"#000000\" style=\"--darkreader-inline-color:#e8e6e3; --darkreader-inline-bgcolor:#999900;\" data-darkreader-inline-color=\"\" data-darkreader-inline-bgcolor=\"\"><b style=\"\">sobre nosotros </b></font>de la página web.</p>'),
+('index-brief-description', 'Esta es una <b><font color=\"#000000\" style=\"\">descripción extensa</font></b> de<i> </i>la empresa.'),
 ('maintenance', 'false'),
-('gallery-desc', '<p>Esta es la <b>descripción general</b> de la galería.sfgdfsgdsf</p>'),
-('seo_modified', 'false');
+('gallery-desc', '<p>Esta es la <b>descripción general</b> de la galería...</p>'),
+('seo_modified', 'true'),
+('index-image-desc', 'fghfgh');
 
 -- --------------------------------------------------------
 
@@ -76,12 +77,12 @@ INSERT INTO `company_info` (`key_info`, `value_info`) VALUES
 
 CREATE TABLE `gallery` (
   `id` int(5) NOT NULL,
-  `filename` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `dir` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `filename` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dir` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `category` int(3) NOT NULL,
-  `altText` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `altText` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `uploadedBy` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -103,7 +104,7 @@ CREATE TABLE `ip_register` (
 
 CREATE TABLE `pages` (
   `id` int(4) NOT NULL,
-  `page` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `page` varchar(255) CHARACTER SET utf8 COLLATE utf8mb4_unicode_ci NOT NULL,
   `cat_id` int(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -136,9 +137,22 @@ CREATE TABLE `pages_metadata` (
 
 INSERT INTO `pages_metadata` (`id`, `title`, `description`, `id_page`) VALUES
 (5, 'Contacta con nosotros', 'Contacta con nosotros, aquí te dejamos nuetros datos de contacto.', 8),
-(6, 'Galería', 'Esta es la página principal de nuestra galería, donde podrás ver una exposición de todos nuestros trabajo. ¡Te invitamos a que le eches un vistazo!.', 6),
-(7, 'qggg', 'w', 5),
+(6, 'Galería', 'Esta es la página principal de nuestra galería, donde podrás ver una exposición de todos nuestros trabajo. ¡Te invitamos a que le eches un vistazo!', 6),
+(7, 'Artesanía con madera antigua', 'Pura artesanía', 5),
 (8, 'Sobre nosotros', 'Esta es la descripción de la página', 7);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `password_reset`
+--
+
+CREATE TABLE `password_reset` (
+  `id` int(4) NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `userid` int(4) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -148,10 +162,11 @@ INSERT INTO `pages_metadata` (`id`, `title`, `description`, `id_page`) VALUES
 
 CREATE TABLE `services` (
   `id` int(1) NOT NULL,
-  `title` text COLLATE utf8_unicode_ci NOT NULL,
-  `description` text COLLATE utf8_unicode_ci NOT NULL,
-  `image` varchar(50) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `title` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image_desc` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -169,14 +184,15 @@ CREATE TABLE `users` (
   `account_type` int(4) DEFAULT NULL,
   `account_enabled` tinyint(1) DEFAULT 1,
   `passwd_reset` tinyint(1) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `passwd`, `firstname`, `surname`, `account_type`, `account_enabled`, `passwd_reset`) VALUES
-(0, 'admin', 'test@miempresa.es', '$2y$10$niQMrP.OEmdiiAamIDQyJuK6uFZZk6hQ4TBC8PpAOMhucfcoCl73S', NULL, NULL, 1, 1, 0);
+(0, 'admin', 'fran_gd_1998@outlook.es', '$2y$10$dWgU4P0hAkT3TljAx/TxY.x.GYwU2h5eas1MGeIPQIACcPlTzG3Hy', NULL, NULL, 1, 1, 0),
+(26, 'fgalvez', 'asdas@asdasd.es', '$2y$10$AqAb4snaXdSXuAewgfd3auDtvywNPKq5etyHc7GfQHYk2lOxRcxXG', NULL, NULL, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -187,7 +203,7 @@ INSERT INTO `users` (`id`, `username`, `email`, `passwd`, `firstname`, `surname`
 CREATE TABLE `user_roles` (
   `id` int(4) NOT NULL,
   `role` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `permissions` bit(10) NOT NULL
+  `permissions` bit(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -195,9 +211,9 @@ CREATE TABLE `user_roles` (
 --
 
 INSERT INTO `user_roles` (`id`, `role`, `permissions`) VALUES
-(1, 'superuser', b'1111111111'),
-(2, 'administrator', b'1111110111'),
-(3, 'gallery_collaborator', b'1111000010');
+(1, 'superuser', b'1111111'),
+(2, 'administrator', b'1110111'),
+(3, 'collaborator', b'1000001');
 
 --
 -- Índices para tablas volcadas
@@ -231,6 +247,13 @@ ALTER TABLE `pages`
 ALTER TABLE `pages_metadata`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_page` (`id_page`);
+
+--
+-- Indices de la tabla `password_reset`
+--
+ALTER TABLE `password_reset`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `userid` (`userid`);
 
 --
 -- Indices de la tabla `services`
@@ -271,25 +294,31 @@ ALTER TABLE `gallery`
 -- AUTO_INCREMENT de la tabla `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT de la tabla `pages_metadata`
 --
 ALTER TABLE `pages_metadata`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
+--
+-- AUTO_INCREMENT de la tabla `password_reset`
+--
+ALTER TABLE `password_reset`
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `services`
 --
 ALTER TABLE `services`
-  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `user_roles`
@@ -318,6 +347,12 @@ ALTER TABLE `gallery`
 --
 ALTER TABLE `pages_metadata`
   ADD CONSTRAINT `pages_metadata_ibfk_1` FOREIGN KEY (`id_page`) REFERENCES `pages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `password_reset`
+--
+ALTER TABLE `password_reset`
+  ADD CONSTRAINT `password_reset_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `users`

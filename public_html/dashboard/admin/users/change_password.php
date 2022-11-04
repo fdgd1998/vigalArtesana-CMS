@@ -26,7 +26,7 @@
                 if (($new1 == $new2) && validatePasswd($new1) && validatePasswd($new2)) {
                     $hash = password_hash($new1, PASSWORD_DEFAULT);
                     $sql = "update users set passwd = '$hash' where id = ".$_SESSION["userid"];
-                    if ($conn->query($sql)) {
+                    if ($conn->exec($sql)) {
                         echo "La contraseña se ha actualizado correctamente";
                     } else {
                         echo "Ha ocurrido un error al actualizar la contraseña.";

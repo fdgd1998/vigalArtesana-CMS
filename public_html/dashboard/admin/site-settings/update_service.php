@@ -18,17 +18,17 @@
 
         if (isset($_POST["title"]) && !isset($_POST["description"]) && !isset($_FILES["image"])) { // changing service title
             $sql = "update services set title = '".$_POST['title']."' where id = ".$_POST["id"];
-            if ($conn->query($sql)) {
+            if ($conn->exec($sql)) {
                 echo "El nombre del servicio se ha actualizado correctamente.";
             } else {
-                echo "No se ha podido actualizar el nombre del servicio.";
+                echo "El contenido no ha cambiado o ha ocurrido un error al actualizar los datos.";
             }
         } else if (!isset($_POST["title"]) && isset($_POST["description"]) && !isset($_FILES["image"])) { //changing service description.
             $sql = "update services set description = '".$_POST['description']."' where id = ".$_POST["id"];
-            if ($conn->query($sql)) {
+            if ($conn->exec($sql)) {
                 echo "La descripción del servicio se ha actualizado correctamente.";
             } else {
-                echo "No se ha podido actualizar la descripción del servicio.";
+                echo "El contenido no ha cambiado o ha ocurrido un error al actualizar los datos.";
             }
         } else if (!isset($_POST["title"]) && !isset($_POST["description"]) && isset($_FILES["image"])){ //changing service image
             // updating entry on database
@@ -41,17 +41,17 @@
             }
 
             $sql= "update services set image = '".$_FILES["image"]["name"]."', image_desc = '".$_POST["image-desc"]."' where id = ".$_POST["id"];
-            if ($conn->query($sql)) {
+            if ($conn->exec($sql)) {
                 echo "La imagen del servicio se ha actualizado correctamente.";
             } else {
-                echo "No se ha podido actualizar la imagen del servicio.";
+                echo "El contenido no ha cambiado o ha ocurrido un error al actualizar los datos.";
             }
         } else if (isset($_POST["title"]) && isset($_POST["description"]) && !isset($_FILES["image"])) { //changing service title and description
             $sql= "update services set title = '".$_POST['title']."', description = '".$_POST["description"]."' where id = ".$_POST["id"];
-            if ($conn->query($sql)) {
+            if ($conn->exec($sql)) {
                 echo "El nombre y la descripción servicio se han actualizado correctamente.";
             } else {
-                echo "No se han podido actualizar el nombre y la descripción del servicio.";
+                echo "El contenido no ha cambiado o ha ocurrido un error al actualizar los datos.";
             }
         } else if (isset($_POST["title"]) && !isset($_POST["description"]) && isset($_FILES["image"])) { //changing service title and image
             // undating entry on database
@@ -64,10 +64,10 @@
             }
 
             $sql = "update services set title = '".$_POST["title"]."', image = '".$_FILES["image"]["name"]."', image_desc = '".$_POST["image-desc"]."' where id = ".$_POST["id"];
-            if ($conn->query($sql) == TRUE) {
+            if ($conn->exec($sql) == TRUE) {
                 echo "El título y la imagen del servicio se han actualizado correctamente.";
             } else {
-                echo "No se han podido actualizar el título y la imagen del servicio.";
+                echo "El contenido no ha cambiado o ha ocurrido un error al actualizar los datos.";
             }
         } else {
 
@@ -81,10 +81,10 @@
             }
 
             $sql = "update services set title = '".$_POST["title"]."', description = '".$_POST["description"]."', image = '".$_FILES["image"]["name"]."', image_desc = '".$_POST["image-desc"]."' where id = ".$_POST["id"];
-            if ($conn->query($sql)) {
+            if ($conn->exec($sql)) {
                 echo "La descripción y la imagen del servicio se han actualizado correctamente.";
             } else {
-                echo "No se han podido actualizar la descripción y la imagen del servicio.";
+                echo "El contenido no ha cambiado o ha ocurrido un error al actualizar los datos.";
             }
         }
         $sitemap = readSitemapXML();

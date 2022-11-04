@@ -15,7 +15,7 @@
     if (isset($_POST)) {
         $conn = new DatabaseConnection();
         $sql = "update pages_metadata set title='".$_POST["title"]."', description = '".$_POST["desc"]."' where id_page=".$_POST["id"];
-        if ($conn->query($sql)) {
+        if ($conn->exec($sql)) {
             $pageName = "";
             if ($_POST["id"] != 5) {
                 $sql = "select page from pages where id = ".$_POST["id"];
@@ -28,7 +28,7 @@
             writeSitemapXML($sitemap);
             echo "Los datos se han modificado correctamente.";
         } else {
-            echo "Ha ocurrido un error al modificar los datos.";
+            echo "El contenido no ha cambiado o ha ocurrido un error al actualizar los datos.";
         }
     }
 ?>

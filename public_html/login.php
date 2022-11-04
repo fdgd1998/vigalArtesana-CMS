@@ -2,13 +2,74 @@
     session_start();
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_site_settings.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/database_connection.php";
 
     $site_settings = getSiteSettings();
-    $conn = new DatabaseConnection(); // Opening database connection.
+    $errorMessage = "";
+    $conn = new DatabaseConnection();
 
     if (isset($_SESSION["loggedin"])) {
         header("Location: index.php");
         exit();
+    }
+    
+    function registerIp($conn) {
+        $ip = $_SERVER["REMOTE_ADDR"];
+        $sql = "insert into ip_register (address ,timestamp) values ('$ip', CURRENT_TIMESTAMP)";
+
+        if ($conn->query($sql)) {
+            return true;
+        }
+        return false;
+    }
+
+    function maximumAttemps($conn) {
+        $ip = $_SERVER["REMOTE_ADDR"];
+        $sql = "select count(address) from ip_register where address = '$ip' and timestamp > (now() - interval 10 minute) and login_success = 0";
+        if ($res = $conn->query($sql)) {
+            $attempts = $res[0]["count(address)"];
+            if ($attempts > 3) {
+                $_SESSION["error"] = "Has superado el número de intentos permitidos. Inténtalo de nuevo en 10 minutos.";
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+    
+    if (isset($_POST)) {
+        $user_form = trim($_POST['user']);
+        $pass_form = trim($_POST['password']);
+    
+        $conn = new DatabaseConnection();
+        registerIp($conn);
+
+        if (!maximumAttemps($conn)) {
+            // Verificación de las credenciales de usuario
+            $sql = "select users.id, users.username, users.passwd, user_roles.role, users.account_enabled, users.passwd_reset from users inner join user_roles on user_roles.id = users.account_type where username = ?";
+            $params = array($user_form);
+            $result = $conn->preparedQuery($sql, $params)[0];
+            
+            // Si los datos coinciden, inicializo la sesión
+            if (isset($result["id"])) {
+                if (password_verify($pass_form, $result["passwd"])) {
+                    $_SESSION['loggedin'] = true;
+                    $_SESSION['user'] = $result["username"];
+                    $_SESSION['userid'] = $result["id"];
+                    $sql = "update ip_register set login_success = 1 where address = '".$_SERVER["REMOTE_ADDR"]."'";
+                    $conn->query($sql);
+                    header("Location: ../dashboard/?page=start");
+                    exit();
+                    // }
+                } else {
+                    $errorMessage = "Usuario y/o contraseña incorrectos.";
+                }
+            } else {
+                $errorMessage = "Usuario y/o contraseña incorrectos.";
+            }
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -32,7 +93,7 @@
 
 <body style="background-color: rgb(241,247,252);">
     <div class="login-clean" style="background-color: rgba(241,247,252,0);">
-        <form class="border rounded shadow-lg" method="post" style="margin-top: 20px;" action="<?=GetBaseUri()?>/scripts/authenticate.php">
+        <form class="border rounded shadow-lg" method="post" style="margin-top: 20px;" action="<?=GetBaseUri()?>/login">
             <div style="margin-top: 20px; text-align: center;">
                 <a href="<?=GetBaseUri()?>">
                     <i class="fas fa-arrow-left" style="margin-right: 10px;"></i>
@@ -41,11 +102,11 @@
             </div>
             <div class="mt-5">
                 <?php
-                    if (isset($_SESSION["error"])) {
+                    if ($errorMessage != "") {
                         $message = $_SESSION["error"];
                         echo '<div class="illustration">
                                 <div style="font-size: 16px;" class="alert alert-danger" >
-                                    '.$message.'
+                                    '.$errorMessage.'
                                 </div>
                             </div>';
                         session_unset();

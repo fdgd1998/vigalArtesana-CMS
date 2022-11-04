@@ -20,18 +20,10 @@
         
         $userPerm = 1;
         if ($permName != "no_user") {
-        
-            if ($conn->conn->connect_error) {
-                print("No se ha podido conectar a la base de datos");
-                exit();
-            } else {
-                $sql = "select permissions from users inner join user_roles on users.account_type = user_roles.id where users.id = ".$_SESSION["userid"];
-                if ($res = $conn->conn->query($sql)) {
-                    $userPerm = $res->fetch_assoc()["permissions"];
-                }
-            }
+            $sql = "select permissions from user_roles inner join users on users.account_type = user_roles.id where users.id = '".$_SESSION["userid"]."'";
             
-            $conn->conn->close();
+            $res = $conn->query($sql);
+            $userPerm = $res[0]["permissions"];
 
             return (($userPerm & bindec($permissions[$permName])) == bindec($permissions[$permName])) ? true : false;
         }

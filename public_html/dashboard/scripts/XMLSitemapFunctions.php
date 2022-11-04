@@ -13,7 +13,7 @@
     function showSeoMessage() {
         $conn = new DatabaseConnection();
         $sql = "update company_info set value_info='true' where key_info='seo_modified'";
-        $conn->query($sql);
+        $conn->exec($sql);
     }
 
     function readSitemapXML() {

@@ -1,4 +1,5 @@
 <?php
+    error_reporting(0);
     require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
     checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
 
@@ -32,9 +33,9 @@
             }
         
             $sql = array(
-                "delete from categories where id = ".$_POST['cat_id'],
+                "delete from categories where id = '".$_POST['cat_id']."'",
                 "delete from pages where cat_id = ".$_POST['cat_id'],
-                "delete from pages_metadata where id_page = (select id from pages where cat_id = ".$_POST['cat_id']."))"
+                "delete p from pages_metadata as p inner join pages on id_page = cat_id where id_page = ".$_POST['cat_id']
             );
 
             if ($conn->transaction($sql)) {
@@ -45,7 +46,6 @@
                 writeSitemapXML($sitemap);
                 echo "La categoría se ha eliminado correctamente.";
             } else {
-                $conn->rollback();
                 echo "Ha ocurrido un error al eliminar la categoría.";
             }
         }   

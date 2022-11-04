@@ -30,7 +30,6 @@
         $filenames = json_decode($_POST["filenames"], true);
         $dir = json_decode($_POST["directories"], true);
         $categories = json_decode($_POST["categories"], true);
-        var_dump($filenames);
 
         $countImagesBefore = array();
         $countImagesAfter = array();
@@ -49,7 +48,7 @@
         $images = "'".implode("','", $filenames)."'";
         $sql= "delete from gallery where filename in(".$images.")";
 
-        if ($conn->query($sql)) {
+        if ($conn->exec($sql)) {
             for ($i = 0; $i < count($filenames); $i++) {
                 unlink($location.$dir[$i].$filenames[$i]); // deleting the file
                 if (dirIsEmpty($location.$dir[$i])) {

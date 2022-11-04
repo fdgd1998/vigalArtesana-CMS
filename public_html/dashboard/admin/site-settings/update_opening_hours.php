@@ -15,13 +15,13 @@
     if (isset($_POST)) {
         $conn = new DatabaseConnection();
         $sql= "update company_info set value_info='".$_POST["hours"]."' where key_info='opening-hours'";
-        if ($conn->query($sql)) {
+        if ($conn->exec($sql)) {
             echo "El horario se ha modificado correctamente.";
             $sitemap = readSitemapXML();
             changeSitemapUrl($sitemap, GetBaseUri()."/contacto", GetBaseUri()."/contacto");
             writeSitemapXML($sitemap);
         } else {
-            echo "Ha ocurrido un error al modificar el horario.";
+            echo "El contenido no ha cambiado o ha ocurrido un error al actualizar los datos.";
         }
         
     }

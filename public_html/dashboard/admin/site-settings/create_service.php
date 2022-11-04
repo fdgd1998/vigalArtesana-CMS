@@ -22,7 +22,7 @@
         $sql = "insert into services (title, description, image, image_desc) values ('".$title."','".$desc."','".$image."', '".$image_desc."')";
         $location = $_SERVER["DOCUMENT_ROOT"]."/uploads/services/"; // location for uploaded images.
 
-        if ($conn->query($sql)) {
+        if ($conn->exec($sql)) {
             $sitemap = readSitemapXML();
             changeSitemapUrl($sitemap, GetBaseUri(), GetBaseUri());
             writeSitemapXML($sitemap);
@@ -30,7 +30,7 @@
             
             echo "La imagen se ha subido correctamente.";
         } else {
-            echo "Ha ocurrido un error.";
+            echo "El contenido no ha cambiado o ha ocurrido un error al actualizar los datos.";
         }
     }
 ?>

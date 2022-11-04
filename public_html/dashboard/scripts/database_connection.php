@@ -2,11 +2,12 @@
     class DatabaseConnection {
         function __construct() {
             require dirname($_SERVER["DOCUMENT_ROOT"], 1).'/connection.php';
-            $this->conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
-            $this->conn->set_charset("utf8");
-
-            if ($this->conn->connect_error) {
-                $this->error = "No se ha podido conectar a la base de datos";
+            // $this->conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
+            try {
+                $this->conn = new PDO($DSN, $DB_user, $DB_pass);
+                // $this->conn->set_charset("utf8");
+            } catch (PDOException $e) {
+                echo 'Connection error: ' . $e->getMessage();
             }
         }
 
@@ -14,8 +15,8 @@
             $res = array();
             $aux = $this->conn->query($sql);
             if (gettype($aux) == "object") {
-                $this->num_rows = $aux->num_rows;
-                while ($rows = $aux->fetch_assoc()) {
+                $this->num_rows = $aux->rowCount();
+                while ($rows = $aux->fetch(PDO::FETCH_ASSOC)) {
                     array_push($res, $rows);
                 }
                 return $res;
@@ -25,18 +26,28 @@
             }
         }
 
+        public function exec($sql) {
+            return $this->conn->exec($sql);
+        }
+
         public function transaction($sql) {
-            $this->conn->begin_transaction();
+            $this->conn->beginTransaction();
             foreach ($sql as $item) {
-                $this->conn->query($item);
+                $this->conn->exec($item);
             }
 
             if ($this->conn->commit()) {
                 return true;
             } else {
-                $this->conn->rollback();
+                $this->conn->rollBack();
                 return false;
             }
+        }
+
+        public function preparedQuery($sql, $params) {
+            $sth = $this->conn->prepare($sql);
+            $sth->execute($params);
+            return $sth->fetchAll();
         }
     }
     

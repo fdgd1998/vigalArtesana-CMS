@@ -13,13 +13,10 @@
     if (isset($_POST)) {
         $conn = new DatabaseConnection();
         $sql = "update company_info set value_info='".$_POST["mode"]."' where key_info='maintenance'";
-        if ($conn->query($sql)) {
-            if ($_POST["mode"] == "true") {
-                echo "El modo de mantenimiento se ha activado correctamente.";
-            } else {
-                echo "El modo de mantenimiento se ha desactivado correctamente.";
-            }
+        if ($conn->exec($sql)) {
+            echo "El modo de mantenimiento se ha activado correctamente.";
+        } else {
+            echo "El modo de mantenimiento se ha desactivado correctamente.";
         }
-        
     }
 ?>

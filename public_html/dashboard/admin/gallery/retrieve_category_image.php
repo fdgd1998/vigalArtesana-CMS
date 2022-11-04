@@ -15,10 +15,8 @@
         $sql= "select image from categories where id = ".$cat_id;
         if ($res = $conn->query($sql)) {
             echo $_SERVER["DOCUMENT_ROOT"]."/uploads/categories/".$res[0]["image"];
-            $conn->close();
         } else {
-            $conn->close();
-            http_response_code(412);
+            http_response_code(303);
         }
     }
 ?>

@@ -19,7 +19,7 @@
         $sql = "delete from services where id = ".$_POST['service_id'];
         $image = $conn->query("select image from services where id = ".$_POST['service_id'])[0]["image"];
 
-        if ($conn->query($sql)) {
+        if ($conn->exec($sql)) {
             unlink($_SERVER["DOCUMENT_ROOT"]."/uploads/services/".$image);
             $sitemap = readSitemapXML();
             changeSitemapUrl($sitemap, GetBaseUri(), GetBaseUri());
@@ -27,7 +27,7 @@
             echo "El servicio se ha eliminado correctamente";
                 
         } else {
-            echo "Ha ocurrido un error.";
+            echo "El contenido no ha cambiado o ha ocurrido un error al actualizar los datos.";
         }
     }
 ?>

@@ -15,7 +15,6 @@
             $page_description = $res[0]['description'];
         }
     } else {
-        $conn->close();
         require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/set_503_header.php";
         set_503_header();
     }

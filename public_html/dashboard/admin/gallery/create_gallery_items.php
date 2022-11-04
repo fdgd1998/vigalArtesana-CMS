@@ -59,7 +59,7 @@
             foreach ($_FILES as $file) {
                 $sql = "insert into gallery (filename,dir,category,altText,uploadedBy) values ('".$file["name"]."','".$directory."',".$categories[$i].",'".$altText[$i]."','".$_SESSION["user"]."')";
                 
-                if ($conn->query($sql)) {
+                if ($conn->exec($sql)) {
                     move_uploaded_file($file['tmp_name'],$location.$directory.$file["name"]); // Moving file to the server.
                 }
                 $i++;

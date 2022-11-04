@@ -15,13 +15,13 @@
     if (isset($_POST)) {
         $conn = new DatabaseConnection();
         $sql = "update company_info set value_info='".$_POST["map_link"]."' where key_info='google-map-link'";
-        if ($conn->query($sql)) {
+        if ($conn->exec($sql)) {
             $sitemap = readSitemapXML();
             changeSitemapUrl($sitemap, GetBaseUri(), GetBaseUri());
             writeSitemapXML($sitemap);
             echo "El enlace se ha modificado correctamente.";
         } else {
-            echo "Ha ocurrido un error al actualizar el enlace.";
+            echo "El contenido no ha cambiado o ha ocurrido un error al actualizar los datos.";
         }
     }
 ?>

@@ -17,7 +17,6 @@
             $page_description = $res[0]['description'];
         }
     } else {
-        $conn->close();
         require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/set_503_header.php";
         set_503_header();
     }
@@ -77,11 +76,11 @@
 
 <body>
 <?php
-    if ($GLOBALS["site_settings"][11] == "true" && !isset($_SESSION["loggedin"])) {
+    if ($site_settings[11]["value_info"] == "true" && !isset($_SESSION["loggedin"])) {
         include $_SERVER["DOCUMENT_ROOT"]."/snippets/maintenance_page.php";
         exit();
     }
-    if ($GLOBALS["site_settings"][11] == "true" && isset($_SESSION["loggedin"])) {
+    if ($site_settings[11]["value_info"] == "true" && isset($_SESSION["loggedin"])) {
         include $_SERVER["DOCUMENT_ROOT"]."/snippets/maintenance_message.php";
     }
     include $_SERVER["DOCUMENT_ROOT"].'/includes/header.php';

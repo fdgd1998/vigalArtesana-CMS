@@ -13,7 +13,6 @@
 
     $sql = "select username, email, role from users inner join user_roles on users.account_type = user_roles.id where users.id = ".$_SESSION["userid"];
 
-
     if ($res = $conn->query($sql)) {
         foreach ($res[0] as $key => $value) {
             $userdata[$key] = $value;

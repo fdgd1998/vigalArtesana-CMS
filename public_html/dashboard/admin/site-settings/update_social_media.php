@@ -15,13 +15,13 @@
     if (isset($_POST)) {
         $conn = new DatabaseConnection();
         $sql = "update company_info set value_info='".$_POST["social"]."' where key_info='social_media'";
-        if ($conn->query($sql)) {
+        if ($conn->exec($sql)) {
             $sitemap = readSitemapXML();
             changeSitemapUrl($sitemap, GetBaseUri()."/contacto", GetBaseUri()."/contacto");
             writeSitemapXML($sitemap);
             echo "Las redes sociales se han actualizado correctamente";
         } else {
-            echo "Ha ocurrido un error mientras se modificaban las redes sociales.";
+            echo "El contenido no ha cambiado o ha ocurrido un error al actualizar los datos.";
         }
     }
 ?>

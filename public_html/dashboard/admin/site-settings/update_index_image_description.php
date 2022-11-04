@@ -15,13 +15,13 @@
     if (isset($_POST)) {
         $conn = new DatabaseConnection();
         $sql = "update company_info set value_info='".$_POST["index-image-description"]."' where key_info='index-slogan'";
-        if ($conn->query($sql)) {
+        if ($conn->exec($sql)) {
             $sitemap = readSitemapXML();
             changeSitemapUrl($sitemap, GetBaseUri(), GetBaseUri());
             writeSitemapXML($sitemap);
             echo "La descripción se ha modificado correctamente.";
         } else {
-            echo "Ha ocurrido un error al editar la descripción.";
+            echo "El contenido no ha cambiado o ha ocurrido un error al actualizar los datos.";
         }
     }
 ?>

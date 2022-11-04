@@ -1,5 +1,4 @@
 <?php
-    error_reporting(0);
     require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
     checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
 
@@ -35,8 +34,8 @@
                 $nameChange = true;
                 echo "El nombre de la categoría se ha actualizado correctamente.";
             } else {
-                $conn->rollback();
-                echo "No se ha podido actualizar la categoría.";
+                $conn->rollBack();
+                echo "No se ha podido actualizar la categoría.6";
             }
         } else if (!isset($_POST["cat_name"]) && isset($_FILES["cat_file"]) && !isset($_POST["cat_desc"])) {    
             // updating entry on database
@@ -46,7 +45,7 @@
                 $image = $res[0]['image'];
             }
             $sql = "update categories set image = '".$_FILES['cat_file']["name"]."' where id = ".$_POST["cat_id"];
-            if ($conn->query($sql)) {
+            if ($conn->exec($sql)) {
                 unlink($location.$image);
                 move_uploaded_file($_FILES['cat_file']['tmp_name'],$location.$_FILES['cat_file']["name"]); //moving file to the server.
                 echo "La imagen se ha actualiado correctamente.";
@@ -55,10 +54,10 @@
             } 
         } else if (!isset($_POST["cat_name"]) && !isset($_FILES["cat_file"]) && isset($_POST["cat_desc"])) {
             $sql = "update categories set description = '".$_POST['cat_desc']."' where id = ".$_POST["cat_id"];
-            if ($conn->query($sql)) {
+            if ($conn->exec($sql)) {
                 echo "La descripción de la categoría se ha actualizado correctamente.";
             } else {
-                echo "No se ha podido actualizar la categoría.";
+                echo "No se ha podido actualizar la categoría.5";
             }
         } else if (isset($_POST["cat_name"]) && isset($_FILES["cat_file"]) && !isset($_POST["cat_desc"])) {
             $image = "";
@@ -76,7 +75,7 @@
                 move_uploaded_file($_FILES['cat_file']['tmp_name'],$location.$_FILES['cat_file']["name"]); //moving file to the server
                 echo "La imagen y el nombre de la categoría se han actualizado correctamente.";
             } else {
-                echo "No se ha podido actualizar la categoría.";
+                echo "No se ha podido actualizar la categoría.4";
             }
         } else if (!isset($_POST["cat_name"]) && isset($_FILES["cat_file"]) && isset($_POST["cat_desc"])) {
             $image = "";
@@ -87,12 +86,12 @@
 
             // updating entry on database
             $sql = "update categories set description = '".$_POST['cat_desc']."', image = '".$_FILES['cat_file']["name"]."' where id = ".$_POST["cat_id"];
-            if ($conn->query($sql)) {
+            if ($conn->exec($sql)) {
                 unlink($location.$image);
                 move_uploaded_file($_FILES['cat_file']['tmp_name'],$location.$_FILES['cat_file']["name"]); //moving file to the server
                 echo "La imagen y descripción de la categoría se han actualizado correctamente.";
             } else {
-                echo "No se ha podido actualizar la categoría.";
+                echo "No se ha podido actualizar la categoría.3";
             }
         } else if (isset($_POST["cat_name"]) && !isset($_FILES["cat_file"]) && isset($_POST["cat_desc"])) {
             $sql = array(
@@ -103,8 +102,8 @@
                 $nameChange = true;
                 echo "El nombre y la descripción de la categoría se han actualizado correctamente.";
             } else {
-                $conn->rollback();
-                echo "No se ha podido actualizar la categoría.";
+                $conn->rollBack();
+                echo "No se ha podido actualizar la categoría.1";
             }
         } else if (isset($_POST["cat_name"]) && isset($_FILES["cat_file"]) && isset($_POST["cat_desc"])) {
             $image = "";
@@ -117,13 +116,13 @@
                 "update categories set name = '".$_POST['cat_name']."', description = '".$_POST['cat_desc']."', friendly_url = '".GetFriendlyUrl($_POST["cat_name"])."', image = '".$_FILES['cat_file']["name"]."' where id = ".$_POST["cat_id"],
                 "update pages set page = 'gallery/".GetFriendlyUrl($_POST["cat_name"])."' where cat_id = ".$_POST["cat_id"]
             );
-            if ($conn->query($sql)) {
+            if ($conn->exec($sql)) {
                 $nameChange = true;
                 unlink($location.$image);
                 move_uploaded_file($_FILES['cat_file']['tmp_name'],$location.$_FILES['cat_file']["name"]); //moving file to the server
                 echo "El nombre, imagen y descripción de la categoría se han actualizado correctamente.";
             } else {
-                echo "No se ha podido actualizar la categoría.";
+                echo "No se ha podido actualizar la categoría.2";
             }
         }
 
@@ -140,28 +139,20 @@
             $total_pages += ($res[0]["count(id)"] % 12 != 0)? 1 : 0;
         }
 
-        echo "\ntotal pages: $total_pages\n";
-
         $sitemap = readSitemapXML();
         $urlAfter = GetBaseUri()."/"."galeria/".$categoryUrlAfter;
         if ($nameChange) {
             deleteSitemapUrl($sitemap, $urlBefore);
-            // echo "delete: $urlBefore\n";
             for ($i = 2; $i <= $total_pages; $i++) {
-                // echo "delete: ".$urlBefore."/$i\n";
                 deleteSitemapUrl($sitemap, $urlBefore."/$i");
             }
             addSitemapUrl($sitemap, $urlAfter);
-            // echo "add: $urlAfter\n";
             for ($i = 2; $i <= $total_pages; $i++) {
-                // echo "add: ".$urlAfter."/$i\n";
                 addSitemapUrl($sitemap, $urlAfter."/$i");
             }
         } else {
             changeSitemapUrl($sitemap, $urlAfter, $urlAfter);
-            // echo "change: $urlAfter\n";
             for ($i = 2; $i <= $total_pages; $i++) {
-                // echo "change: ".$urlAfter."/$i\n";
                 changeSitemapUrl($sitemap, $urlAfter."/$i", $urlAfter."/$i");
             }
         }

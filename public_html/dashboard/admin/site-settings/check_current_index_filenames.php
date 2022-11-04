@@ -11,7 +11,7 @@
         if(is_dir($location)) {
             $searchDir = scandir($location);
             if (in_array($filename, $searchDir)) {
-                http_response_code(412);
+                http_response_code(303);
             }
         } else {
             http_response_code(200);

@@ -1,8 +1,8 @@
 <?php
     session_start();
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_site_settings.php";
-    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/set_error_header.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
 
     $site_settings = getSiteSettings();
     $conn = new DatabaseConnection(); // Opening database connection.
@@ -37,19 +37,20 @@
                 array_push($categories, array($item['friendly_url'], $item['name'], $item['image'], $item['description']));
             }
         } else {
-            $sql = "select gallery.id, filename, dir, altText from gallery inner join categories on gallery.category = categories.id where gallery.category = (select id from categories where friendly_url = '".$_GET['category']."') limit $paginationStart, $limit";
+            $sql = "select id, name, description from categories where id = (select id from categories where friendly_url = '".$_GET['category']."')";
             if ($res = $conn->query($sql)) {
-                if ($conn->num_rows >= 0) {
+                $category_id = $res[0]['id'];
+                $category_name = $res[0]['name'];
+                $category_description = $res[0]['description'];
+                $sql = "select gallery.id, filename, dir, altText from gallery inner join categories on gallery.category = categories.id where gallery.category = (select id from categories where friendly_url = '".$_GET['category']."') limit $paginationStart, $limit";
+                if ($res = $conn->query($sql)) {
                     foreach ($res as $item) {
                         array_push($results, array($item['id'], $item['filename'], $item['dir'], $item['altText']));
                     }
-                } else {
-                    $pageNotFound = true;
                 }
             } else {
                 $pageNotFound = true;
             }
-
 
             // Getting all records from database
             $sql = "select count(gallery.id) as id from gallery inner join categories on gallery.category = categories.id where cat_enabled='YES' and gallery.category = (select id from categories where friendly_url = '".$_GET['category']."')"; 
@@ -64,12 +65,7 @@
                 }
             }
 
-            $sql = "select id, name, description from categories where id = (select id from categories where friendly_url = '".$_GET['category']."')";
-            if ($res = $conn->query($sql)) {
-                $category_id = $res[0]['id'];
-                $category_name = $res[0]['name'];
-                $category_description = $res[0]['description'];
-            }
+            
         }
 
         // Getting page metadata
@@ -84,7 +80,6 @@
             $page_description = $res[0]['description'];
         }
     } else {
-        require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/set_503_header.php";
         set_503_header();
     }
 ?>
@@ -107,7 +102,7 @@
         gtag('config', 'G-5GCTKSYQEQ');
     </script>
     <?php endif; ?>
-    <?php if ($pageNotFound): ?>
+    <?php if ($pageNotFound && $site_settings[11]["value_info"] != "false"): ?>
     <?php set_404_header(); ?>
     <title>Página no encontrada | <?=$site_settings[2]["value_info"]?></title>
     <?php else: ?>
@@ -234,8 +229,12 @@
             var $gallery = new SimpleLightbox('.galeria a', {});
         })();
         </script>
-        <?php endif; ?>
-    <?php else: ?>
+    <?php endif; ?>
+    <?php endif; ?>
+    <?php if (($pageNotFound && $site_settings[11]["value_info"] == "true") && !isset($_SESSION["loggedin"])): ?> 
+    <?php set_503_header() ?>
+    <?php endif; ?>
+    <?php if ($pageNotFound): ?>
     <?php
         include $_SERVER["DOCUMENT_ROOT"].'/includes/header.php';
         include $_SERVER["DOCUMENT_ROOT"].'/snippets/404.php';

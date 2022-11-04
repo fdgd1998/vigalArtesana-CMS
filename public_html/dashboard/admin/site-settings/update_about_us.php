@@ -15,13 +15,13 @@
     if (isset($_POST)) {
         $conn = new DatabaseConnection();
         $sql = "update company_info set value_info='".$_POST["about_text"]."' where key_info='about-us'";
-        if ($conn->query($sql)) {
+        if ($conn->exec($sql)) {
             $sitemap = readSitemapXML();
             changeSitemapUrl($sitemap, GetBaseUri()."/sobre-nosotros", GetBaseUri()."/sobre-nosotros");
             writeSitemapXML($sitemap);
             echo "Se ha guardado correctamente.";
         } else {
-            echo "Ha ocurrido un error.";
+            echo "El contenido no ha cambiado o ha ocurrido un error al actualizar los datos.";
         }
     }
 ?>

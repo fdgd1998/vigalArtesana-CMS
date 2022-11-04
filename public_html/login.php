@@ -9,7 +9,7 @@
     $conn = new DatabaseConnection();
 
     if (isset($_SESSION["loggedin"])) {
-        header("Location: index.php");
+        header("Location: /");
         exit();
     }
     
@@ -29,7 +29,6 @@
         if ($res = $conn->query($sql)) {
             $attempts = $res[0]["count(address)"];
             if ($attempts > 3) {
-                $_SESSION["error"] = "Has superado el número de intentos permitidos. Inténtalo de nuevo en 10 minutos.";
                 return true;
             } else {
                 return false;
@@ -39,7 +38,7 @@
         }
     }
     
-    if (isset($_POST)) {
+    if ($_POST) {
         $user_form = trim($_POST['user']);
         $pass_form = trim($_POST['password']);
     
@@ -69,6 +68,8 @@
             } else {
                 $errorMessage = "Usuario y/o contraseña incorrectos.";
             }
+        } else {
+            $errorMessage = "Has superado el número de intentos permitidos. Inténtalo de nuevo en 10 minutos.";
         }
     }
 ?>

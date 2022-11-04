@@ -16,12 +16,19 @@
         $location = $_SERVER["DOCUMENT_ROOT"]."/uploads//";
         $conn = new DatabaseConnection();
 
+        $image = "";
+        $sql = "select value_info from company_info where key_info = 'index-image'";
+        if ($res = $conn->query($sql)) {
+            $image = $res[0]["value_info"];
+        }
+
         $sql = array(
             "update company_info set value_info='".$_POST["image-desc"]."' where key_info='index-image-desc'",
             "update company_info set value_info='".$_FILES["image"]["name"]."' where key_info='index-image'"
         );
 
         if ($conn->transaction($sql)) {
+            unlink($location.$image);
             move_uploaded_file($_FILES["image"]['tmp_name'],$location.$_FILES["image"]["name"]); 
             $sitemap = readSitemapXML();
             changeSitemapUrl($sitemap, GetBaseUri(), GetBaseUri());

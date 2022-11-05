@@ -72,6 +72,8 @@
   <div class="button-group">
     <button type="button" id="upload-images" class="btn my-button"><i class="i-margin fas fa-upload"></i>Subir imágenes...</button>
   </div>
+  <?php if (count($results) > 0): ?>
+
   <div class="input-group" style="margin-bottom: 20px;">
     <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">Ordenar</span>
@@ -126,6 +128,7 @@
       </div>
     <?php endforeach; ?>
 </div>
+
 <!-- Pagination -->
 <nav aria-label="Page navigation example mt-5" style="margin-bottom: 50px;">
     <ul class="pagination justify-content-center">
@@ -165,6 +168,9 @@
     </ul>
 </nav>
 </div>
+<?php else: ?>
+  <p style="text-align: center; font-size: 20px; margin-top: 50px;">NO HAY RESULTADOS</p>
+<?php endif ?>
 <script src="../includes/js/jquery.min.js"></script>
 <script>
     $(document).ready(function () {

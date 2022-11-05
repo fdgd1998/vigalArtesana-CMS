@@ -49,7 +49,7 @@
         gtag('config', 'G-5GCTKSYQEQ');
     </script>
     <?php else: ?>
-    <title>Página en mantenimiento</title>
+    <title>Página en mantenimiento | <?=$site_settings[2]["value_info"]?></title>
     <?php endif; ?>
     <link rel="canonical" href="<?=GetUri();?>">
     <link rel="icon" href="<?=GetBaseUri()?>/includes/img/favicon.ico" type="image/x-icon">

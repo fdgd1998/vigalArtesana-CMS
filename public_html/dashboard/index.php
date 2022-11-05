@@ -13,6 +13,93 @@
     $metadata = array();
     $conn = new DatabaseConnection();
     $site_settings = getSiteSettings();
+    $page = "";
+    $title = "";
+
+    if (!isset($_GET['page'])) $title = 'Panel de control | '.$site_settings[2]["value_info"];
+    
+    switch($_GET['page']) {
+        case 'new-user':
+            $page = '/dashboard/admin/users/pages/new_user.php';
+            $title = 'Nuevo usuario | '.$site_settings[2]["value_info"];
+            break;
+        case 'user-profile':
+            $page = '/dashboard/admin/users/pages/user_profile.php';
+            $title = 'Perfil | '.$site_settings[2]["value_info"];
+            break;
+        case 'manage-users':
+            $page = '/dashboard/admin/users/pages/manage_users.php';
+            $title = 'Administrar usuarios | '.$site_settings[2]["value_info"];
+            break;
+        case 'seo-notify':
+            $page = '/dashboard/admin/site-settings/pages/seo_notify.php';
+            $title = 'Notificar cambios SEO | '.$site_settings[2]["value_info"];
+            break;
+        case 'text-editor':
+            $page = '/dashboard/admin/site-settings/pages/text_editor.php';
+            $title = 'Editor: '.$_GET['file'].' | '.$site_settings[2]["value_info"];
+            break;
+        case 'new-category':
+            $page = '/dashboard/admin/gallery/pages/category_new.php';
+            $title = 'Nueva categoría | '.$site_settings[2]["value_info"];
+            break;
+        case 'gallery-desc':
+            $page = '/dashboard/admin/gallery/pages/gallery_desc.php';
+            $title = 'Descripción de la galería | '.$site_settings[2]["value_info"];
+            break;
+        case 'edit-category':
+            $page = '/dashboard/admin/gallery/pages/category_new.php';
+            $title = 'Editar categoría | '.$site_settings[2]["value_info"]; 
+            break;
+        case 'manage-gallery':
+            $page = '/dashboard/admin/gallery/pages/manage_gallery.php';
+            $title = 'Administrar galería | '.$site_settings[2]["value_info"];
+            break;
+        case 'metadata-settings':
+            $page = '/dashboard/admin/site-settings/pages/pages_metadata.php';
+            $title = 'Títulos y descripciones de páginas (metadatos) | '.$site_settings[2]["value_info"];
+            break;
+        case 'gallery-new':
+            $page = '/dashboard/admin/gallery/pages/gallery_new.php';
+            $title = 'Subir imágenes | '.$site_settings[2]["value_info"];
+            break;
+        case 'categories':
+            $page = '/dashboard/admin/gallery/pages/categories.php';
+            $title = 'Administrar categorías | '.$site_settings[2]["value_info"];
+            break;
+        case 'general-settings':
+            $page = '/dashboard/admin/site-settings/pages/general.php';
+            $title = 'Opciones de la página de inicio | '.$site_settings[2]["value_info"];
+            break;
+        case 'contact-settings':
+            $page = '/dashboard/admin/site-settings/pages/contact.php';
+            $title = 'Opciones de contacto | '.$site_settings[2]["value_info"];
+            break;
+        case 'manage-services':
+            $page = '/dashboard/admin/site-settings/pages/services.php';
+            $title = 'Administrar servicios | '.$site_settings[2]["value_info"];
+            break;
+        case 'new-service':
+            $page = '/dashboard/admin/site-settings/pages/new_service.php';
+            $title = 'Nuevo servicio | '.$site_settings[2]["value_info"];
+            break;
+        case 'about-us':
+            $page = '/dashboard/admin/site-settings/pages/about_us.php';
+            $title = 'Editar sobre nosotros | '.$site_settings[2]["value_info"];
+            break;
+        case 'advanced':
+            $page = '/dashboard/admin/site-settings/pages/advanced.php';
+            $title = 'Opciones avanzadas | '.$site_settings[2]["value_info"];
+            break;
+        case 'edit-service':
+            $page = '/dashboard/admin/site-settings/pages/edit_service.php';
+            $title = 'Editar servicio | '.$site_settings[2]["value_info"];
+            break;
+        default:
+            $page = '/dashboard/start.php';
+            $title = 'Panel de control | '.$site_settings[2]["value_info"];
+    }
+    
 
 ?>
 <!DOCTYPE html>
@@ -23,7 +110,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Panel de control | ViGal Artesana</title>
+    <title><?=$title?></title>
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/gallery.css">
@@ -172,70 +259,7 @@
         <!-- Page Content  -->
         <div id="content">
             <div>
-                <?php
-                    // reading GET variable and load corresponding page
-                    switch($_GET['page']) {
-                        case 'new-user':
-                            include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/users/pages/new_user.php';
-                            break;
-                        case 'user-profile':
-                            include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/users/pages/user_profile.php';
-                            break;
-                        case 'manage-users':
-                            include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/users/pages/manage_users.php';
-                            break;
-                        case 'seo-notify':
-                            include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/site-settings/pages/seo_notify.php';
-                            break;
-                        case 'text-editor':
-                            include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/site-settings/pages/text_editor.php';
-                            break;
-                        case 'new-category':
-                            include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/gallery/pages/category_new.php';
-                            break;
-                        case 'gallery-desc':
-                            include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/gallery/pages/gallery_desc.php';
-                            break;
-                        case 'edit-category':
-                            include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/gallery/pages/category_new.php';
-                            break;
-                        case 'manage-gallery':
-                            include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/gallery/pages/manage_gallery.php';
-                            break;
-                        case 'metadata-settings':
-                            include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/site-settings/pages/pages_metadata.php';
-                            break;
-                        case 'gallery-new':
-                            include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/gallery/pages/gallery_new.php';
-                            break;
-                        case 'categories':
-                            include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/gallery/pages/categories.php';
-                            break;
-                        case 'general-settings':
-                            include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/site-settings/pages/general.php';
-                            break;
-                        case 'contact-settings':
-                            include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/site-settings/pages/contact.php';
-                            break;
-                        case 'manage-services':
-                            include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/site-settings/pages/services.php';
-                            break;
-                        case 'new-service':
-                            include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/site-settings/pages/new_service.php';
-                            break;
-                        case 'about-us':
-                            include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/site-settings/pages/about_us.php';
-                            break;
-                        case 'advanced':
-                            include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/site-settings/pages/advanced.php';
-                            break;
-                        case 'edit-service':
-                            include $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/site-settings/pages/edit_service.php';
-                            break;
-                        default:
-                            include $_SERVER["DOCUMENT_ROOT"].'/dashboard/start.php';
-                    }
-                ?>
+                <?php include $_SERVER["DOCUMENT_ROOT"].$page?>
             </div>
         </div>
     </div>

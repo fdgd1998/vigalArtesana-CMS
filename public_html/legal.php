@@ -29,7 +29,7 @@
         gtag('config', 'G-5GCTKSYQEQ');
     </script>
     <?php else: ?>
-    <title>Página en mantenimiento</title>
+    <title>Página en mantenimiento | <?=$site_settings[2]["value_info"]?></title>
     <?php endif; ?>
     <link rel="canonical" href="<?=GetUri();?>">
     <link rel="icon" href="<?=GetBaseUri()?>/includes/img/favicon.ico" type="image/x-icon">
@@ -62,10 +62,9 @@
             <p>En cumplimiento del deber de información establecido en el artículo 10 de la Ley 34/2002, de Servicios de la Sociedad de la Información y de Comercio Electrónico, le comunicamos que el titular del sitio web SITIO WEB es RAZON SOCIAL.</p>
             <p>Los datos identificativos y de contacto con los titulares del sitio web sitio son los siguientes:</p>
             <p>Razón Social: Victoria Eugenia Díaz Gálvez</p>
-            <p>NIF: 77472123G</p>
-            <p>Dirección: Diseminado Vado 154, 29749, Almayate, Málaga</p>
-            <p>Email de contacto: contacto@vigalartesana.es</p>
-            <p>Tlf: +34602036830</p>
+            <p>Dirección: <?=$site_settings[1]["value_info"]?></p>
+            <p>Email de contacto: <?=$site_settings[3]["value_info"]?></p>
+            <p>Teléfono: <?=$site_settings[0]["value_info"]?></p>
             <h2 class="title">2. Objeto y ámbito de aplicación.</h2>
             <p>2.1.- Mediante este Aviso Legal se establecen las condiciones generales de uso que regulan el acceso, navegación y uso del sitio web SITIO WEB (en adelante, Sitio Web), así como las responsabilidades derivadas de la utilización de sus contenidos. Adicionalmente, la prestación de determinados servicios o actividades en el marco del Sitio Web podrán quedar asimismo sometidas a otras condiciones particulares que pudieran establecerse y que, en su caso, sustituyan, complementen y/o modifiquen las condiciones generales de uso de este Aviso Legal. </p>
             <p>2.2.- Este Sitio Web es un servicio que RAZON SOCIAL SITIO WEB, (en adelante el RESPONSABLE) pone a disposición de los usuarios de Internet con finalidad informativa, pudiendo efectuar en cualquier momento y sin previo aviso las modificaciones que considere oportunas en su diseño, configuración y contenidos.</p>

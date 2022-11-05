@@ -30,7 +30,7 @@
         gtag('config', 'G-5GCTKSYQEQ');
     </script>
     <?php else: ?>
-    <title>Página en mantenimiento</title>
+    <title>Página en mantenimiento | <?=$site_settings[2]["value_info"]?></title>
     <?php endif; ?>
     <link rel="canonical" href="<?=GetUri();?>">
     <link rel="icon" href="<?=GetBaseUri()?>/includes/img/favicon.ico" type="image/x-icon">
@@ -60,10 +60,9 @@
             <p>De acuerdo con lo establecido en el Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo, de 27 de abril de 2016, relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales y a la libre circulación de estos datos (RGPD) y LO 3/2018, de 5 de diciembre, de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD),  les informamos sobre el tratamiento de los datos personales que nos facilitan a través de esta Web </p>
             <h3 class="title">¿Quién es el responsable del tratamiento de sus datos personales?</h3>
             <p>Razón Social: Victoria Eugenia Díaz Gálvez</p>
-            <p>NIF: 77472123G</p>
-            <p>Dirección: Diseminado Vado, 154, 29749 Almayate, Málaga</p>
-            <p>Email de contacto: contacto@vigalartesana.es</p>
-            <p>Tlf: +34602036830</p>
+            <p>Dirección: <?=$site_settings[1]["value_info"]?></p>
+            <p>Email de contacto: <?=$site_settings[3]["value_info"]?></p>
+            <p>Teléfono: <?=$site_settings[0]["value_info"]?></p>
             <h3 class="title">¿Con qué finalidad trataremos sus datos personales?</h3>
             <p>Como Usuario de la Web: Sus datos serán utilizados para dar respuestas  solicitudes de información, comentarios o sugerencias, a través del apartado de contacto o de las direcciones de correo que aparezcan en nuestra página y mantener la comunicación con el interesado.</p>
             <p>Como seguidor en RRSS: Los datos que hayas facilitado a la red social serán usados para mantener un seguimiento mutuo de nuestras cuentas y poder contactar contigo siempre a través de la red social elegida. </p>

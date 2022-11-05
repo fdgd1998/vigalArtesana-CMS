@@ -75,7 +75,7 @@
 <div class="container settings-container">
     <h1 class="title">Usuarios</h1>
     <button type="button" id="create-user" class="btn my-button" style="margin-bottom: 15px;"><i class="i-margin fas fa-user-plus"></i>Crear usuario</button>
-
+  <?php if (count($users) > 0): ?>
     <div class="table-responsive">
         <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
@@ -117,3 +117,6 @@
         </table>
     </div>
 </div>
+<?php else: ?>
+  <p style="font-size: 20px; text-align: center; margin-top: 50px;">NO HAY RESULTADOS</p>
+<?php endif; ?>

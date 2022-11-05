@@ -89,7 +89,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php if ($site_settings[11]["value_info"] == "false" && !$pageNotFound): ?>
-    <title><?=$page_title?> | <?=$site_settings[2]["value_info"]?> | <?= isset($_GET["page"])?"Página ".$page:"Página 1"?></title>
+    <title><?=$page_title?> | <?=$site_settings[2]["value_info"]; isset($_GET["category"]) ? (isset($_GET["page"])?" | Página ".$page:"Página 1") : ""?></title>
     <meta name="description" content="<?=$page_description?>">
     <meta name="robots" content="index, follow">
     <!-- Global site tag (gtag.js) - Google Analytics -->

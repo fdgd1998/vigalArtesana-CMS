@@ -597,11 +597,11 @@ li > i {
   }
   
   .contact-data {
-    text-align: center;
+    text-align: left;
   }
 }
 
-@media (max-width: 576px){
+@media (max-width: 576px) {
   h1.title {
     color: var(--title-color);
     font-size: 30px !important;
@@ -694,7 +694,7 @@ li > i {
   }
 }
 
-a.contact-data > i{
+a.contact-data > i {
   margin-right: 10px;
 }
 

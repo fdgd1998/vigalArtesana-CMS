@@ -203,7 +203,7 @@ INSERT INTO `users` (`id`, `username`, `email`, `passwd`, `firstname`, `surname`
 CREATE TABLE `user_roles` (
   `id` int(4) NOT NULL,
   `role` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `permissions` bit(7) NOT NULL
+  `permissions` bit(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -211,9 +211,9 @@ CREATE TABLE `user_roles` (
 --
 
 INSERT INTO `user_roles` (`id`, `role`, `permissions`) VALUES
-(1, 'superuser', b'1111111'),
-(2, 'administrator', b'1110111'),
-(3, 'collaborator', b'1000001');
+(1, 'superuser', b'11111111'),
+(2, 'administrator', b'01110111'),
+(3, 'collaborator', b'01000001');
 
 --
 -- Índices para tablas volcadas

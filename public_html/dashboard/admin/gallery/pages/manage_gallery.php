@@ -65,7 +65,6 @@
       $baseURL.="?page=manage-gallery&display=all&n=";
     }
 ?>
-
 <div class="container settings-container">
   <h1 class="title">Galería</h1>
   <p class="title-descirption">Gestiona la galería. Para borrar imágenes, pincha sobre ellas para seleccionarlas.</p>
@@ -122,7 +121,7 @@
   <div class="container gallery-manage row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" style="margin-bottom: 20px;">
     <?php foreach ($results as $element): ?>
       <div class="wrap animated-item">
-        <a class='gallery-item '>
+        <a class='gallery-item'>
           <img class="photos img-fluid" id="<?=$element[2]?>" category="<?=$element[3]?>" dir="<?=$element[1]?>" src='../uploads/images/<?=$element[1].$element[2]?>'/>
         </a>
       </div>

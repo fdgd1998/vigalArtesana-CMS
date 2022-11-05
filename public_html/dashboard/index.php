@@ -19,6 +19,10 @@
     if (!isset($_GET['page'])) $title = 'Panel de control | '.$site_settings[2]["value_info"];
     
     switch($_GET['page']) {
+        case 'logs':
+            $page = '/dashboard/admin/site-settings/pages/logs.php';
+            $title = 'Logs | '.$site_settings[2]["value_info"];
+            break;
         case 'new-user':
             $page = '/dashboard/admin/users/pages/new_user.php';
             $title = 'Nuevo usuario | '.$site_settings[2]["value_info"];
@@ -165,13 +169,25 @@
                                     <i class="fas fa-plus-circle"></i>
                                     Nuevo servicio
                                 </a>
-                                <div class="dropdown-divider"></div>
+                            </div>
+                        </li>
+                        <?php if (HasPermission("manage_advancedSettings")): ?>
+                        <li class="nav-item dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">
+                                Avanzado
+                            </a>
+                            <div role="menu" class="dropdown-menu">
                                 <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=advanced">
                                     <i class="fas fa-code"></i>
                                     Opciones avanzadas
                                 </a>
+                                <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=logs">
+                                    <i class="fas fa-file-code"></i>
+                                    Ver logs
+                                </a>
                             </div>
                         </li>
+                        <?php endif; ?>
                     <?php endif; ?>
                     <?php if (HasPermission("manage_seoSettings")): ?>
                         <li class="nav-item dropdown">

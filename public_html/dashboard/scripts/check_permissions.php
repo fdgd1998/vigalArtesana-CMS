@@ -9,13 +9,14 @@
         $conn = new DatabaseConnection();
         $permissions = array 
             (
-              "manage_gallery" =>  "1000000",
-              "manage_companySettings" =>  "0100000",
-              "manage_services" =>  "0010000",
-              "manage_users" =>  "0001000",
-              "manage_siteSettings" =>  "0000100",
-              "manage_seoSettings" => "0000010",
-              "standard_user" =>  "0000001"
+              "manage_advancedSettings" =>  "10000000",
+              "manage_gallery" =>  "01000000",
+              "manage_companySettings" =>  "00100000",
+              "manage_services" =>  "00010000",
+              "manage_users" =>  "00001000",
+              "manage_siteSettings" =>  "00000100",
+              "manage_seoSettings" => "00000010",
+              "standard_user" =>  "00000001"
             );
         
         $userPerm = 1;

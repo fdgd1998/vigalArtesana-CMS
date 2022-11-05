@@ -55,6 +55,7 @@
             if (isset($result["id"])) {
                 if (password_verify($pass_form, $result["passwd"])) {
                     $_SESSION['loggedin'] = true;
+                    $_SESSION['account_type'] = $result["role"];
                     $_SESSION['user'] = $result["username"];
                     $_SESSION['userid'] = $result["id"];
                     $sql = "update ip_register set login_success = 1 where address = '".$_SERVER["REMOTE_ADDR"]."'";

@@ -9,6 +9,7 @@
     }
 
     $users = array();
+    echo var_dump($users);
 
     if ($_SESSION["account_type"] != "superuser") {
         $sql = "select users.id, username, email, role from users inner join user_roles on users.account_type = user_roles.id where role != 'superuser'";

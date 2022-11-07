@@ -5,8 +5,7 @@
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/get_uri.php';
     require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/XMLSitemapFunctions.php";
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/database_connection.php';
-    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/avif.php';
-
+    
     if (!HasPermission("manage_gallery")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
         exit();
@@ -15,7 +14,6 @@
     if (isset($_POST)) {
         $conn = new DatabaseConnection();
         $location = $_SERVER["DOCUMENT_ROOT"]."/uploads/images/"; // location for gallery images.
-        $temp = $_SERVER["DOCUMENT_ROOT"]."/uploads/temp/";
         $categories = json_decode($_POST["categories"]);
         $altText = json_decode($_POST["alt_text"]);
 
@@ -63,7 +61,6 @@
                 
                 if ($conn->exec($sql)) {
                     move_uploaded_file($file['tmp_name'],$location.$directory.$file["name"]); // Moving file to the server.
-                    createAvifImage($file["name"], $location.$directory);
                 }
                 $i++;
             }

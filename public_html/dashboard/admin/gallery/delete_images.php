@@ -50,11 +50,7 @@
 
         if ($conn->exec($sql)) {
             for ($i = 0; $i < count($filenames); $i++) {
-                
-                unlink($location.$dir[$i].$filenames[$i]);
-                $image_info = explode(".", $filenames[$i]);
-                unlink($location.$dir[$i].$image_info[0].".avif");
-
+                unlink($location.$dir[$i].$filenames[$i]); // deleting the file
                 if (dirIsEmpty($location.$dir[$i])) {
                     rmdir($location.$dir[$i]);
                 }

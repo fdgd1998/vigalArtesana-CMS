@@ -85,7 +85,7 @@ var input_files = [];
         $("#images-preview").empty();
 
         if (input_files.length > 0) { // Checking if there's selected files
-            if (input_files.length <= 10) { // Checking if there's less than 10 files selected.
+            if (input_files.length <= 5) { // Checking if there's less than 10 files selected.
                 
                 for (var i = 0; i < input_files.length; i++) {
                     console.log(input_files[i].name +": "+input_files[i].size);

@@ -95,7 +95,7 @@
 
 <div class="container settings-container">
     <h1 class="title">Subir imágenes</h1>
-    <p class="title-description">Sube imágenes a tu galería. Puedes subir un máximo de 10 ficheros simultáneamente y un peso de 5 MB máximo por cada uno.</p>
+    <p class="title-description">Sube imágenes a tu galería. Puedes subir un máximo de 5 ficheros simultáneamente y un peso de 5 MB máximo por cada uno.</p>
     <form style="margin-bottom: 20px;padding-top: 17px;" enctype="multipart/form-data">
         <div class="form-row" style="margin-top: 10px;">
             <div class="input-group mb-3">

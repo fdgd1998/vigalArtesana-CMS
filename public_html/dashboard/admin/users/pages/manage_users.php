@@ -9,7 +9,6 @@
     }
 
     $users = array();
-    echo var_dump($users);
 
     if ($_SESSION["account_type"] != "superuser") {
         $sql = "select users.id, username, email, role from users inner join user_roles on users.account_type = user_roles.id where role != 'superuser'";
@@ -76,7 +75,7 @@
 <div class="container settings-container">
     <h1 class="title">Usuarios</h1>
     <button type="button" id="create-user" class="btn my-button" style="margin-bottom: 15px;"><i class="i-margin fas fa-user-plus"></i>Crear usuario</button>
-  <?php if (count($users) > 0): ?>
+  <?php if (count($users) > 1): ?>
     <div class="table-responsive">
         <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>

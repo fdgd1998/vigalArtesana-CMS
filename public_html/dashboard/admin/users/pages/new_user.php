@@ -28,8 +28,8 @@
         <div class="col-12 col-sm-12 col-md-6 mt-3">
             <label for="basic-url">Tipo de cuenta:</label>
             <select class="custom-select mr-sm-2" id="role">
-                <?php foreach ($roles as $roles):?>
-                <option value="<?=$roles["id"]?>"><?=$roles["role"]?></option>
+                <?php foreach ($roles as $role):?>
+                <option value="<?=$role["id"]?>"><?=$role["role"]?></option>
                 <?php endforeach; ?>
             </select>
         </div>

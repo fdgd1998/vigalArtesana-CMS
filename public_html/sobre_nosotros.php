@@ -2,13 +2,15 @@
     session_start();
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_site_settings.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_maintenance_status.php";
 
     $site_settings = getSiteSettings();
     $conn = new DatabaseConnection(); // Opening database connection.
+    $maintenance = getMaintenanceStatus($site_settings);
     
     $page_id = 7;
 
-    if ($site_settings[11]["value_info"] == "false" || ($site_settings[11]["value_info"] == "true" && isset($_SESSION["loggedin"]))) { 
+    if (!$maintenance || ($maintenance && isset($_SESSION["loggedin"]))) { 
         $sql = "select title, description from pages_metadata where id_page = (select id from pages where id = ".$page_id.")";  
         if ($res = $conn->query($sql)) {
             $page_title = $res[0]['title'];
@@ -25,7 +27,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php if ($site_settings[11]["value_info"] == "false"): ?>
+    <?php if (!$maintenance || ($maintenance && isset($_SESSION["loggedin"]))): ?>
     <title><?=$page_title." | ".$site_settings[2]["value_info"]?></title>
     <meta name="description" content="<?=$page_description?>">
     <meta name="robots" content="index, follow">
@@ -56,11 +58,11 @@
 
 <body>
     <?php
-    if ($site_settings[11]["value_info"] == "true" && !isset($_SESSION["loggedin"])) {
+    if ($maintenance && !isset($_SESSION["loggedin"])) {
         include $_SERVER["DOCUMENT_ROOT"]."/snippets/maintenance_page.php";
         exit();
     }
-    if ($site_settings[11]["value_info"] == "true" && isset($_SESSION["loggedin"])) {
+    if ($maintenance && isset($_SESSION["loggedin"])) {
         include $_SERVER["DOCUMENT_ROOT"]."/snippets/maintenance_message.php";
     }
     include $_SERVER["DOCUMENT_ROOT"].'/includes/header.php';

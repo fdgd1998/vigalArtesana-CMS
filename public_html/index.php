@@ -2,14 +2,16 @@
     session_start();
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_site_settings.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_maintenance_status.php";
 
     $site_settings = getSiteSettings();
+    $maintenance = getMaintenanceStatus($site_settings);
     $conn = new DatabaseConnection(); // Opening database connection.
 
     $services = array(); // Array to save categories
     $page_id = 5;
 
-    if ($site_settings[11]["value_info"] == "false" || ($site_settings[11]["value_info"] == "true" && isset($_SESSION["loggedin"]))) {
+    if (!$maintenance || ($maintenance && isset($_SESSION["loggedin"]))) {
         // Fetching categories from database and storing then in the array for further use.
         $sql = "select * from services";
         if ($res = $conn->query($sql)) {
@@ -35,7 +37,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php if ($site_settings[11]["value_info"] == "false"): ?>
+    <?php if (!$maintenance || ($maintenance && isset($_SESSION["loggedin"]))): ?>
     <title><?=$page_title?> | <?=$site_settings[2]["value_info"]?></title>
     <meta name="description" content="<?=$page_description?>">
     <meta name="robots" content="index, follow">
@@ -66,7 +68,7 @@
 
 <body>
     <?php
-    if ($site_settings[11]["value_info"] == "true" && !isset($_SESSION["loggedin"])) {
+    if ($maintenance && !isset($_SESSION["loggedin"])) {
         include $_SERVER["DOCUMENT_ROOT"]."/snippets/maintenance_page.php";
         exit();
     }
@@ -74,7 +76,7 @@
     <div id="main">
 
         <?php
-            if ($site_settings[11]["value_info"] == "true" && isset($_SESSION["loggedin"])) {
+            if ($maintenance && isset($_SESSION["loggedin"])) {
                 include $_SERVER["DOCUMENT_ROOT"]."/snippets/maintenance_message.php";
             }
             include $_SERVER["DOCUMENT_ROOT"].'/includes/header.php';

@@ -2,11 +2,14 @@
     session_start();
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_site_settings.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_maintenance_status.php";
 
     $site_settings = getSiteSettings();
+    $maintenance = getMaintenanceStatus($site_settings);
+
     $conn = new DatabaseConnection(); // Opening database connection.
 
-    if ($site_settings[11]["value_info"] == "true" || ($site_settings[11]["value_info"] == "true" && !isset($_SESSION["loggedin"]))) { 
+    if ($maintenance && !isset($_SESSION["loggedin"])) { 
         require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/set_503_header.php";
         set_503_header();
     }
@@ -17,7 +20,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php if ($site_settings[11]["value_info"] == "false"): ?>
+    <?php if (!$maintenance || ($maintenance && isset($_SESSION["loggedin"]))): ?>
     <title>Aviso legal | <?=$site_settings[2]["value_info"]?></title>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5GCTKSYQEQ"></script>
@@ -44,14 +47,14 @@
 
 <body>
     <?php
-    if ($site_settings[11]["value_info"] == "true" && !isset($_SESSION["loggedin"])) {
+    if ($maintenance && !isset($_SESSION["loggedin"])) {
         include $_SERVER["DOCUMENT_ROOT"]."/snippets/maintenance_page.php";
         exit();
     }  
     ?>
     <div id="main">
         <?php
-        if ($site_settings[11]["value_info"] == "true" && isset($_SESSION["loggedin"])) {
+        if ($maintenance && isset($_SESSION["loggedin"])) {
             include $_SERVER["DOCUMENT_ROOT"]."/snippets/maintenance_message.php";
         }
         include $_SERVER["DOCUMENT_ROOT"].'/includes/header.php';

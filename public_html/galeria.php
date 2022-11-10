@@ -3,12 +3,15 @@
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_site_settings.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/set_error_header.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_maintenance_status.php";
 
     $site_settings = getSiteSettings();
+    $maintenance = getMaintenanceStatus($site_settings);
+    
     $conn = new DatabaseConnection(); // Opening database connection.
     $pageNotFound = false;
 
-    if ($site_settings[11]["value_info"] == "false" || ($site_settings[11]["value_info"] == "true" && isset($_SESSION["loggedin"]))) { 
+    if (!$maintenance || ($maintenance && isset($_SESSION["loggedin"]))) { 
         $categories = array();
         $results = array();
         $category_name = "";
@@ -88,7 +91,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php if ($site_settings[11]["value_info"] == "false" && !$pageNotFound): ?>
+    <?php if (!$maintenance && !$pageNotFound): ?>
     <title><?=$page_title?> | <?=$site_settings[2]["value_info"]; isset($_GET["category"]) ? (isset($_GET["page"])?" | Página ".$page:"Página 1") : ""?></title>
     <meta name="description" content="<?=$page_description?>">
     <meta name="robots" content="index, follow">
@@ -127,11 +130,11 @@
 <body>
     <?php if (!$pageNotFound): ?> 
         <?php
-            if ($site_settings[11]["value_info"] == "true" && !isset($_SESSION["loggedin"])) {
+            if ($maintenance && !isset($_SESSION["loggedin"])) {
                 include $_SERVER["DOCUMENT_ROOT"]."/snippets/maintenance_page.php";
                 exit();
             }
-            if ($site_settings[11]["value_info"]== "true" && isset($_SESSION["loggedin"])) {
+            if ($maintenance && isset($_SESSION["loggedin"])) {
                 include $_SERVER["DOCUMENT_ROOT"]."/snippets/maintenance_message.php";
             }
             include $_SERVER["DOCUMENT_ROOT"].'/includes/header.php';
@@ -231,7 +234,7 @@
         </script>
     <?php endif; ?>
     <?php endif; ?>
-    <?php if (($pageNotFound && $site_settings[11]["value_info"] == "true") && !isset($_SESSION["loggedin"])): ?> 
+    <?php if (($pageNotFound && $maintenance) && !isset($_SESSION["loggedin"])): ?> 
     <?php set_503_header() ?>
     <?php endif; ?>
     <?php if ($pageNotFound): ?>

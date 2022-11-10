@@ -49,3 +49,8 @@ $("#user-reset").on("click", function() {
         }
     });
 })
+
+$(".user-edit").on("click", function() {
+    var id = $(this).attr("userid");
+    window.location = location.origin + "/dashboard?page=edit-user&id="+id;
+})

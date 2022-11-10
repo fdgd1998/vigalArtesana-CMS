@@ -31,6 +31,10 @@
             $page = '/dashboard/admin/users/pages/user_profile.php';
             $title = 'Perfil | '.$site_settings[2]["value_info"];
             break;
+        case 'edit-user':
+            $page = '/dashboard/admin/users/pages/user_profile.php';
+            $title = 'Editar usuario | '.$site_settings[2]["value_info"];
+            break;
         case 'manage-users':
             $page = '/dashboard/admin/users/pages/manage_users.php';
             $title = 'Administrar usuarios | '.$site_settings[2]["value_info"];
@@ -460,6 +464,11 @@
 
     <?php if (isset($_GET["page"]) && $_GET["page"] == "contact-settings"): ?>
     <script src="<?=GetBaseUri()?>/dashboard/admin/site-settings/js/contact.js"></script>
+    <?php endif; ?>
+    
+    <?php if (isset($_GET["page"]) && $_GET["page"] == "edit-user"): ?>
+    <script src="<?=GetBaseUri()?>/dashboard/admin/users/js/user_edit.js"></script>
+    <script src="<?=GetBaseUri()?>/includes/js/validations.js"></script>
     <?php endif; ?>
 
     <?php if (isset($_GET["page"]) && $_GET["page"] == "advanced"): ?>

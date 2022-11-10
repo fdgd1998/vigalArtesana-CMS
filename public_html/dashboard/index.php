@@ -129,10 +129,10 @@
 
 <body class="d-flex">
     <?php 
-    if ($site_settings[11]["value_info"] == "true" && HasPermission("manage_siteSettings")) {
+    if (strcmp($site_settings[11]["value_info"], "true") == 0 && HasPermission("manage_siteSettings")) {
         include $_SERVER["DOCUMENT_ROOT"]."/snippets/maintenance_message.php";
     }
-    if ($site_settings[13]["value_info"] == "true" && HasPermission("manage_seoSettings")) {
+    if (strcmp($site_settings[13]["value_info"], "true") == 0 && HasPermission("manage_seoSettings")) {
         include $_SERVER["DOCUMENT_ROOT"]."/snippets/seo_message.php";
     }
     ?>
@@ -295,16 +295,16 @@
     <script src="<?=GetBaseUri()?>/dashboard/js/show_spinner.js"></script>
     <script src="<?=GetBaseUri()?>/dashboard/js/hide_spinner.js"></script>
 
-    <?php if (isset($_GET["page"]) && ($_GET["page"] == "manage-gallery" || $_GET["page"] == "gallery-new")): ?>
+    <?php if (isset($_GET["page"]) && (strcmp($_GET["page"], "manage-gallery") == 0 || strcmp($_GET["page"], "gallery-new")) == 0): ?>
     <script src="<?=GetBaseUri()?>/dashboard/admin/gallery/js/gallery_new.js"></script>
     <script src="<?=GetBaseUri()?>/dashboard/admin/gallery/js/gallery-manage.js"></script>
     <?php endif; ?>
 
-    <?php if (isset($_GET["page"]) && ($_GET["page"] == "categories")): ?>
+    <?php if (isset($_GET["page"]) && (strcmp($_GET["page"], "categories")) == 0): ?>
     <script src="<?=GetBaseUri()?>/dashboard/admin/gallery/js/categories.js"></script>
     <?php endif; ?>
 
-    <?php if (isset($_GET["page"]) && ($_GET["page"] == "new-category" || $_GET["page"] == "edit-category")): ?>
+    <?php if (isset($_GET["page"]) && (strcmp($_GET["page"], "new-category") == 0 || strcmp($_GET["page"], "edit-category")) == 0): ?>
     <script src="<?=GetBaseUri()?>/dashboard/admin/gallery/js/new_category.js"></script>
     <script src="<?=GetBaseUri()?>/includes/summernote/summernote-bs4.min.js"></script>
     <script src="<?=GetBaseUri()?>/includes/summernote/lang/summernote-es-ES.js"></script>
@@ -345,12 +345,12 @@
             ],
             callbacks: {
                 onInit: function() {
-                    <?php if ($_GET["page"] == "edit-category"):?>
+                    <?php if (strcmp($_GET["page"], "edit-category") == 0):?>
                         if (catDesc) $(this).summernote('code', catDesc);
                     <?php endif; ?>
                 },
                 onChange: function() {
-                    <?php if ($_GET["page"] == "edit-category"):?>
+                    <?php if (strcmp($_GET["page"], "edit-category") == 0):?>
                         console.log('onEditChange:', $(this).summernote("code"));
                         enableEditFormBtn();
                     <?php else: ?>
@@ -363,7 +363,7 @@
     </script>
     <?php endif; ?>
 
-    <?php if (isset($_GET["page"]) && $_GET["page"] == "general-settings"): ?>
+    <?php if (isset($_GET["page"]) && strcmp($_GET["page"], "general-settings") == 0): ?>
     <script src="<?=GetBaseUri()?>/dashboard/admin/site-settings/js/general.js"></script>
     <script src="<?=GetBaseUri()?>/includes/summernote/summernote-bs4.min.js"></script>
     <script src="<?=GetBaseUri()?>/includes/summernote/lang/summernote-es-ES.js"></script>
@@ -410,7 +410,7 @@
         });
     </script>
     <?php endif; ?>
-    <?php if (isset($_GET["page"]) && $_GET["page"] == "gallery-desc"): ?>
+    <?php if (isset($_GET["page"]) && strcmp($_GET["page"], "gallery-desc") == 0): ?>
     <script src="<?=GetBaseUri()?>/dashboard/admin/gallery/js/category_desc.js"></script>
     <script src="<?=GetBaseUri()?>/includes/summernote/summernote-bs4.min.js"></script>
     <script src="<?=GetBaseUri()?>/includes/summernote/lang/summernote-es-ES.js"></script>
@@ -462,43 +462,43 @@
     </script>
     <?php endif; ?>
 
-    <?php if (isset($_GET["page"]) && $_GET["page"] == "contact-settings"): ?>
+    <?php if (isset($_GET["page"]) && strcmp($_GET["page"], "contact-settings") == 0): ?>
     <script src="<?=GetBaseUri()?>/dashboard/admin/site-settings/js/contact.js"></script>
     <?php endif; ?>
     
-    <?php if (isset($_GET["page"]) && $_GET["page"] == "edit-user"): ?>
+    <?php if (isset($_GET["page"]) && strcmp($_GET["page"], "edit-user") == 0): ?>
     <script src="<?=GetBaseUri()?>/dashboard/admin/users/js/user_edit.js"></script>
     <script src="<?=GetBaseUri()?>/includes/js/validations.js"></script>
     <?php endif; ?>
 
-    <?php if (isset($_GET["page"]) && $_GET["page"] == "advanced"): ?>
+    <?php if (isset($_GET["page"]) && strcmp($_GET["page"], "advanced") == 0): ?>
     <script src="<?=GetBaseUri()?>/dashboard/admin/site-settings/js/advanced.js"></script>
     <?php endif; ?>
 
-    <?php if (isset($_GET["page"]) && ($_GET["page"] == "manage-services") || $_GET["page"] == "new-service" || preg_match('^edit-service&id=(\d{1,2})$^', isset($_GET["id"])?$_GET["page"]."&id=".$_GET["id"]:$_GET["page"])): ?>
+    <?php if (isset($_GET["page"]) && ($_GET["page"] == "manage-services") || strcmp($_GET["page"], "new-service") == 0 || preg_match('^edit-service&id=(\d{1,2})$^', isset($_GET["id"])?$_GET["page"]."&id=".$_GET["id"]:$_GET["page"])): ?>
     <script src="<?=GetBaseUri()?>/dashboard/admin/site-settings/js/services.js"></script>
     <?php endif; ?>
 
-    <?php if (isset($_GET["page"]) && ($_GET["page"] == "metadata-settings") || $_GET["page"] == "new-service" || preg_match('^edit-service&id=(\d{1,2})$^', isset($_GET["id"])?$_GET["page"]."&id=".$_GET["id"]:$_GET["page"])): ?>
+    <?php if (isset($_GET["page"]) && strcmp($_GET["page"], "metadata-settings") == 0): ?>
     <script src="<?=GetBaseUri()?>/dashboard/admin/site-settings/js/pages-metadata.js"></script>
     <?php endif; ?>
 
-    <?php if (isset($_GET["page"]) && ($_GET["page"] == "user-profile")): ?>
+    <?php if (isset($_GET["page"]) && strcmp($_GET["page"], "user-profile") == 0): ?>
     <script src="<?=GetBaseUri()?>/dashboard/admin/users/js/user_profile.js"></script>
     <script src="<?=GetBaseUri()?>/includes/js/validations.js"></script>
     <?php endif; ?>
 
-    <?php if (isset($_GET["page"]) && ($_GET["page"] == "new-user")): ?>
+    <?php if (isset($_GET["page"]) && strcmp($_GET["page"], "new-user") == 0): ?>
     <script src="<?=GetBaseUri()?>/dashboard/admin/users/js/user_new.js"></script>
     <script src="<?=GetBaseUri()?>/includes/js/validations.js"></script>
     <?php endif; ?>
 
-    <?php if (isset($_GET["page"]) && ($_GET["page"] == "manage-users")): ?>
+    <?php if (isset($_GET["page"]) && strcmp($_GET["page"], "manage-users") == 0): ?>
     <script src="<?=GetBaseUri()?>/dashboard/admin/users/js/manage_users.js"></script>
     <script src="<?=GetBaseUri()?>/includes/js/validations.js"></script>
     <?php endif; ?>
     
-    <?php if(isset($_GET["page"]) && $_GET["page"] == "about-us"): ?>
+    <?php if(isset($_GET["page"]) && strcmp($_GET["page"], "about-us") == 0): ?>
     <script src="<?=GetBaseUri()?>/includes/summernote/summernote-bs4.min.js"></script>
     <script src="<?=GetBaseUri()?>/includes/summernote/lang/summernote-es-ES.js"></script>
     <script src="<?=GetBaseUri()?>/dashboard/admin/site-settings/js/about-us.js"></script>

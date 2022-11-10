@@ -13,7 +13,7 @@
 
     $categories = array(); // Array to save categories
 
-    if ($_GET["page"] == "edit-category") {
+    if (strcmp($_GET["page"], "edit-category") == 0) {
         $sql = "select id, name, description, image from categories where id = ".$_GET["id"];
         if ($res = $conn->query($sql)) {
             foreach ($res as $item) {
@@ -21,7 +21,7 @@
                 $categories["name"] = $item["name"];
                 $categories["description"] = $item["description"];
                 $categories["image"] = $item["image"];
-                $desc = ($_GET["page"] == "edit-category")?$categories["description"]:"";
+                $desc = (strcmp($_GET["page"], "edit-category") == 0)?$categories["description"]:"";
                 echo "<script>var catDesc = '".$desc."'</script>";
             }
         }

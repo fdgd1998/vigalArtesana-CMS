@@ -10,10 +10,16 @@
     }
 
     $userdata = array();
-    $editUser = ($_GET["page"] == "edit-user" && isset($_GET["id"]))? $_GET["id"] : false;
+    $editUser = (strcmp($_GET["page"], "edit-user") == 0 && isset($_GET["id"]))? $_GET["id"] : false;
     $roles = getUserRoles();
 
-    $sql = "select username, email, role from users inner join user_roles on users.account_type = user_roles.id where users.id = ".$_GET["id"];
+    $sql = "select username, email, role from users inner join user_roles on users.account_type = user_roles.id where users.id = ";
+    if (strcmp($_GET["page"], "edit-user") == 0) {
+        $sql .= $_GET["id"];
+    } else {
+        $sql .= $_SESSION["userid"];
+    }
+    
 
     if ($res = $conn->query($sql)) {
         foreach ($res[0] as $key => $value) {

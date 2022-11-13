@@ -10,12 +10,11 @@
     }
 
     if (isset($_POST["useremail"])) {
-        $conn = new DatabaseConnection();
         $isSend = resetPassword($_POST["useremail"]);
         if ($isSend) {
             echo "Se ha enviado la solicitud de restablecimiento de contraseña.";
         } else {
-        echo "Ha ocurrido un error al enviar la solicitud de restablecemiento de la contraseña.";
+            echo "Ha ocurrido un error al enviar la solicitud de restablecemiento de la contraseña.";
         }
     }
 ?>

@@ -295,7 +295,7 @@
     <script src="<?=GetBaseUri()?>/dashboard/js/show_spinner.js"></script>
     <script src="<?=GetBaseUri()?>/dashboard/js/hide_spinner.js"></script>
 
-    <?php if (isset($_GET["page"]) && (strcmp($_GET["page"], "manage-gallery") == 0 || strcmp($_GET["page"], "gallery-new")) == 0): ?>
+    <?php if (isset($_GET["page"]) && (strcmp($_GET["page"], "manage-gallery") == 0 || strcmp($_GET["page"], "gallery-new") == 0)): ?>
     <script src="<?=GetBaseUri()?>/dashboard/admin/gallery/js/gallery_new.js"></script>
     <script src="<?=GetBaseUri()?>/dashboard/admin/gallery/js/gallery-manage.js"></script>
     <?php endif; ?>
@@ -304,7 +304,7 @@
     <script src="<?=GetBaseUri()?>/dashboard/admin/gallery/js/categories.js"></script>
     <?php endif; ?>
 
-    <?php if (isset($_GET["page"]) && (strcmp($_GET["page"], "new-category") == 0 || strcmp($_GET["page"], "edit-category")) == 0): ?>
+    <?php if (isset($_GET["page"]) && (strcmp($_GET["page"], "new-category") == 0 || strcmp($_GET["page"], "edit-category") == 0)): ?>
     <script src="<?=GetBaseUri()?>/dashboard/admin/gallery/js/new_category.js"></script>
     <script src="<?=GetBaseUri()?>/includes/summernote/summernote-bs4.min.js"></script>
     <script src="<?=GetBaseUri()?>/includes/summernote/lang/summernote-es-ES.js"></script>

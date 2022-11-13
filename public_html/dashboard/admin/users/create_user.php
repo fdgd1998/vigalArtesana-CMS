@@ -34,7 +34,7 @@
                     } else {
                         if (validatePasswd($pass1) && validatePasswd($pass2)) {
                             $hash = password_hash($pass1, PASSWORD_DEFAULT);
-                            $sql = "insert into users (username, email, passwd, account_type) values ('$username', '$email', '$hash', ".intval($role).")";
+                            $sql = "insert into users (username, email, passwd, account_type, createdBy) values ('$username', '$email', '$hash', ".intval($role).", ".$_SESSION["userid"].")";
                             if ($conn->exec($sql)) {
                                 echo "El usuario se ha creado correctamente.";
                             } else {

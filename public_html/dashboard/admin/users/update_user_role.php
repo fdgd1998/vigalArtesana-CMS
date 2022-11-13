@@ -11,7 +11,7 @@
 
     if($_POST) {
         $conn = new DatabaseConnection();
-        $sql = "update users set account_type = ".$_POST["role"]." where username = '".$_POST["username"]."'";
+        $sql = "update users set modifiedBy = ".$_SESSION["userid"].", account_type = ".$_POST["role"]." where username = '".$_POST["username"]."'";
         
         if ($conn->exec($sql)) {
             echo "Se ha modificado el rol del usuario";

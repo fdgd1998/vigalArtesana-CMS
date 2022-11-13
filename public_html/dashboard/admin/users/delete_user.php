@@ -12,7 +12,9 @@
     if ($_POST) {
         $userid = $_POST['userid'];
         $conn = new DatabaseConnection();
-
+        $sql = "update users set modifiedBy = ".$_SESSION["userid"]." where id = $userid";
+        $conn->exec($sql);
+        
         $sql = "delete from users where id = ".intval($userid);
         echo $sql;
         if ($conn->exec($sql)) {

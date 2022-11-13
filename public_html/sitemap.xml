@@ -27,12 +27,17 @@
   </url>
   <url>
     <loc>http://localhost/galeria</loc>
-    <lastmod>2022-11-05T01:36:44+01:00</lastmod>
+    <lastmod>2022-11-13T13:24:43+01:00</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost/galeria/dsfsd</loc>
-    <lastmod>2022-11-05T02:19:08+01:00</lastmod>
+    <loc>http://localhost/galeria/zxczxc</loc>
+    <lastmod>2022-11-12T13:13:36+01:00</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost/galeria/sdf</loc>
+    <lastmod>2022-11-13T13:25:09+01:00</lastmod>
     <priority>0.5</priority>
   </url>
 </urlset>

@@ -1,5 +1,5 @@
 <?php  
-    error_reporting(0);
+    // error_reporting(0);
     require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
     checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
 
@@ -21,8 +21,8 @@
     } else {
         $conn = new DatabaseConnection();
         
-        $sql = "insert into categories (friendly_url, name, description, image, uploadedBy) values ('".GetFriendlyUrl($_POST["cat_name"])."','".$_POST['cat_name']."','".$_POST["cat_desc"]."' ,'".$_FILES['file']["name"]."','".$_SESSION["user"]."')";
-
+        $sql = "insert into categories (friendly_url, name, description, image, uploadedBy) values ('".GetFriendlyUrl($_POST["cat_name"])."','".$_POST['cat_name']."','".$_POST["cat_desc"]."','".$_FILES['file']["name"]."',".$_SESSION["userid"].")";
+        echo $sql;
         if ($conn->exec($sql)) {
             $sql = "select id from categories where name = '".$_POST["cat_name"]."'";
             if ($res = $conn->query($sql)) {

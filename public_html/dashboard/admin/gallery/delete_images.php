@@ -46,6 +46,10 @@
         }
 
         $images = "'".implode("','", $filenames)."'";
+
+        $sql = "update gallery set deletedBy = ".$_SESSION["userid"]." where filename in(".$images.")";
+        $conn->exec($sql);
+        
         $sql= "delete from gallery where filename in(".$images.")";
 
         if ($conn->exec($sql)) {

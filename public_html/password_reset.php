@@ -2,17 +2,17 @@
     session_start();
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/validation.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/send_email.php";
-    require_once dirname($_SERVER["DOCUMENT_ROOT"], 1)."/connection.php"; //datos de conexión
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_site_settings.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/reset_password_function.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/database_connection.php";
 
     if (isset($_SESSION["loggedin"])) {
         header("Location: index.php");
         exit();
     }
-    try {
-        $conn = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
+    // try {
+        $conn = new DatabaseConnection();
 
         $emailValid = false;
         $emailSend = false;
@@ -21,40 +21,28 @@
         $validToken = false;
 
         if (isset($_POST["email"])) {
-            resetPassword($_POST["email"], $conn);
+            resetPassword($_POST["email"]);
             $message = "Se ha enviado el correo electrónico. Comprueba tu bandeja de entrada.";
         } else if (isset($_POST["pass1"]) && isset($_POST["pass2"]) && isset($_GET["token"])) {
             $pass1 = $_POST["pass1"];
             $pass2 = $_POST["pass2"];
             $token = $_GET["token"];
             if (validatePasswd($pass1) && validatePasswd($pass2)) {
-                $sql = $conn->prepare("select userid from password_reset where token = ?");
-                $sql->bind_param("s", $token);
-                $sql->execute();
-                $sql->store_result();
-                $sql->bind_result($userid);
-                $sql->fetch();
+                $res = $conn->preparedQuery("select userid from password_reset where token = ?", array($token));
                 $hash = password_hash($pass1, PASSWORD_DEFAULT);
-                $sql = $conn->prepare("update users set passwd = ? where id = ?");
-                $sql->bind_param("si", $hash, $userid);
-                if ($sql->execute()) {
-                    $sql = "delete from password_reset where token = '$token'";
-                    if ($conn->query($sql) === TRUE) {
-                        $passChanged = true;
-                    }
+                $conn->preparedQuery("update users set passwd = ? where id = ?", array($hash, $res[0]["userid"]));
+                $sql = "delete from password_reset where token = '$token'";
+                if ($conn->exec($sql)) {
+                    $passChanged = true;
                 }
             } else {
                 $message = "Las contraseñas no coninciden.";
             }
         } else if (isset($_GET["token"])) {
-            $token = $_GET["token"];
-            $sql = $conn->prepare("select token from password_reset where token = ? and timestamp >= (now() - interval 1 day)");
-            $sql->bind_param("s", $token);
-            $sql->execute();
-            $sql->store_result();
-            $sql->bind_result($token);
+            $params = array($_GET["token"]);
+            $res1 = $conn->preparedQuery("select token from password_reset where token = ? and timestamp >= (now() - interval 1 day)", $params);
 
-            if ($sql->num_rows > 0) {
+            if (isset($res1[0]["token"])) {
                 $validToken = true;
             } else {
                 $validToken = false;
@@ -62,10 +50,11 @@
         } else {
             $validToken = false;
         }
-    } catch (Exception $e) {
-        include $_SERVER["DOCUMENT_ROOT"]."/errorpages/500.php";
-        exit();
-    }
+    // } 
+    // catch (Exception $e) {
+    //     include $_SERVER["DOCUMENT_ROOT"]."/errorpages/500.php";
+    //     exit();
+    // }
 ?>
 <!DOCTYPE html>
 <html>

@@ -25,7 +25,7 @@
             if (password_verify($current, $stored)) {
                 if (strcmp($new1, $new2) == 0 && validatePasswd($new1) && validatePasswd($new2)) {
                     $hash = password_hash($new1, PASSWORD_DEFAULT);
-                    $sql = "update users set passwd = '$hash' where id = ".$_SESSION["userid"];
+                    $sql = "update users set modifiedBy = ".$_SESSION["userid"].", passwd = '$hash' where id = ".$_SESSION["userid"];
                     if ($conn->exec($sql)) {
                         echo "La contraseña se ha actualizado correctamente";
                     } else {

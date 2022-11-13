@@ -474,6 +474,7 @@
             $('#logs').DataTable({
                 processing: true,
                 serverSide: true,
+                order: [[ 2, 'desc' ]],
                 ajax: {
                     url: location.origin + '/dashboard/scripts/get_logs.php',
                     type: 'POST',

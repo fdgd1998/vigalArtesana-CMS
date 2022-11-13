@@ -17,14 +17,14 @@
         $location = $_SERVER["DOCUMENT_ROOT"]."/uploads/services/"; //location for category images.
 
         if (isset($_POST["title"]) && !isset($_POST["description"]) && !isset($_FILES["image"])) { // changing service title
-            $sql = "update services set title = '".$_POST['title']."' where id = ".$_POST["id"];
+            $sql = "update services set modifiedBy = ".$_SESSION["userid"].", title = '".$_POST['title']."' where id = ".$_POST["id"];
             if ($conn->exec($sql)) {
                 echo "El nombre del servicio se ha actualizado correctamente.";
             } else {
                 echo "El contenido no ha cambiado o ha ocurrido un error al actualizar los datos.";
             }
         } else if (!isset($_POST["title"]) && isset($_POST["description"]) && !isset($_FILES["image"])) { //changing service description.
-            $sql = "update services set description = '".$_POST['description']."' where id = ".$_POST["id"];
+            $sql = "update services set modifiedBy = ".$_SESSION["userid"].", description = '".$_POST['description']."' where id = ".$_POST["id"];
             if ($conn->exec($sql)) {
                 echo "La descripción del servicio se ha actualizado correctamente.";
             } else {
@@ -40,14 +40,14 @@
                 echo "Ha ocurrido un error mientras se borraba la imagen.";
             }
 
-            $sql= "update services set image = '".$_FILES["image"]["name"]."', image_desc = '".$_POST["image-desc"]."' where id = ".$_POST["id"];
+            $sql= "update services set modifiedBy = ".$_SESSION["userid"].", image = '".$_FILES["image"]["name"]."', image_desc = '".$_POST["image-desc"]."' where id = ".$_POST["id"];
             if ($conn->exec($sql)) {
                 echo "La imagen del servicio se ha actualizado correctamente.";
             } else {
                 echo "El contenido no ha cambiado o ha ocurrido un error al actualizar los datos.";
             }
         } else if (isset($_POST["title"]) && isset($_POST["description"]) && !isset($_FILES["image"])) { //changing service title and description
-            $sql= "update services set title = '".$_POST['title']."', description = '".$_POST["description"]."' where id = ".$_POST["id"];
+            $sql= "update services set modifiedBy = ".$_SESSION["userid"].", title = '".$_POST['title']."', description = '".$_POST["description"]."' where id = ".$_POST["id"];
             if ($conn->exec($sql)) {
                 echo "El nombre y la descripción servicio se han actualizado correctamente.";
             } else {
@@ -63,7 +63,7 @@
                 echo "Ha ocurrido un error mientras se borraba la imagen.";
             }
 
-            $sql = "update services set title = '".$_POST["title"]."', image = '".$_FILES["image"]["name"]."', image_desc = '".$_POST["image-desc"]."' where id = ".$_POST["id"];
+            $sql = "update services set modifiedBy = ".$_SESSION["userid"].", title = '".$_POST["title"]."', image = '".$_FILES["image"]["name"]."', image_desc = '".$_POST["image-desc"]."' where id = ".$_POST["id"];
             if ($conn->exec($sql) == TRUE) {
                 echo "El título y la imagen del servicio se han actualizado correctamente.";
             } else {
@@ -80,7 +80,7 @@
                 echo "Ha ocurrido un error mientras se borraba la imagen.";
             }
 
-            $sql = "update services set title = '".$_POST["title"]."', description = '".$_POST["description"]."', image = '".$_FILES["image"]["name"]."', image_desc = '".$_POST["image-desc"]."' where id = ".$_POST["id"];
+            $sql = "update services set modifiedBy = ".$_SESSION["userid"].", title = '".$_POST["title"]."', description = '".$_POST["description"]."', image = '".$_FILES["image"]["name"]."', image_desc = '".$_POST["image-desc"]."' where id = ".$_POST["id"];
             if ($conn->exec($sql)) {
                 echo "La descripción y la imagen del servicio se han actualizado correctamente.";
             } else {

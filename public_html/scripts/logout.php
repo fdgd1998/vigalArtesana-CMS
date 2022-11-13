@@ -4,7 +4,7 @@
     require_once "check_session.php";
 
     $conn = new DatabaseConnection();
-    $sql = "insert into logs (text, type) values (concat('Logout, ID usuario: ', ".$_SESSION["userid"]."), 'login')";
+    $sql = "insert into logs (text, type) values (concat('LOGOUT: usuario con ID ', ".$_SESSION["userid"]."), 'login')";
     $conn->exec($sql);
 
     session_unset();

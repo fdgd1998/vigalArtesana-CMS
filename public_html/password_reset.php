@@ -11,7 +11,7 @@
         header("Location: index.php");
         exit();
     }
-    // try {
+    try {
         $conn = new DatabaseConnection();
 
         $emailValid = false;
@@ -50,11 +50,11 @@
         } else {
             $validToken = false;
         }
-    // } 
-    // catch (Exception $e) {
-    //     include $_SERVER["DOCUMENT_ROOT"]."/errorpages/500.php";
-    //     exit();
-    // }
+    } 
+    catch (Exception $e) {
+        include $_SERVER["DOCUMENT_ROOT"]."/errorpages/500.php";
+        exit();
+    }
 ?>
 <!DOCTYPE html>
 <html>

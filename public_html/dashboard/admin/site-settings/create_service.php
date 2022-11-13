@@ -19,7 +19,7 @@
         $desc = $_POST["description"];
         $image = $_FILES["file"]["name"];
         $image_desc = $_POST["image-desc"];
-        $sql = "insert into services (title, description, image, image_desc) values ('".$title."','".$desc."','".$image."', '".$image_desc."')";
+        $sql = "insert into services (title, description, image, image_desc, createdBy) values ('".$title."','".$desc."','".$image."', '".$image_desc."', ".$_SESSION["userid"].")";
         $location = $_SERVER["DOCUMENT_ROOT"]."/uploads/services/"; // location for uploaded images.
 
         if ($conn->exec($sql)) {

@@ -27,11 +27,11 @@
             $sql = "select id from categories where name = '".$_POST["cat_name"]."'";
             if ($res = $conn->query($sql)) {
                 $cat_id = $res[0]['id'];
-                $sql = "insert into pages (page, cat_id) values ('galeria/".GetFriendlyUrl($_POST["cat_name"])."', ".$cat_id.")";
+                $sql = "insert into pages (page, cat_id, createdBy) values ('galeria/".GetFriendlyUrl($_POST["cat_name"])."', ".$cat_id.", ".$_SESSION["userid"].")";
                 if ($conn->exec($sql)) {
                     $sql = "select id from pages where cat_id = ".$cat_id;
                     if ($res = $conn->query($sql)) {
-                        $sql = "insert into pages_metadata (title, description, id_page) values ('', '', ".$res[0]['id'].")";
+                        $sql = "insert into pages_metadata (title, description, id_page, createdBy) values ('', '', ".$res[0]['id'].", ".$_SESSION["userid"].")";
                         if ($conn->exec($sql)) {
                             $sitemap = readSitemapXML();
                             changeSitemapUrl($sitemap, GetBaseUri()."/galeria", GetBaseUri()."/galeria");

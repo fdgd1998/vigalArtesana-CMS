@@ -33,6 +33,8 @@
             }
         
             $sql = array(
+                "update pages set modifiedBy = ".$_SESSION["userid"]." where cat_id = ".$_POST['cat_id'],
+                "update pages_metadata inner join pages on id_page = cat_id where id_page = ".$_POST['cat_id'],
                 "delete from categories where id = '".$_POST['cat_id']."'",
                 "delete from pages where cat_id = ".$_POST['cat_id'],
                 "delete p from pages_metadata as p inner join pages on id_page = cat_id where id_page = ".$_POST['cat_id']

@@ -16,6 +16,9 @@
     if (isset($_POST)) {
         $conn = new DatabaseConnection();
 
+        $sql = "update services set modifiedBy = ".$_SESSION["userid"]." where id = ".$_POST['service_id'];
+        $conn->exec($sql);
+
         $sql = "delete from services where id = ".$_POST['service_id'];
         $image = $conn->query("select image from services where id = ".$_POST['service_id'])[0]["image"];
 

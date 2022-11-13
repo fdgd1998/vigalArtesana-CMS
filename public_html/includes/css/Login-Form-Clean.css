@@ -1,12 +1,13 @@
 .login-clean {
   background: #f1f7fc;
   padding: 50px 0;
+  margin-top: 20vh;
 }
 
 .login-clean form {
   max-width: 350px;
   width: 90%;
-  margin: 50px auto;
+  margin: auto;
   background-color: #ffffff;
   padding: 40px;
   border-radius: 4px;

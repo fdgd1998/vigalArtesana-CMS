@@ -119,12 +119,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title><?=$title?></title>
-    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/gallery.css">
-    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/styles.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand" />
-    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/summernote/summernote-bs4.min.css" />
+    <link rel="stylesheet" type="text/css" href="<?=GetBaseUri()?>/includes/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="<?=GetBaseUri()?>/includes/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" type="text/css" href="<?=GetBaseUri()?>/includes/css/gallery.css">
+    <link rel="stylesheet" type="text/css" href="<?=GetBaseUri()?>/includes/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="<?=GetBaseUri()?>/dashboard/includes/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Quicksand" />
+    <link rel="stylesheet" type="text/css" href="<?=GetBaseUri()?>/includes/summernote/summernote-bs4.min.css" />
 </head>
 
 <body class="d-flex">
@@ -464,6 +465,39 @@
 
     <?php if (isset($_GET["page"]) && strcmp($_GET["page"], "contact-settings") == 0): ?>
     <script src="<?=GetBaseUri()?>/dashboard/admin/site-settings/js/contact.js"></script>
+    <?php endif; ?>
+
+    <?php if (isset($_GET["page"]) && strcmp($_GET["page"], "logs") == 0): ?>
+    <script type="text/javascript" src="<?=GetBaseUri()?>/dashboard/includes/dataTables.bootstrap4.js"></script>    
+    <script>
+        $(document).ready(function () {
+            $('#logs').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: location.origin + '/dashboard/scripts/get_logs.php',
+                    type: 'POST',
+                },
+                columns: [
+                    { data: 'description' },
+                    { data: 'type' },
+                    { data: 'timestamp' },
+                ],
+                language: {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "No hay resultado",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "search": "Buscar",
+                    "infoEmpty": "No hay resultados",
+                    "infoFiltered": "(_MAX_ registros totales)",
+                    "paginate": {
+                        "previous": "<",
+                        "next": ">"
+                    }
+                }
+            });
+        });
+    </script>
     <?php endif; ?>
     
     <?php if (isset($_GET["page"]) && strcmp($_GET["page"], "edit-user") == 0): ?>

@@ -11,4 +11,20 @@
 ?>
 <div class="container settings-container">
     <h1 class="title">Logs</h1>
+    <table id="logs" class="table table-striped table-bordered table-compact" style="width:100%">
+        <thead>
+            <tr>
+                <th>Descripción</th>
+                <th>Tipo</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Descripción</th>
+                <th>Tipo</th>
+                <th>Timestamp</th>
+            </tr>
+        </tfoot>
+    </table>
 </div>

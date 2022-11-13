@@ -119,6 +119,9 @@
     <?php else: ?>
     <div class="row">
         <div class="col-12 col-sm-12 col-md-6 mb-3">
+            <div class="alert alert-warning" role="alert">
+                Copia la contraseña generada en un lugar seguro. Tras salir de esta página, no podrás volver a verla. 
+            </div>
             <label for="basic-url">Nueva contraseña:</label>
             <input disabled type="text" class="form-control" id="new-password">
             <div class="button-group" style="margin-top: 20px">

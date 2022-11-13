@@ -18,19 +18,19 @@ The main purpose of this CMS is to be simple, lightweight and without any unnece
 - In-site contact form.
 - User profile page.
 - Search Engine Optimization options.
-- Loing attempts limit.
+- Login attempts limit.
 - Under construction / maintenance website template.
 - Dynamic sitemap.xml generation.
-- User management (*).
-- Password self-recovery via token and email.
+- User management.
+- SSPR.
 - User password complexity requirements.
 - Users and permissions. Explanation can be read in permissions_explanations.txt.
+- Logging system (using mysql triggers).
 
 NOTE: Features marked with (*) are in the works.
 
 ### Planned features:
 - Blog system.
-- Simple logs.
 
 ## Admin credentials
 

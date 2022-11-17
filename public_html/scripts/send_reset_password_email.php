@@ -50,4 +50,13 @@
         }
         return false;
     }
+
+    function passwordChangeConfirmEmail($email) {
+        $subject = "Contraseña cambiada en ViGal Boutique.";
+        $body = "<p>Tu contraseña en ViGal Boutique se ha cambiado correctamente.</p>";
+        $body .= "<p>Si no has sido tú, ponte inmediatamente en contacto con el <a href='mailto:contacto@vigalartesana.es'>administrador del sitio</a>.</p>";
+        $body .= "<p><strong>NOTA: No respondas a este mensaje, ha sido generado automáticamente.</strong></p>";
+
+        return sendEmail($email, $subject, $body);
+    }
 ?>

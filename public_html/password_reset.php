@@ -28,11 +28,12 @@
             $pass1 = $_POST["pass1"];
             $pass2 = $_POST["pass2"];
             $token = $_GET["token"];
-            $userid = ($conn->preparedQuery("select userid from password_reset where token = ?", array($token)))[0]["userid"];
+            $userdata = $conn->preparedQuery("select users.id, users.email from users inner join password_reset on users.id = password_reset.userid where token = ?", array($token));
 
-            if (updatePassword($pass1, $pass2, $userid, $userid)) {
+            if (updatePassword($pass1, $pass2, $userdata[0]["id"], $userdata[0]["id"])) {
                 $sql = "delete from password_reset where token = '$token'";
                 if ($conn->exec($sql)) {
+                    passwordChangeConfirmEmail($userdata[0]["email"]);
                     $passChanged = true;
                 }
             } else {

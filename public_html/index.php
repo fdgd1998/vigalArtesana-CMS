@@ -57,13 +57,9 @@
     <link rel="icon" href="<?=GetBaseUri()?>/includes/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/footer.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/Navigation-Clean.css">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/styles.css">
-    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand" />    
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Great Vibes">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/fontawesome.all.min.css">
 </head>
 
 <body>
@@ -82,17 +78,17 @@
             include $_SERVER["DOCUMENT_ROOT"].'/includes/header.php';
         ?>
         <div class="index-image-container">
-            <img class="index-image wow animate__animated animate__fadeIn" src="<?=GetBaseUri()?>/uploads/<?=$site_settings[5]["value_info"]?>" alt="<?=$site_settings[14]["value_info"]?>"></img>
+            <img class="index-image" src="<?=GetBaseUri()?>/uploads/<?=$site_settings[5]["value_info"]?>" alt="<?=$site_settings[14]["value_info"]?>"></img>
             <div class="index-text-image">
-                <h1 class="wow animate__animated animate__fadeInUp"><?=$site_settings[6]["value_info"]?></h1>
+                <h1 class="wow"><?=$site_settings[6]["value_info"]?></h1>
             </div>
         </div>
         <div class="div-color-1">
             <div class="container">
-                <div class="index-description wow animate__animated animate__fadeInUp">
+                <div class="index-description">
                     <p><?=$site_settings[10]["value_info"]?></p>
                 </div>
-                <div class="button-group wow animate__animated animate__fadeInUp">
+                <div class="button-group">
                     <a href="<?=GetBaseUri()?>/sobre-nosotros" class="btn my-button">Sobre nosotros</a>
                     <a href="<?=GetBaseUri()?>/galeria" class="btn my-button">Galería</a>
                 </div>
@@ -100,9 +96,9 @@
         </div>
         <div id="services-section" class="div-color-2">
             <div class="container">
-            <h1 class="title wow animate__animated animate__fadeInUp">Nuestros servicios</h1>
+            <h1 class="title">Nuestros servicios</h1>
                 <div class="row">
-                    <div class="col-12 carousel-buttons wow animate__animated animate__fadeInUp">
+                    <div class="col-12 carousel-buttons">
                         <a class="btn my-button mr-1" href="#services" role="button" data-slide="prev">
                             <i class="fa fa-arrow-left i-no-margin"></i>
                         </a>
@@ -111,7 +107,7 @@
                         </a>
                     </div>
                     <div class="col-12">
-                        <div id="services" class="carousel slide  wow animate__animated animate__fadeInUp" data-ride="carousel">
+                        <div id="services" class="carousel slide" data-ride="carousel">
                             <!-- The slideshow -->
                             <div class="carousel-inner">
                                 <?php $i = 0; ?>
@@ -141,10 +137,10 @@
         </div>
         <div class="div-color-1">
             <div class="container">
-                <h1 class="title wow animate__animated animate__fadeInUp">¿Necesitas más información?</h1>
-                <div class="title-description wow animate__animated animate__fadeInUp">
-                    <p class="wow animate__animated animate__fadeInUp">Si quieres pedir más información, preguntar precios, pedir un presupuesto o preguntar cualquier otra cosa, no dudes en contactar con nosotros. ¡Estaremos encantados de atenderte!</p>
-                    <a href = "<?=GetBaseUri()?>/contacto" class="btn btn-light my-button wow animate__animated animate__fadeInUp">Ver información de contacto</a>
+                <h1 class="title">¿Necesitas más información?</h1>
+                <div class="title-description">
+                    <p>Si quieres pedir más información, preguntar precios, pedir un presupuesto o preguntar cualquier otra cosa, no dudes en contactar con nosotros. ¡Estaremos encantados de atenderte!</p>
+                    <a href = "<?=GetBaseUri()?>/contacto" class="btn btn-light my-button">Ver información de contacto</a>
                 </div>
             </div>
         </div>
@@ -154,8 +150,6 @@
     </div>
     <script src="<?=GetBaseUri()?>/includes/js/jquery.min.js"></script>
     <script src="<?=GetBaseUri()?>/includes/bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="<?=GetBaseUri()?>/includes/js/wow-init.js"></script>
     <script>
         $("#services").carousel({
             interval: 10000,

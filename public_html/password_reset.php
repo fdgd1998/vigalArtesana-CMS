@@ -67,12 +67,10 @@
     <meta name="description" content="Iniciar sesión en ViGal Artesana">
     <link rel="icon" href="<?=GetBaseUri()?>/includes/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/fontawesome.all.min.css">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/Bootstrap-Callout.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/Login-Form-Clean.css">
-    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/styles.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand" />    
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/styles.css">  
 
 </head>
 

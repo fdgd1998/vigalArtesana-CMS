@@ -115,16 +115,11 @@
     <link rel="icon" href="/includes/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/footer.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/Navigation-Clean.css">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/styles.css">
-    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/fontawesome.all.min.css">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/gallery.css">
-    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/simple-lightbox.css?v2.8.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand" />    
-    <link href='https://fonts.googleapis.com/css?family=Great Vibes' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/simple-lightbox.css?v2.8.0"> 
 </head>
 
 <body>

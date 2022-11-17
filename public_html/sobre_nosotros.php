@@ -49,11 +49,7 @@
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/footer.css">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/Navigation-Clean.css">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/styles.css">
-    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/fonts/fontawesome-all.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Great Vibes' rel='stylesheet'>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/fontawesome.all.min.css">  
 </head>
 
 <body>

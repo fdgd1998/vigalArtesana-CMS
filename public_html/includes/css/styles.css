@@ -21,6 +21,18 @@
   --pagination-main-color: #ffb162;
 }
 
+@font-face {
+  font-family: "QuickSand";
+  src: url(../webfonts/Quicksand-VariableFont_wght.ttf);
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Great Vibes";
+  src: url(../webfonts/GreatVibes-Regular.ttf);
+  font-display: swap;
+}
+
 .custom-checkbox .custom-control-input:checked~.custom-control-label::before{
   background-color:var(--custom-checkbox-bg-selected);
 }
@@ -290,9 +302,6 @@ footer{
   background-color: var(--footer-main-color) !important;
 }
 
-.footer_link {
-    color: #85FFFD !important;
-}
 
 footer a:hover {
     color: var(--footer-link-hover-color) !important;

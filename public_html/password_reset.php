@@ -4,8 +4,9 @@
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/send_email.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_site_settings.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
-    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/reset_password_function.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/send_reset_password_email.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/database_connection.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/admin/users/change_password_function.php";
 
     if (isset($_SESSION["loggedin"])) {
         header("Location: index.php");
@@ -21,16 +22,15 @@
         $validToken = false;
 
         if (isset($_POST["email"])) {
-            resetPassword($_POST["email"]);
+            resetPasswordEmail($_POST["email"]);
             $message = "Se ha enviado el correo electrónico. Comprueba tu bandeja de entrada.";
         } else if (isset($_POST["pass1"]) && isset($_POST["pass2"]) && isset($_GET["token"])) {
             $pass1 = $_POST["pass1"];
             $pass2 = $_POST["pass2"];
             $token = $_GET["token"];
-            if (validatePasswd($pass1) && validatePasswd($pass2)) {
-                $res = $conn->preparedQuery("select userid from password_reset where token = ?", array($token));
-                $hash = password_hash($pass1, PASSWORD_DEFAULT);
-                $conn->preparedQuery("update users set passwd = ? where id = ?", array($hash, $res[0]["userid"]));
+            $userid = ($conn->preparedQuery("select userid from password_reset where token = ?", array($token)))[0]["userid"];
+
+            if (updatePassword($pass1, $pass2, $userid, $userid)) {
                 $sql = "delete from password_reset where token = '$token'";
                 if ($conn->exec($sql)) {
                     $passChanged = true;

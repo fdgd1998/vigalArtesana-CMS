@@ -7,44 +7,13 @@ function enableCreateUserBtn() {
     if (passValid && userValid && emailValid) $("#create-user").removeAttr("disabled");
     else $("#create-user").attr("disabled", true);
 }
-$("#new-password-1, #new-password-2").on("keyup", function() {
-    if ($("#new-password-1").val() != $("#new-password-2").val()) {
-        $("#new-password-2").siblings(".invalid-feedback").html("Las contraseñas no coinciden.");
-        $("#new-password-1").addClass("is-invalid");
-        $("#new-password-2").addClass("is-invalid");
-        $("#new-password-1").removeClass("is-valid");
-        $("#new-password-2").removeClass("is-valid");
-        passValid = false;
-    } else {
-        $("#new-password-1").addClass("is-valid");
-        $("#new-password-2").addClass("is-valid");
-        $("#new-password-1").removeClass("is-invalid");
-        $("#new-password-2").removeClass("is-invalid");
-        if (passwordComplexity($("#new-password-1").val()) && passwordComplexity($("#new-password-2").val())) {
-            $("#new-password-1").addClass("is-valid");
-            $("#new-password-2").addClass("is-valid");
-            $("#new-password-1").removeClass("is-invalid");
-            $("#new-password-2").removeClass("is-invalid");
-            passValid = true;
-        } else  {
-            $("#new-password-1").addClass("is-invalid");
-            $("#new-password-2").addClass("is-invalid");
-            $("#new-password-1").removeClass("is-valid");
-            $("#new-password-2").removeClass("is-valid");
-            passValid = false;
-            $("#new-password-2").siblings(".invalid-feedback").html("La contraseña no cumple los requisitos de complejidad.");
-        }
-    }
-    enableCreateUserBtn();
-})
 
 $("#create-user").on("click", function() {
     var formdata = new FormData();
     formdata.append("username", $.trim($("#username").val()));
     formdata.append("role", $.trim($("#role option:selected").val()));
     formdata.append("email", $.trim($("#email").val()));
-    formdata.append("pass-1", $("#new-password-1").val());
-    formdata.append("pass-2", $("#new-password-2").val());
+    formdata.append("pass", $("#password").val());
 
     $.ajax({
         url: location.origin+'/dashboard/admin/users/create_user.php', // this is the target
@@ -132,3 +101,13 @@ $('#email').on('keyup', function(e) {
 $("#cancel-create-user").on("click", function() {
     window.location = location.origin + "/dashboard?page=manage-users";
 })
+
+$("#generate").on("click", function(){
+    var pass = generatePass();
+    while (!passwordComplexity(pass)) {
+        pass = generatePass();
+    }
+    $("#password").val(pass);
+    passValid = true;
+    enableCreateUserBtn()
+});

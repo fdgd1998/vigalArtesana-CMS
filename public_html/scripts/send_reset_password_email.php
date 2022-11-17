@@ -5,7 +5,7 @@
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/send_email.php";
 
-    function resetPassword($email) {
+    function resetPasswordEmail($email) {
         require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/database_connection.php';
         $conn = new DatabaseConnection();
 

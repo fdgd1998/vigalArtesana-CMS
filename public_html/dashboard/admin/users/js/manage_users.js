@@ -35,7 +35,7 @@ $("#user-delete").on("click", function() {
 
 $("#user-reset").on("click", function() {
     $.ajax({
-        url: location.origin+'/dashboard/admin/users/user_reset_password.php', // this is the target
+        url: location.origin+'/dashboard/admin/users/user_password_reset_email.php', // this is the target
         type: 'post', // method
         dataType: 'text',
         cache: false,

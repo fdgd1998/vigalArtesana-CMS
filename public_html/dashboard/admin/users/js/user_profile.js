@@ -55,9 +55,10 @@ $("#change-password").on("click", function() {
     formdata.append("current", $("#current-password").val());
     formdata.append("new-1", $("#new-password-1").val());
     formdata.append("new-2", $("#new-password-2").val());
+    formdata.append("userid", userid);
 
     $.ajax({
-        url: location.origin+'/dashboard/admin/users/change_password.php', // this is the target
+        url: location.origin+'/dashboard/admin/users/update_user_profile_password.php', // this is the target
         type: 'post', // method
         dataType: 'text',
         cache: false,

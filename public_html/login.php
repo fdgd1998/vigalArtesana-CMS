@@ -47,7 +47,7 @@
 
         if (!maximumAttemps($conn)) {
             // Verificación de las credenciales de usuario
-            $sql = "select users.id, users.username, users.passwd, user_roles.role, users.account_enabled, users.passwd_reset from users inner join user_roles on user_roles.id = users.account_type where username = ?";
+            $sql = "select users.id, users.username, users.passwd, user_roles.role from users inner join user_roles on user_roles.id = users.account_type where username = ?";
             $params = array($user_form);
             $result = $conn->preparedQuery($sql, $params)[0];
             
@@ -59,7 +59,9 @@
                     $_SESSION['user'] = $result["username"];
                     $_SESSION['userid'] = $result["id"];
                     $sql = "update ip_register set login_success = 1 where address = '".$_SERVER["REMOTE_ADDR"]."'";
-                    $conn->query($sql);
+                    $conn->exec($sql);
+                    $sql = "insert into logs (text, type) values (concat('LOGIN: (código 1) usuario con ID ', ".$_SESSION["userid"]."), 'login')";
+                    $conn->exec($sql);
                     header("Location: ../dashboard/?page=start");
                     exit();
                     // }

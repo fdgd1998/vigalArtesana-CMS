@@ -13,36 +13,20 @@
     $editUser = (strcmp($_GET["page"], "edit-user") == 0 && isset($_GET["id"]))? $_GET["id"] : false;
     $roles = getUserRoles();
 
-    $sql = "select username, email, role from users inner join user_roles on users.account_type = user_roles.id where users.id = ";
-    if (strcmp($_GET["page"], "edit-user") == 0) {
-        $sql .= $_GET["id"];
-    } else {
-        $sql .= $_SESSION["userid"];
-    }
+    $sql = "select users.id, username, email, role from users inner join user_roles on users.account_type = user_roles.id where users.id = ".$_SESSION["userid"];
     
-
     if ($res = $conn->query($sql)) {
         foreach ($res[0] as $key => $value) {
             $userdata[$key] = $value;
         }
     }
         
+    echo "<script>var userid = ".$userdata["id"]."</script>";
 
-    function getRanddomPass() {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%&()\-_+,.';
-        $randomString = '';
-    
-        for ($i = 0; $i <= 12; $i++) {
-            $index = rand(0, strlen($characters) - 1);
-            $randomString .= $characters[$index];
-        }
-    
-        return $randomString;
-    }
 ?>
 
 <div class="container settings-container">
-    <h1 class="title"><?php if($editUser) {echo "Editar usuario";} else {echo "Perfil de usuario";}?></h1>
+    <h1 class="title">Perfil de usuario</h1>
     <h3 class="title">Información de la cuenta</h3>
 
     <div class="row">
@@ -52,24 +36,12 @@
                 <input type="text" id="username" disabled class="form-control" value="<?=$userdata["username"]?>">
             </div>
         </div>
-        <?php if (!$editUser): ?>
         <div class="col-12 col-sm-12 col-md-6">
             <label for="basic-url">Tipo de cuenta:</label>
             <div class="input-group mb-3">
                 <input type="text" disabled class="form-control" value="<?=$userdata["role"]?>">
             </div>
         </div>
-        <?php else: ?>
-        <div class="col-12 col-sm-12 col-md-6">
-            <label for="basic-url">Tipo de cuenta:</label>
-            <select class="custom-select mr-sm-2" id="role">
-                <?php foreach ($roles as $role):?>
-                    <?php echo $role["role"] == $userdata["role"]."<br>"?>
-                <option <?=strcmp($role["role"], $userdata["role"]) == 0?"selected":""?> value="<?=$role["id"]?>"><?=$role["role"]?></option>
-                <?php endforeach; ?>
-            </select>
-        </div>
-        <?php endif; ?>
     </div>
     <div class="row">
         <div class="col-12 col-sm-12 col-md-6">
@@ -88,8 +60,6 @@
         <li>Dígitos del <strong>0 al 9</strong></li>
         <li>Caracteres especiales (<strong>!, @, #, $, %, ^, &, (, ), \, -, _, +, .</strong>).</li>
     </ul>
-    
-    <?php if (!$editUser): ?>
     <div class="row">
         <div class="col-12 col-sm-12 col-md-6 mb-3">
             <label for="basic-url">Contraseña actual:</label>
@@ -115,21 +85,6 @@
     </div>
     <div class="button-group text-right" style="margin-top: 20px">
         <button disabled id="change-password" class="btn my-button"><i class="i-margin fas fa-key"></i>Cambiar contraseña</button>
-    </div> 
-    <?php else: ?>
-    <div class="row">
-        <div class="col-12 col-sm-12 col-md-6 mb-3">
-            <div class="alert alert-warning" role="alert">
-                Copia la contraseña generada en un lugar seguro. Tras salir de esta página, no podrás volver a verla. 
-            </div>
-            <label for="basic-url">Nueva contraseña:</label>
-            <input disabled type="text" class="form-control" id="new-password">
-            <div class="button-group" style="margin-top: 20px">
-                <button id="generate" class="btn my-button"><i class="i-margin fas fa-key"></i>Generar contraseña</button>
-                <button disabled id="edit-pass" class="btn my-button-3 ml-2"><i class="i-margin fas fa-save"></i>Guardar</button>
-            </div> 
-        </div>
     </div>
-    <?php endif; ?>
 </div>
     

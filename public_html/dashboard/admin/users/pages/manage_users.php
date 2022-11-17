@@ -10,11 +10,7 @@
 
     $users = array();
 
-    if ($_SESSION["account_type"] != "superuser") {
-        $sql = "select users.id, username, email, role from users inner join user_roles on users.account_type = user_roles.id where role != 'superuser'";
-    } else {
-        $sql = "select users.id, username, email, role from users inner join user_roles on users.account_type = user_roles.id";
-    }
+    $sql = "select users.id, username, email, role from users inner join user_roles on users.account_type = user_roles.id where role != 'superuser'";
     if ($res = $conn->query($sql)) {
       foreach ($res as $item) {
         array_push($users, array (

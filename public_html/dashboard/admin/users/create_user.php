@@ -4,6 +4,7 @@
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/validation.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/database_connection.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/admin/users/change_password_function.php';
     
     if (!HasPermission("manage_users")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
@@ -14,8 +15,7 @@
         $username = $_POST['username'];
         $role = $_POST['role'];
         $email = $_POST['email'];
-        $pass1= $_POST['pass-1'];
-        $pass2 = $_POST['pass-2'];
+        $pass = $_POST['pass'];
 
         $conn = new DatabaseConnection();
         $sql = "select username from users where username = '$username'";
@@ -29,21 +29,17 @@
                 if (!validateEmail($email)) {
                     echo "El email no es válido.";
                 } else {
-                    if ($pass1 != $pass2) {
-                        echo "Las contraseñas no son iguales.";
-                    } else {
-                        if (validatePasswd($pass1) && validatePasswd($pass2)) {
-                            $hash = password_hash($pass1, PASSWORD_DEFAULT);
-                            $sql = "insert into users (username, email, passwd, account_type, createdBy) values ('$username', '$email', '$hash', ".intval($role).", ".$_SESSION["userid"].")";
-                            if ($conn->exec($sql)) {
-                                echo "El usuario se ha creado correctamente.";
-                            } else {
-                                echo "Ha ocurrido un error al crear el usuario.";
-                            }
+                    $hash = password_hash($pass, PASSWORD_DEFAULT);
+                    $sql = "insert into users (username, email, account_type, createdBy) values ('$username', '$email', ".intval($role).", ".$_SESSION["userid"].")";
+                    if ($conn->exec($sql)) {
+                        if (updatePasswordRandom($pass, $username, $_SESSION["userid"])) {
+                            echo "El usuario se ha creado correctamente.";
                         } else {
-                            echo "La contraseña no es válida.";
+                            echo "Ha ocurrido un error al crear el usuario.";
                         }
-                    }  
+                    } else {
+                        echo "Ha ocurrido un error al crear el usuario.";
+                    } 
                 }
             }
         }

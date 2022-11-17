@@ -32,7 +32,7 @@
             $title = 'Perfil | '.$site_settings[2]["value_info"];
             break;
         case 'edit-user':
-            $page = '/dashboard/admin/users/pages/user_profile.php';
+            $page = '/dashboard/admin/users/pages/new_user.php';
             $title = 'Editar usuario | '.$site_settings[2]["value_info"];
             break;
         case 'manage-users':
@@ -503,6 +503,7 @@
     
     <?php if (isset($_GET["page"]) && strcmp($_GET["page"], "edit-user") == 0): ?>
     <script src="<?=GetBaseUri()?>/dashboard/admin/users/js/user_edit.js"></script>
+    <script src="<?=GetBaseUri()?>/dashboard/admin/users/js/random_pass_generate.js"></script>
     <script src="<?=GetBaseUri()?>/includes/js/validations.js"></script>
     <?php endif; ?>
 
@@ -525,6 +526,7 @@
 
     <?php if (isset($_GET["page"]) && strcmp($_GET["page"], "new-user") == 0): ?>
     <script src="<?=GetBaseUri()?>/dashboard/admin/users/js/user_new.js"></script>
+    <script src="<?=GetBaseUri()?>/dashboard/admin/users/js/random_pass_generate.js"></script>
     <script src="<?=GetBaseUri()?>/includes/js/validations.js"></script>
     <?php endif; ?>
 

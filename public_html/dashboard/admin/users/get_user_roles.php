@@ -4,7 +4,7 @@
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/check_permissions.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/database_connection.php';
     
-    if (!HasPermission("manage_users")) {
+    if (!HasPermission("standard_user")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
         exit();
     }
@@ -13,7 +13,7 @@
         $conn = new DatabaseConnection();
         $roles = array();
 
-        $sql = "select id, role from user_roles";
+        $sql = "select id, role from user_roles where role != 'superuser'";
         if ($res = $conn->query($sql)) {
             foreach ($res as $item) {
                 array_push($roles, array("id" => $item["id"], "role" => $item["role"]));

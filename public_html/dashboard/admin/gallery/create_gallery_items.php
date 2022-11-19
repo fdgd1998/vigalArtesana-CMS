@@ -5,6 +5,7 @@
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/get_uri.php';
     require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/XMLSitemapFunctions.php";
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/database_connection.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/compress_image.php';
     
     if (!HasPermission("manage_gallery")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
@@ -60,7 +61,8 @@
                 $sql = "insert into gallery (filename,dir,category,altText,uploadedBy) values ('".$file["name"]."','".$directory."',".$categories[$i].",'".$altText[$i]."','".$_SESSION["user"]."')";
                 
                 if ($conn->exec($sql)) {
-                    move_uploaded_file($file['tmp_name'],$location.$directory.$file["name"]); // Moving file to the server.
+                    uploadAndCompressImage($location.$directory, $file);
+                    // move_uploaded_file($file['tmp_name'],$location.$directory.$file["name"]); // Moving file to the server.
                 }
                 $i++;
             }

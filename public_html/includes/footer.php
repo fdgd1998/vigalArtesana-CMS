@@ -17,7 +17,7 @@
                 </ul>
             </div>
             <div class="col-12 col-sm-7 col-md-6">
-                <h3>Contacto</h3>
+                <p><strong>Contacto</strong></p>
                 <ul>
                     <li style="color: rgb(240,249,255);"><i class="fas fa-mobile-alt" style="padding-right: 5px;"></i><label id="telephone"><?=$site_settings[0]["value_info"]?></label></li>
                     <li style="color: rgb(240,249,255);"><i class="fas fa-envelope" style="padding-right: 5px;"></i><label id="email"><?=$site_settings[3]["value_info"]?></label></li>

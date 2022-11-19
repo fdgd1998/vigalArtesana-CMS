@@ -14,7 +14,7 @@
 
     if (isset($_POST)) {
         $conn = new DatabaseConnection();
-        $sql = "update pages_metadata set set modifiedBy = ".$_SESSION["userid"].", title='".$_POST["title"]."', description = '".$_POST["desc"]."' where id_page=".$_POST["id"];
+        $sql = "update pages_metadata set modifiedBy = ".$_SESSION["userid"].", title='".$_POST["title"]."', description = '".$_POST["desc"]."' where id_page=".$_POST["id"];
         if ($conn->exec($sql)) {
             $pageName = "";
             if ($_POST["id"] != 5) {

@@ -15,14 +15,13 @@
         $conn = new DatabaseConnection();
         $sql = "update company_info set value_info = '".$_POST["desc"]."' where key_info = 'gallery-desc'";
     
-        if ($conn->query($sql)) {
+        if ($conn->exec($sql)) {
             echo "La descripción se ha editado correctamente.";
             $sitemap = readSitemapXML();
             changeSitemapUrl($sitemap, GetBaseUri()."/"."galeria", GetBaseUri()."/"."galeria");
             writeSitemapXML($sitemap);
         } else {
-            $conn->rollback();
-            echo "Ha ocurrido un error al editar la descripción.";
+            echo "Ha ocurrido un error al editar la descripción o no ha cambiado.";
         }
     }
 ?>

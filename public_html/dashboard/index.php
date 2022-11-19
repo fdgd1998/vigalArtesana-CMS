@@ -120,7 +120,7 @@
 
     <title><?=$title?></title>
     <link rel="stylesheet" type="text/css" href="<?=GetBaseUri()?>/includes/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="<?=GetBaseUri()?>/includes/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" type="text/css" href="<?=GetBaseUri()?>/includes/css/fontawesome.all.min.css">
     <link rel="stylesheet" type="text/css" href="<?=GetBaseUri()?>/includes/css/gallery.css">
     <link rel="stylesheet" type="text/css" href="<?=GetBaseUri()?>/includes/css/styles.css">
     <link rel="stylesheet" type="text/css" href="<?=GetBaseUri()?>/dashboard/includes/dataTables.bootstrap4.min.css">

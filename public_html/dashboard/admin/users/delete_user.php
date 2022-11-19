@@ -16,7 +16,6 @@
         $conn->exec($sql);
         
         $sql = "delete from users where id = ".intval($userid);
-        echo $sql;
         if ($conn->exec($sql)) {
             echo "Se ha eliminado el usuario.";
         } else {

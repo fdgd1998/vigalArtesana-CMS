@@ -10,7 +10,7 @@
 
     $users = array();
 
-    $sql = "select users.id, username, email, role from users inner join user_roles on users.account_type = user_roles.id where role != 'superuser'";
+    $sql = "select users.id, username, email, role from users inner join user_roles on users.account_type = user_roles.id";
     if ($res = $conn->query($sql)) {
       foreach ($res as $item) {
         array_push($users, array (
@@ -86,7 +86,7 @@
                 <?php
                 foreach ($users as $item) {
                     // Showing categories on the page.
-                    if ($_SESSION["userid"] != $item["id"]) {
+                    if ($_SESSION["userid"] != $item["id"] && $item["id"] != 0) {
                         echo '<tr>';
                         echo '<td class="username">'.$item['username'].'</td>';
                         echo '<td>'.$item['email'].'</td>';

@@ -28,7 +28,7 @@
         if (isset($_POST["cat_name"]) && !isset($_FILES["cat_file"]) && !isset($_POST["cat_desc"])) { // changing category name
             $sql = array(
                 "update categories set modifiedBy = ".$_SESSION["userid"].", name = '".$_POST['cat_name']."', friendly_url = '".GetFriendlyUrl($_POST["cat_name"])."' where id = ".$_POST["cat_id"],
-                "update pages set set modifiedBy = ".$_SESSION["userid"].", page = 'gallery/".GetFriendlyUrl($_POST["cat_name"])."' where cat_id = ".$_POST["cat_id"]
+                "update pages set modifiedBy = ".$_SESSION["userid"].", page = 'gallery/".GetFriendlyUrl($_POST["cat_name"])."' where cat_id = ".$_POST["cat_id"]
             );
             if ($conn->transaction($sql)) {
                 $nameChange = true;
@@ -96,7 +96,7 @@
         } else if (isset($_POST["cat_name"]) && !isset($_FILES["cat_file"]) && isset($_POST["cat_desc"])) {
             $sql = array(
                 "update categories set modifiedBy = ".$_SESSION["userid"].", name = '".$_POST['cat_name']."', description = '".$_POST['cat_desc']."', friendly_url = '".GetFriendlyUrl($_POST["cat_name"])."' where id = ".$_POST["cat_id"],
-                "update pages set set modifiedBy = ".$_SESSION["userid"].", page = 'gallery/".GetFriendlyUrl($_POST["cat_name"])."' where cat_id = ".$_POST["cat_id"]
+                "update pages set modifiedBy = ".$_SESSION["userid"].", page = 'gallery/".GetFriendlyUrl($_POST["cat_name"])."' where cat_id = ".$_POST["cat_id"]
             );
             if ($conn->transaction($sql)) {
                 $nameChange = true;
@@ -114,7 +114,7 @@
 
             $sql = array(
                 "update categories set modifiedBy = ".$_SESSION["userid"].", name = '".$_POST['cat_name']."', description = '".$_POST['cat_desc']."', friendly_url = '".GetFriendlyUrl($_POST["cat_name"])."', image = '".$_FILES['cat_file']["name"]."' where id = ".$_POST["cat_id"],
-                "update pages set set modifiedBy = ".$_SESSION["userid"].", page = 'gallery/".GetFriendlyUrl($_POST["cat_name"])."' where cat_id = ".$_POST["cat_id"]
+                "update pages set modifiedBy = ".$_SESSION["userid"].", page = 'gallery/".GetFriendlyUrl($_POST["cat_name"])."' where cat_id = ".$_POST["cat_id"]
             );
             if ($conn->exec($sql)) {
                 $nameChange = true;

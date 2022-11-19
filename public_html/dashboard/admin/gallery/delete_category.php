@@ -1,5 +1,5 @@
 <?php
-    error_reporting(0);
+    // error_reporting(0);
     require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/check_url_direct_access.php";
     checkUrlDirectAcces(realpath(__FILE__), realpath($_SERVER['SCRIPT_FILENAME']));
 
@@ -31,11 +31,11 @@
                 $image_name = $res[0]['image'];
                 $cat_name = $res[0]['friendly_url'];
             }
+            
         
             $sql = array(
                 "update pages set modifiedBy = ".$_SESSION["userid"]." where cat_id = ".$_POST['cat_id'],
-                "update pages_metadata inner join pages on id_page = cat_id where id_page = ".$_POST['cat_id'],
-                "delete from categories where id = '".$_POST['cat_id']."'",
+                "delete from categories where id = ".$_POST['cat_id'],
                 "delete from pages where cat_id = ".$_POST['cat_id'],
                 "delete p from pages_metadata as p inner join pages on id_page = cat_id where id_page = ".$_POST['cat_id']
             );

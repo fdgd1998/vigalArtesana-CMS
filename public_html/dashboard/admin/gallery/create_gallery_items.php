@@ -5,7 +5,8 @@
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/get_uri.php';
     require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/XMLSitemapFunctions.php";
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/database_connection.php';
-    
+    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/image_compression.php';
+
     if (!HasPermission("manage_gallery")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
         exit();
@@ -48,7 +49,7 @@
         //If the directory doesn't already exists.
         if(!is_dir($location.$directory)){
             //Create our directory.
-            mkdir($location.$directory, 755, true);
+            exec('install -d -m 0755 '.$location.$directory);
         }
 
         $sql = "select id from users where username = '".$_SESSION['user']."'";
@@ -60,7 +61,8 @@
                 $sql = "insert into gallery (filename,dir,category,altText,uploadedBy) values ('".$file["name"]."','".$directory."',".$categories[$i].",'".$altText[$i]."','".$_SESSION["user"]."')";
                 
                 if ($conn->exec($sql)) {
-                    move_uploaded_file($file['tmp_name'],$location.$directory.$file["name"]); // Moving file to the server.
+                    uploadAndCompressImage($location.$directory, $file);
+                    // move_uploaded_file($file['tmp_name'],$location.$directory.$file["name"]); // Moving file to the server.
                 }
                 $i++;
             }

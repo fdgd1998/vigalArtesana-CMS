@@ -119,7 +119,7 @@
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/styles.css">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/fontawesome.all.min.css">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/gallery.css">
-    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/simple-lightbox.css?v2.8.0"> 
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/simple-lightbox.min.css"> 
 </head>
 
 <body>
@@ -145,7 +145,7 @@
                             <a href='<?=GetBaseUri()?>/galeria/<?=$element[0]?>'>
                                 <div class='wrap-category animated-item'>
                                     <label class='category-title'><?=$element[1]?></label>
-                                    <img loading="lazy" class='img-fluid category photos' src='<?=GetBaseUri()?>/uploads/categories/<?=$element[2]?>' alt="<?=$element[1]?>"/>
+                                    <img class='img-fluid category photos' src='<?=GetBaseUri()?>/uploads/categories/<?=$element[2]?>' alt="<?=$element[1]?>"/>
                                 </div>
                             </a>
                         </div>
@@ -167,7 +167,7 @@
                         <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4"> 
                             <?php foreach ($results as $element): ?>    
                             <a class="animated-item wrap" href="<?=GetBaseUri()?>/uploads/images/<?=$element[2].$element[1]?>">
-                                <img loading="lazy" id="image-<?=$element[0]?>" class='img-fluid photos' src="<?=GetBaseUri()?>/uploads/images/<?=$element[2].$element[1]?>" alt="<?=$element[3]?>" title="<?=$element[3]?>"/>
+                                <img id="image-<?=$element[0]?>" class='img-fluid photos' src="<?=GetBaseUri()?>/uploads/images/<?=$element[2].$element[1]?>" alt="<?=$element[3]?>" title="<?=$element[3]?>"/>
                             </a>
                             <?php endforeach; ?>
                         </div>
@@ -220,7 +220,7 @@
         <?php include $_SERVER["DOCUMENT_ROOT"].'/includes/footer.php'; ?>
         <script src="<?=GetBaseUri()?>/includes/js/jquery.min.js"></script>
         <script src="<?=GetBaseUri()?>/includes/bootstrap/js/bootstrap.min.js"></script>
-        <script src="<?=GetBaseUri()?>/includes/js/simple-lightbox.js?v2.8.0"></script>
+        <script src="<?=GetBaseUri()?>/includes/js/simple-lightbox.min.js"></script>
         <?php if (isset($_GET['category'])): ?>
         <script>
             (function() {

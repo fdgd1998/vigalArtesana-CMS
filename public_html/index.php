@@ -4,6 +4,7 @@
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_maintenance_status.php";
 
+    // $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
     $site_settings = getSiteSettings();
     $maintenance = getMaintenanceStatus($site_settings);
     $conn = new DatabaseConnection(); // Opening database connection.
@@ -60,6 +61,7 @@
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/Navigation-Clean.css">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/styles.css">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/flag-icon.css">
 </head>
 
 <body>
@@ -96,7 +98,7 @@
         </div>
         <div id="services-section" class="div-color-2">
             <div class="container">
-            <h1 class="title">Nuestros servicios</h1>
+                <h1 class="title">Nuestros servicios</h1>
                 <div class="row">
                     <div class="col-12 carousel-buttons">
                         <a class="btn my-button mr-1" href="#services" role="button" data-slide="prev">
@@ -151,12 +153,12 @@
     <script src="<?=GetBaseUri()?>/includes/js/jquery.min.js"></script>
     <script src="<?=GetBaseUri()?>/includes/bootstrap/js/bootstrap.min.js"></script>
     <script>
-        $("#services").carousel({
-            interval: 10000,
-            pause: true,
-            touch: true,
-            keyboard: true
-    });
+    //     $("#services").carousel({
+    //         interval: 10000,
+    //         pause: true,
+    //         touch: true,
+    //         keyboard: true
+    // });
     </script>
 </body>
 </html>

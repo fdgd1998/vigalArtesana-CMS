@@ -31,6 +31,18 @@
                         <?php endif; ?>
                     </div>
                 </li>
+                <li class="nav-item dropdown" hidden>
+                    <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                    <?php if (strcmp($lang, "es") == 0): ?>
+                    <span class="flag-icon flag-icon-esp"></span>Español
+                    <?php else: ?>
+                    <span class="flag-icon flag-icon-gbr"></span>English
+                    <?php endif; ?>
+                    </a>
+                    <div class="dropdown-menu">
+                    <a class="dropdown-item" href="<?=$_SERVER['REQUEST_URI']?>"><span class="flag-icon flag-icon-esp"></span>Español</a>
+                    <a class="dropdown-item" href="/en<?=$_SERVER['REQUEST_URI']?>"><span class="flag-icon flag-icon-gbr"></span>English</a>
+                </li>
             </ul>
         </div>
     </div>

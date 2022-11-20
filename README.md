@@ -1,4 +1,6 @@
 ## ViGal Artesana CMS
+Version 2.0.1
+
 This is a small, custom CMS developed from scratch for my family's carprenty and restoration company.
 
 See the project on vigalartesana.es

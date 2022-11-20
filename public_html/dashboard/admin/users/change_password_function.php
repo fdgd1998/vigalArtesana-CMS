@@ -18,14 +18,14 @@
         return false;
     }
 
-    function updatePassword($pass1, $pass2, $userid, $modifiedBy, $current = null) {
+    function updatePassword($pass1, $pass2, $userid, $modifiedBy = 0, $current = null) {
         $conn = new DatabaseConnection();
         if (strcmp($pass1, $pass2) == 0 && validatePasswd($pass1) && validatePasswd($pass2)) {
             if ($current) {
                 $sql = "select passwd from users where id = ".$userid;
                 if ($res = $conn->query($sql)) {
                     $hash = password_hash($pass1, PASSWORD_DEFAULT);
-                    $res = $conn->preparedQuery("update users set passwd = ?, modifiedBy = ? where id = ?", array($hash, $modifiedBy,$userid));
+                    $res = $conn->preparedQuery("update users set passwd = ?, modifiedBy = ? where id = ?", array($hash, $modifiedBy, $userid));
                     if (count($res) == 0) {
                         return true;
                     } else {

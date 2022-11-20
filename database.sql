@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-11-2022 a las 20:40:09
+-- Tiempo de generación: 20-11-2022 a las 03:24:40
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `website`
+-- Base de datos: `vigal`
 --
 
 -- --------------------------------------------------------
@@ -92,16 +92,17 @@ INSERT INTO `company_info` (`key_info`, `value_info`, `modifiedBy`) VALUES
 ('name', 'Mi Empresa', 0),
 ('email', 'contacto@miempresa.es', 0),
 ('social_media', '{\"instagram\":\"miempresaa\",\"facebook\":\"miempresaa\",\"whatsapp\":\"+34600000000\"}', 0),
-('index-image', '16359609031.jpg', 0),
-('index-slogan', 'Breve descripción de mi empresa...', 0),
+('index-image', '16367490931.jpg', 0),
+('index-slogan', 'Breve descripción de mi empresa.', 0),
 ('google-map-link', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1654425.3095923811!2d-4.408954431630243!3d35.91517012339416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd7134e9fd7091b5%3A0xd1256645b08b9d84!2sMar%20de%20Albor%C3%A1n!5e0!3m2!1ses!2ses!4v1652859736537!5m2!1ses!2ses', 0),
 ('opening-hours', '{\"Lunes\":\"7:00 - 15:00\",\"Martes\":\"7:00 - 15:00\",\"Miércoles\":\"7:00 - 15:00\",\"Jueves\":\"7:00 - 15:00\",\"Viernes\":\"7:00 - 13:30\",\"Sábado\":\"cerrado\",\"Domingo\":\"cerrado\"}', 0),
-('about-us', '<p>Esta es la sección <font color=\"#000000\" style=\"--darkreader-inline-color:#e8e6e3; --darkreader-inline-bgcolor:#999900;\" data-darkreader-inline-color=\"\" data-darkreader-inline-bgcolor=\"\"><b style=\"\">sobre nosotros </b></font>de la página web.</p>', 0),
+('about-us', '<p>Esta es la sección <font color=\"#000000\" style=\"--darkreader-inline-color:#e8e6e3; --darkreader-inline-bgcolor:#999900;\" data-darkreader-inline-color=\"\" data-darkreader-inline-bgcolor=\"\"><b style=\"\">sobre nosotros </b></font>de la página web...</p>', 0),
 ('index-brief-description', 'Esta es una <b><font color=\"#000000\" style=\"\">descripción extensa</font></b> de<i> </i>la empresa.', 0),
-('maintenance', 'true', 0),
+('maintenance', 'false', 0),
 ('gallery-desc', '<p>Esta es la <b>descripción general</b> de la galería...</p>', 0),
 ('seo_modified', 'true', 0),
-('index-image-desc', 'fghfgh', 0);
+('index-image-desc', 'sdfsffs', 0),
+('software-version', '2.0.1', 0);
 
 --
 -- Disparadores `company_info`
@@ -246,7 +247,7 @@ CREATE TABLE `pages_metadata` (
 --
 
 INSERT INTO `pages_metadata` (`id`, `title`, `description`, `id_page`, `createdBy`, `modifiedBy`) VALUES
-(5, 'Contacta con nosotros', 'Contacta con nosotros, aquí te dejamos nuetros datos de contacto.', 8, 0, 0),
+(5, 'Contacta con nosotros', 'Contacta con nosotros, aquí te dejamos nuetros datos de contacto....', 8, 0, 0),
 (6, 'Galería', 'Esta es la página principal de nuestra galería, donde podrás ver una exposición de todos nuestros trabajo. ¡Te invitamos a que le eches un vistazo!', 6, 0, 0),
 (7, 'Artesanía con madera antigua', 'Pura artesanía', 5, 0, 0),
 (8, 'Sobre nosotros', 'Esta es la descripción de la página', 7, 0, 0);
@@ -347,11 +348,7 @@ CREATE TABLE `users` (
   `username` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
   `email` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
   `passwd` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
-  `login_timestamp` timestamp NULL DEFAULT NULL,
-  `logout_timestamp` timestamp NULL DEFAULT NULL,
   `account_type` int(4) NOT NULL,
-  `account_enabled` tinyint(1) NOT NULL DEFAULT 1,
-  `passwd_reset` tinyint(1) NOT NULL DEFAULT 0,
   `createdBy` int(4) DEFAULT NULL,
   `modifiedBy` int(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -360,8 +357,8 @@ CREATE TABLE `users` (
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `passwd`, `login_timestamp`, `logout_timestamp`, `account_type`, `account_enabled`, `passwd_reset`, `createdBy`, `modifiedBy`) VALUES
-(0, 'admin', 'ejemplo@miempresa.com', '$2y$10$ytIhonJbZTQSHzr1ibi62OwTsVh8BuhI3EkgG7V85dhftMkdj/l9O', NULL, NULL, 1, 1, 0, NULL, 0);
+INSERT INTO `users` (`id`, `username`, `email`, `passwd`, `account_type`, `createdBy`, `modifiedBy`) VALUES
+(0, 'admin', 'test@mydomain.com', '$2y$10$75Z8hzflktTgwejtrykgwO6sgJQkHMRZx3A72vq5czDLk0WxM1A62', 1, 0, 0);
 
 --
 -- Disparadores `users`
@@ -525,13 +522,13 @@ ALTER TABLE `logs`
 -- AUTO_INCREMENT de la tabla `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT de la tabla `pages_metadata`
 --
 ALTER TABLE `pages_metadata`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `password_reset`
@@ -549,7 +546,7 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT de la tabla `user_roles`
@@ -614,9 +611,7 @@ ALTER TABLE `services`
 -- Filtros para la tabla `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`account_type`) REFERENCES `user_roles` (`id`),
-  ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`createdBy`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `users_ibfk_3` FOREIGN KEY (`modifiedBy`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`account_type`) REFERENCES `user_roles` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

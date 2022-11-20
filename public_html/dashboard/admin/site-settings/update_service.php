@@ -6,6 +6,7 @@
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/get_uri.php';
     require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/XMLSitemapFunctions.php";
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/database_connection.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/image_compression.php';
     
     if (!HasPermission("manage_companySettings")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
@@ -34,7 +35,8 @@
             // updating entry on database
             $sql = "select image from services where id = ".$_POST["id"];
             if ($res = $conn->query($sql)) {
-                move_uploaded_file($_FILES['image']['tmp_name'],$location.$_FILES["image"]["name"]); //moving file to the server.
+                uploadAndCompressImage($location, $_FILES['image']);
+                // move_uploaded_file($_FILES['image']['tmp_name'],$location.$_FILES["image"]["name"]); //moving file to the server.
                 unlink($location.$res[0]['image']);
             } else {
                 echo "Ha ocurrido un error mientras se borraba la imagen.";
@@ -57,7 +59,8 @@
             // undating entry on database
             $sql = "select image from services where id = ".$_POST["id"];
             if ($res = $conn->query($sql)) {
-                move_uploaded_file($_FILES['image']['tmp_name'],$location.$_FILES["image"]["name"]); //moving file to the server.
+                uploadAndCompressImage($location, $_FILES['image']);
+                // move_uploaded_file($_FILES['image']['tmp_name'],$location.$_FILES["image"]["name"]); //moving file to the server.
                 unlink($location.$res[0]['image']);
             } else {
                 echo "Ha ocurrido un error mientras se borraba la imagen.";
@@ -74,7 +77,8 @@
             // undating entry on database
             $sql = "select image from services where id = ".$_POST["id"];
             if ($res = $conn->query($sql)) {
-                move_uploaded_file($_FILES['image']['tmp_name'],$location.$_FILES["image"]["name"]); //moving file to the server.
+                uploadAndCompressImage($location, $_FILES['image']);
+                // move_uploaded_file($_FILES['image']['tmp_name'],$location.$_FILES["image"]["name"]); //moving file to the server.
                 unlink($location.$rows['image']);
             } else {
                 echo "Ha ocurrido un error mientras se borraba la imagen.";

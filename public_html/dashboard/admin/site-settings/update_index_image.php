@@ -6,6 +6,7 @@
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/get_uri.php';
     require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/XMLSitemapFunctions.php";
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/database_connection.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/image_compression.php';
     
     if (!HasPermission("manage_companySettings")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
@@ -29,7 +30,8 @@
 
         if ($conn->transaction($sql)) {
             unlink($location.$image);
-            move_uploaded_file($_FILES["image"]['tmp_name'],$location.$_FILES["image"]["name"]); 
+            uploadAndCompressImage($location, $_FILES['image']);
+            // move_uploaded_file($_FILES["image"]['tmp_name'],$location.$_FILES["image"]["name"]); 
             $sitemap = readSitemapXML();
             changeSitemapUrl($sitemap, GetBaseUri(), GetBaseUri());
             writeSitemapXML($sitemap);

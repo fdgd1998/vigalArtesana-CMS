@@ -7,6 +7,7 @@
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/XMLSitemapFunctions.php";
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/database_connection.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/image_compression.php';
     
     if (!HasPermission("manage_gallery")) {
         include $_SERVER["DOCUMENT_ROOT"].'/dashboard/includes/forbidden.php';
@@ -41,13 +42,14 @@
             // updating entry on database
             $image = "";
             $sql = "select image from categories where id = ".$_POST["cat_id"];
-            if ($res = $conn->query($stmt)) {
+            if ($res = $conn->query($sql)) {
                 $image = $res[0]['image'];
             }
             $sql = "update categories set modifiedBy = ".$_SESSION["userid"].", image = '".$_FILES['cat_file']["name"]."' where id = ".$_POST["cat_id"];
             if ($conn->exec($sql)) {
                 unlink($location.$image);
-                move_uploaded_file($_FILES['cat_file']['tmp_name'],$location.$_FILES['cat_file']["name"]); //moving file to the server.
+                uploadAndCompressImage($location, $_FILES['cat_file']);
+                // move_uploaded_file($_FILES['cat_file']['tmp_name'],$location.$_FILES['cat_file']["name"]); //moving file to the server.
                 echo "La imagen se ha actualiado correctamente.";
             } else {
                 echo "Ha ocurrido un error borrando la imagen actual.";
@@ -61,7 +63,7 @@
             }
         } else if (isset($_POST["cat_name"]) && isset($_FILES["cat_file"]) && !isset($_POST["cat_desc"])) {
             $image = "";
-            $stmt = "select image from categories where id = ".$_POST["cat_id"];
+            $sql = "select image from categories where id = ".$_POST["cat_id"];
             if ($res = $conn->query($sql)) {
                 $image = $res[0]['image'];
             }
@@ -72,7 +74,8 @@
             if ($conn->transaction($sql)) {
                 $nameChange = true;
                 unlink($location.$image);
-                move_uploaded_file($_FILES['cat_file']['tmp_name'],$location.$_FILES['cat_file']["name"]); //moving file to the server
+                uploadAndCompressImage($location, $_FILES['cat_file']);
+                // move_uploaded_file($_FILES['cat_file']['tmp_name'],$location.$_FILES['cat_file']["name"]); //moving file to the server
                 echo "La imagen y el nombre de la categoría se han actualizado correctamente.";
             } else {
                 echo "No se ha podido actualizar la categoría.4";
@@ -88,7 +91,8 @@
             $sql = "update categories set modifiedBy = ".$_SESSION["userid"].", description = '".$_POST['cat_desc']."', image = '".$_FILES['cat_file']["name"]."' where id = ".$_POST["cat_id"];
             if ($conn->exec($sql)) {
                 unlink($location.$image);
-                move_uploaded_file($_FILES['cat_file']['tmp_name'],$location.$_FILES['cat_file']["name"]); //moving file to the server
+                uploadAndCompressImage($location, $_FILES['cat_file']);
+                // move_uploaded_file($_FILES['cat_file']['tmp_name'],$location.$_FILES['cat_file']["name"]); //moving file to the server
                 echo "La imagen y descripción de la categoría se han actualizado correctamente.";
             } else {
                 echo "No se ha podido actualizar la categoría.3";
@@ -108,7 +112,7 @@
         } else if (isset($_POST["cat_name"]) && isset($_FILES["cat_file"]) && isset($_POST["cat_desc"])) {
             $image = "";
             $sql= "select image from categories where id = ".$_POST["cat_id"];
-            if ($res = $conn->query($stmt)) {
+            if ($res = $conn->query($sql)) {
                 $image = $res[0]['image'];
             }
 
@@ -119,7 +123,8 @@
             if ($conn->exec($sql)) {
                 $nameChange = true;
                 unlink($location.$image);
-                move_uploaded_file($_FILES['cat_file']['tmp_name'],$location.$_FILES['cat_file']["name"]); //moving file to the server
+                uploadAndCompressImage($location, $_FILES['cat_file']);
+                // move_uploaded_file($_FILES['cat_file']['tmp_name'],$location.$_FILES['cat_file']["name"]); //moving file to the server
                 echo "El nombre, imagen y descripción de la categoría se han actualizado correctamente.";
             } else {
                 echo "No se ha podido actualizar la categoría.2";

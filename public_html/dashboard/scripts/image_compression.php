@@ -16,10 +16,10 @@
         $img = null;
         if (strcmp($imageData[1], "png") == 0) {
             $img = imagecreatefrompng($temp.$fileObj["name"]);   // load the image-to-be-saved
-            imagepng($img, $path.$fileObj["name"], 40);
+            imagepng($img, $path.$fileObj["name"], 50);
         } else {
             $img = imagecreatefromjpeg($temp.$fileObj["name"]);   // load the image-to-be-saved
-            imagejpeg($img, $path.$fileObj["name"], 40);
+            imagejpeg($img, $path.$fileObj["name"], 50);
         }
 
         // 50 is quality; change from 0 (worst quality,smaller file) - 100 (best quality)

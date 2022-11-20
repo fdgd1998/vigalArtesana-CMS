@@ -12,6 +12,7 @@
 
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/get_uri.php';
     require_once $_SERVER["DOCUMENT_ROOT"]."/dashboard/scripts/XMLSitemapFunctions.php";
+    require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/image_compression.php';
 
     if (isset($_POST)) {
         $conn = new DatabaseConnection();
@@ -26,7 +27,8 @@
             $sitemap = readSitemapXML();
             changeSitemapUrl($sitemap, GetBaseUri(), GetBaseUri());
             writeSitemapXML($sitemap);
-            move_uploaded_file($_FILES['file']['tmp_name'],$location.$image); // Moving file to the server
+            uploadAndCompressImage($location, $_FILES['file']);
+            // move_uploaded_file($_FILES['file']['tmp_name'],$location.$image); // Moving file to the server
             
             echo "La imagen se ha subido correctamente.";
         } else {

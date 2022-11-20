@@ -95,6 +95,7 @@
 
 <div class="container settings-container">
     <h1 class="title">Subir imágenes</h1>
+    <?php if (count($categories) > 0) : ?>
     <p class="title-description">Sube imágenes a tu galería. Puedes subir un máximo de 5 ficheros simultáneamente y un peso de 5 MB máximo por cada uno.</p>
     <form style="margin-bottom: 20px;padding-top: 17px;" enctype="multipart/form-data">
         <div class="form-row" style="margin-top: 10px;">
@@ -116,8 +117,14 @@
         <div class="form-row text-right" style="margin-top: 20px;">
             <div class="col">
                 <button id="cancel" class="btn my-button-2" type="button"><i class="i-margin fas fa-times-circle"></i>Cancelar</button>
-                <button id="uploadbtn" disabled class="btn my-button" type="button" style="margin-left: 5px;"><i class="i-margin fas fa-upload"></i>Subir imágenes</button>
+                <button id="uploadbtn" disabled class="btn my-button" type="button" style="margin-left: 5px;"><i class="i-margin fa-solid fa-upload"></i>Subir imágenes</button>
             </div>
         </div>
     </form>
+    <?php else: ?>
+    <p>No has creado ninguna categoría. Para subir imágenes, crea al menos una categoría.</p>
+    <div class="button-group">
+        <button type="button" id="create-category" class="btn my-button"><i class="i-margin fas fa-plus-circle"></i>Nueva categoría</button>
+    </div>    
+    <?php endif; ?>
 </div>

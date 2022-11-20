@@ -282,13 +282,14 @@ var input_files = [];
         enableUploadBtn()
     });
 
+    $("#create-category").on("click", function() {
+        window.location = location.origin + "/dashboard?page=new-category";
+    });
+
     function enableUploadBtn() {
         console.log("enabling button...")
         var categories = $(document).find(".category-upload option:selected");
         var alt_text = $(document).find(".alt-text-upload");
-
-        // var cat_values = [];
-        // var alt_text_values = [];
 
         var cat_bool = false;
         var alt_text_bool = false;

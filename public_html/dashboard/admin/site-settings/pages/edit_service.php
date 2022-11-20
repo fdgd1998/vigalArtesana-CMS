@@ -57,7 +57,7 @@
         </div>
     </div>
     <div class="button-group text-right">
-        <button id="cancel-service-edit" class="btn my-button-2">Cancelar</button>
-        <button disabled id="submit-service-edit" class="btn my-button-3"><i class="far fa-edit"></i>Editar</button>
+        <button id="cancel-service-edit" class="btn my-button-2"><i class="i-margin fa-solid fa-circle-xmark"></i>Cancelar</button>
+        <button disabled id="submit-service-edit" class="btn my-button-3"><i class="i-margin fa-regular fa-pen-to-square"></i>Editar</button>
     </div>
 </div>

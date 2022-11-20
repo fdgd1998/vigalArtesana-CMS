@@ -33,7 +33,7 @@
                 </li>
                 <li class="nav-item dropdown" hidden>
                     <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                    <?php if (strcmp($lang, "es") == 0): ?>
+                    <?php if (strcmp($_SESSION["lang"], "es") == 0): ?>
                     <span class="flag-icon flag-icon-esp"></span>Español
                     <?php else: ?>
                     <span class="flag-icon flag-icon-gbr"></span>English

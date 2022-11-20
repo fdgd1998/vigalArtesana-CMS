@@ -114,7 +114,7 @@
     <form style="margin-bottom: 20px;">
         <div class="form-row">
             <div class="col">
-                <h3 class="title"><i class="far fa-calendar-alt"></i>Horario</h3>
+                <h3 class="title"><i class="fa-solid fa-calendar-days"></i></i>Horario</h3>
                 <p class="title-description">Establece un horario por cada día de la semana. Formato recomendado: <strong>hh:mm - hh:mm | hh:mm - hh:mm</strong>.</p>
             </div>
         </div>

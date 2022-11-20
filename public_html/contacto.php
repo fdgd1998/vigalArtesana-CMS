@@ -92,16 +92,16 @@
         <div class="row">
             <div class="col-lg-7">
                 <p class="address"><?=$site_settings[1]["value_info"]?></p>
-                <u><a class="contact-data" href="tel:<?=str_replace(' ','',$site_settings[0]["value_info"])?>"><i class="fas fa-phone-alt"></i><?=$site_settings[0]["value_info"]?></a></u>
-                <u><a class="contact-data" href="mailto:<?=$site_settings[3]["value_info"]?>"><i class="fas fa-envelope"></i><?=$site_settings[3]["value_info"]?></a></u>
+                <u><a class="contact-data" href="tel:<?=str_replace(' ','',$site_settings[0]["value_info"])?>"><i class="i-margin fa-solid fa-phone"></i><?=$site_settings[0]["value_info"]?></a></u>
+                <u><a class="contact-data" href="mailto:<?=$site_settings[3]["value_info"]?>"><i class="i-margin fa-solid fa-envelope"></i><?=$site_settings[3]["value_info"]?></a></u>
                 <?php if (isset($site_settings[4]["value_info"]["whatsapp"])):?>
-                    <u><a class="contact-data whatsapp" data-bs-hover-animate="pulse" target="blank" href="https://wa.me/<?=$site_settings[4]["value_info"]["whatsapp"]?>"><i class="fab fa-whatsapp fa-w-16"></i>WhatsApp</a></u>
+                    <u><a class="contact-data whatsapp" data-bs-hover-animate="pulse" target="blank" href="https://wa.me/<?=$site_settings[4]["value_info"]["whatsapp"]?>"><i class="i-margin fa-brands fa-whatsapp"></i>WhatsApp</a></u>
                 <?php endif; ?>
                 <?php if (isset($site_settings[4]["value_info"]["instagram"])):?>
-                    <u><a class="contact-data instagram" data-bs-hover-animate="pulse" target="blank" href="https://www.instagram.com/<?=$site_settings[4]["value_info"]["instagram"]?>"><i class="fab fa-instagram"></i>@<?=$site_settings[4]["value_info"]["instagram"]?></a></u>
+                    <u><a class="contact-data instagram" data-bs-hover-animate="pulse" target="blank" href="https://www.instagram.com/<?=$site_settings[4]["value_info"]["instagram"]?>"><i class="i-margin fa-brands fa-instagram"></i>@<?=$site_settings[4]["value_info"]["instagram"]?></a></u>
                 <?php endif; ?>
                 <?php if (isset($site_settings[4]["value_info"]["facebook"])):?>
-                    <u><a class="contact-data facebook" data-bs-hover-animate="pulse" target="blank" href="https://www.facebook.com/<?=$site_settings[4]["value_info"]["facebook"]?>"><i class="fab fa-facebook-square"></i>@<?=$site_settings[4]["value_info"]["facebook"]?></a></u>
+                    <u><a class="contact-data facebook" data-bs-hover-animate="pulse" target="blank" href="https://www.facebook.com/<?=$site_settings[4]["value_info"]["facebook"]?>"><i class="i-margin fa-brands fa-square-facebook"></i>@<?=$site_settings[4]["value_info"]["facebook"]?></a></u>
                 <?php endif; ?>
             </div>
             <div class="col-lg-5">

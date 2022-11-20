@@ -14,7 +14,7 @@
     <form style="margin-bottom: 20px;">
         <div class="form-row">
             <div class="col">
-                <h3 class="title"><i class="i-margin fas fa-toolbox"></i>Modo de mantenimiento</h3>
+                <h3 class="title"><i class="fa-solid fa-screwdriver-wrench"></i>Modo de mantenimiento</h3>
                 <p class="title-description">Es recomendable activar el modo de mantenimiendo cuando se van a realizar cambios en la estructura o el código de los archivos del sistema de gestión de contenidos.</p>
                 <p> Mientras este modo esté activado, los usuarios no pdrán navegar por el sitio web y verán un aviso inicando que el sitio está en mantenimiento.</p>
                 <p>Mientras este modo esté activo, solo podrás navegar por la web iniciando sesión.</p>

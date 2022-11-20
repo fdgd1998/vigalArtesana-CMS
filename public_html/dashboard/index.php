@@ -19,6 +19,10 @@
     if (!isset($_GET['page'])) $title = 'Panel de control | '.$site_settings[2]["value_info"];
     
     switch($_GET['page']) {
+        case 'about-cms':
+            $page = '/dashboard/admin/site-settings/pages/about_cms.php';
+            $title = 'Información del software | '.$site_settings[2]["value_info"];
+            break;
         case 'logs':
             $page = '/dashboard/admin/site-settings/pages/logs.php';
             $title = 'Logs | '.$site_settings[2]["value_info"];
@@ -153,15 +157,15 @@
                             <div role="menu" class="dropdown-menu">
                                 <h6 class="dropdown-header">Información de la empresa</h6>
                                 <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=general-settings">
-                                    <i class="fas fa-home"></i>
+                                    <i class="fa-solid fa-house-user"></i>
                                     Página de inicio
                                 </a>
                                 <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=contact-settings">
-                                    <i class="fas fa-address-book"></i>
+                                    <i class="fa-solid fa-building-user"></i>
                                     Contacto, ubicación y horario
                                 </a>
                                 <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=about-us">
-                                    <i class="fas fa-industry"></i>
+                                    <i class="fa-solid fa-user-tie"></i>
                                     Sobre nosotros
                                 </a>
                                 <div class="dropdown-divider"></div>
@@ -183,11 +187,11 @@
                             </a>
                             <div role="menu" class="dropdown-menu">
                                 <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=advanced">
-                                    <i class="fas fa-code"></i>
+                                    <i class="fa-solid fa-code"></i>
                                     Opciones avanzadas
                                 </a>
                                 <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=logs">
-                                    <i class="fas fa-file-code"></i>
+                                    <i class="fa-regular fa-file-code"></i>
                                     Ver logs
                                 </a>
                             </div>
@@ -207,15 +211,15 @@
                                 <div class="dropdown-divider"></div>
                                 <h6 class="dropdown-header">Metadatos</h6>
                                 <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=metadata-settings">
-                                    <i class="fas fa-window-maximize"></i>
+                                    <i class="fa-solid fa-window-maximize"></i>
                                     Título y descripción de las páginas (metadatos)
                                 </a>
                                 <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=text-editor&file=sitemap.xml">
-                                    <i class="fas fa-file-code"></i>
+                                    <i class="fa-regular fa-file-code"></i>
                                     Modificar sitemap.xml
                                 </a>
                                 <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=text-editor&file=robots.txt">
-                                    <i class="fas fa-file-alt"></i>
+                                    <i class="fa-regular fa-file-code"></i>
                                     Modificar robots.txt
                                 </a>
                             </div>
@@ -227,11 +231,11 @@
                             </a>
                             <div role="menu" class="dropdown-menu">
                                 <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=manage-users">
-                                    <i class="fas fa-users"></i>
+                                    <i class="fa-solid fa-users-gear"></i>
                                     Gestionar usuarios
                                 </a>
                                 <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=new-user">
-                                    <i class="fas fa-user-plus"></i>
+                                    <i class="fa-solid fa-user-plus"></i>
                                     Nuevo usuario
                                 </a>
                             </div>
@@ -249,11 +253,11 @@
                                 Descripción general
                             </a>
                             <a role='presentation' class='dropdown-item' href='<?=GetBaseUri()?>/dashboard?page=gallery-new'>
-                                <i class='fas fa-upload'></i>
+                                <i class="fa-solid fa-upload"></i>
                                 Subir imágenes
                             </a>
                             <a role='presentation' class='dropdown-item' href='<?=GetBaseUri()?>/dashboard?page=manage-gallery'>
-                                <i class='fas fa-images'></i>
+                                <i class="fa-regular fa-images"></i>
                                 Gestionar galería
                             </a>
                             <div class="dropdown-divider"></div>
@@ -270,9 +274,10 @@
                     </li>
                 </ul>
                 <div style="display: block;">
-                    <a class="nav-link" href="<?=GetBaseUri()?>/dashboard?page=user-profile"><i class="fas fa-user-circle"></i></a>
-                    <a class="nav-link" href="<?=GetBaseUri()?>"><i class="fas fa-home"></i></a>
-                    <a class="nav-link" href="<?=GetBaseUri()?>/scripts/logout.php"><i class="fas fa-power-off"></i></a>
+                    <a class="nav-link" href="<?=GetBaseUri()?>/dashboard?page=about-cms"><i class="fa-solid fa-circle-info"></i></a>
+                    <a class="nav-link" href="<?=GetBaseUri()?>/dashboard?page=user-profile"><i class="fa-regular fa-circle-user"></i></a>
+                    <a class="nav-link" href="<?=GetBaseUri()?>"><i class="fa-solid fa-house-laptop"></i></a>
+                    <a class="nav-link" href="<?=GetBaseUri()?>/scripts/logout.php"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
                 <div>
             </div>
         </nav>
@@ -582,5 +587,13 @@
         });
     </script>
     <?php endif; ?>
+    
+    <footer>
+        <div class="container">
+            <div style="color: rgb(240,249,255); padding: 10px; text-align: right">
+                <p>Versión <?=$site_settings[15]["value_info"]?></p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

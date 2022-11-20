@@ -73,8 +73,8 @@
                     <h5 class="card-title font-weight-bold"><?=$service["title"]?></h5>
                     <p class="card-text"><?=$service["description"]?></p>
                     <div class="button-group carousel-buttons">
-                      <button type="button" id="edit-<?=$service["id"]?>" class="btn my-button-3 edit-service"><i class="far fa-edit"></i>Editar</button>
-                      <button type="button" id="delete-<?=$service["id"]?>" class="btn my-button-2 delete-service"><i class="far fa-trash-alt"></i>Borrar</button>
+                      <button type="button" id="edit-<?=$service["id"]?>" class="btn my-button-3 edit-service"><i class="i-margin far fa-edit"></i>Editar</button>
+                      <button type="button" id="delete-<?=$service["id"]?>" class="btn my-button-2 delete-service"><i class="i-margin far fa-trash-alt"></i>Borrar</button>
                     </div>
                   </div>
                 </div>

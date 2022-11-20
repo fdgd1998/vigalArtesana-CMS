@@ -9,7 +9,7 @@
     <form style="margin-bottom: 20px;">
         <div class="form-row">
             <div class="col">
-                <h3 class="title"><i class="far fa-image"></i>Imagen de portada</h3>
+                <h3 class="title"><i class="fa-regular fa-image"></i></i>Imagen de portada</h3>
                 <p class="title-description">Establece una imagen de portada que se verá en la página principal (máximo 5 MB).</p>
             </div>
         </div>

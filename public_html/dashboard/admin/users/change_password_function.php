@@ -4,11 +4,11 @@
     require_once $_SERVER["DOCUMENT_ROOT"].'/scripts/validation.php';
     require_once $_SERVER["DOCUMENT_ROOT"].'/dashboard/scripts/database_connection.php';
     
-    function updatePasswordRandom($pass, $userid, $modifiedBy) {
+    function updatePasswordRandom($pass, $username, $modifiedBy) {
         $conn = new DatabaseConnection();
         if (validatePasswd($pass)) {
             $hash = password_hash($pass, PASSWORD_DEFAULT);
-            $sql = "update users set passwd = '$hash', modifiedBy = $modifiedBy where id = '$userid'";
+            $sql = "update users set passwd = '$hash', modifiedBy = $modifiedBy where username = '$username'";
             if ($conn->exec($sql)) {
                 return true;
             } else {

@@ -11,6 +11,7 @@
     <p><strong>Versión 2.0.1 (20/11/2022)</strong></p>
     <ul style="list-style-type: disc; margin-left: 20px;">
         <li>Nuevos iconos de interfaz de usuarios.</li>
+        <li>Arreglos del código fuente.</li>
     </ul>
     <p><strong>Versión 2.0 (20/11/2022)</strong></p>
     <ul style="list-style-type: disc; margin-left: 20px;">

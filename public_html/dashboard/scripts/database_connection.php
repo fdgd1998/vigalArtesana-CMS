@@ -7,7 +7,7 @@
                 $this->conn = new PDO($DSN, $DB_user, $DB_pass);
                 // $this->conn->set_charset("utf8");
             } catch (PDOException $e) {
-                header("Location: /errorpages/500.php");
+                include $_SERVER["DOCUMENT_ROOT"]."/errorpages/500.php";
                 exit();
             }
         }

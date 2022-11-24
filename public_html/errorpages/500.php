@@ -22,6 +22,7 @@
             <h1 class=" text-center">500</h1>
             <h2>Error interno del servidor.</h2>
             <p>Estamos trabajando para solucionar el problema en la mayor brevedad posible.</p>
+        </div>
     </div>
 </body>
 </html>

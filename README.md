@@ -31,6 +31,7 @@ NOTE: Features marked with (*) are in the works.
 
 ### Planned features:
 - Blog system.
+- ES/EN language selector.
 
 ## Admin credentials
 

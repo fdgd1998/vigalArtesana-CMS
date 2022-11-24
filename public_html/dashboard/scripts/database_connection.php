@@ -7,7 +7,8 @@
                 $this->conn = new PDO($DSN, $DB_user, $DB_pass);
                 // $this->conn->set_charset("utf8");
             } catch (PDOException $e) {
-                echo 'Connection error: ' . $e->getMessage();
+                header("Location: /errorpages/500.php");
+                exit();
             }
         }
 

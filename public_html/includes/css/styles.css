@@ -302,6 +302,10 @@ footer{
   background-color: var(--footer-main-color) !important;
 }
 
+footer li{
+  margin-bottom: 5px;
+}
+
 
 footer a:hover {
     color: var(--footer-link-hover-color) !important;

@@ -33,6 +33,7 @@ NOTE: Features marked with (*) are in the works.
 
 ### Planned features:
 - Blog system.
+- Spanish/English language selector.
 
 ## Admin credentials
 

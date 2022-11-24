@@ -9,7 +9,6 @@
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/PHPMailer/PHPMailer.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/PHPMailer/Exception.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/PHPMailer/SMTP.php";
-    require_once dirname($_SERVER["DOCUMENT_ROOT"], 1)."/connection.php";
 
     function sendEmail($to, $subject, $body) {
         try {

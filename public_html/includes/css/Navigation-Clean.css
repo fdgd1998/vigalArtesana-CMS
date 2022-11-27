@@ -20,6 +20,10 @@
   color: inherit;
 }
 
+.navigation-clean .dropdown-menu{
+  margin: 5px 0px 0px 5px !important;
+}
+
 .navigation-clean .navbar-brand:hover {
   color: #222;
 }

@@ -127,12 +127,13 @@
     <link rel="stylesheet" type="text/css" href="<?=GetBaseUri()?>/includes/css/fontawesome.all.min.css">
     <link rel="stylesheet" type="text/css" href="<?=GetBaseUri()?>/includes/css/gallery.css">
     <link rel="stylesheet" type="text/css" href="<?=GetBaseUri()?>/includes/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="<?=GetBaseUri()?>/includes/css/Navigation-Clean.css">
     <link rel="stylesheet" type="text/css" href="<?=GetBaseUri()?>/dashboard/includes/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Quicksand" />
     <link rel="stylesheet" type="text/css" href="<?=GetBaseUri()?>/includes/summernote/summernote-bs4.min.css" />
 </head>
 
-<body class="d-flex">
+<body>
     <?php 
     if (strcmp($site_settings[11]["value_info"], "true") == 0 && HasPermission("manage_siteSettings")) {
         include $_SERVER["DOCUMENT_ROOT"]."/snippets/maintenance_message.php";

@@ -65,7 +65,7 @@
       $baseURL.="?page=manage-gallery&display=all&n=";
     }
 ?>
-<div class="container settings-container">
+<div class="container content">
   <h1 class="title">Galería</h1>
   <p class="title-descirption">Gestiona la galería. Para borrar imágenes, pincha sobre ellas para seleccionarlas.</p>
   <div class="button-group">
@@ -75,8 +75,8 @@
 
   <div class="input-group" style="margin-bottom: 20px;">
     <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon1">Ordenar</span>
-      </div>
+      <span class="input-group-text" id="basic-addon1">Ordenar</span>
+    </div>
     <select id="display-order" class="form-control">
       <option value="all" <?=$display=='all'?'selected':''?>>Todos</option>
       <option value="bycategory" <?=isset($_GET['c'])?'selected':''?>>Por categoría</option>
@@ -104,19 +104,19 @@
   </div>
   <form id="set-limit" action="<?=$baseURL?>" method="get">
     <div class="input-group mb-3" style="width: 220px; padding-bottom: 20px;">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Mostrar</span>
-        </div>
-        <select name="records-limit" id="records-limit" class="custom-select">
-            <?php foreach([12,16,24] as $limit) : ?>
-            <option
-                <?php if(isset($_SESSION['records-limit']) && $_SESSION['records-limit'] == $limit) echo 'selected'; ?>
-                value="<?= $limit; ?>">
-                <?= $limit; ?> resultados
-            </option>
-            <?php endforeach; ?>
-        </select>
+      <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Mostrar</span>
       </div>
+      <select name="records-limit" id="records-limit" class="custom-select">
+          <?php foreach([12,16,24] as $limit) : ?>
+          <option
+              <?php if(isset($_SESSION['records-limit']) && $_SESSION['records-limit'] == $limit) echo 'selected'; ?>
+              value="<?= $limit; ?>">
+              <?= $limit; ?> resultados
+          </option>
+          <?php endforeach; ?>
+      </select>
+    </div>
   </form>
   <div class="container gallery-manage row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" style="margin-bottom: 20px;">
     <?php foreach ($results as $element): ?>
@@ -126,46 +126,45 @@
         </a>
       </div>
     <?php endforeach; ?>
-</div>
-
-<!-- Pagination -->
-<nav aria-label="Page navigation example mt-5" style="margin-bottom: 50px;">
-    <ul class="pagination justify-content-center">
-        <li class="page-item <?php if($page <= 1){ echo 'disabled'; } ?>">
-            <a class="page-link" href="<?php if($page <= 1){ echo '#'; } else { echo $baseURL.$prev; }?>"><</a>
-        </li>
-        <?php if ($totalPages > 10): ?>
-            <?php
-                $min = $page - 3 < 1 ? 1 : $page - 3;
-                $max = $page + 3 > $totalPages ? $totalPages : $page + 3;    
-            ?>
-            <?php if($page >= 5): ?>
-                <li class="page-item disabled">
-                    <a class="page-link">...</a>
-                </li>
-            <?php endif; ?>
-            <?php for($i = $min; $i <= $max; $i++): ?>
-            <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
-                <a class="page-link" href="<?= $baseURL.$i;?>"> <?= $i; ?> </a>
-            </li>
-            <?php endfor; ?>
-            <?php if($page < $totalPages - 3): ?>
-                <li class="page-item disabled">
-                    <a class="page-link">...</a>
-                </li>
-            <?php endif; ?>
-        <?php else: ?>
-            <?php for($i = 1; $i <= $totalPages; $i++ ): ?>
-            <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
-                <a class="page-link" href="<?= $baseURL.$i; ?>"> <?= $i; ?> </a>
-            </li>
-            <?php endfor; ?>
-        <?php endif; ?>
-        <li class="page-item <?php if($page >= $totalPages) { echo 'disabled'; } ?>">
-            <a class="page-link" href="<?php if($page >= $totalPages){ echo '#'; } else {echo $baseURL.$next; } ?>">></a>
-        </li>
-    </ul>
-</nav>
+  </div>
+  <!-- Pagination -->
+  <nav aria-label="Page navigation example mt-5" style="margin-bottom: 50px;">
+      <ul class="pagination justify-content-center">
+          <li class="page-item <?php if($page <= 1){ echo 'disabled'; } ?>">
+              <a class="page-link" href="<?php if($page <= 1){ echo '#'; } else { echo $baseURL.$prev; }?>"><</a>
+          </li>
+          <?php if ($totalPages > 10): ?>
+              <?php
+                  $min = $page - 3 < 1 ? 1 : $page - 3;
+                  $max = $page + 3 > $totalPages ? $totalPages : $page + 3;    
+              ?>
+              <?php if($page >= 5): ?>
+                  <li class="page-item disabled">
+                      <a class="page-link">...</a>
+                  </li>
+              <?php endif; ?>
+              <?php for($i = $min; $i <= $max; $i++): ?>
+              <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
+                  <a class="page-link" href="<?= $baseURL.$i;?>"> <?= $i; ?> </a>
+              </li>
+              <?php endfor; ?>
+              <?php if($page < $totalPages - 3): ?>
+                  <li class="page-item disabled">
+                      <a class="page-link">...</a>
+                  </li>
+              <?php endif; ?>
+          <?php else: ?>
+              <?php for($i = 1; $i <= $totalPages; $i++ ): ?>
+              <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
+                  <a class="page-link" href="<?= $baseURL.$i; ?>"> <?= $i; ?> </a>
+              </li>
+              <?php endfor; ?>
+          <?php endif; ?>
+          <li class="page-item <?php if($page >= $totalPages) { echo 'disabled'; } ?>">
+              <a class="page-link" href="<?php if($page >= $totalPages){ echo '#'; } else {echo $baseURL.$next; } ?>">></a>
+          </li>
+      </ul>
+  </nav>
 </div>
 <?php else: ?>
   <p style="text-align: center; font-size: 20px; margin-top: 50px;">NO HAY RESULTADOS</p>

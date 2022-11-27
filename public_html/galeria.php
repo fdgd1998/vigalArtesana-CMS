@@ -108,7 +108,7 @@
     <?php if ($pageNotFound && $site_settings[11]["value_info"] != "false"): ?>
     <?php set_404_header(); ?>
     <title>Página no encontrada | <?=$site_settings[2]["value_info"]?></title>
-    <?php else: ?>
+    <?php elseif ($site_settings[11]["value_info"] == "true"): ?>
     <title>Página en mantenimiento | <?=$site_settings[2]["value_info"]?></title>
     <?php endif; ?>
     <link rel="canonical" href="<?=GetUri();?>">

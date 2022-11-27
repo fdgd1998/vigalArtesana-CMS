@@ -40,13 +40,14 @@
                 array_push($categories, array($item['friendly_url'], $item['name'], $item['image'], $item['description']));
             }
         } else {
-            $sql = "select id, name, description from categories where id = (select id from categories where friendly_url = '".$_GET['category']."')";
-            if ($res = $conn->query($sql)) {
+            $sql = "select id, name, description from categories where id = (select id from categories where friendly_url = ?)";
+            $params = array($_GET["category"]);
+            if ($res = $conn->preparedQuery($sql, $params)) {
                 $category_id = $res[0]['id'];
                 $category_name = $res[0]['name'];
                 $category_description = $res[0]['description'];
-                $sql = "select gallery.id, filename, dir, altText from gallery inner join categories on gallery.category = categories.id where gallery.category = (select id from categories where friendly_url = '".$_GET['category']."') limit $paginationStart, $limit";
-                if ($res = $conn->query($sql)) {
+                $sql = "select gallery.id, filename, dir, altText from gallery inner join categories on gallery.category = categories.id where gallery.category = (select id from categories where friendly_url = ?) limit $paginationStart, $limit";
+                if ($res = $conn->preparedQuery($sql, $params)) {
                     foreach ($res as $item) {
                         array_push($results, array($item['id'], $item['filename'], $item['dir'], $item['altText']));
                     }
@@ -105,10 +106,10 @@
         gtag('config', 'G-5GCTKSYQEQ');
     </script>
     <?php endif; ?>
-    <?php if ($pageNotFound && $site_settings[11]["value_info"] != "false"): ?>
+    <?php if ($pageNotFound && !$maintenance): ?>
     <?php set_404_header(); ?>
     <title>Página no encontrada | <?=$site_settings[2]["value_info"]?></title>
-    <?php elseif ($site_settings[11]["value_info"] == "true"): ?>
+    <?php elseif ($maintenance): ?>
     <title>Página en mantenimiento | <?=$site_settings[2]["value_info"]?></title>
     <?php endif; ?>
     <link rel="canonical" href="<?=GetUri();?>">

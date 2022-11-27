@@ -13,6 +13,4 @@
         if (preg_match($regex, $email)) return true;
         else return false;
     }
-
-    echo validatePasswd("(C5Nt@XArqxE.");
 ?>

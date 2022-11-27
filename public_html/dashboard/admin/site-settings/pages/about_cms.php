@@ -5,9 +5,11 @@
     $about_text = $site_settings[9]["value_info"];
 ?>
 <div class="container content">
-    <h1 class="title">Información del software</h1>
-    <p class="title-description">ViGal Artesana CMS, versión: <strong><?=$site_settings[15]["value_info"]?></strong>. Desarrollado por Francisco Gálvez.</p>
-    <p>Registro de cambios:</p>
+    <h1 class="title">Acerca de ViGal Artesana CMS</h1>
+    <h2 class="title">Información del software</h2>
+    <p>Versión: <?=$site_settings[15]["value_info"]?>.</p>
+    <p>Desarrollador: Francisco Gálvez.</p>
+    <h2 class="title">Registro de cambios:</h2>
     <p><strong>Versión 2.0.1 (20/11/2022)</strong></p>
     <ul style="list-style-type: disc; margin-left: 20px;">
         <li>Nuevos iconos de interfaz de usuarios.</li>
@@ -17,9 +19,15 @@
     <ul style="list-style-type: disc; margin-left: 20px;">
         <li>Interfaz de usuario mejorada.</li>
         <li>Añadido sistema de SEO con generación dinámica de sitemap.xml.</li>
-        <li>Añadido editor de texto para algunos ficheros.</li>
+        <li>Implementación de interfaz notificar cambios SEO.</li>
+        <li>Añadido editor de texto básico.</li>
         <li>Añadido sistema de logs.</li>
         <li>Librerías de terceros actualizadas.</li>
+        <ul style="list-style-type: disc; margin-left: 40px;">
+            <li>JQuery 3.6.1</li>
+            <li>FontAwesome 6.2.1</li>
+            <li>Simple Lightbox 2.11.0</li>
+        </ul>
         <li>Sistema de árbol de directorios de galería optimizado.</li>
         <li>Atributos SEO de contenido mejorados.</li>
         <li>Añadido sistema de gestión de usuarios y permisos.</li>
@@ -31,6 +39,7 @@
         <li>Opciones de configuración de datos básicos del sitio web mejoradas.</li>
         <li>Nuevos estilos CSS.</li>
         <li>Añadido sistema compresión de imágenes.</li>
+        <li>Cambio a PDO como controlador de base de datos.</li>
     </ul>
     <p><strong>Versión 1.0 (30/11/2021)</strong></p>
     <ul style="list-style-type: disc; margin-left: 20px;">

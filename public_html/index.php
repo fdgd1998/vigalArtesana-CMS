@@ -82,7 +82,7 @@
         <div class="index-image-container">
             <img class="index-image" src="<?=GetBaseUri()?>/uploads/<?=$site_settings[5]["value_info"]?>" alt="<?=$site_settings[14]["value_info"]?>"></img>
             <div class="index-text-image">
-                <h1 class="wow"><?=$site_settings[6]["value_info"]?></h1>
+                <p><?=$site_settings[6]["value_info"]?></p>
             </div>
         </div>
         <div class="div-color-1">

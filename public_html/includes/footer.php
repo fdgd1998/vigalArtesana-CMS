@@ -20,13 +20,6 @@
             </div>
             <div class="col-12 col-md-8">
                 <div class="row">
-                    <div class="col site_info links-block links-spacing">
-                        <p class="company_name"><?=$site_settings[2]["value_info"]?></p>
-                        <?=date('Y')?> © Sitio web desarrollado por Francisco Gálvez
-                        <a target="blank" href="https://www.linkedin.com/in/fdgd">linkedin.com/in/fdgd</a>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col contact_info links-spacing">
                         <a href="tel:<?=$site_settings[0]["value_info"]?>"><i style="color: #E34234;" class="i-margin fa-solid fa-phone"></i><?=$site_settings[0]["value_info"]?></a>
                         <a href="mailto:<?=$site_settings[3]["value_info"]?>"><i style="color: #E34234;" class="i-margin fa-solid fa-envelope"></i><?=$site_settings[3]["value_info"]?></a>
@@ -43,7 +36,13 @@
                         </div>
                     </div>
                 </div>
-                
+                <div class="row">
+                    <div class="col site_info links-block links-spacing">
+                        <p class="company_name"><?=$site_settings[2]["value_info"]?></p>
+                        <?=date('Y')?> © Sitio web desarrollado por Francisco Gálvez
+                        <a target="blank" href="https://www.linkedin.com/in/fdgd">linkedin.com/in/fdgd</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

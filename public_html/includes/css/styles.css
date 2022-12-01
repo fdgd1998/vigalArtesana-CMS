@@ -312,7 +312,7 @@ footer .company_name {
 }
 
 footer .site_info {
-  margin-bottom: 50px;
+  margin-top: 60px;
 }
 
 footer .social {
@@ -450,7 +450,7 @@ li > i {
 
   footer .site_info {
     text-align: right;
-    margin-bottom: 20px;
+    margin-top: 30px;
   }
 
   footer .contact_info > a {
@@ -560,7 +560,7 @@ li > i {
   }
 
   footer .site_info {
-    margin-bottom: 20px;
+    margin-top: 20px;
   }
 
   footer .links-spacing > a  {
@@ -672,7 +672,7 @@ li > i {
   }
 
   footer .site_info {
-    margin-bottom: 20px;
+    margin-top: 20px;
   }
 
   footer .links-spacing > a  {

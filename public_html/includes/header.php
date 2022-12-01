@@ -1,11 +1,16 @@
-<nav class="nav-solid navbar navbar-expand-lg navigation-clean">
+<?php 
+    $is_index_page = 0;
+    if (strcmp($_SERVER['REQUEST_URI'], "/") == 0) $is_index_page = 1;
+    echo "<script>var is_index_page = $is_index_page </script>";
+?>
+<nav class="nav-<?=$is_index_page?"transparent":"solid"?> navbar navbar-expand-lg navigation-clean">
     <div class="container">
         <a class="navbar-brand" href="<?=GetBaseUri()?>" name="company_name"><?=$site_settings[2]["value_info"]?></a>
         <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1" style="color: white; border: 1px solid grey">
             <span class="sr-only">Toggle navigation</span>
-            <span class="navbar-toggler-icon" style="background-image: url('/includes/img/icons8-menu.svg');"></span>
+            <span class="navbar-toggler-icon" style="background-image: url('/includes/img/<?=$is_index_page?"menu-white":"menu-black"?>.svg');"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navcol-1" style="margin-left: 5%;">
+        <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav nav ml-auto mt-2 mt-lg-0">
                 <li class="nav-item"><a class="nav-link underline-animated" href="<?=GetBaseUri()?>">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link underline-animated" href="<?=GetBaseUri()?>/galeria">Galería</a></li>

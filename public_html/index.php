@@ -152,6 +152,7 @@
     </div>
     <script src="<?=GetBaseUri()?>/includes/js/jquery.min.js"></script>
     <script src="<?=GetBaseUri()?>/includes/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?=GetBaseUri()?>/includes/js/change-navbar-color.js"></script>
     <script>
     //     $("#services").carousel({
     //         interval: 10000,

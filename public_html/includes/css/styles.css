@@ -191,10 +191,12 @@ body {
 
 .index-image-container {
   position: relative;
+  margin-top: -87px;
+  z-index: -1;
 }
 
 .index-image {
-  height:60vh; 
+  height: 70vh; 
   width: 100%; 
   object-fit: cover;
   filter: brightness(50%);
@@ -282,6 +284,12 @@ a.instagram:hover {
     background-color: var(--navbar-main-color) !important;
     transition: background-color 200ms linear !important;
 }
+.nav-transparent {
+    background: linear-gradient(#0000007d, #00000000 100%);
+    color: white !important;
+}
+
+
 
 li[class~="active"]>a {
   background-color: var(--pagination-main-color) !important;

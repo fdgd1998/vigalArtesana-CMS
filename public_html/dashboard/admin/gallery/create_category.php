@@ -22,7 +22,6 @@
         $conn = new DatabaseConnection();
         
         $sql = "insert into categories (friendly_url, name, description, image, uploadedBy) values ('".GetFriendlyUrl($_POST["cat_name"])."','".$_POST['cat_name']."','".$_POST["cat_desc"]."','".$_FILES['file']["name"]."',".$_SESSION["userid"].")";
-        echo $sql;
         if ($conn->exec($sql)) {
             $sql = "select id from categories where name = '".$_POST["cat_name"]."'";
             if ($res = $conn->query($sql)) {

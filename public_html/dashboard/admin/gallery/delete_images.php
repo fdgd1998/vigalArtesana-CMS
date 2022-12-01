@@ -136,6 +136,8 @@
             writeSitemapXML($sitemap);
 
             echo "Las imágenes se han eliminado correctamente.";
+        } else {
+            echo "Ha ocurrido un error.";
         }
     }
 ?>

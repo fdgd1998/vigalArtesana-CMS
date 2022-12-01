@@ -12,49 +12,45 @@
         header("Location: index.php");
         exit();
     }
-    try {
-        $conn = new DatabaseConnection();
 
-        $emailValid = false;
-        $emailSend = false;
-        $message = "";
-        $passChanged = false;
-        $validToken = false;
+    $site_settings = getSiteSettings();
+    $conn = new DatabaseConnection();
 
-        if (isset($_POST["email"])) {
-            resetPasswordEmail($_POST["email"]);
-            $message = "Se ha enviado el correo electrónico. Comprueba tu bandeja de entrada.";
-        } else if (isset($_POST["pass1"]) && isset($_POST["pass2"]) && isset($_GET["token"])) {
-            $pass1 = $_POST["pass1"];
-            $pass2 = $_POST["pass2"];
-            $token = $_GET["token"];
-            $userdata = $conn->preparedQuery("select users.id, users.email from users inner join password_reset on users.id = password_reset.userid where token = ?", array($token));
+    $emailValid = false;
+    $emailSend = false;
+    $message = "";
+    $passChanged = false;
+    $validToken = false;
 
-            if (updatePassword($pass1, $pass2, $userdata[0]["id"], $userdata[0]["id"])) {
-                $sql = "delete from password_reset where token = '$token'";
-                if ($conn->exec($sql)) {
-                    passwordChangeConfirmEmail($userdata[0]["email"]);
-                    $passChanged = true;
-                }
-            } else {
-                $message = "Las contraseñas no coninciden.";
+    if (isset($_POST["email"])) {
+        resetPasswordEmail($_POST["email"]);
+        $message = "Se ha enviado el correo electrónico. Comprueba tu bandeja de entrada.";
+    } else if (isset($_POST["pass1"]) && isset($_POST["pass2"]) && isset($_GET["token"])) {
+        $pass1 = $_POST["pass1"];
+        $pass2 = $_POST["pass2"];
+        $token = $_GET["token"];
+        $userdata = $conn->preparedQuery("select users.id, users.email from users inner join password_reset on users.id = password_reset.userid where token = ?", array($token));
+
+        if (updatePassword($pass1, $pass2, $userdata[0]["id"], $userdata[0]["id"])) {
+            $sql = "delete from password_reset where token = '$token'";
+            if ($conn->exec($sql)) {
+                passwordChangeConfirmEmail($userdata[0]["email"]);
+                $passChanged = true;
             }
-        } else if (isset($_GET["token"])) {
-            $params = array($_GET["token"]);
-            $res1 = $conn->preparedQuery("select token from password_reset where token = ? and timestamp >= (now() - interval 1 day)", $params);
+        } else {
+            $message = "Las contraseñas no coninciden.";
+        }
+    } else if (isset($_GET["token"])) {
+        $params = array($_GET["token"]);
+        $res1 = $conn->preparedQuery("select token from password_reset where token = ? and timestamp >= (now() - interval 1 day)", $params);
 
-            if (isset($res1[0]["token"])) {
-                $validToken = true;
-            } else {
-                $validToken = false;
-            }
+        if (isset($res1[0]["token"])) {
+            $validToken = true;
         } else {
             $validToken = false;
         }
-    } 
-    catch (Exception $e) {
-        include $_SERVER["DOCUMENT_ROOT"]."/errorpages/500.php";
-        exit();
+    } else {
+        $validToken = false;
     }
 ?>
 <!DOCTYPE html>
@@ -79,6 +75,7 @@
         <form class="border rounded shadow-lg" method="post"  action="<?=GetUri()?>">
             <?php if (!$passChanged): ?>
             <div style="margin-bottom: 20px; text-align: center;">
+                <p style="font-family: Great Vibes; font-size: 32px;"><?=$site_settings[2]["value_info"]?></p>
                 <a href="<?=GetBaseUri()?>/login">
                     <i class="fas fa-arrow-left" style="margin-right: 5px;"></i>
                     Volver a Iniciar Sesión

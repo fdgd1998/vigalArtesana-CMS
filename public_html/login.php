@@ -1,4 +1,5 @@
 <?php
+    error_reporting(0);
     session_start();
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_site_settings.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
@@ -97,7 +98,8 @@
     <div class="login-clean" style="background-color: rgba(241,247,252,0);">
         <form class="border rounded shadow-lg" method="post" style="margin-top: 20px;" action="<?=GetBaseUri()?>/login">
             <div style="margin-top: 20px; text-align: center;">
-                <a href="<?=GetBaseUri()?>">
+                <p style="font-family: Great Vibes; font-size: 32px;"><?=$site_settings[2]["value_info"]?></p>
+                <a href="<?=GetBaseUri()?>" >
                     <i class="fas fa-arrow-left" style="margin-right: 10px;"></i>
                     Volver a Inicio
                 </a>

@@ -11,24 +11,19 @@
     }
 
     if (isset($_POST)) {
-        try {
-            $conn = new DatabaseConnection();
-        
-            if ($conn->connect_error) {
-                print("No se ha podido conectar a la base de datos");
-                exit();
-            } else {
-                $sql = "select email from users where email = '".$_POST["email"]."'";
+        $conn = new DatabaseConnection();
+    
+        if ($conn->connect_error) {
+            print("No se ha podido conectar a la base de datos");
+            exit();
+        } else {
+            $sql = "select email from users where email = '".$_POST["email"]."'";
 
-                if ($conn->query($sql)) {
-                    http_response_code(303);
-                } else {
-                    http_response_code(200);
-                }
+            if ($conn->query($sql)) {
+                http_response_code(303);
+            } else {
+                http_response_code(200);
             }
-        } catch (Exception $e) {
-            $conn->close();
-            echo $e;
         }
     }
 ?>

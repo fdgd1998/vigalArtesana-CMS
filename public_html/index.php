@@ -39,7 +39,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php if (!$maintenance || ($maintenance && isset($_SESSION["loggedin"]))): ?>
-    <title><?=$page_title?> | <?=$site_settings[2]["value_info"]?></title>
+    <title><?=$page_title?> - <?=$site_settings[2]["value_info"]?></title>
     <meta name="description" content="<?=$page_description?>">
     <meta name="robots" content="index, follow">
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -52,7 +52,7 @@
         gtag('config', 'G-5GCTKSYQEQ');
     </script>
     <?php else: ?>
-    <title>Página en mantenimiento | <?=$site_settings[2]["value_info"]?></title>
+    <title>Página en mantenimiento - <?=$site_settings[2]["value_info"]?></title>
     <?php endif; ?>
     <link rel="canonical" href="<?=GetUri();?>">
     <link rel="icon" href="<?=GetBaseUri()?>/includes/img/favicon.ico" type="image/x-icon">
@@ -82,7 +82,7 @@
         <div class="index-image-container">
             <img class="index-image" src="<?=GetBaseUri()?>/uploads/<?=$site_settings[5]["value_info"]?>" alt="<?=$site_settings[14]["value_info"]?>"></img>
             <div class="index-text-image">
-                <h1 class="wow"><?=$site_settings[6]["value_info"]?></h1>
+                <p><?=$site_settings[6]["value_info"]?></p>
             </div>
         </div>
         <div class="div-color-1">
@@ -152,6 +152,7 @@
     </div>
     <script src="<?=GetBaseUri()?>/includes/js/jquery.min.js"></script>
     <script src="<?=GetBaseUri()?>/includes/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?=GetBaseUri()?>/includes/js/change-navbar-color.js"></script>
     <script>
     //     $("#services").carousel({
     //         interval: 10000,

@@ -18,19 +18,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php if ($site_settings[11]["value_info"] == "false"): ?>
-    <title>No encontrado | <?=$site_settings[2]["value_info"]?></title>
+    <title>No encontrado - <?=$site_settings[2]["value_info"]?></title>
     <?php else: ?>
-    <title>Página en mantenimiento | <?=$site_settings[2]["value_info"]?></title>
+    <title>Página en mantenimiento - <?=$site_settings[2]["value_info"]?></title>
     <?php endif; ?>
     <link rel="icon" href="<?=GetBaseUri()?>/includes/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/footer.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/Navigation-Clean.css">
     <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/styles.css">
-    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand" />    
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Great Vibes">
+    <link rel="stylesheet" href="<?=GetBaseUri()?>/includes/css/fontawesome.all.min.css">
 </head>
 
 <body>

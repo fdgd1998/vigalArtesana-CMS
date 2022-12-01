@@ -19,4 +19,4 @@ Disallow: /includes
 Disallow: /scripts
 Disallow: /snippets
 
-sitemap: vigalartesana.es/sitemap.xml
+sitemap: https://vigalartesana.es/sitemap.xml

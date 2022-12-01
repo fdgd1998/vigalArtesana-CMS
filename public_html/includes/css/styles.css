@@ -204,6 +204,7 @@ body {
 
 .index-text-image {
   text-align: center;
+  font-size: 42px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -289,8 +290,6 @@ a.instagram:hover {
     color: white !important;
 }
 
-
-
 li[class~="active"]>a {
   background-color: var(--pagination-main-color) !important;
   border: 1px solid var(--pagination-main-color) !important;
@@ -320,7 +319,11 @@ footer .company_name {
 }
 
 footer .site_info {
-  margin-top: 60px;
+  margin-top: 55px;
+}
+
+footer .contact_info {
+  margin-top: 10px;
 }
 
 footer .social {
@@ -450,6 +453,10 @@ li > i {
 }
 
 @media (min-width: 768px) and (max-width: 991px){
+  .index-text-image {
+    font-size: 38px;
+  }
+
   footer .social {
     display: inline-flex;
     gap: 20px;
@@ -458,7 +465,7 @@ li > i {
 
   footer .site_info {
     text-align: right;
-    margin-top: 30px;
+    margin-top: 25px;
   }
 
   footer .contact_info > a {
@@ -563,12 +570,16 @@ li > i {
 }
 
 @media (min-width: 576px) and (max-width: 768px){
+  .index-text-image {
+    font-size: 36px;
+  }
+
   footer .contact_info > a {
     display: block;
   }
 
   footer .site_info {
-    margin-top: 20px;
+    margin-top: 40px;
   }
 
   footer .links-spacing > a  {
@@ -675,12 +686,16 @@ li > i {
 }
 
 @media (max-width: 576px) {
+  .index-text-image {
+    font-size: 32px;
+  }
+
   footer .contact_info > a {
     display: block;
   }
 
   footer .site_info {
-    margin-top: 20px;
+    margin-top: 40px;
   }
 
   footer .links-spacing > a  {
@@ -859,4 +874,40 @@ h1 > i {
 
 .seo-warning i {
   margin-right: 5px;
+}
+
+@media (min-height: 768px) and (max-height: 991px) and (orientation: landscape) { 
+  .index-text-image {
+    text-align: center;
+    font-size: 40px;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+  }
+}
+
+@media (min-height: 576px) and (max-height: 768px) and (orientation: landscape) { 
+  .index-text-image {
+    text-align: center;
+    font-size: 32px;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+  }
+}
+
+@media (max-height: 576px) and (orientation: landscape) { 
+  .index-text-image {
+    text-align: center;
+    font-size: 24px;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+  }
 }

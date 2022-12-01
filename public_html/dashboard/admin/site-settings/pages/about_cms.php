@@ -10,7 +10,7 @@
     <p>Versión: <?=$site_settings[15]["value_info"]?>.</p>
     <p>Desarrollador: Francisco Gálvez.</p>
     <h2 class="title">Registro de cambios:</h2>
-    <p><strong>Versión 2.0.1 (01/1/2022)</strong></p>
+    <p><strong>Versión 2.0.1 (01/12/2022)</strong></p>
     <ul style="list-style-type: disc; margin-left: 20px;">
         <li>Nueva barra de navegación.</li>
         <li>Nuevo pie de página.</li>

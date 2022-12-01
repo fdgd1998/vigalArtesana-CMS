@@ -93,7 +93,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php if (!$maintenance && !$pageNotFound): ?>
-    <title><?=$page_title?> | <?=$site_settings[2]["value_info"]; isset($_GET["category"]) ? (isset($_GET["page"])?" | Página ".$page:"Página 1") : ""?></title>
+    <?php 
+        $title .= $page_title." - ".$site_settings[2]["value_info"];
+        $title .= isset($_GET["page"])?" - Página ".$page : "";
+    ?>
+    <title><?=$title?></title>
     <meta name="description" content="<?=$page_description?>">
     <meta name="robots" content="index, follow">
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -108,9 +112,9 @@
     <?php endif; ?>
     <?php if ($pageNotFound && !$maintenance): ?>
     <?php set_404_header(); ?>
-    <title>Página no encontrada | <?=$site_settings[2]["value_info"]?></title>
+    <title>Página no encontrada - <?=$site_settings[2]["value_info"]?></title>
     <?php elseif ($maintenance): ?>
-    <title>Página en mantenimiento | <?=$site_settings[2]["value_info"]?></title>
+    <title>Página en mantenimiento - <?=$site_settings[2]["value_info"]?></title>
     <?php endif; ?>
     <link rel="canonical" href="<?=GetUri();?>">
     <link rel="icon" href="/includes/img/favicon.ico" type="image/x-icon">

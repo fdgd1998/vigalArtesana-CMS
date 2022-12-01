@@ -31,7 +31,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php if (!$maintenance || ($maintenance && isset($_SESSION["loggedin"]))): ?>
-    <title><?=$page_title." | ".$site_settings[2]["value_info"]?></title>
+    <title><?=$page_title." - ".$site_settings[2]["value_info"]?></title>
     <meta name="description" content="<?=$page_description?>">
     <meta name="robots" content="index, follow">
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -44,7 +44,7 @@
         gtag('config', 'G-5GCTKSYQEQ');
     </script>
     <?php else: ?>
-    <title>Página en mantenimiento | <?=$site_settings[2]["value_info"]?></title>
+    <title>Página en mantenimiento - <?=$site_settings[2]["value_info"]?></title>
     <?php endif; ?>
     <link rel="icon" href="./includes/img/favicon.ico" type="image/x-icon">
     <link rel="canonical" href="<?=GetUri();?>">
@@ -92,16 +92,16 @@
         <div class="row">
             <div class="col-lg-7">
                 <p class="address"><?=$site_settings[1]["value_info"]?></p>
-                <u><a class="contact-data" href="tel:<?=str_replace(' ','',$site_settings[0]["value_info"])?>"><i class="i-margin fa-solid fa-phone"></i><?=$site_settings[0]["value_info"]?></a></u>
-                <u><a class="contact-data" href="mailto:<?=$site_settings[3]["value_info"]?>"><i class="i-margin fa-solid fa-envelope"></i><?=$site_settings[3]["value_info"]?></a></u>
+                <a class="contact-data" href="tel:<?=str_replace(' ','',$site_settings[0]["value_info"])?>"><i class="i-margin fa-solid fa-phone"></i><?=$site_settings[0]["value_info"]?></a>
+                <a class="contact-data" href="mailto:<?=$site_settings[3]["value_info"]?>"><i class="i-margin fa-solid fa-envelope"></i><?=$site_settings[3]["value_info"]?></a>
                 <?php if (isset($site_settings[4]["value_info"]["whatsapp"])):?>
-                    <u><a class="contact-data whatsapp" data-bs-hover-animate="pulse" target="blank" href="https://wa.me/<?=$site_settings[4]["value_info"]["whatsapp"]?>"><i class="i-margin fa-brands fa-whatsapp"></i>WhatsApp</a></u>
+                    <a class="contact-data whatsapp" data-bs-hover-animate="pulse" target="blank" href="https://wa.me/<?=$site_settings[4]["value_info"]["whatsapp"]?>"><i class="i-margin fa-brands fa-whatsapp"></i>WhatsApp</a>
                 <?php endif; ?>
                 <?php if (isset($site_settings[4]["value_info"]["instagram"])):?>
-                    <u><a class="contact-data instagram" data-bs-hover-animate="pulse" target="blank" href="https://www.instagram.com/<?=$site_settings[4]["value_info"]["instagram"]?>"><i class="i-margin fa-brands fa-instagram"></i>@<?=$site_settings[4]["value_info"]["instagram"]?></a></u>
+                    <a class="contact-data instagram" data-bs-hover-animate="pulse" target="blank" href="https://www.instagram.com/<?=$site_settings[4]["value_info"]["instagram"]?>"><i class="i-margin fa-brands fa-instagram"></i>@<?=$site_settings[4]["value_info"]["instagram"]?></a>
                 <?php endif; ?>
                 <?php if (isset($site_settings[4]["value_info"]["facebook"])):?>
-                    <u><a class="contact-data facebook" data-bs-hover-animate="pulse" target="blank" href="https://www.facebook.com/<?=$site_settings[4]["value_info"]["facebook"]?>"><i class="i-margin fa-brands fa-square-facebook"></i>@<?=$site_settings[4]["value_info"]["facebook"]?></a></u>
+                    <a class="contact-data facebook" data-bs-hover-animate="pulse" target="blank" href="https://www.facebook.com/<?=$site_settings[4]["value_info"]["facebook"]?>"><i class="i-margin fa-brands fa-square-facebook"></i>@<?=$site_settings[4]["value_info"]["facebook"]?></a>
                 <?php endif; ?>
             </div>
             <div class="col-lg-5">

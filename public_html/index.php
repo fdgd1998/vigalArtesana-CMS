@@ -39,7 +39,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php if (!$maintenance || ($maintenance && isset($_SESSION["loggedin"]))): ?>
-    <title><?=$page_title?> | <?=$site_settings[2]["value_info"]?></title>
+    <title><?=$page_title?> - <?=$site_settings[2]["value_info"]?></title>
     <meta name="description" content="<?=$page_description?>">
     <meta name="robots" content="index, follow">
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -52,7 +52,7 @@
         gtag('config', 'G-5GCTKSYQEQ');
     </script>
     <?php else: ?>
-    <title>Página en mantenimiento | <?=$site_settings[2]["value_info"]?></title>
+    <title>Página en mantenimiento - <?=$site_settings[2]["value_info"]?></title>
     <?php endif; ?>
     <link rel="canonical" href="<?=GetUri();?>">
     <link rel="icon" href="<?=GetBaseUri()?>/includes/img/favicon.ico" type="image/x-icon">

@@ -1,16 +1,16 @@
 :root {
   --navbar-main-color:   #ffcc99;
-  --navbar-link-hover-color: #F08000;
-  --footer-main-color: #36454F;
+  --navbar-link-hover-color: #ea5b4e;
+  --footer-main-color: #191919;
   --footer-link-hover-color: #ffcc99;
   --body-background-color:  #f0f0f0;
   --navbar-text-color: black ;
-  --title-color: #E34234;
-  --button-main-color: #FFDB58;
-  --button-hover-bg-color:  #F3E5AB;
+  --title-color: #ea5b4e;
+  --button-main-color: #ffcc99;
+  --button-hover-bg-color:  #fcd7b2;
   --button-hover-text-color: rgb(37, 37, 37);
   --button-text-color: black;
-  --navigation-button-text-color: white;
+  --navigation-button-text-color: black;
   --button-2-main-color: #ff9999;
   --button-2-hover-bg-color: #ffcccc;
   --button-3-main-color: #6fdc87;
@@ -18,7 +18,7 @@
   --div-bg-color-1: #e6e6e6;
   --div-bg-color-2: #f2f2f2;
   --custom-checkbox-bg-selected: #ffcc99;
-  --pagination-main-color: #ffb162;
+  --pagination-main-color: #ffcc99;
 }
 
 @font-face {
@@ -288,27 +288,37 @@ li[class~="active"]>a {
   border: 1px solid var(--pagination-main-color) !important;
 }
 
-a[class="page-link"]:active {
-  outline-color: white !important;
-  color: black !important;
-}
-
 li[class="page-item active"] {
   color: var(--navigation-button-text-color) !important;
 }
 
-footer{
+footer .links-block > a {
+  display: block;
+  
+}
+
+footer .links-spacing > a  {
+  margin-top: 6px;
+}
+
+footer {
   margin-top: auto;
   background-color: var(--footer-main-color) !important;
 }
 
-footer li{
-  margin-bottom: 5px;
+footer .company_name {
+  font-family: "Great Vibes"; 
+  font-size: 32px;
 }
 
+footer .site_info {
+  margin-bottom: 50px;
+}
 
-footer a:hover {
-    color: var(--footer-link-hover-color) !important;
+footer .social {
+  display: inline-flex;
+  gap: 20px;
+  margin-left: 30px;
 }
 
 ul {
@@ -321,6 +331,18 @@ li > i {
 }
 
 @media (min-width: 991px){
+  footer .site_info {
+    text-align: right;
+  }
+
+  footer .contact_info > a {
+    margin-left: 30px;
+  }
+
+  footer .contact_info {
+    text-align: right;
+  }
+
   h1.title {
     color: var(--title-color);
     font-size: 50px !important;
@@ -360,10 +382,6 @@ li > i {
   .contact-data:hover {
     text-decoration: underline;
     color: var(--button-hover-bg-color);
-  }
-  
-  div[id=main] > p {
-    text-align: left;
   }
 
   .title-description {
@@ -424,6 +442,25 @@ li > i {
 }
 
 @media (min-width: 768px) and (max-width: 991px){
+  footer .social {
+    display: inline-flex;
+    gap: 20px;
+    margin-top: 10px;
+  }
+
+  footer .site_info {
+    text-align: right;
+    margin-bottom: 20px;
+  }
+
+  footer .contact_info > a {
+    margin-left: 30px;
+  }
+
+  footer .contact_info {
+    text-align: right;
+  }
+
   h1.title {
     color: var(--title-color);
     font-size: 35px !important;
@@ -468,10 +505,6 @@ li > i {
     text-align: left;
     margin-bottom: 30px;
     margin-top: 30px;
-  }
-
-  div[id=main] > p {
-    text-align: left;
   }
   
   .index-description {
@@ -522,6 +555,29 @@ li > i {
 }
 
 @media (min-width: 576px) and (max-width: 768px){
+  footer .contact_info > a {
+    display: block;
+  }
+
+  footer .site_info {
+    margin-bottom: 20px;
+  }
+
+  footer .links-spacing > a  {
+    margin-top: 8px;
+  }
+
+  footer .social a > i{
+    font-size: 20px;
+  }
+  
+  footer .social {
+    display: inline-flex;
+    gap: 20px;
+    margin-left: 0px;
+    margin-top: 20px;
+  }
+
   h1.title {
     color: var(--title-color);
     font-size: 35px !important;
@@ -562,10 +618,6 @@ li > i {
   .contact-data:hover {
     text-decoration: underline;
     color: var(--button-hover-bg-color);
-  }
-
-  div[id=main] > p {
-    text-align: left;
   }
 
   .title-description {
@@ -615,6 +667,29 @@ li > i {
 }
 
 @media (max-width: 576px) {
+  footer .contact_info > a {
+    display: block;
+  }
+
+  footer .site_info {
+    margin-bottom: 20px;
+  }
+
+  footer .links-spacing > a  {
+    margin-top: 8px;
+  }
+
+  footer .social {
+    display: inline-flex;
+    gap: 20px;
+    margin-left: 0px;
+    margin-top: 20px;
+  }
+
+  footer .social a > i{
+    font-size: 20px;
+  }
+
   h1.title {
     color: var(--title-color);
     font-size: 30px !important;

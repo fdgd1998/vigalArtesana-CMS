@@ -13,7 +13,6 @@
     $page_id = 5;
 
     if (!$maintenance || ($maintenance && isset($_SESSION["loggedin"]))) {
-        // Fetching categories from database and storing then in the array for further use.
         $sql = "select * from services";
         if ($res = $conn->query($sql)) {
             foreach ($res as $item) {

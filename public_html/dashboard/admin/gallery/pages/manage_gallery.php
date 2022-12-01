@@ -67,7 +67,7 @@
 ?>
 <div class="container content">
   <h1 class="title">Galería</h1>
-  <p class="title-descirption">Gestiona la galería. Para borrar imágenes, pincha sobre ellas para seleccionarlas.</p>
+  <p class="title-descirption">Gestiona la galería. Haz clic sobre las imágenes para seleccionarlas y borrarlas.</p>
   <div class="button-group">
     <button type="button" id="upload-images" class="btn my-button"><i class="i-margin fas fa-upload"></i>Subir imágenes...</button>
   </div>
@@ -88,18 +88,18 @@
     
     <?php endif; ?>
     <?php
-          $sql = "select id, name from categories";
-          if ($res = $conn->query($sql)) {
-            foreach ($res as $item) {
-              $selected = "false";
-              if ($_GET['c']==$item['id']) {
-                echo "<option value='".$item['id']."' selected>".$item['name']."</option>";
-              } else {
-                echo "<option value='".$item['id']."'>".$item['name']."</option>";
-              }   
-            }
+        $sql = "select id, name from categories";
+        if ($res = $conn->query($sql)) {
+          foreach ($res as $item) {
+            $selected = "false";
+            if ($_GET['c']==$item['id']) {
+              echo "<option value='".$item['id']."' selected>".$item['name']."</option>";
+            } else {
+              echo "<option value='".$item['id']."'>".$item['name']."</option>";
+            }   
           }
-      ?>
+        }
+    ?>
     </select>
   </div>
   <form id="set-limit" action="<?=$baseURL?>" method="get">
@@ -129,46 +129,46 @@
   </div>
   <!-- Pagination -->
   <nav aria-label="Page navigation example mt-5" style="margin-bottom: 50px;">
-      <ul class="pagination justify-content-center">
-          <li class="page-item <?php if($page <= 1){ echo 'disabled'; } ?>">
-              <a class="page-link" href="<?php if($page <= 1){ echo '#'; } else { echo $baseURL.$prev; }?>"><</a>
-          </li>
-          <?php if ($totalPages > 10): ?>
-              <?php
-                  $min = $page - 3 < 1 ? 1 : $page - 3;
-                  $max = $page + 3 > $totalPages ? $totalPages : $page + 3;    
-              ?>
-              <?php if($page >= 5): ?>
-                  <li class="page-item disabled">
-                      <a class="page-link">...</a>
-                  </li>
-              <?php endif; ?>
-              <?php for($i = $min; $i <= $max; $i++): ?>
-              <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
-                  <a class="page-link" href="<?= $baseURL.$i;?>"> <?= $i; ?> </a>
-              </li>
-              <?php endfor; ?>
-              <?php if($page < $totalPages - 3): ?>
-                  <li class="page-item disabled">
-                      <a class="page-link">...</a>
-                  </li>
-              <?php endif; ?>
-          <?php else: ?>
-              <?php for($i = 1; $i <= $totalPages; $i++ ): ?>
-              <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
-                  <a class="page-link" href="<?= $baseURL.$i; ?>"> <?= $i; ?> </a>
-              </li>
-              <?php endfor; ?>
-          <?php endif; ?>
-          <li class="page-item <?php if($page >= $totalPages) { echo 'disabled'; } ?>">
-              <a class="page-link" href="<?php if($page >= $totalPages){ echo '#'; } else {echo $baseURL.$next; } ?>">></a>
-          </li>
-      </ul>
+    <ul class="pagination justify-content-center">
+        <li class="page-item <?php if($page <= 1){ echo 'disabled'; } ?>">
+            <a class="page-link" href="<?php if($page <= 1){ echo '#'; } else { echo $baseURL.$prev; }?>"><</a>
+        </li>
+        <?php if ($totalPages > 10): ?>
+            <?php
+                $min = $page - 3 < 1 ? 1 : $page - 3;
+                $max = $page + 3 > $totalPages ? $totalPages : $page + 3;    
+            ?>
+            <?php if($page >= 5): ?>
+                <li class="page-item disabled">
+                    <a class="page-link">...</a>
+                </li>
+            <?php endif; ?>
+            <?php for($i = $min; $i <= $max; $i++): ?>
+            <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
+                <a class="page-link" href="<?= $baseURL.$i;?>"> <?= $i; ?> </a>
+            </li>
+            <?php endfor; ?>
+            <?php if($page < $totalPages - 3): ?>
+                <li class="page-item disabled">
+                    <a class="page-link">...</a>
+                </li>
+            <?php endif; ?>
+        <?php else: ?>
+            <?php for($i = 1; $i <= $totalPages; $i++ ): ?>
+            <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
+                <a class="page-link" href="<?= $baseURL.$i; ?>"> <?= $i; ?> </a>
+            </li>
+            <?php endfor; ?>
+        <?php endif; ?>
+        <li class="page-item <?php if($page >= $totalPages) { echo 'disabled'; } ?>">
+            <a class="page-link" href="<?php if($page >= $totalPages){ echo '#'; } else {echo $baseURL.$next; } ?>">></a>
+        </li>
+    </ul>
   </nav>
+  <?php else: ?>
+    <p style="text-align: center; font-size: 20px; margin-top: 50px;">NO HAY RESULTADOS</p>
+  <?php endif ?>
 </div>
-<?php else: ?>
-  <p style="text-align: center; font-size: 20px; margin-top: 50px;">NO HAY RESULTADOS</p>
-<?php endif ?>
 <script src="../includes/js/jquery.min.js"></script>
 <script>
     $(document).ready(function () {

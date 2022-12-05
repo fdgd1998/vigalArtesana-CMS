@@ -6,9 +6,10 @@
 ?>
 <div class="container content">
     <h1 class="title">Sobre nosotros</h1>
-    <p class="title-description">Aquí podrás redactar el contenido que aparecerá en la sección <em>"sobre nosotros"</em> del sitio web.</p>
+    <p class="title-description">Describe con detalle tu empresa, trayectoria profesional, trabajadores, filosofía... Incluye detalles que capten la atención de los usuarios que visiten el sitio web.</p>
+    <p>Recuerda que, idealmente, esta sección deberá tener una extensión media.</p>
     <div id="summernote"></div>
-    <div class="button-group text-right mt-3">
+    <div class="button-group-right mt-3">
         <button id="save-about-us" class="btn my-button-3"><i class=" i-margin fas fa-save"></i>Guardar</button>
     </div>
 </div>

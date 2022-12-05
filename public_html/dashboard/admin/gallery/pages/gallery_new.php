@@ -114,16 +114,14 @@
         <!-- class="row row-cols-2 row-cols-md-2 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" -->
         <div id="images-preview"  style="margin-top: 10px;">
         </div>
-        <div class="form-row text-right" style="margin-top: 20px;">
-            <div class="col">
-                <button id="cancel" class="btn my-button-2" type="button"><i class="i-margin fas fa-times-circle"></i>Cancelar</button>
-                <button id="uploadbtn" disabled class="btn my-button" type="button" style="margin-left: 5px;"><i class="i-margin fa-solid fa-upload"></i>Subir imágenes</button>
-            </div>
+        <div class="button-group-right">
+            <button id="cancel" class="btn my-button-2" type="button"><i class="i-margin fas fa-times-circle"></i>Cancelar</button>
+            <button id="uploadbtn" disabled class="btn my-button" type="button" style="margin-left: 5px;"><i class="i-margin fa-solid fa-upload"></i>Subir imágenes</button>
         </div>
     </form>
     <?php else: ?>
     <p>No has creado ninguna categoría. Para subir imágenes, crea al menos una categoría.</p>
-    <div class="button-group">
+    <div class="button-group-left">
         <button type="button" id="create-category" class="btn my-button"><i class="i-margin fas fa-plus-circle"></i>Nueva categoría</button>
     </div>    
     <?php endif; ?>

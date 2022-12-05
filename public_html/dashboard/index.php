@@ -146,7 +146,7 @@
         <div class="container">
             <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1" style="color: white; border: 1px solid grey">
                 <span class="sr-only">Toggle navigation</span>
-                <span class="navbar-toggler-icon" style="background-image: url('<?=GetBaseUri()?>/includes/img/icons8-menu.svg');"></span>
+                <span class="navbar-toggler-icon" style="background-image: url('<?=GetBaseUri()?>/includes/img/menu-black.svg');"></span>
             </button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">

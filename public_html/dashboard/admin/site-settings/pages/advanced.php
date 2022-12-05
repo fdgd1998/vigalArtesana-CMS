@@ -20,14 +20,12 @@
                 <p>Mientras este modo esté activo, solo podrás navegar por la web iniciando sesión.</p>
             </div>
         </div>
-        <div class="form-row text-right">
-            <div class="col">
-                <?php if ($site_settings[11]["value_info"] != "true"): ?>
-                    <button id="maintenance-on" class="btn my-button-3" type="button"><i class="i-margin fas fa-arrow-up"></i>Activar</button>
-                <?php else: ?>
-                    <button id="maintenance-off" class="btn my-button-2" type="button"><i class="i-margin fas fa-arrow-down"></i>Desactivar</button>
-                <?php endif; ?>
-            </div>
+        <div class="button-group-right">
+            <?php if ($site_settings[11]["value_info"] != "true"): ?>
+                <button id="maintenance-on" class="btn my-button-3" type="button"><i class="i-margin fas fa-arrow-up"></i>Activar</button>
+            <?php else: ?>
+                <button id="maintenance-off" class="btn my-button-2" type="button"><i class="i-margin fas fa-arrow-down"></i>Desactivar</button>
+            <?php endif; ?>
         </div>
     </form>
 </div>

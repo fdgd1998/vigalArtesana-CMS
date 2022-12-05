@@ -44,7 +44,7 @@
         <p>Vista previa:</p>
         <img id="image-preview-new" width="50%"><img>
     </div>
-    <div class="text-right" style="margin-top: 20px;">
+    <div class="button-group-right">
         <button type="button" onclick="window.location.href = '?page=manage-services'" class="btn my-button-2" ><i class="i-margin fas fa-times-circle"></i>Cancelar</button>
         <button disabled type="button" id="new-service-btn" class="btn my-button-3" ><i class="i-margin fas fa-save"></i>Guardar</button>
     </div>

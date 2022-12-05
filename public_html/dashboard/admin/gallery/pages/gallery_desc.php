@@ -20,7 +20,7 @@
     <h1 class="title">Descripción general</h1>
     <p>Define un texto descriptivo que acompañe a la vista general de la galería.</p>
     <div id="gallery-desc"></div>
-    <div style="margin-top: 20px;" class="button-group text-right">
+    <div class="button-group-right mt-3">
         <button disabled id="submit" class="btn my-button-3"><i class="i-margin fas fa-save"></i>Guardar</button>
     </div>
 </div>

@@ -342,6 +342,7 @@ li > i {
 }
 
 @media (min-width: 991px){
+
   footer .site_info {
     text-align: right;
   }
@@ -408,8 +409,14 @@ li > i {
     margin-top: 30px;
   }
 
-  .button-group {
+  .button-group-right {
     margin-bottom: 30px !important;
+    text-align: right !important;
+  }
+
+  .button-group-left {
+    margin-bottom: 30px !important;
+    text-align: left !important;
   }
 
   .timetable {
@@ -529,9 +536,18 @@ li > i {
     margin-top: 30px;
   }
 
-  .button-group {
+
+  .button-group-right {
     margin-bottom: 30px !important;
+    text-align: right !important;
   }
+
+  
+  .button-group-left {
+    margin-bottom: 30px !important;
+    text-align: left !important;
+  }
+
 
   .timetable {
     text-align: left !important;
@@ -649,8 +665,15 @@ li > i {
     text-align: left;
   }
 
-  .button-group {
+  .button-group-right {
     margin-bottom: 30px !important;
+    text-align: right !important;
+  }
+
+  
+  .button-group-left {
+    margin-bottom: 30px !important;
+    text-align: left !important;
   }
 
   .content {
@@ -769,12 +792,15 @@ li > i {
     text-align: center;
   }
 
-  .button-group {
+  .button-group-right {
     text-align: center !important;
+    margin-bottom: 20px !important;
   }
 
-  .button-group {
-    margin-bottom: 20px !important;
+  
+  .button-group-left {
+    margin-bottom: 30px !important;
+    text-align: center !important;
   }
 
   .content {
@@ -831,7 +857,7 @@ footer {
   border-color: var(--button-2-main-color);
 }
 
-.button-group > button {
+.button-group-right > button {
   margin-bottom: 5px;
 }
 

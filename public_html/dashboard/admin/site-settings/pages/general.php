@@ -10,7 +10,7 @@
         <div class="form-row">
             <div class="col">
                 <h3 class="title"><i class="fa-regular fa-image"></i></i>Imagen de portada</h3>
-                <p class="title-description">Establece una imagen de portada que se verá en la página principal (máximo 5 MB).</p>
+                <p class="title-description">Establece una imagen de portada que se verá en la página principal del sitio web (máximo 5 MB). Observa la imagen de la siguiente sección para guiarte.</p>
             </div>
         </div>
         <div class="form-row">
@@ -39,16 +39,15 @@
                 <img id="index-image-preview" class="text-center w-50"/>
             </div>
         </div>
-        <div class="form-row text-right">
-            <div class="col"><button id="submit-index-image" disabled class="btn my-button-3" type="button"><i class=" i-margin fas fa-save"></i>Guardar</button></div>
-        </div>
+        <div class="button-group-right"><button id="submit-index-image" disabled class="btn my-button-3" type="button"><i class=" i-margin fas fa-save"></i>Guardar</button></div>
     </form>
     <hr>
     <form style="margin-bottom: 20px;">
         <div class="form-row">
             <div class="col">
                 <h3 class="title">Eslogan de la empresa</h3>
-                <p class="title-description">Establece un eslogan que se mostrará sobre la imagen de la página principal configurada en la opción de arriba.</p>
+                <p class="title-description">Establece un eslogan que se mostrará sobre la imagen de la página principal configurada en la opción de arriba. Observa la imagen de abajo para guiarte.</p>
+            <img width="100%" class="mb-5" style="object-fit: contain; max-height: 400px" src="<?=GetBaseUri()?>/includes/img/index-image-example.jpg">
             </div>
         </div>
         <div class="form-row">
@@ -58,21 +57,17 @@
                 </div>
             </div>
         </div>
-        <div class="form-row text-right">
-            <div class="col"><button id="submit-index-image-description" class="btn my-button-3" type="button"><i class=" i-margin fas fa-save"></i>Guardar</button></div>
-        </div>
+        <div class="button-group-right"><button id="submit-index-image-description" class="btn my-button-3" type="button"><i class=" i-margin fas fa-save"></i>Guardar</button></div>
     </form>
     <hr>
     <form style="margin-bottom: 20px;">
         <div class="form-row">
             <div class="col">
-                <h3 class="title">Texto resumen página de inicio</h3>
+                <h3 class="title">Descripción de la empresa</h3>
                 <p class="title-description">Describe brevemente tu negocio. Esta descripción aparecerá debajo de la imagen de la página principal.</p>
             </div>
         </div>
         <div id="index-brief-description"></div>
-        <div style="margin-top: 15px;" class="form-row text-right">
-            <div class="col"><button id="submit-index-brief-description" class="btn my-button-3" type="button"><i class=" i-margin fas fa-save"></i>Guardar</button></div>
-        </div>
+        <div class="button-group-right mt-3"><button id="submit-index-brief-description" class="btn my-button-3" type="button"><i class=" i-margin fas fa-save"></i>Guardar</button></div>
     </form>
 </div>

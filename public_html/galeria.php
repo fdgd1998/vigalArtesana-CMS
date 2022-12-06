@@ -143,7 +143,7 @@
             <?php if (!isset($_GET['category'])): ?>
                 <h1 class="title">Galería</h1>
                 <p class="title-description"><?=$site_settings[12]["value_info"]?></p>
-                <p class="title-description">Selecciona una categoría pulsando sobre una imagen.</p>
+                <p class="title-description">Visualiza las categorías haciendo clic sobre las imágenes.</p>
                 <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4" style="margin-bottom: 20px;">
                     <?php foreach ($categories as $element): ?>
                         <div class='category col-sm-6 col-md-4 col-lg-3 item' style='margin-bottom: 30px;'>
@@ -161,7 +161,7 @@
                     <h1 class="title"><a href="<?=GetBaseUri()?>/galeria"><i class="fas fa-arrow-left" style="margin-right: 20px !important;"></i></a><?=$category_name?></h1>
                     <?php if (count($results) > 0): ?>
                         <p><?=$category_description?></p>
-                        <p class="title-description">Pincha sobre las imágenes para verlas a tamaño completo. Para volver a la página anterior, pulsa la flecha a la izquierda del nombre de la categoría.</p>
+                        <p class="title-description">Haz clic sobre las imágenes para verlas a tamaño completo. Para volver a la vista principal, haz clic en la flecha de arriba.</p>
                     <?php else: ?>
                         <p><?=$category_description?></p>
                         <p class="title-description">No se han encontrado elementos en esta categoría. Visita esta página más tarde.</p>

@@ -86,12 +86,13 @@
         </div>
         <div class="div-color-1">
             <div class="container">
+                <h1 class="title">Bienvenidos a <?=$site_settings[2]["value_info"]?></h1>
                 <div class="index-description">
                     <p><?=$site_settings[10]["value_info"]?></p>
                 </div>
                 <div class="button-group">
-                    <a href="<?=GetBaseUri()?>/sobre-nosotros" class="btn my-button">Sobre nosotros</a>
                     <a href="<?=GetBaseUri()?>/galeria" class="btn my-button">Galería</a>
+                    <a href="<?=GetBaseUri()?>/sobre-nosotros" class="btn my-button">Sobre nosotros</a>
                 </div>
             </div>
         </div>

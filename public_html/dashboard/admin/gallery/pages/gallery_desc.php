@@ -18,7 +18,7 @@
 
 <div class="container settings-container">
     <h1 class="title">Descripción general</h1>
-    <p>Define un texto descriptivo que acompañe a la vista general de la galería.</p>
+    <p>Escribe una breve descripción para tu galería. Este texto se mostrará en la página principal de la galería, encima de la vista general de categorías.</p>
     <div id="gallery-desc"></div>
     <div class="button-group-right mt-3">
         <button disabled id="submit" class="btn my-button-3"><i class="i-margin fas fa-save"></i>Guardar</button>

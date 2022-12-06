@@ -115,7 +115,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <h2 class="title">Ubicación</h2>
+                <h2 class="title">¿Dónde estamos?</h2>
                 <div class="map-responsive">
                     <iframe class="w-100" src="<?=$site_settings[7]["value_info"]?>" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>

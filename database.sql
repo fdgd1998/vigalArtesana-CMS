@@ -102,7 +102,7 @@ INSERT INTO `company_info` (`key_info`, `value_info`, `modifiedBy`) VALUES
 ('gallery-desc', '<p>Esta es la <b>descripción general</b> de la galería...</p>', 0),
 ('seo_modified', 'true', 0),
 ('index-image-desc', 'sdfsffs', 0),
-('software-version', '2.1.0', 0);
+('software-version', '2.1.1', 0);
 
 --
 -- Disparadores `company_info`

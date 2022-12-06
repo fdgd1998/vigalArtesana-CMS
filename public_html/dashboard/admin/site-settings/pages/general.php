@@ -35,11 +35,16 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="col text-center mb-3" hidden>
-                <img id="index-image-preview" class="text-center w-50"/>
+            <div class="col-6 col-sm-6 col-md-6">
+                <p>Imagen actual:</p>
+                <img width="100%" style="object-fit: cover !important;" src="../uploads/<?=$site_settings[5]["value_info"]?>"/>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6">
+                <p>Nueva imagen:</p>
+                <img id="index-image-preview" width="100%" style="object-fit: cover !important;" src="../includes/img/placeholder-image.jpg"/>
             </div>
         </div>
-        <div class="button-group-right"><button id="submit-index-image" disabled class="btn my-button-3" type="button"><i class=" i-margin fas fa-save"></i>Guardar</button></div>
+        <div class="button-group-right mt-3"><button id="submit-index-image" disabled class="btn my-button-3" type="button"><i class=" i-margin fas fa-save"></i>Guardar</button></div>
     </form>
     <hr>
     <form style="margin-bottom: 20px;">

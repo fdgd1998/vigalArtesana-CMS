@@ -1,14 +1,13 @@
 :root {
-  --navbar-main-color:   #ffcc99;
-  --navbar-link-hover-color: #ea5b4e;
+  --navbar-main-color:   #fed7af;
+  --navbar-link-hover-color: #ee4c3d;
   --footer-main-color: #191919;
-  --footer-link-hover-color: #ffcc99;
   --body-background-color:  #f0f0f0;
-  --navbar-text-color: black ;
-  --title-color: #ea5b4e;
+  --navbar-text-color: black;
+  --title-color: #f06255;
   --button-main-color: #ffcc99;
   --button-hover-bg-color:  #fcd7b2;
-  --button-hover-text-color: rgb(37, 37, 37);
+  --button-hover-text-color: #252525;
   --button-text-color: black;
   --navigation-button-text-color: black;
   --button-2-main-color: #ff9999;
@@ -141,6 +140,12 @@
   box-shadow: none !important;
 }
 
+
+.current-page {
+  color: var(--navbar-link-hover-color) !important;
+  font-weight: bold;
+}
+
 .i-margin {
   margin-right: 10px !important;
 }
@@ -154,7 +159,7 @@
 }
 
 .navbar-brand:hover {
-  color: black !important;
+  color: white !important;
 }
 
 h1.maintenance-title {
@@ -266,7 +271,7 @@ a.instagram:hover {
   content: '' !important;
   display: block !important;
   margin: auto !important;
-  height: 3px !important;
+  height: 2px !important;
   width: 0px !important;
   background: transparent !important;
   transition: width .5s ease, background-color .5s ease !important;

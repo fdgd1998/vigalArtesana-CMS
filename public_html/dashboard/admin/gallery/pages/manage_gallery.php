@@ -68,7 +68,7 @@
 <div class="container content">
   <h1 class="title">Galería</h1>
   <p class="title-descirption">Gestiona la galería. Haz clic sobre las imágenes para seleccionarlas y borrarlas.</p>
-  <div class="button-group">
+  <div class="button-group mb-3">
     <button type="button" id="upload-images" class="btn my-button"><i class="i-margin fas fa-upload"></i>Subir imágenes...</button>
   </div>
   <?php if (count($results) > 0): ?>

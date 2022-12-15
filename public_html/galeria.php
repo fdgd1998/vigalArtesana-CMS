@@ -18,6 +18,7 @@
         $category_description = "";
         $category_id = 0;
         $page_id = 6;
+        $title = "";
         $page_title = "";
         $page_description = "";
 

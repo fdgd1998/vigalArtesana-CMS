@@ -578,7 +578,7 @@
             ],
             callbacks: {
                 onInit: function() {
-                    $(this).summernote('code', '<?=$about_text?>');
+                    $(this).summernote('code', `<?=$about_text?>`);
                 }
             }
         });

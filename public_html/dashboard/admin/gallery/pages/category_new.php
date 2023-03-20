@@ -22,7 +22,7 @@
                 $categories["description"] = $item["description"];
                 $categories["image"] = $item["image"];
                 $desc = (strcmp($_GET["page"], "edit-category") == 0)?$categories["description"]:"";
-                echo "<script>var catDesc = '".$desc."'</script>";
+                echo "<script>var catDesc = `".$desc."`</script>";
             }
         }
     }

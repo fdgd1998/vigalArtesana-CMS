@@ -12,7 +12,7 @@
     $sql = "select value_info from company_info where key_info = 'gallery-desc'";
 
     if ($res = $conn->query($sql)) {
-        echo "<script>var galleryDesc = '".$res[0]["value_info"]."'</script>";
+        echo "<script>var galleryDesc = `".$res[0]["value_info"]."`</script>";
     }
 ?>
 

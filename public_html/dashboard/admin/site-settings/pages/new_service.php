@@ -16,19 +16,19 @@
     <div class="mb-3">
         <label for="basic-url">Título:</label>
         <div class="input-group mb-3">
-            <input id="title-new" type="text" class="form-control" maxlength="60">
+            <input id="title-new" type="text" class="form-control">
         </div>
     </div>
     <div class="mb-3">
         <label for="basic-url">Descripción:</label>
         <div class="input-group mb-3">
-            <textarea class="form-control" id="description-new" maxlength="200"></textarea>
+            <textarea class="form-control" id="description-new"></textarea>
         </div>
     </div>
     <div class="mb-3">
         <label for="basic-url">Descripción de la imagen:</label>
         <div class="input-group mb-3">
-            <input id="new-image-desc" type="text" class="form-control" maxlength="60">
+            <input id="new-image-desc" type="text" class="form-control">
         </div>
     </div>
     <div class="input-group mb-3">

@@ -16,14 +16,14 @@
         <label class="custom-control-label" for="edit-title">Editar título</label>
     </div>
     <div id="title-div" class="input-group mb-3">
-        <input disabled type="text" class="form-control" id="title-input-edit" maxlength="60" value="<?=$services[0]["title"]?>">
+        <input disabled type="text" class="form-control" id="title-input-edit" value="<?=$services[0]["title"]?>">
     </div>
     <div class="custom-control custom-checkbox mb-2">
         <input type="checkbox" class="custom-control-input" id="edit-description">
         <label class="custom-control-label" for="edit-description">Editar descripción</label>
     </div>
     <div id="description-div" class="input-group mb-3">
-        <textarea disabled class="form-control" id="description-input-edit" maxlength="200"><?=$services[0]["description"]?></textarea>
+        <textarea disabled class="form-control" id="description-input-edit"><?=$services[0]["description"]?></textarea>
     </div>
     <div class="custom-control custom-checkbox mb-2">
         <input type="checkbox" class="custom-control-input" id="edit-image">
@@ -33,7 +33,7 @@
         <div class="mb-3">
             <label for="basic-url">Descripción de la imagen:</label>
             <div class="input-group mb-3">
-                <input disabled id="edit-image-desc" type="text" class="form-control" maxlength="60">
+                <input disabled id="edit-image-desc" type="text" class="form-control">
             </div>
         </div>
         <div id="image-div" class="input-group mb-4">

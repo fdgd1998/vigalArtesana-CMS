@@ -221,22 +221,24 @@ var input_files = [];
         var spinner_div = $("<div style='height: 100%; min-height: 100%; z-index: 10; position: absolute; bottom:0; left:0; right:0; background-color: rgba(255,255,255,.75)' class='row justify-content-center align-items-center' id='spinner-div'><div class='spinner-border' role='status'></div><span style='margin-left: 10px'>Subiendo imágenes...</span></div>");
         $("body").append(spinner_div);
         // Getting data to sent and appending it to the form data.
-        var image_categories = [];
-        var image_alt_text = [];
+        var image_categories = {};
+        var image_alt_text = {};
         var formData = new FormData();
         // var i = 0;
 
         // getting category ids selected for each image
         $(".category-upload").each(function(index) {    
             var value = $(this).val();
-            image_categories[index] = value;
+            var file = $(this).closest(".main-div").attr("id");
+            image_categories[file] = value;
             // image_categories[i++] = value;
         });
 
         // getting alt text for each image
         $(".alt-text-upload").each(function(index) {    
             var value = $(this).val();
-            image_alt_text[index] = value;
+            var file = $(this).closest(".main-div").attr("id");
+            image_alt_text[file] = value;
         });
 
         formData.append("categories", JSON.stringify(image_categories)); // encoding string to pass it to php file

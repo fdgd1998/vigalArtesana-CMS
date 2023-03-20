@@ -42,26 +42,25 @@ $(document).ready(function() {
                     if (!existentFile) {
                         if (blob.size < 5242880) {
                             readURL(input, $("#index-image-preview"));
-                            $("#index-image-preview").parent().removeAttr("hidden");
                             $("#upload-index-name").html(blob.name); // Updating input text.
                         } else {
                             $(input).val('');
                             alert("El fichero supera el máximo de 5 MB. Comprueba el tamaño e inténtalo de nuevo.");
-                            $("#index-image-preview").parent().attr("hidden",true);
+                            $("#index-image-preview").attr("src", "../includes/img/placeholder-image.jpg");
                             $("#upload-index-name").html("Seleccionar imagen...");
                         }
                     }
                 },
                 error: function(response) { 
                     $("#upload-index-name").html("Seleccionar imagen...");
-                    $("#index-image-preview").parent().attr("hidden",true);
+                    $("#index-image-preview").attr("src", "../includes/img/placeholder-image.jpg");
                     $("#upload-index-image").val("");
                     alert("El fichero " + blob.name + " ya existe en el servidor. Renómbralo e inténtalo de nuevo.");
                 } 
             });
         } else {
              // If no files are selected, reset form.
-             $("#index-image-preview").parent().attr("hidden",true);
+             $("#index-image-preview").attr("src", "../includes/img/placeholder-image.jpg");
              $("#upload-index-name").html("Seleccionar imagen...");
         }
         enableIndexImageEditBtn();

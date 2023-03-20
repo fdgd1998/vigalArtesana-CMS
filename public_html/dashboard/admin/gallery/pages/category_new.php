@@ -22,7 +22,7 @@
                 $categories["description"] = $item["description"];
                 $categories["image"] = $item["image"];
                 $desc = (strcmp($_GET["page"], "edit-category") == 0)?$categories["description"]:"";
-                echo "<script>var catDesc = '".$desc."'</script>";
+                echo "<script>var catDesc = `".$desc."`</script>";
             }
         }
     }
@@ -99,7 +99,7 @@
     <?php endif; ?>
     <div id="cat-desc" class="disabled-form">
     </div> 
-    <div class="button-group text-right" style="margin-top: 20px">
+    <div class="button-group-right mt-3">
         <button id="cancel-btn" class="btn my-button-2"><i class="i-margin fas fa-times-circle"></i>Cancelar</button>
         <button disabled id="<?=(strcmp($_GET["page"], "edit-category") == 0)?"cat-edit":"cat-create"?>" <?=(strcmp($_GET["page"], "edit-category") == 0)?'catid="'.$categories["id"].'"':''?> class="btn my-button-3"><i class="i-margin fas fa-<?=(strcmp($_GET["page"], "edit-category") == 0)?"edit":"save"?>"></i><?=(strcmp($_GET["page"], "edit-category") == 0)?"Editar":"Crear"?></button>
     </div>   

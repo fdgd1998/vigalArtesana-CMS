@@ -123,13 +123,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title><?=$title?></title>
+    <link rel="canonical" href="<?=GetUri();?>">
     <link rel="stylesheet" type="text/css" href="<?=GetBaseUri()?>/includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="<?=GetBaseUri()?>/includes/css/fontawesome.all.min.css">
     <link rel="stylesheet" type="text/css" href="<?=GetBaseUri()?>/includes/css/gallery.css">
     <link rel="stylesheet" type="text/css" href="<?=GetBaseUri()?>/includes/css/styles.css">
     <link rel="stylesheet" type="text/css" href="<?=GetBaseUri()?>/includes/css/Navigation-Clean.css">
     <link rel="stylesheet" type="text/css" href="<?=GetBaseUri()?>/dashboard/includes/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Quicksand" />
     <link rel="stylesheet" type="text/css" href="<?=GetBaseUri()?>/includes/summernote/summernote-bs4.min.css" />
 </head>
 
@@ -146,109 +146,109 @@
         <div class="container">
             <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1" style="color: white; border: 1px solid grey">
                 <span class="sr-only">Toggle navigation</span>
-                <span class="navbar-toggler-icon" style="background-image: url('<?=GetBaseUri()?>/includes/img/icons8-menu.svg');"></span>
+                <span class="navbar-toggler-icon" style="background-image: url('<?=GetBaseUri()?>/includes/img/menu-black.svg');"></span>
             </button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <?php if (HasPermission("manage_siteSettings")): ?>
-                        <li class="nav-item dropdown">
-                            <a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">
-                                Configuración del sitio
+                    <li class="nav-item dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">
+                            Configuración del sitio
+                        </a>
+                        <div role="menu" class="dropdown-menu">
+                            <h6 class="dropdown-header">Información de la empresa</h6>
+                            <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=general-settings">
+                                <i class="fa-solid fa-house-user"></i>
+                                Página de inicio
                             </a>
-                            <div role="menu" class="dropdown-menu">
-                                <h6 class="dropdown-header">Información de la empresa</h6>
-                                <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=general-settings">
-                                    <i class="fa-solid fa-house-user"></i>
-                                    Página de inicio
-                                </a>
-                                <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=contact-settings">
-                                    <i class="fa-solid fa-building-user"></i>
-                                    Contacto, ubicación y horario
-                                </a>
-                                <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=about-us">
-                                    <i class="fa-solid fa-user-tie"></i>
-                                    Sobre nosotros
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <h6 class="dropdown-header">Servicios</h6>
-                                <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=manage-services">
-                                    <i class="fas fa-wrench"></i>
-                                    Gestionar servicios
-                                </a>
-                                <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=new-service">
-                                    <i class="fas fa-plus-circle"></i>
-                                    Nuevo servicio
-                                </a>
-                            </div>
-                        </li>
-                        <?php if (HasPermission("manage_advancedSettings")): ?>
-                        <li class="nav-item dropdown">
-                            <a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">
-                                Avanzado
+                            <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=contact-settings">
+                                <i class="fa-solid fa-building-user"></i>
+                                Contacto, ubicación y horario
                             </a>
-                            <div role="menu" class="dropdown-menu">
-                                <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=advanced">
-                                    <i class="fa-solid fa-code"></i>
-                                    Opciones avanzadas
-                                </a>
-                                <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=logs">
-                                    <i class="fa-regular fa-file-code"></i>
-                                    Ver logs
-                                </a>
-                            </div>
-                        </li>
-                        <?php endif; ?>
+                            <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=about-us">
+                                <i class="fa-solid fa-user-tie"></i>
+                                Sobre nosotros
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <h6 class="dropdown-header">Servicios</h6>
+                            <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=manage-services">
+                                <i class="fas fa-wrench"></i>
+                                Gestionar servicios
+                            </a>
+                            <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=new-service">
+                                <i class="fas fa-plus-circle"></i>
+                                Nuevo servicio
+                            </a>
+                        </div>
+                    </li>
+                    <?php if (HasPermission("manage_advancedSettings")): ?>
+                    <li class="nav-item dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">
+                            Avanzado
+                        </a>
+                        <div role="menu" class="dropdown-menu">
+                            <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=advanced">
+                                <i class="fa-solid fa-code"></i>
+                                Opciones avanzadas
+                            </a>
+                            <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=logs">
+                                <i class="fa-regular fa-file-code"></i>
+                                Ver logs
+                            </a>
+                        </div>
+                    </li>
+                    <?php endif; ?>
                     <?php endif; ?>
                     <?php if (HasPermission("manage_seoSettings")): ?>
-                        <li class="nav-item dropdown">
-                            <a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">
-                                SEO
+                    <li class="nav-item dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">
+                            SEO
+                        </a>
+                        <div role="menu" class="dropdown-menu">
+                            <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=seo-notify">
+                                <i class="fab fa-searchengin"></i>
+                                Notificar cambios a motores de búsqueda
                             </a>
-                            <div role="menu" class="dropdown-menu">
-                                <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=seo-notify">
-                                    <i class="fab fa-searchengin"></i>
-                                    Notificar cambios a motores de búsqueda
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <h6 class="dropdown-header">Metadatos</h6>
-                                <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=metadata-settings">
-                                    <i class="fa-solid fa-window-maximize"></i>
-                                    Título y descripción de las páginas (metadatos)
-                                </a>
-                                <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=text-editor&file=sitemap.xml">
-                                    <i class="fa-regular fa-file-code"></i>
-                                    Modificar sitemap.xml
-                                </a>
-                                <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=text-editor&file=robots.txt">
-                                    <i class="fa-regular fa-file-code"></i>
-                                    Modificar robots.txt
-                                </a>
-                            </div>
-                        </li>
-                        <?php if (HasPermission("manage_users")): ?>
-                        <li class="nav-item dropdown">
-                            <a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">
-                                Usuarios
+                            <div class="dropdown-divider"></div>
+                            <h6 class="dropdown-header">Metadatos</h6>
+                            <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=metadata-settings">
+                                <i class="fa-solid fa-window-maximize"></i>
+                                Título y descripción de las páginas (metadatos)
                             </a>
-                            <div role="menu" class="dropdown-menu">
-                                <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=manage-users">
-                                    <i class="fa-solid fa-users-gear"></i>
-                                    Gestionar usuarios
-                                </a>
-                                <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=new-user">
-                                    <i class="fa-solid fa-user-plus"></i>
-                                    Nuevo usuario
-                                </a>
-                            </div>
-                        </li>
-                        <?php endif; ?>
+                            <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=text-editor&file=sitemap.xml">
+                                <i class="fa-regular fa-file-code"></i>
+                                Modificar sitemap.xml
+                            </a>
+                            <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=text-editor&file=robots.txt">
+                                <i class="fa-regular fa-file-code"></i>
+                                Modificar robots.txt
+                            </a>
+                        </div>
+                    </li>
+                    <?php if (HasPermission("manage_users")): ?>
+                    <li class="nav-item dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">
+                            Usuarios
+                        </a>
+                        <div role="menu" class="dropdown-menu">
+                            <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=manage-users">
+                                <i class="fa-solid fa-users-gear"></i>
+                                Gestionar usuarios
+                            </a>
+                            <a role="presentation" class="dropdown-item" href="<?=GetBaseUri()?>/dashboard?page=new-user">
+                                <i class="fa-solid fa-user-plus"></i>
+                                Nuevo usuario
+                            </a>
+                        </div>
+                    </li>
+                    <?php endif; ?>
                     <?php endif; ?>
                     <li class='nav-item dropdown'>
                         <a data-toggle='dropdown' class='dropdown-toggle nav-link' href='#'>
                             Galería
                         </a>
                         <div role='menu' class='dropdown-menu'>
-                        <h6 class="dropdown-header">Galería</h6>
+                            <h6 class="dropdown-header">Galería</h6>
                             <a role='presentation' class='dropdown-item' href='<?=GetBaseUri()?>/dashboard?page=gallery-desc'>
                                 <i class="fas fa-align-left"></i>
                                 Descripción general
@@ -281,14 +281,10 @@
                     <a class="nav-link" href="<?=GetBaseUri()?>/scripts/logout.php"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
                 <div>
             </div>
-        </nav>
-        <div class="wrapper">
-        <!-- Page Content  -->
-        <div id="content">
-            <div>
-                <?php include $_SERVER["DOCUMENT_ROOT"].$page?>
-            </div>
         </div>
+    </nav>
+    <div id="content">
+    <?php include $_SERVER["DOCUMENT_ROOT"].$page?>
     </div>
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
@@ -582,7 +578,7 @@
             ],
             callbacks: {
                 onInit: function() {
-                    $(this).summernote('code', '<?=$about_text?>');
+                    $(this).summernote('code', `<?=$about_text?>`);
                 }
             }
         });

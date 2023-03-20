@@ -1,14 +1,13 @@
 :root {
-  --navbar-main-color:   #ffcc99;
-  --navbar-link-hover-color: #ea5b4e;
+  --navbar-main-color:   #fed7af;
+  --navbar-link-hover-color: #ee4c3d;
   --footer-main-color: #191919;
-  --footer-link-hover-color: #ffcc99;
   --body-background-color:  #f0f0f0;
-  --navbar-text-color: black ;
-  --title-color: #ea5b4e;
+  --navbar-text-color: black;
+  --title-color: #f06255;
   --button-main-color: #ffcc99;
   --button-hover-bg-color:  #fcd7b2;
-  --button-hover-text-color: rgb(37, 37, 37);
+  --button-hover-text-color: #252525;
   --button-text-color: black;
   --navigation-button-text-color: black;
   --button-2-main-color: #ff9999;
@@ -141,6 +140,12 @@
   box-shadow: none !important;
 }
 
+
+.current-page {
+  color: var(--navbar-link-hover-color) !important;
+  font-weight: bold;
+}
+
 .i-margin {
   margin-right: 10px !important;
 }
@@ -154,7 +159,7 @@
 }
 
 .navbar-brand:hover {
-  color: black !important;
+  color: white !important;
 }
 
 h1.maintenance-title {
@@ -266,7 +271,7 @@ a.instagram:hover {
   content: '' !important;
   display: block !important;
   margin: auto !important;
-  height: 3px !important;
+  height: 2px !important;
   width: 0px !important;
   background: transparent !important;
   transition: width .5s ease, background-color .5s ease !important;
@@ -342,6 +347,7 @@ li > i {
 }
 
 @media (min-width: 991px){
+
   footer .site_info {
     text-align: right;
   }
@@ -359,7 +365,6 @@ li > i {
     font-size: 50px !important;
     text-align: left !important;
     margin-bottom: 30px !important;
-    font-weight: bold !important;
   }
   
   h2.title {
@@ -408,8 +413,14 @@ li > i {
     margin-top: 30px;
   }
 
-  .button-group {
+  .button-group-right {
     margin-bottom: 30px !important;
+    text-align: right !important;
+  }
+
+  .button-group-left {
+    margin-bottom: 30px !important;
+    text-align: left !important;
   }
 
   .timetable {
@@ -481,7 +492,6 @@ li > i {
     font-size: 35px !important;
     text-align: left;
     margin-bottom: 20px !important;
-    font-weight: bold;
   }
   
   h2.title {
@@ -529,9 +539,18 @@ li > i {
     margin-top: 30px;
   }
 
-  .button-group {
+
+  .button-group-right {
     margin-bottom: 30px !important;
+    text-align: right !important;
   }
+
+  
+  .button-group-left {
+    margin-bottom: 30px !important;
+    text-align: left !important;
+  }
+
 
   .timetable {
     text-align: left !important;
@@ -602,7 +621,6 @@ li > i {
     font-size: 35px !important;
     text-align: left;
     margin-bottom: 30px !important;
-    font-weight: bold;
   }
   
   h2.title {
@@ -649,8 +667,15 @@ li > i {
     text-align: left;
   }
 
-  .button-group {
+  .button-group-right {
     margin-bottom: 30px !important;
+    text-align: right !important;
+  }
+
+  
+  .button-group-left {
+    margin-bottom: 30px !important;
+    text-align: left !important;
   }
 
   .content {
@@ -718,7 +743,6 @@ li > i {
     font-size: 30px !important;
     text-align: center;
     margin-bottom: 20px !important;
-    font-weight: bold;
   }
   
   h2.title {
@@ -769,12 +793,15 @@ li > i {
     text-align: center;
   }
 
-  .button-group {
+  .button-group-right {
     text-align: center !important;
+    margin-bottom: 20px !important;
   }
 
-  .button-group {
-    margin-bottom: 20px !important;
+  
+  .button-group-left {
+    margin-bottom: 30px !important;
+    text-align: center !important;
   }
 
   .content {
@@ -831,7 +858,7 @@ footer {
   border-color: var(--button-2-main-color);
 }
 
-.button-group > button {
+.button-group-right > button {
   margin-bottom: 5px;
 }
 

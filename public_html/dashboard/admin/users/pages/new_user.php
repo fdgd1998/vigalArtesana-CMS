@@ -60,20 +60,20 @@
     <div class="row">
         <div class="col-12 col-sm-12 col-md-6 mb-3">
             <div class="alert alert-warning" role="alert">
-                Copia la contraseña generada en un lugar seguro. Tras salir de esta página, no podrás volver a verla. También se enviará al usuario un email con las nuevas credenciales.
+                Copia la contraseña generada en un lugar seguro. Tras salir de esta página, no podrás volver a verla.
             </div>
             <label for="basic-url">Nueva contraseña:</label>
             <input disabled type="text" class="form-control" id="password">
-            <div class="button-group" style="margin-top: 20px">
+            <div class="button-group-left mt-3">
                 <button id="generate" class="btn my-button"><i class="i-margin fas fa-key"></i>Generar contraseña</button>
                 <?php if ($editUser): ?>
-                <button disabled id="edit-pass" class="btn my-button-3 ml-2"><i class="i-margin fas fa-save"></i>Cambiar contraseña</button>
+                <button disabled id="edit-pass" class="btn my-button-3 ml-2"><i class="i-margin fas fa-save"></i>Cambiar</button>
                 <?php endif; ?>
             </div> 
         </div>
     </div>
     
-    <div class="button-group text-right" style="margin-top: 20px">
+    <div class="button-group-right">
         <button id="cancel-create-user" class="btn my-button-2"><i class="i-margin fas fa-times-circle"></i>Cancelar</button>
         <?php if (!$editUser): ?>
         <button disabled id="create-user" class="btn my-button-3"><i class="i-margin fas fa-user-plus"></i>Crear usuario</button>

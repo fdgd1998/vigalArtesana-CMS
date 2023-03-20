@@ -5,6 +5,7 @@
 ?>
 <div class="container content">
     <h1 class="title">Notificar cambios a motores de búsqueda</h1>
+    <p><strong>NOTA: esta página actualmente solo está presente para su visualización de una característica futura. Cualquier acción realizada no realizará modificaciones en el sitio web.</strong></p>
     <p class="title-description">Notifica los cambios que se realizan en el sitio web a los motores de búsqueda. Es necesario realizar esta acción cada vez que se:</p>
     <ul style="list-style-type: disc; padding-left: 30px;">
         <li>Crea, modifica o elimina una categoría.</li>

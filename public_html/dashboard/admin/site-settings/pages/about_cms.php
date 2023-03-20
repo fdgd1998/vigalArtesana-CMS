@@ -7,13 +7,25 @@
 <div class="container content">
     <h1 class="title">Acerca de ViGal Artesana CMS</h1>
     <h2 class="title">Información del software</h2>
-    <p>Versión: <?=$site_settings[15]["value_info"]?>.</p>
+    <p>Versión: <?=$site_settings[15]["value_info"]?></p>
     <p>Desarrollador: Francisco Gálvez.</p>
-    <h2 class="title">Registro de cambios:</h2>
-    <p><strong>Versión 2.0.1 (01/12/2022)</strong></p>
+    <h2 class="title">Registro de cambios</h2>
+    <p><strong>Versión 2.1.1 (06/12/2022)</strong></p>
+    <ul style="list-style-type: disc; margin-left: 20px;">
+        <li>Retoques de títulos y descripciones de algunas secciones para hacerlas más comprensibles.</li>
+        <li>Añadida previsualización imagen de página de inicio.</li>
+        <li>Arreglos en los estilos CSS.</li>
+        <li>Arreglos del código fuente.</li>
+    </ul>
+    <p><strong>Versión 2.1.0 (01/12/2022)</strong></p>
     <ul style="list-style-type: disc; margin-left: 20px;">
         <li>Nueva barra de navegación.</li>
         <li>Nuevo pie de página.</li>
+        <li>Arreglos en los estilos CSS.</li>
+        <li>Arreglos del código fuente.</li>
+    </ul>
+    <p><strong>Versión 2.0.1 (20/11/2022)</strong></p>
+    <ul style="list-style-type: disc; margin-left: 20px;">
         <li>Nuevos iconos de interfaz de usuarios.</li>
         <li>Arreglos del código fuente.</li>
         <li>Arreglos en los estilos CSS.</li>
@@ -31,7 +43,7 @@
             <li>FontAwesome 6.2.1</li>
             <li>Simple Lightbox 2.11.0</li>
         </ul>
-        <li>Sistema de árbol de directorios de galería optimizado.</li>
+        <li>Nuevo árbol de directorios de galería optimizado.</li>
         <li>Atributos SEO de contenido mejorados.</li>
         <li>Añadido sistema de gestión de usuarios y permisos.</li>
         <li>Aladido página de perfil de usuario.</li>
@@ -44,7 +56,7 @@
         <li>Añadido sistema compresión de imágenes.</li>
         <li>Cambio a PDO como controlador de base de datos.</li>
     </ul>
-    <p><strong>Versión 1.0 (30/11/2021)</strong></p>
+    <p><strong>Versión 1.0.0 (30/11/2021)</strong></p>
     <ul style="list-style-type: disc; margin-left: 20px;">
         <li>Versión inicial.</li>
         <li>Añadido sistema de galería y categorías.</li>

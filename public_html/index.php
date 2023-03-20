@@ -2,6 +2,7 @@
     session_start();
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_site_settings.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_uri.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/check_current_page.php";
     require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/get_maintenance_status.php";
 
     // $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
@@ -13,7 +14,6 @@
     $page_id = 5;
 
     if (!$maintenance || ($maintenance && isset($_SESSION["loggedin"]))) {
-        // Fetching categories from database and storing then in the array for further use.
         $sql = "select * from services";
         if ($res = $conn->query($sql)) {
             foreach ($res as $item) {
@@ -87,12 +87,13 @@
         </div>
         <div class="div-color-1">
             <div class="container">
+                <h1 class="title">Bienvenidos a <?=$site_settings[2]["value_info"]?></h1>
                 <div class="index-description">
                     <p><?=$site_settings[10]["value_info"]?></p>
                 </div>
-                <div class="button-group">
-                    <a href="<?=GetBaseUri()?>/sobre-nosotros" class="btn my-button">Sobre nosotros</a>
+                <div class="button-group-left">
                     <a href="<?=GetBaseUri()?>/galeria" class="btn my-button">Galería</a>
+                    <a href="<?=GetBaseUri()?>/sobre-nosotros" class="btn my-button">Sobre nosotros</a>
                 </div>
             </div>
         </div>

@@ -29,7 +29,7 @@
 <div class="container settings-container">
   <h1 class="title">Servicios</h1>
   <p class="title-description">Añade en esta sección los servicios que ofreces a tus clientes. Puedes añadir hasta un máximo de 10 servicios.</p>
-  <div class="alert my-alert">
+  <div class="alert my-alert title-description">
     <?php if ($total_services == 0): ?>
       Aún no has creado ningún servicio. Puedes crear un total de 10.
     <?php endif; ?>
@@ -41,11 +41,10 @@
     <?php endif; ?>
   </div>
 
-  <div class="button-group">
+  <div class="button-group-left">
     <button <?=$total_services == 10?"disabled":""?> type="button" onclick="window.location.href='?page=new-service'" class="btn my-button" style="margin-bottom: 15px;"><i class="i-margin fas fa-plus-circle"></i>Nuevo servicio</button>
   </div>
   <?php if ($total_services != 0): ?>
-  <div class="row">
     <div class="col-12 carousel-buttons">
         <a class="btn my-button mr-1" href="#services" role="button" data-slide="prev">
             <i class="fa fa-arrow-left i-no-margin"></i>
@@ -54,38 +53,33 @@
             <i class="fa fa-arrow-right i-no-margin"></i>
         </a>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-12">
-      <div id="services" class="carousel slide" data-ride="carousel">
-          <!-- The slideshow -->
-        <div class="carousel-inner">
-          <?php $i = 0; ?>
-          <?php foreach ($services as $service): ?>
-          <div class="carousel-item <?=$i == 0? "active":""?>">
-            <div class="card mb-3">
-              <div class="row no-gutters">
-                <div class="col-md-6">
-                  <img src="../uploads/services/<?=$service["image"]?>" class="card-img" alt="...">
-                </div>
-                <div class="col-md-6 d-flex">
-                  <div class="card-body align-self-center">
-                    <h5 class="card-title font-weight-bold"><?=$service["title"]?></h5>
-                    <p class="card-text"><?=$service["description"]?></p>
-                    <div class="button-group carousel-buttons">
-                      <button type="button" id="edit-<?=$service["id"]?>" class="btn my-button-3 edit-service"><i class="i-margin far fa-edit"></i>Editar</button>
-                      <button type="button" id="delete-<?=$service["id"]?>" class="btn my-button-2 delete-service"><i class="i-margin far fa-trash-alt"></i>Borrar</button>
-                    </div>
+    <div id="services" class="carousel slide" data-ride="carousel">
+        <!-- The slideshow -->
+      <div class="carousel-inner">
+        <?php $i = 0; ?>
+        <?php foreach ($services as $service): ?>
+        <div class="carousel-item <?=$i == 0? "active":""?>">
+          <div class="card mb-3">
+            <div class="row no-gutters">
+              <div class="col-md-6">
+                <img src="<?=GetBaseUri()?>/uploads/services/<?=$service["image"]?>" class="card-img" alt="...">
+              </div>
+              <div class="col-md-6 d-flex">
+                <div class="card-body align-self-center">
+                  <h5 class="card-title font-weight-bold title-description"><?=$service["title"]?></h5>
+                  <p class="card-text"><?=$service["description"]?></p>
+                  <div class="carousel-buttons">
+                    <button type="button" id="edit-<?=$service["id"]?>" class="btn my-button-3 edit-service"><i class="i-margin far fa-edit"></i>Editar</button>
+                    <button type="button" id="delete-<?=$service["id"]?>" class="btn my-button-2 delete-service"><i class="i-margin far fa-trash-alt"></i>Borrar</button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <?php $i++; ?>
-          <?php endforeach; ?>
         </div>
+        <?php $i++; ?>
+        <?php endforeach; ?>
       </div>
     </div>
-  </div>
   <?php endif; ?>
 </div>

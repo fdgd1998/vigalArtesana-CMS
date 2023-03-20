@@ -16,19 +16,19 @@
     <div class="mb-3">
         <label for="basic-url">Título:</label>
         <div class="input-group mb-3">
-            <input id="title-new" type="text" class="form-control" maxlength="60">
+            <input id="title-new" type="text" class="form-control">
         </div>
     </div>
     <div class="mb-3">
         <label for="basic-url">Descripción:</label>
         <div class="input-group mb-3">
-            <textarea class="form-control" id="description-new" maxlength="200"></textarea>
+            <textarea class="form-control" id="description-new"></textarea>
         </div>
     </div>
     <div class="mb-3">
         <label for="basic-url">Descripción de la imagen:</label>
         <div class="input-group mb-3">
-            <input id="new-image-desc" type="text" class="form-control" maxlength="60">
+            <input id="new-image-desc" type="text" class="form-control">
         </div>
     </div>
     <div class="input-group mb-3">
@@ -44,7 +44,7 @@
         <p>Vista previa:</p>
         <img id="image-preview-new" width="50%"><img>
     </div>
-    <div class="text-right" style="margin-top: 20px;">
+    <div class="button-group-right">
         <button type="button" onclick="window.location.href = '?page=manage-services'" class="btn my-button-2" ><i class="i-margin fas fa-times-circle"></i>Cancelar</button>
         <button disabled type="button" id="new-service-btn" class="btn my-button-3" ><i class="i-margin fas fa-save"></i>Guardar</button>
     </div>

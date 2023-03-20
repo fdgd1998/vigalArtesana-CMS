@@ -35,9 +35,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-row text-right">
-            <div class="col"><button id="submit_contact_data" class="btn my-button-3" type="button"><i class=" i-margin fas fa-save"></i>Guardar</button></div>
-        </div>
+        <div class="button-group-right"><button id="submit_contact_data" class="btn my-button-3" type="button"><i class=" i-margin fas fa-save"></i>Guardar</button></div>
     </form>
     <hr>
     <form style="margin-bottom: 20px;">
@@ -86,10 +84,8 @@
                 </div>
             </div>
         </div>
-        <div class="form-row text-right">
-            <div class="col">
-                <button id="submit_social" class="btn my-button-3" type="button"><i class=" i-margin fas fa-save"></i>Guardar</button>
-            </div>
+        <div class="button-group-right">
+            <button id="submit_social" class="btn my-button-3" type="button"><i class=" i-margin fas fa-save"></i>Guardar</button>
         </div>
     </form>
     <hr>
@@ -106,9 +102,7 @@
                 <textarea id="map-link" class="form-control" rows="3" style="margin-bottom: 15px;"><?=$site_settings[7]["value_info"]?></textarea>
             </div>
         </div>
-        <div class="form-row">
-            <div class="col text-right"><button id="submit_map_link" class="btn my-button-3" type="button"><i class=" i-margin fas fa-save"></i>Guardar</button></div>
-        </div>
+        <div class="button-group-right"><button id="submit_map_link" class="btn my-button-3" type="button"><i class=" i-margin fas fa-save"></i>Guardar</button></div>
     </form>
     <hr>
     <form style="margin-bottom: 20px;">
@@ -185,10 +179,8 @@
                 </div>
             </div>
         </div>
-        <div class="form-row">
-            <div class="col text-right">
-                <button id="submit_opening_hours" class="btn my-button-3" type="button"><i class=" i-margin fas fa-save"></i>Guardar</button>
-            </div>
+        <div class="button-group-right">
+            <button id="submit_opening_hours" class="btn my-button-3" type="button"><i class=" i-margin fas fa-save"></i>Guardar</button>
         </div>
     </form>
     <hr>

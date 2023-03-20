@@ -1,4 +1,7 @@
 <?php 
+    require_once $_SERVER["DOCUMENT_ROOT"]."/scripts/check_current_page.php";
+
+    $request_uri = ltrim($_SERVER["REQUEST_URI"], "/");
     $is_index_page = 0;
     if (strcmp($_SERVER['REQUEST_URI'], "/") == 0) $is_index_page = 1;
     echo "<script>var is_index_page = $is_index_page </script>";
@@ -12,10 +15,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav nav ml-auto mt-2 mt-lg-0">
-                <li class="nav-item"><a class="nav-link underline-animated" href="<?=GetBaseUri()?>">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link underline-animated" href="<?=GetBaseUri()?>/galeria">Galería</a></li>
-                <li class="nav-item"><a class="nav-link underline-animated" href="<?=GetBaseUri()?>/sobre-nosotros">Sobre nosotros</a></li>
-                <li class="nav-item"><a class="nav-link underline-animated" href="<?=GetBaseUri()?>/contacto">Contacto</a></li>
+                <li class="nav-item"><a class="nav-link nav-header underline-animated <?=currentPage($request_uri, "")?'current-page':''?>" href="<?=GetBaseUri()?>" >Inicio</a></li>
+                <li class="nav-item"><a class="nav-link nav-header underline-animated <?=currentPage($request_uri, "galeria")?'current-page':''?>" href="<?=GetBaseUri()?>/galeria">Galería</a></li>
+                <li class="nav-item"><a class="nav-link nav-header underline-animated <?=currentPage($request_uri, "sobre-nosotros")?'current-page':''?>" href="<?=GetBaseUri()?>/sobre-nosotros">Sobre nosotros</a></li>
+                <li class="nav-item"><a class="nav-link nav-header underline-animated <?=currentPage($request_uri, "contacto")?'current-page':''?>" href="<?=GetBaseUri()?>/contacto">Contacto</a></li>
 
                 <li class="nav-item">
                     <div class="social-div">

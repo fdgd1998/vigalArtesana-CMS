@@ -42,7 +42,9 @@
 
 <div class="container settings-container">
     <h1 class="title">Categorías</h1>
-    <button type="button" id="create-cat" class="btn my-button" style="margin-bottom: 15px;"><i class="i-margin fas fa-plus-circle"></i>Nueva categoría</button>
+    <div class="button-group-left">
+      <button type="button" id="create-cat" class="btn my-button" style="margin-bottom: 15px;"><i class="i-margin fas fa-plus-circle"></i>Nueva categoría</button>
+    </div>
     <div class="table-responsive">
       <?php if (count($categories) > 0): ?>
         <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">

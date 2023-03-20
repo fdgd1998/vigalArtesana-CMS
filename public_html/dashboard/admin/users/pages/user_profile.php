@@ -83,7 +83,7 @@
             </div>
         </div>
     </div>
-    <div class="button-group text-right" style="margin-top: 20px">
+    <div class="button-group-right">
         <button disabled id="change-password" class="btn my-button"><i class="i-margin fas fa-key"></i>Cambiar contraseña</button>
     </div>
 </div>

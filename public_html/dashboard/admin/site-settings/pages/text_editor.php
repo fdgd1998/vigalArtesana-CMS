@@ -25,12 +25,11 @@
 
     <form action="" method="post">
         <textarea rows="30" class="form-control" name="text"s><?php echo htmlspecialchars($text); ?></textarea>
-        <div class="form-row text-right" style="margin-top: 20px;">
-            <div class="col">
-                <a class="btn my-button" href="<?=GetBaseUri().'/dashboard/admin/site-settings/download.php?file='.$_GET['file']?>"><i class="i-margin fa-solid fa-download"></i>Descargar</a>
-                <button class="btn my-button-3" type="submit" ><i class="i-margin fas fa-save"></i>Guardar</button>
-                
+        <!-- <div class="form-row text-right" style="margin-top: 20px;"> -->
+            <div class="button-group-right mt-3">
+                <a class="btn my-button" style="margin-top: -5px" href="<?=GetBaseUri().'/dashboard/admin/site-settings/download.php?file='.$_GET['file']?>"><i class="i-margin fa-solid fa-download"></i>Descargar</a>
+                <button class="btn my-button-3" type="submit" ><i class="i-margin fas fa-save"></i>Guardar</button>            
             </div>
-        </div>
+        <!-- </div> -->
     </form>
 </div>

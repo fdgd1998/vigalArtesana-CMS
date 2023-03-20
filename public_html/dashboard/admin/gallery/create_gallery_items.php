@@ -15,14 +15,17 @@
     if (isset($_POST)) {
         $conn = new DatabaseConnection();
         $location = $_SERVER["DOCUMENT_ROOT"]."/uploads/images/"; // location for gallery images.
-        $categories = json_decode($_POST["categories"]);
-        $altText = json_decode($_POST["alt_text"]);
+        $categories = json_decode($_POST["categories"], true);
+        echo var_dump($categories);
+        $altText = json_decode($_POST["alt_text"], true);
+        echo var_dump($alt_text);
+        $categories_values = array_values($categories);
 
         // Getting images from database before adding new ones
         $countImagesBefore = array();
         $countImagesAfter = array();
 
-        $categoriesUnique = array_values(array_unique($categories));
+        $categoriesUnique = array_values(array_unique($categories_values));
 
         for ($i = 0; $i < count($categoriesUnique); $i++) {
             $sql = "select count(id) from gallery where category = ".$categoriesUnique[$i];
@@ -58,7 +61,7 @@
             $i = 0;
 
             foreach ($_FILES as $file) {
-                $sql = "insert into gallery (filename,dir,category,altText,uploadedBy) values ('".$file["name"]."','".$directory."',".$categories[$i].",'".$altText[$i]."','".$_SESSION["user"]."')";
+                $sql = "insert into gallery (filename,dir,category,altText,uploadedBy) values ('".$file["name"]."','".$directory."',".$categories[$file["name"]].",'".$altText[$file["name"]]."','".$_SESSION["user"]."')";
                 
                 if ($conn->exec($sql)) {
                     uploadAndCompressImage($location.$directory, $file);
